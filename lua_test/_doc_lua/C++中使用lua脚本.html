@@ -1,0 +1,334 @@
+<div class="blog-content-box">
+        <div class="article-header-box">
+        <div class="article-header">
+            <div class="article-title-box">
+                <h1 class="title-article" id="articleContentId">C++中使用lua脚本</h1>
+            </div>
+            <div class="article-info-box">
+                <div class="article-bar-top">
+                    <img class="article-type-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/original.png" alt="">
+                    <div class="bar-content">
+                    <a class="follow-nickName " href="https://blog.csdn.net/weixin_43450564" target="_blank" rel="noopener">时光清浅，不觉多年</a>
+                    <img class="article-time-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCurrentTime2.png" alt="">
+                    <span class="time">于&nbsp;2021-04-22 19:51:53&nbsp;发布</span>
+                    <img class="article-read-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/articleReadEyes2.png" alt="">
+                    <span class="read-count">1370</span>
+                    <a id="blog_detail_zk_collection" class="un-collection" data-report-click="{&quot;mod&quot;:&quot;popu_823&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;ab&quot;:&quot;new&quot;}">
+                        <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:inline-block" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollect2.png" alt="">
+                        <img class="article-collect-img article-heard-img collect-status isactive" style="display:none" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive2.png" alt="">
+                        <span class="name">收藏</span>
+                        <span class="get-collection">
+                            9
+                        </span>
+                    </a>
+                    </div>
+                </div>
+                <div class="blog-tags-box">
+                    <div class="tags-box artic-tag-box">
+                            <span class="label">分类专栏：</span>
+                                <a class="tag-link" href="https://blog.csdn.net/weixin_43450564/category_10954757.html" target="_blank" rel="noopener">C++调用第三方</a>
+                                <a class="tag-link" href="https://blog.csdn.net/weixin_43450564/category_9586216.html" target="_blank" rel="noopener">C++相关</a>
+                            <span class="label">文章标签：</span>
+                                <a data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;c++&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;c++\&quot;}&quot;}" class="tag-link" href="https://so.csdn.net/so/search/s.do?q=c%2B%2B&amp;t=blog&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank" rel="noopener">c++</a>
+                                <a data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;lua&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;lua\&quot;}&quot;}" class="tag-link" href="https://so.csdn.net/so/search/s.do?q=lua&amp;t=blog&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=" target="_blank" rel="noopener">lua</a>
+                    </div>
+                </div>
+                <div class="slide-content-box">
+                    <div class="article-copyright">
+                        <div class="creativecommons">
+                            版权声明：本文为博主原创文章，遵循<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。
+                        </div>
+                        <div class="article-source-link">
+                            本文链接：<a href="https://blog.csdn.net/weixin_43450564/article/details/116027706" target="_blank">https://blog.csdn.net/weixin_43450564/article/details/116027706</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="operating">
+                    <a class="href-article-edit slide-toggle">版权</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <div id="blogColumnPayAdvert">
+            <div class="column-group">
+                <div class="column-group-item column-group0 ">
+                    <div class="item-l">
+                        <a class="item-target" href="https://blog.csdn.net/weixin_43450564/category_10954757.html" target="_blank" title="C++调用第三方" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.6332&quot;}">
+                            <img class="item-target" src="https://img-blog.csdnimg.cn/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="">
+                            <span class="title item-target">
+                                <span>
+                                <span class="tit">C++调用第三方</span>
+                                    <span class="dec more">同时被 2 个专栏收录<img src="https://csdnimg.cn/release/blogv2/dist/pc/img/newArrowDown1White.png" alt=""></span>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="item-m">
+                        <span>4 篇文章</span>
+                        <span>0 订阅</span>
+                    </div>
+                    <div class="item-r">
+                            <a class="item-target article-column-bt articleColumnFreeBt" data-id="10954757">订阅专栏</a>
+                    </div>
+                </div>
+                <div class="column-group-item column-group1 ">
+                    <div class="item-l">
+                        <a class="item-target" href="https://blog.csdn.net/weixin_43450564/category_9586216.html" target="_blank" title="C++相关" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.6332&quot;}">
+                            <img class="item-target" src="https://img-blog.csdnimg.cn/20201014180756757.png?x-oss-process=image/resize,m_fixed,h_64,w_64" alt="">
+                            <span class="title item-target">
+                                <span>
+                                <span class="tit">C++相关</span>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="item-m">
+                        <span>91 篇文章</span>
+                        <span>2 订阅</span>
+                    </div>
+                    <div class="item-r">
+                            <a class="item-target article-column-bt articleColumnFreeBt" data-id="9586216">订阅专栏</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <article class="baidu_pl">
+        <div id="article_content" class="article_content clearfix">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-b3c43d3711.css">
+                <div id="content_views" class="markdown_views prism-atelier-sulphurpool-light">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                    </svg>
+                    <p></p>
+<div class="toc">
+ <h3><a name="t0"></a>文章目录</h3>
+ <ul><li><a href="#1_lua_3" target="_self">1. 项目中导入lua模块</a></li><li><a href="#2__9" target="_self">2. 使用</a></li><li><ul><li><a href="#21_lua_111" target="_self">2.1 创建lua句柄</a></li><li><a href="#22_lua_119" target="_self">2.2 加载lua的相关库</a></li><li><a href="#23_lua_125" target="_self">2.3 加载lua文件</a></li><li><a href="#24_lua_137" target="_self">2.4 执行lua文件</a></li><li><a href="#25_lua_160" target="_self">2.5 正式操作lua脚本</a></li><li><ul><li><a href="#251__161" target="_self">2.5.1 获取值</a></li><li><a href="#252__177" target="_self">2.5.2 获取表值</a></li><li><a href="#253__202" target="_self">2.5.3 调用函数</a></li><li><ul><li><a href="#2531__204" target="_self">2.5.3.1 无参函数</a></li><li><a href="#2532__212" target="_self">2.5.3.2 有参函数</a></li></ul>
+   </li></ul>
+   </li><li><a href="#26__236" target="_self">2.6 关闭句柄</a></li></ul>
+  </li><li><a href="#3__242" target="_self">3. 结果演示</a></li><li><a href="#4_Clua_245" target="_self">4. C++调用lua的本质</a></li><li><a href="#_255" target="_self">参考链接</a></li></ul>
+</div>
+<p></p> 
+<p>还是因为项目的原因，需要在C++中使用到lua脚本，使用到的就是普通的lua库，可以在<a href="http://www.lua.org/download.html">这里</a>下载。</p> 
+<h1><a name="t1"></a><a id="1_lua_3"></a>1. 项目中导入lua模块</h1> 
+<p>创建工程后，在项目中导入lua模块，一个是lua的<a href="https://so.csdn.net/so/search?q=%E5%A4%B4%E6%96%87%E4%BB%B6&amp;spm=1001.2101.3001.7020" target="_blank" class="hl hl-1" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.7020&quot;,&quot;dest&quot;:&quot;https://so.csdn.net/so/search?q=%E5%A4%B4%E6%96%87%E4%BB%B6&amp;spm=1001.2101.3001.7020&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;头文件\&quot;}&quot;}" data-tit="头文件" data-pretit="头文件">头文件</a>，还有就是lua的lib库，在项目中包含include和lib路径并设置lib名称即可使用。<br> <img src="https://img-blog.csdnimg.cn/20210422191411799.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQ1MDU2NA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> <img src="https://img-blog.csdnimg.cn/20210422191457399.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQ1MDU2NA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 关于lib库，比较简单的使用方式就是直接使用这个以-<a href="https://so.csdn.net/so/search?q=static&amp;spm=1001.2101.3001.7020" target="_blank" class="hl hl-1" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.7020&quot;,&quot;dest&quot;:&quot;https://so.csdn.net/so/search?q=static&amp;spm=1001.2101.3001.7020&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;static\&quot;}&quot;}" data-tit="static" data-pretit="static">static</a>结尾的静态库即可，比较方便，无需其他操作。</p> 
+<h1><a name="t2"></a><a id="2__9"></a>2. 使用</h1> 
+<p>先创建一个lua脚本，比较简单，就定义了一个<a href="https://so.csdn.net/so/search?q=%E5%AD%97%E7%AC%A6%E4%B8%B2&amp;spm=1001.2101.3001.7020" target="_blank" class="hl hl-1" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.7020&quot;,&quot;dest&quot;:&quot;https://so.csdn.net/so/search?q=%E5%AD%97%E7%AC%A6%E4%B8%B2&amp;spm=1001.2101.3001.7020&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;字符串\&quot;}&quot;}" data-tit="字符串" data-pretit="字符串">字符串</a>、一个表格、两个函数（一个有参，一个无参）。如下：</p> 
+<pre data-index="0" class="prettyprint"><code class="prism language-lua has-numbering" onclick="mdcp.signin(event)" style="position: unset;">mystr <span class="token operator">=</span> <span class="token string">"I'm lua"</span>
+
+myTable <span class="token operator">=</span> <span class="token punctuation">{<!-- --></span>name <span class="token operator">=</span> <span class="token string">"xiaomign"</span><span class="token punctuation">,</span> id <span class="token operator">=</span> <span class="token number">123456</span><span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">print_hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"hello lua"</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">function</span> <span class="token function">_add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> a <span class="token operator">+</span> b
+<span class="token keyword">end</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li></ul></pre> 
+<p>至于更细致的lua语法，这里就不多加介绍了，在lua官网上有详细的介绍。</p> 
+<p>使用上比较简单，先附上一段代码：</p> 
+<pre data-index="1" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"lua/lua.hpp"</span></span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">{<!-- --></span>
+	<span class="token comment">///&lt; 创建lua句柄并初始化</span>
+	lua_State <span class="token operator">*</span>pState <span class="token operator">=</span> <span class="token function">luaL_newstate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">nullptr</span> <span class="token operator">==</span> pState<span class="token punctuation">)</span>
+	<span class="token punctuation">{<!-- --></span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Lua 初始化失败"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		<span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">///&lt; 加载相关库文件</span>
+	<span class="token function">luaL_openlibs</span><span class="token punctuation">(</span>pState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token comment">///&lt; 加载lua文件</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">luaL_loadfile</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"./test.lua"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{<!-- --></span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Lua 文件加载失败"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">else</span>
+	<span class="token punctuation">{<!-- --></span>
+		<span class="token comment">///&lt; 执行lua文件</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">lua_pcall</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+		<span class="token punctuation">{<!-- --></span>
+			cerr <span class="token operator">&lt;&lt;</span> <span class="token function">lua_tostring</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token keyword">else</span>
+		<span class="token punctuation">{<!-- --></span>
+			<span class="token comment">///&lt; 获取值</span>
+			<span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"mystr"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			string str <span class="token operator">=</span> <span class="token function">lua_tostring</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			cout <span class="token operator">&lt;&lt;</span> str <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+			<span class="token comment">///&lt; 获取表中数据</span>
+			<span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"myTable"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">lua_getfield</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			cout <span class="token operator">&lt;&lt;</span> <span class="token function">lua_tostring</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+			<span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"myTable"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">lua_getfield</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			cout <span class="token operator">&lt;&lt;</span> <span class="token function">lua_tonumber</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+			<span class="token comment">///&lt; 调用函数</span>
+			<span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"print_hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">lua_pcall</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			<span class="token comment">///&lt; 调用计算函数</span>
+			<span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"_add"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">lua_pushnumber</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">lua_pushnumber</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">lua_pcall</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+			<span class="token punctuation">{<!-- --></span>
+				cout <span class="token operator">&lt;&lt;</span> <span class="token function">lua_tostring</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+				<span class="token function">lua_close</span><span class="token punctuation">(</span>pState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+			<span class="token keyword">else</span>
+			<span class="token punctuation">{<!-- --></span>
+				<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">lua_isnumber</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+				<span class="token punctuation">{<!-- --></span>
+					cout <span class="token operator">&lt;&lt;</span> <span class="token function">lua_tonumber</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+				<span class="token punctuation">}</span>
+			<span class="token punctuation">}</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token function">lua_close</span><span class="token punctuation">(</span>pState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"pause"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li><li style="color: rgb(153, 153, 153);">19</li><li style="color: rgb(153, 153, 153);">20</li><li style="color: rgb(153, 153, 153);">21</li><li style="color: rgb(153, 153, 153);">22</li><li style="color: rgb(153, 153, 153);">23</li><li style="color: rgb(153, 153, 153);">24</li><li style="color: rgb(153, 153, 153);">25</li><li style="color: rgb(153, 153, 153);">26</li><li style="color: rgb(153, 153, 153);">27</li><li style="color: rgb(153, 153, 153);">28</li><li style="color: rgb(153, 153, 153);">29</li><li style="color: rgb(153, 153, 153);">30</li><li style="color: rgb(153, 153, 153);">31</li><li style="color: rgb(153, 153, 153);">32</li><li style="color: rgb(153, 153, 153);">33</li><li style="color: rgb(153, 153, 153);">34</li><li style="color: rgb(153, 153, 153);">35</li><li style="color: rgb(153, 153, 153);">36</li><li style="color: rgb(153, 153, 153);">37</li><li style="color: rgb(153, 153, 153);">38</li><li style="color: rgb(153, 153, 153);">39</li><li style="color: rgb(153, 153, 153);">40</li><li style="color: rgb(153, 153, 153);">41</li><li style="color: rgb(153, 153, 153);">42</li><li style="color: rgb(153, 153, 153);">43</li><li style="color: rgb(153, 153, 153);">44</li><li style="color: rgb(153, 153, 153);">45</li><li style="color: rgb(153, 153, 153);">46</li><li style="color: rgb(153, 153, 153);">47</li><li style="color: rgb(153, 153, 153);">48</li><li style="color: rgb(153, 153, 153);">49</li><li style="color: rgb(153, 153, 153);">50</li><li style="color: rgb(153, 153, 153);">51</li><li style="color: rgb(153, 153, 153);">52</li><li style="color: rgb(153, 153, 153);">53</li><li style="color: rgb(153, 153, 153);">54</li><li style="color: rgb(153, 153, 153);">55</li><li style="color: rgb(153, 153, 153);">56</li><li style="color: rgb(153, 153, 153);">57</li><li style="color: rgb(153, 153, 153);">58</li><li style="color: rgb(153, 153, 153);">59</li><li style="color: rgb(153, 153, 153);">60</li><li style="color: rgb(153, 153, 153);">61</li><li style="color: rgb(153, 153, 153);">62</li><li style="color: rgb(153, 153, 153);">63</li><li style="color: rgb(153, 153, 153);">64</li><li style="color: rgb(153, 153, 153);">65</li><li style="color: rgb(153, 153, 153);">66</li><li style="color: rgb(153, 153, 153);">67</li><li style="color: rgb(153, 153, 153);">68</li><li style="color: rgb(153, 153, 153);">69</li><li style="color: rgb(153, 153, 153);">70</li><li style="color: rgb(153, 153, 153);">71</li><li style="color: rgb(153, 153, 153);">72</li><li style="color: rgb(153, 153, 153);">73</li><li style="color: rgb(153, 153, 153);">74</li><li style="color: rgb(153, 153, 153);">75</li><li style="color: rgb(153, 153, 153);">76</li><li style="color: rgb(153, 153, 153);">77</li><li style="color: rgb(153, 153, 153);">78</li><li style="color: rgb(153, 153, 153);">79</li><li style="color: rgb(153, 153, 153);">80</li></ul></pre> 
+<h2><a name="t3"></a><a id="21_lua_111"></a>2.1 创建lua句柄</h2> 
+<p>使用lua的第一步就是创建一个用于lua和C++之家通信的句柄。<br> 这个句柄极为重要，<strong>后面所有涉及到lua的操作，<font color="#FF00," size="5">均需要使用到这个句柄</font></strong>。</p> 
+<pre data-index="2" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;">lua_State <span class="token operator">*</span>pState <span class="token operator">=</span> <span class="token function">luaL_newstate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li></ul></pre> 
+<p><strong>只要返回的pState不是nullptr，就说明创建句柄成功。</strong></p> 
+<h2><a name="t4"></a><a id="22_lua_119"></a>2.2 加载lua的相关库</h2> 
+<p>创建完句柄之后，需要加载lua的库文件，这一点和socket编程有点类似。</p> 
+<pre data-index="3" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">luaL_openlibs</span><span class="token punctuation">(</span>pState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li></ul></pre> 
+<h2><a name="t5"></a><a id="23_lua_125"></a>2.3 加载lua文件</h2> 
+<pre data-index="4" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">luaL_loadfile</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"./test.lua"</span><span class="token punctuation">)</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li></ul></pre> 
+<p>luaL_loadfile是一个宏，其原型为：</p> 
+<pre data-index="5" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token macro property">#<span class="token directive keyword">define</span> luaL_loadfile(L,f)	luaL_loadfilex(L,f,NULL)</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li></ul></pre> 
+<p><strong>加载成功的话，返回值是0.</strong></p> 
+<h2><a name="t6"></a><a id="24_lua_137"></a>2.4 执行lua文件</h2> 
+<p>执行的意思，可以理解为<strong>激活</strong>，就是说如果这个句柄处于激活状态，就可以顺利地执行相关的操作。</p> 
+<pre data-index="6" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">lua_pcall</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li></ul></pre> 
+<p>这玩意也是一个宏值，如下：</p> 
+<pre data-index="7" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token macro property">#<span class="token directive keyword">define</span> lua_pcall(L,n,r,f)	lua_pcallk(L, (n), (r), (f), 0, NULL)</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li></ul></pre> 
+<p>这个函数参数的含义如下：</p> 
+<p><strong>1. 参数1：lua句柄<br> 2. 参数2：参数个数<br> 3. 参数3：返回值个数<br> 4. 参数4：错误处理函数，0表示无，表示错误处理函数在栈中的索引</strong></p> 
+<p>执行成功的话，<strong>返回值为0</strong>.</p> 
+<p>至此，前期准备工作结束，接下来就是对于lua脚本内部东西进行的处理了，如下方介绍。</p> 
+<h2><a name="t7"></a><a id="25_lua_160"></a>2.5 正式操作lua脚本</h2> 
+<h3><a name="t8"></a><a id="251__161"></a>2.5.1 获取值</h3> 
+<p>获取值比较简单，因为在lua脚本中定义了一个名为mystr的变量，因此，这里面就可以使用lua_getglobal函数，通过“mystr”名字的方式，获得这个字符串。</p> 
+<pre data-index="8" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"mystr"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li></ul></pre> 
+<p>因为已知这玩意是个字符串，因此可以采用lua_tostring这个宏将其转化为字符串类型（返回的是C++中的string类）。</p> 
+<pre data-index="9" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;">string str <span class="token operator">=</span> <span class="token function">lua_tostring</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> str <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li></ul></pre> 
+<p>lua_tostring宏值原型如下：</p> 
+<pre data-index="10" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token macro property">#<span class="token directive keyword">define</span> lua_tostring(L,i)	lua_tolstring(L, (i), NULL)</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li></ul></pre> 
+<h3><a name="t9"></a><a id="252__177"></a>2.5.2 获取表值</h3> 
+<p>接下来是获取表值，因为定义了一个表，名为“myTable”，有两个键值对，分别为“name”和“id”，操作如下。<br> 首先取出表：</p> 
+<pre data-index="11" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"myTable"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li></ul></pre> 
+<p>然后取出表中值：</p> 
+<pre data-index="12" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">lua_getfield</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">lua_tostring</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li></ul></pre> 
+<p>不过有一点值得注意，<strong>每次加载表格只能获取其中一个值，如果想要获取第二个值，需要重新加载表格</strong>。</p> 
+<pre data-index="13" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"myTable"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">lua_getfield</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">lua_tostring</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+
+<span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"myTable"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">lua_getfield</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token function">lua_tonumber</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li></ul></pre> 
+<h3><a name="t10"></a><a id="253__202"></a>2.5.3 调用函数</h3> 
+<p>函数可以分为有参函数和无参函数两种，下面进行介绍。</p> 
+<h4><a id="2531__204"></a>2.5.3.1 无参函数</h4> 
+<p>无参函数比较简单，直接通过函数名获得函数，然后调用lua_pcall调用即可。</p> 
+<pre data-index="14" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"print_hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">lua_pcall</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li></ul></pre> 
+<h4><a id="2532__212"></a>2.5.3.2 有参函数</h4> 
+<p>无参函数相对来说要麻烦一些，需要先将参数传进去，然后再调用。</p> 
+<pre data-index="15" class="set-code-hide prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">lua_getglobal</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token string">"_add"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">lua_pushnumber</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">///&lt; 压入参数1</span>
+<span class="token function">lua_pushnumber</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">///&lt; 压入参数2</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">lua_pcall</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">{<!-- --></span>
+	<span class="token comment">///&lt; 调用失败</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token function">lua_tostring</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token function">lua_close</span><span class="token punctuation">(</span>pState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">else</span>
+<span class="token punctuation">{<!-- --></span>
+	<span class="token comment">///&lt; 调用成功后获得数据</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">lua_isnumber</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{<!-- --></span>
+		cout <span class="token operator">&lt;&lt;</span> <span class="token function">lua_tonumber</span><span class="token punctuation">(</span>pState<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><div class="hide-preCode-box"><span class="hide-preCode-bt" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.7365&quot;}"><img class="look-more-preCode contentImg-no-view" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCodeMoreWhite.png" alt="" title=""></span></div><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li></ul></pre> 
+<h2><a name="t11"></a><a id="26__236"></a>2.6 关闭句柄</h2> 
+<p>在调用结束之后，需要关闭句柄，这一步的目的是卸载加载的库，以及安全释放lua句柄。</p> 
+<pre data-index="16" class="prettyprint"><code class="prism language-cpp has-numbering" onclick="mdcp.signin(event)" style="position: unset;"><span class="token function">lua_close</span><span class="token punctuation">(</span>pState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="hljs-button signin" data-title="登录后复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}"></div></code><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li></ul></pre> 
+<h1><a name="t12"></a><a id="3__242"></a>3. 结果演示</h1> 
+<p><img src="https://img-blog.csdnimg.cn/20210422195049975.png" alt="在这里插入图片描述"></p> 
+<h1><a name="t13"></a><a id="4_Clua_245"></a>4. C++调用lua的本质</h1> 
+<p>C++和lua通信的本质是通过一个“虚拟栈”进行交互。</p> 
+<p><font size="5," color="#FF00"><strong>-1表示栈顶，1表示栈底</strong></font></p> 
+<blockquote> 
+ <p>lua和c++是通过一个虚拟栈来交互的。<br> c++调用lua实际上是：由c++先把数据放入栈中，由lua去栈中取数据，然后返回数据对应的值到栈顶，再由栈顶返回c++。<br> lua调c++也一样：先编写自己的c模块，然后注册函数到lua解释器中，然后由lua去调用这个模块的函数。<br> 在lua中，lua堆栈就是一个struct，堆栈索引的方式可是是正数也可以是负数，区别是：正数索引1永远表示栈底，负数索引-1永远表示栈顶</p> 
+</blockquote> 
+<h1><a name="t14"></a><a id="_255"></a>参考链接</h1> 
+<p><a href="https://blog.csdn.net/harryptter/article/details/49799133">lua的一些API</a><br> <a href="https://blog.csdn.net/liguan1102/article/details/90231728">C++调用lua示例</a><br> <a href="https://www.runoob.com/manual/lua53doc/manual.html">lua5.3语法介绍</a><br> <a href="https://blog.csdn.net/u010782644/article/details/79641284">lua_pcall函数介绍</a></p>
+                </div><div data-report-view="{&quot;mod&quot;:&quot;1585297308_001&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6548&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/weixin_43450564/article/details/116027706&quot;,&quot;extend1&quot;:&quot;pc&quot;,&quot;ab&quot;:&quot;new&quot;}"><div></div></div>
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-22a2fefd3b.css" rel="stylesheet">
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-4f8fbf9108.css" rel="stylesheet">
+        </div>
+        
+    </article>
+  <script>
+  $(function() {
+    setTimeout(function () {
+      var mathcodeList = document.querySelectorAll('.htmledit_views img.mathcode');
+      if (mathcodeList.length > 0) {
+        var testImg = new Image();
+        testImg.onerror = function () {
+          mathcodeList.forEach(function (item) {
+            $(item).before('<span class="img-codecogs">\\(' + item.alt + '\\)</span>');
+            $(item).remove();
+          })
+          MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        }
+        testImg.src = mathcodeList[0].src;
+      }
+    }, 1000)
+  })
+  </script>
+</div>
