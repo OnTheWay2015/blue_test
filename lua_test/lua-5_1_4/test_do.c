@@ -118,40 +118,11 @@ void p_lua_stack(lua_State*L, StkId st, StkId ed)
     }
 }
 
-//extern void PrintFunction(const Proto* f, int full);
-extern void luaU_print(const Proto* f, int full);
+extern void PrintFunction(const Proto* f, int full);
 void p_func_proto(Proto *p)
 {
     printf(" Proto: --------------------\n");
-    luaU_print(p,1);
-    
-    typedef struct Proto {
-      CommonHeader;
-      TValue *k;  /* constants used by the function */
-      Instruction *code;// 
-      struct Proto **p;  /* functions defined inside the function */
-      int *lineinfo;  /* map from opcodes to source lines */
-      struct LocVar *locvars;  /* information about local variables */
-      TString **upvalues;  /* upvalue names */
-      TString  *source;
-      int sizeupvalues;
-      int sizek;  /* size of `k' */
-      int sizecode;
-      int sizelineinfo;
-      int sizep;  /* size of `p' */
-      int sizelocvars;
-      int linedefined;
-      int lastlinedefined;
-      GCObject *gclist;
-      lu_byte nups;  /* number of upvalues */
-      lu_byte numparams;
-      lu_byte is_vararg;
-      lu_byte maxstacksize;
-    } Proto;
-
-
-
-
+    PrintFunction(p,1);
 }
 
 
@@ -316,40 +287,118 @@ void p_lua_state(lua_State *L)
     //ptrdiff_t是C/C++标准库中定义的一个与机器相关的数据类型。ptrdiff_t类型变量通常用来保存两个指针减法操作的结果。
     //ptrdiff_t定义在stddef.h（cstddef）这个文件内。ptrdiff_t通常被定义为long int类型。    
 
-	stackDump(L);
+	stackDump(L,0);
 }
 
-
-void stackDump(lua_State* L)
+//extern TValue *index2adr (lua_State *L, int idx);
+void DumpStkId(lua_State* L,int i, int isbase)
 {
-    printf(" begin dump lua stack");
-    int i = 0;
-    int top = lua_gettop(L);
-    for (i = 1; i <= top; ++i) {
-        int t = lua_type(L, i);
-        switch (t) {
-            case LUA_TSTRING:
-            {
-                printf("'%s' ", lua_tostring(L, i));
-            }
-                break;
-            case LUA_TBOOLEAN:
-            {
-                printf(lua_toboolean(L, i) ? "true " : "false ");
-            }break;
-            case LUA_TNUMBER:
-            {
-                printf("%g ", lua_tonumber(L, i));
-            }
-                break;
-            default:
-            {
-                printf("%s ", lua_typename(L, t));
-            }
-                break;
-        }
+    StkId o;
+    if (!isbase)
+    {
+        //o = index2adr(L, i); 
+        o = L->base + (i- 1);//当前栈
     }
-    printf(" end dump lua stack");
+    else
+    {
+        o = L->stack + (i- 1); //全局栈
+    }
+    int t = (o == luaO_nilobject) ? LUA_TNONE : ttype(o);
+    //int t = lua_type(L, i);
+    printf("idx[%d], ", i);
+    switch (t) {
+    case LUA_TSTRING:
+    {
+        printf("LUA_TSTRING: %s \n", svalue(o));
+    }
+    break;
+    case LUA_TBOOLEAN:
+    {
+        printf("LUA_TBOOLEAN:");
+        printf(bvalue(o) ? " true \n" : "false \n");
+    }break;
+    case LUA_TNUMBER:
+    {
+        printf("LUA_TNUMBER: %g \n", nvalue(o));
+    }
+    break;
+
+    case LUA_TNONE:
+    {
+        printf("LUA_TNONE:\n");
+    }
+    break;
+    case LUA_TNIL:
+    {
+        printf("LUA_TNIL:\n");
+    }
+    break;
+    case LUA_TTABLE:
+    {
+        printf("LUA_TTABLE:\n");
+    }
+    break;
+    case LUA_TLIGHTUSERDATA	:
+    {
+        printf("LUA_TLIGHTUSERDATA:\n");
+    }
+    break;
+    case LUA_TFUNCTION:
+    {
+        printf("LUA_TFUNCTION:");
+        Closure* cl = clvalue(o);
+        if (iscfunction(o))
+        {
+            printf(" [isC] ");
+        }
+        else
+        {
+            printf(" [notC] ");
+        }
+        
+        printf("\n");
+        
+        
+//#define iscfunction(o)	(ttype(o) == LUA_TFUNCTION && clvalue(o)->c.isC)
+//#define isLfunction(o)	(ttype(o) == LUA_TFUNCTION && !clvalue(o)->c.isC)
+
+ 
+    }
+    break;
+    case LUA_TUSERDATA:
+    {
+        printf("LUA_TUSERDATA:\n");
+    }
+    break;
+    case LUA_TTHREAD:
+    {
+        printf("LUA_TTHREAD:\n");
+    }
+    break;
+    default:
+    {
+        printf("type:%d,  error, need to do more.  \n", t);
+    }
+    break;
+    }
+
 }
+
+void stackDump(lua_State* L, int isGlobal)
+{
+    int i = 0; 
+    //int top = isGlobal==0 ? lua_gettop(L) :(L->stack_last - L->stack);
+    int top = isGlobal==0 ? lua_gettop(L) :(L->top - L->stack);
+
+    printf("\n\n");
+    printf(" begin dump lua isGlobal[%d] stack len[%d]\n",isGlobal,top);
+    for (i = 1; i <= top; ++i) {
+        DumpStkId(L,i,isGlobal); 
+    }
+    printf(" end dump lua stack\n");
+}
+
+
+
 
 

@@ -1,57 +1,59 @@
 #include <iostream>
 
-extern "C" { // lua.dllã€€æ˜¯cåº“ï¼Œä½¿ç”¨æ—¶è¦ç”¨ extern "C",  å¦‚æœ luaåº“æŒ‰ c++ã€€ç¼–è¯‘çš„å°±ç”¨  __declspec(dllimport)/dllexport è¿™å¥—
+extern "C" { // lua.dll¡¡ÊÇc¿â£¬Ê¹ÓÃÊ±ÒªÓÃ extern "C",  Èç¹û lua¿â°´ c++¡¡±àÒëµÄ¾ÍÓÃ  __declspec(dllimport)/dllexport ÕâÌ×
 
 #include "../lua-5_1_4/lua.h"
 #include "../lua-5_1_4/lualib.h"
 #include "../lua-5_1_4/lauxlib.h"
+#include "../lua-5_1_4/test_do.h"
 
 }
 
 using namespace std;
 
 
-static string dir_scripts = "D:/work/wh_svr/lua_test/test/scripts";
+
+static string dir_scripts = "../../test/scripts";
 
 
 int n_act01(lua_State* L)
 {
-	//lua_gettop æ˜¯å–å‡ºæ ˆé¡¶çš„ç´¢å¼•å€¼ã€‚æ­¤æ—¶æ ˆé¡¶çš„ç´¢å¼•å€¼å¤§å°å°±æ˜¯æ ˆå†…å…ƒç´ çš„ä¸ªæ•°
+	//lua_gettop ÊÇÈ¡³öÕ»¶¥µÄË÷ÒıÖµ¡£´ËÊ±Õ»¶¥µÄË÷ÒıÖµ´óĞ¡¾ÍÊÇÕ»ÄÚÔªËØµÄ¸öÊı
 	int n = lua_gettop(L);
 	double sum = 0;
-	//ä½¿ç”¨å¾ªç¯å˜é‡ç«™å†…æ‰€æœ‰çš„å…ƒç´ ï¼Œé€šè¿‡lua_tonumberå–å‡ºæ ˆå†…çš„å€¼ï¼Œç„¶åè¿›è¡Œç›¸åŠ æ“ä½œã€‚
+	//Ê¹ÓÃÑ­»·±äÁ¿Õ¾ÄÚËùÓĞµÄÔªËØ£¬Í¨¹ılua_tonumberÈ¡³öÕ»ÄÚµÄÖµ£¬È»ºó½øĞĞÏà¼Ó²Ù×÷¡£
 	for (int i = 1; i <= n; ++i)
 	{
 		auto v = lua_tonumber(L, i);
 		sum += v;
 		cout << "argn["<<n<<"]  idx["<<i<<"] v["<<v<<"]" << endl;
 	}
-	//å°†è¿ç®—åçš„å€¼è¿”è¿˜ç»™Luaã€‚æŠŠè¦è¿”å›çš„å€¼å†å‹å…¥æ ˆã€‚æ­¤æ—¶æ­¤æ—¶æ ˆå†…7æ¡æ•°æ®ï¼Œå‚è€ƒæ ˆçš„è¿è¡Œå›¾Log index 2
+	//½«ÔËËãºóµÄÖµ·µ»¹¸øLua¡£°ÑÒª·µ»ØµÄÖµÔÙÑ¹ÈëÕ»¡£´ËÊ±´ËÊ±Õ»ÄÚ7ÌõÊı¾İ£¬²Î¿¼Õ»µÄÔËĞĞÍ¼Log index 2
 	//lua_pushnumber(L, sum / n);//average
 	lua_pushnumber(L, sum);//sum
 	
-	//å‘Šè¯‰luaä¸»ç¨‹åºï¼Œè¿”å›2ä¸ªå€¼ã€‚luaè¿™æ˜¯å¯ä»¥ç”¨å‚æ•°æ¥å—è¿™ä¸¤ä¸ªå€¼
+	//¸æËßluaÖ÷³ÌĞò£¬·µ»Ø1¸öÖµ, ÔÚ½Å±¾Àï¿ÉÊ¹ÓÃ
 	return 1;
 }
 
 
 int n_act02(lua_State* L)
 {
-	//lua_gettop æ˜¯å–å‡ºæ ˆé¡¶çš„ç´¢å¼•å€¼ã€‚æ­¤æ—¶æ ˆé¡¶çš„ç´¢å¼•å€¼å¤§å°å°±æ˜¯æ ˆå†…å…ƒç´ çš„ä¸ªæ•°
+	//lua_gettop ÊÇÈ¡³öÕ»¶¥µÄË÷ÒıÖµ¡£´ËÊ±Õ»¶¥µÄË÷ÒıÖµ´óĞ¡¾ÍÊÇÕ»ÄÚÔªËØµÄ¸öÊı
 	int n = lua_gettop(L);
 	double sum = 0;
-	//ä½¿ç”¨å¾ªç¯å˜é‡ç«™å†…æ‰€æœ‰çš„å…ƒç´ ï¼Œé€šè¿‡lua_tonumberå–å‡ºæ ˆå†…çš„å€¼ï¼Œç„¶åè¿›è¡Œç›¸åŠ æ“ä½œã€‚
+	//Ê¹ÓÃÑ­»·±äÁ¿Õ¾ÄÚËùÓĞµÄÔªËØ£¬Í¨¹ılua_tonumberÈ¡³öÕ»ÄÚµÄÖµ£¬È»ºó½øĞĞÏà¼Ó²Ù×÷¡£
 	for (int i = 1; i <= n; ++i)
 	{
 		auto v = lua_tonumber(L, i);
 		sum += v;
 		cout << "argn["<<n<<"]  idx["<<i<<"] v["<<v<<"]" << endl;
 	}
-	//å°†è¿ç®—åçš„å€¼è¿”è¿˜ç»™Luaã€‚æŠŠè¦è¿”å›çš„å€¼å†å‹å…¥æ ˆã€‚æ­¤æ—¶æ­¤æ—¶æ ˆå†…7æ¡æ•°æ®ï¼Œå‚è€ƒæ ˆçš„è¿è¡Œå›¾Log index 2
+	//½«ÔËËãºóµÄÖµ·µ»¹¸øLua¡£°ÑÒª·µ»ØµÄÖµÔÙÑ¹ÈëÕ»¡£´ËÊ±´ËÊ±Õ»ÄÚ7ÌõÊı¾İ£¬²Î¿¼Õ»µÄÔËĞĞÍ¼Log index 2
 	lua_pushnumber(L, sum / n);//average
 	//lua_pushnumber(L, sum);//sum
 	
-	//å‘Šè¯‰luaä¸»ç¨‹åºï¼Œè¿”å›2ä¸ªå€¼ã€‚luaè¿™æ˜¯å¯ä»¥ç”¨å‚æ•°æ¥å—è¿™ä¸¤ä¸ªå€¼
+	//¸æËßluaÖ÷³ÌĞò£¬·µ»Ø2¸öÖµ¡£luaÕâÊÇ¿ÉÒÔÓÃ²ÎÊı½ÓÊÜÕâÁ½¸öÖµ
 	return 1;
 }
 
@@ -68,7 +70,7 @@ lua
 
 
 */
-//luaã€€ä½¿ç”¨ c++ é‡Œæ³¨å†Œçš„æ¨¡å—
+//lua¡¡Ê¹ÓÃ c++ Àï×¢²áµÄÄ£¿é
 void test003()
 {
 	lua_State *pState = lua_open();
@@ -79,16 +81,16 @@ void test003()
 		return;
 	}
 
-	///< åŠ è½½ç›¸å…³åº“æ–‡ä»¶
+	///< ¼ÓÔØÏà¹Ø¿âÎÄ¼ş
 	luaL_openlibs(pState);
 
 	luaL_register(pState, "testlib", testlib);
 	
-	///< åŠ è½½luaæ–‡ä»¶
+	///< ¼ÓÔØluaÎÄ¼ş
 	std::string sf = dir_scripts + "/test003.lua";
 	if (luaL_loadfile(pState, sf.c_str()))
 	{
-		cout << "Lua æ–‡ä»¶åŠ è½½å¤±è´¥" << endl;
+		cout << "Lua ÎÄ¼ş¼ÓÔØÊ§°Ü" << endl;
 		return;
 	}
 	
@@ -123,20 +125,20 @@ print("The sum is ", sum)
 */
 int Average(lua_State *L)
 {
-	//code3   lua_gettop æ˜¯å–å‡ºæ ˆé¡¶çš„ç´¢å¼•å€¼ã€‚æ­¤æ—¶æ ˆé¡¶çš„ç´¢å¼•å€¼å¤§å°å°±æ˜¯æ ˆå†…å…ƒç´ çš„ä¸ªæ•°
+	//code3   lua_gettop ÊÇÈ¡³öÕ»¶¥µÄË÷ÒıÖµ¡£´ËÊ±Õ»¶¥µÄË÷ÒıÖµ´óĞ¡¾ÍÊÇÕ»ÄÚÔªËØµÄ¸öÊı
 	int n = lua_gettop(L);
 	double sum = 0;
-	//code4 ä½¿ç”¨å¾ªç¯å˜é‡ç«™å†…æ‰€æœ‰çš„å…ƒç´ ï¼Œé€šè¿‡lua_tonumberå–å‡ºæ ˆå†…çš„å€¼ï¼Œç„¶åè¿›è¡Œç›¸åŠ æ“ä½œã€‚
+	//code4 Ê¹ÓÃÑ­»·±äÁ¿Õ¾ÄÚËùÓĞµÄÔªËØ£¬Í¨¹ılua_tonumberÈ¡³öÕ»ÄÚµÄÖµ£¬È»ºó½øĞĞÏà¼Ó²Ù×÷¡£
 	for (int i = 1; i <= n; ++i)
 	{
 		auto v = lua_tonumber(L, i);
 		sum += v;
 		cout << "argn["<<n<<"]  idx["<<i<<"] v["<<v<<"]" << endl;
 	}
-	//code5 å°†è¿ç®—åçš„å€¼è¿”è¿˜ç»™Luaã€‚æŠŠè¦è¿”å›çš„å€¼å†å‹å…¥æ ˆã€‚æ­¤æ—¶æ­¤æ—¶æ ˆå†…7æ¡æ•°æ®ï¼Œå‚è€ƒæ ˆçš„è¿è¡Œå›¾Log index 2
+	//code5 ½«ÔËËãºóµÄÖµ·µ»¹¸øLua¡£°ÑÒª·µ»ØµÄÖµÔÙÑ¹ÈëÕ»¡£´ËÊ±´ËÊ±Õ»ÄÚ7ÌõÊı¾İ£¬²Î¿¼Õ»µÄÔËĞĞÍ¼Log index 2
 	lua_pushnumber(L, sum / n);//average
 	lua_pushnumber(L, sum);//sum
-	//code6 å‘Šè¯‰luaä¸»ç¨‹åºï¼Œè¿”å›2ä¸ªå€¼ã€‚luaè¿™æ˜¯å¯ä»¥ç”¨å‚æ•°æ¥å—è¿™ä¸¤ä¸ªå€¼
+	//code6 ¸æËßluaÖ÷³ÌĞò£¬·µ»Ø2¸öÖµ¡£luaÕâÊÇ¿ÉÒÔÓÃ²ÎÊı½ÓÊÜÕâÁ½¸öÖµ
 	return 2;
 
 }
@@ -145,7 +147,7 @@ int Average(lua_State *L)
 
 
 
-//luaã€€ä½¿ç”¨ c++ é‡Œçš„æ•°æ®
+//lua¡¡Ê¹ÓÃ c++ ÀïµÄ·½·¨
 void test002()
 {
 	lua_State *pState = lua_open();
@@ -156,22 +158,22 @@ void test002()
 		return;
 	}
 
-	///< åŠ è½½ç›¸å…³åº“æ–‡ä»¶
+	///< ¼ÓÔØÏà¹Ø¿âÎÄ¼ş
 	luaL_openlibs(pState);
 
-	///< åŠ è½½luaæ–‡ä»¶
+	///< ¼ÓÔØluaÎÄ¼ş
 	std::string sf = dir_scripts + "/test002.lua";
 	if (luaL_loadfile(pState, sf.c_str()))
 	{
-		cout << "Lua æ–‡ä»¶åŠ è½½å¤±è´¥" << endl;
+		cout << "Lua ÎÄ¼ş¼ÓÔØÊ§°Ü" << endl;
 		return;
 	}
 
-	//code1 lua_register æ³¨å†Œå‡½æ•°æŠŠ Lua å‡½æ•°å’Œ C++ å‡½æ•°è¿›è¡Œç»‘å®šã€‚
-	//å…¶å®å°±æ˜¯å…ˆç”¨lua_pushcfunctionæŠŠåœ¨c++ä¸­å®šä¹‰çš„å‡½æ•°å‹å¦‚æ ˆä¸­ï¼Œ
-	//ç„¶ålua_setglobalæ¥è®¾ç½®æ ˆé¡¶çš„å…ƒç´ å¯¹åº”çš„å€¼ï¼Œè¿™æ ·å°±å¯ä»¥æŠŠluaå‡½æ•°å’Œæ ˆé¡¶çš„c++å‡½æ•°å»ºç«‹å¼•ç”¨å…³ç³»ã€‚
+	//code1 lua_register ×¢²áº¯Êı°Ñ Lua º¯ÊıºÍ C++ º¯Êı½øĞĞ°ó¶¨¡£
+	//ÆäÊµ¾ÍÊÇÏÈÓÃlua_pushcfunction°ÑÔÚc++ÖĞ¶¨ÒåµÄº¯ÊıÑ¹ÈçÕ»ÖĞ£¬
+	//È»ºólua_setglobalÀ´ÉèÖÃÕ»¶¥µÄÔªËØ¶ÔÓ¦µÄÖµ£¬ÕâÑù¾Í¿ÉÒÔ°Ñluaº¯ÊıºÍÕ»¶¥µÄc++º¯Êı½¨Á¢ÒıÓÃ¹ØÏµ¡£
 	lua_register(pState, "average", Average);
-	//code2  åŠ è½½å¹¶æ‰§è¡Œluaè„šæœ¬ï¼Œæ­¤æ—¶luaä¸­çš„å‡½æ•°averageè¢«æ‰§è¡Œï¼ŒåŒæ—¶å‘æ ˆä¸­å‹å¦‚5ä¸ªå‚æ•°ã€‚å‚è€ƒæ ˆçš„è¿è¡Œå›¾Log index 1
+	//code2  ¼ÓÔØ²¢Ö´ĞĞlua½Å±¾£¬´ËÊ±luaÖĞµÄº¯Êıaverage±»Ö´ĞĞ£¬Í¬Ê±ÏòÕ»ÖĞÑ¹Èç5¸ö²ÎÊı¡£²Î¿¼Õ»µÄÔËĞĞÍ¼Log index 1
 	//luaL_dofile(L, "testLC.lua");
 	 if (lua_pcall(pState, 0, 0, 0))
 	 {
@@ -183,11 +185,95 @@ void test002()
 	 lua_close(pState);
 }
 
+//±éÀú Table
+bool DumpTable(lua_State* L, int idx)
+{
+    try{
+        lua_pushnil(L);
+/*
+lua_next() Õâ¸öº¯ÊıµÄ¹¤×÷¹ı³ÌÊÇ£º
+1) ÏÈ´ÓÕ»¶¥µ¯³öÒ»¸ö key, ËùÒÔÔÚÊ¹ÓÃ lua_next Ö®Ç°»áÏÈÑ¹ÈëÒ»¸ö nil. lua_pushnil(L);
+2) ´ÓÕ»Ö¸¶¨Î»ÖÃµÄ table ÀïÈ¡ÏÂÒ»¶Ô key-value£¬ÏÈ½« key ÈëÕ»ÔÙ½« value ÈëÕ»
+3) Èç¹ûµÚ 2 ²½³É¹¦Ôò·µ»Ø·Ç 0 Öµ£¬·ñÔò·µ»Ø 0£¬²¢ÇÒ²»ÏòÕ»ÖĞÑ¹ÈëÈÎºÎÖµ
+*/
+        while(lua_next(L, idx) != 0){
+            int keyType = lua_type(L, -2);
+            if(keyType == LUA_TNUMBER){
+                double value = lua_tonumber(L, -2);
+                cout << "Key:" << value << endl;
+            }else if(keyType == LUA_TSTRING){
+                const char*  value = lua_tostring(L, -2);
+                cout << "Key:" << value << endl;
+            }else{
+                cout << "Invalid key type: " << keyType << endl;
+                return false;
+            }
+            int valueType = lua_type(L, -1);
+            switch(valueType){
+                case LUA_TNIL:
+                {
+                    cout << "Value: nil" << endl;
+                    break;
+                }
+                case LUA_TBOOLEAN:
+                {
+                    int value = lua_toboolean(L, -1);
+                    cout << value << endl;
+                    break;
+                }
+                case LUA_TNUMBER:
+                {    cout << "Value:" << lua_tonumber(L, -1) << endl;
+                    break;
+                }
+                case LUA_TSTRING:
+                {
+                    cout << "Value:" << lua_tostring(L, -1) << endl;
+                    break;
+                }
+                case LUA_TTABLE:
+                {
+ 
+                    cout << "====sub table===" << endl;
+                    int index = lua_gettop(L);
+                    if (!DumpTable(L, index)) {
+                        cout << "popTable error in  popTable,error occured" << endl;
+                        return false;
+                    }
+                    break;
+                }
+                default:
+                {
+                    cout << "Invalid value type: " << valueType << endl;
+                    return false;
+                }
+            }
+            lua_pop(L, 1);
+        }
+    }catch(const char* s){
+       string errMsg = s;
+       lua_pop(L,1);
+       cout << errMsg << endl;
+       return false;
+    }catch(std::exception& e){
+        const char* errMsg = e.what();
+        lua_pop(L,1);
+        cout << errMsg << endl;
+        return false;
+    }catch(...){
+        const char* errMsg = lua_tostring(L,-1);
+        lua_pop(L,1);
+        cout << errMsg << endl;
+        return false;
+    }
+    return true;
+}
+ 
 
-//c++ ä½¿ç”¨ luaã€€é‡Œçš„æ•°æ®
+
+//c++ Ê¹ÓÃ lua¡¡ÀïµÄÊı¾İ
 int test001()
 {
-	///< åˆ›å»ºluaå¥æŸ„å¹¶åˆå§‹åŒ–
+	///< ´´½¨lua¾ä±ú²¢³õÊ¼»¯
 	//lua_State *pState = luaL_newstate();
 	lua_State *pState = lua_open();
 
@@ -197,44 +283,77 @@ int test001()
 		return -1;
 	}
 
-	///< åŠ è½½ç›¸å…³åº“æ–‡ä»¶
+	///< ¼ÓÔØÏà¹Ø¿âÎÄ¼ş
 	luaL_openlibs(pState);
 
-	///< åŠ è½½luaæ–‡ä»¶
+	///< ¼ÓÔØluaÎÄ¼ş
 	std::string sf = dir_scripts + "/test001.lua";
-	if (luaL_loadfile(pState, sf.c_str()))
-	{
-		cout << "Lua æ–‡ä»¶åŠ è½½å¤±è´¥" << endl;
-	}
-	else
-	{
-		///< æ‰§è¡Œluaæ–‡ä»¶
+    if (luaL_loadfile(pState, sf.c_str()))
+    {
+        cout << "Lua ÎÄ¼ş¼ÓÔØÊ§°Ü" << endl;
+        return -2;
+    }
+
+    {
+
+		//½Å±¾¼ÓÔØºó»á½âÎö³ÉÒ»¸ö Closure Èë¿Ú·½·¨,Ñ¹ÈëÕ»ÖĞ.ËùÒÔµ±Ç°Õ» top µÄÉÏÒ»¸ö¾ÍÊÇÕâ¸öÊµÀı,Í¨¹ıÕâ¸ö¿ÉÒÔÕÒµ½ Proto 
+		p_func_proto(clvalue( pState->top - 1)->l.p);
+
+		///< Ö´ĞĞluaÎÄ¼ş Èë¿Ú·½·¨
+		//LUA_API int lua_pcall (lua_State *L, int nargs, int nresults, int errfunc) {
 		if (lua_pcall(pState, 0, 0, 0))
 		{
 			cerr << lua_tostring(pState, -1) << endl;
 		}
 		else
 		{
-			///< è·å–å€¼
+			/// »ñÈ¡ lua mystr Öµ
 			lua_getglobal(pState, "mystr");
-
 			string str = lua_tostring(pState, -1);
-			cout << str << endl;
+			string str2 = lua_tostring(pState, -1);
+			cout << str << "  " << str2 << endl;
+			lua_pop(pState, 1); 
 
-			///< è·å–è¡¨ä¸­æ•°æ®
+			///< »ñÈ¡ lua myTable ±íÖĞÊı¾İ
 			lua_getglobal(pState, "myTable");
 			lua_getfield(pState, -1, "name");
 			cout << lua_tostring(pState, -1) << endl;
+			lua_pop(pState, 1); 
 
-			lua_getglobal(pState, "myTable");
+
 			lua_getfield(pState, -1, "id");
 			cout << lua_tonumber(pState, -1) << endl;
+			lua_pop(pState, 1); 
 
-			//æ•°ç»„
+
+            int type = lua_type(pState, -1);
+            if (type == LUA_TTABLE) {
+                int index = lua_gettop(pState);
+                if (DumpTable(pState, index)) {
+                    return 0;
+                }
+                else {
+                    cout << "Error" << endl;
+                    return -1;
+                }
+            }
+
+
+			//lua  myAry Êı×é
 			lua_getglobal(pState, "myAry");
 			auto n = lua_objlen(pState, -1);
-			//ä¿®æ”¹ æ•°ç»„
+			
+			//´òÓ¡Êı×é
 			for (int i = 1; i <= n; ++i) {
+				lua_pushnumber(pState, i);  //ÍùÕ»ÀïÃæÑ¹Èëi
+				lua_gettable(pState, -2);  //tableÎ»ÓÚ-2µÄÎ»ÖÃ, ¶ÁÈ¡table[i] µ½ top¡£
+				//lua_rawget(pState, -2);  //lua_gettableÒ²¿ÉÒÔÓÃlua_rawgetÀ´Ìæ»»
+				cout << lua_tostring(pState, -1) << endl;
+				lua_pop(pState, 1); //µ¯³ötop¶ÁÈ¡µ½µÄtable[i]
+			}
+
+			//ĞŞ¸Ä Êı×é
+			for (int i = n+1; i <= n+2; ++i) {
 				lua_pushnumber(pState, i);
 				char buf[256];
 				sprintf(buf, "hehe%d", i);
@@ -243,13 +362,14 @@ int test001()
 				lua_rawset(pState, -3);
 			}
 
-			//æ‰“å°æ•°ç»„
+			//´òÓ¡ĞŞ¸ÄºóÊı×é
+			n = lua_objlen(pState, -1);
 			for (int i = 1; i <= n; ++i) {
-				lua_pushnumber(pState, i);  //å¾€æ ˆé‡Œé¢å‹å…¥i
-				lua_gettable(pState, -2);  //è¯»å–table[i]ï¼Œtableä½äº-2çš„ä½ç½®ã€‚
-				//lua_rawget(pState, -2);  //lua_gettableä¹Ÿå¯ä»¥ç”¨lua_rawgetæ¥æ›¿æ¢
+				lua_pushnumber(pState, i);  //ÍùÕ»ÀïÃæÑ¹Èëi
+				lua_gettable(pState, -2);  //tableÎ»ÓÚ-2µÄÎ»ÖÃ, ¶ÁÈ¡table[i] µ½ top¡£
+				//lua_rawget(pState, -2);  //lua_gettableÒ²¿ÉÒÔÓÃlua_rawgetÀ´Ìæ»»
 				cout << lua_tostring(pState, -1) << endl;
-				lua_pop(pState, 1);
+				lua_pop(pState, 1); //µ¯³ötop¶ÁÈ¡µ½µÄtable[i]
 			}
 
 
@@ -260,11 +380,11 @@ int test001()
 
 
 
-			///< è°ƒç”¨å‡½æ•°
+			///< µ÷ÓÃ lua º¯Êı print_hello
 			lua_getglobal(pState, "print_hello");
 			lua_pcall(pState, 0, 0, 0);
 
-			///< è°ƒç”¨è®¡ç®—å‡½æ•°
+			///< µ÷ÓÃ lua º¯Êı _add
 			lua_getglobal(pState, "_add");
 			lua_pushnumber(pState, 10);
 			lua_pushnumber(pState, 20);
@@ -293,16 +413,257 @@ int test001()
 
 
 
+/*
+lua_newuserdata  º¯Êı°´ÕÕÖ¸¶¨µÄ´óĞ¡·ÖÅäÒ»¿éÄÚ´æ£¬½«¶ÔÓ¦µÄ userdatum·Åµ½Õ»ÄÚ,²¢·µ»ØÄÚ´æ¿éµÄµØÖ·¡£
+*/
+void TestUserdata(lua_State* L)
+{
+
+}
+
+
+int ActFunc(lua_State* L)
+{
+	stackDump(L,0);
+	
+	//auto baseLuaState = G(L)->mainthread;
+		
+	lua_pushstring(L, "1");
+	cout << "top:"<< L->top - L->base  << endl;
+    lua_pushstring(L, "1");
+	cout << "top:"<< L->top - L->base  << endl;
+	
+	stackDump(L,1);
+
+	//ttisthread(baseLuaState->base);	
+	//auto tp = lua_type(baseLuaState, 0);
+	
+	//stackDump(G(L)->mainthread);
+	
+	void* buffer;
+	buffer = lua_touserdata(L, lua_upvalueindex(1)); //ÔÚ lua_pushcclosure ¹ØÁªµÄÊı¾İ
+
+	cout <<"buffer store string:" << (char*)buffer <<endl;
+
+	int a=0x123;
+	
+
+
+	return 0;
+}
+/*
+int lua_pushcclosure(lua_State *L,lua_CFunction func,int n )
+	ÆäÖĞnÊÇ¶ÑÕ»¶¥¶ËÖµµÃ¸öÊı£¬ÕâĞ©Öµ½«¸´ÖÆµ½closureÖĞ£¬funcÊÇÊ¹ÓÃclosureµÄº¯Êı£¬
+	Õâ¸öº¯Êıµ÷ÓÃºó»áÇå³ıÕ»ÖĞn¸öÖµ£¬»áÑ¹ÈëÒ»¸öclosureµ½Õ»ÖĞ¡£
+*/
+void TestCClosure(lua_State* L)
+{
+	stackDump(L,1);
+    
+	lua_pushstring(L, "1");
+
+	stackDump(L,1);
+	stackDump(L,0);
+
+
+    lua_pushstring(L, "1");
+    lua_pushstring(L, "1");
+    lua_pushstring(L, "1");
+
+	cout << "top:"<< L->top - L->base  << endl;
+    lua_CFunction function = &ActFunc;
+
+	const char* str = "123";
+    int sizeofstring= 32;
+    lua_pushstring(L, "funcName");
+	cout << "top:"<< L->top - L->base  << endl;
+	unsigned char* buffer = (unsigned char*)lua_newuserdata(L, sizeofstring);
+	cout << "top:"<< L->top - L->base  << endl;
+
+	memset(buffer, '\0',strlen(str) ); 
+	memcpy(buffer, str,strlen(str) ); //Ê¹ÓÃ buffer,±£´æ str,Î´´ø½áÊø·û
+	lua_pushcclosure(L, function, 1);
+		/*
+			ÕâÀï n=1,ÓĞÒ»¸ö¹ØÁª²ÎÊı,»á°ÑÉÏ±ßÄÇ¸ö lua_newuserdata ¸´ÖÆµ½ closuer,Ö®ºóÔÚÕ»Àïµ¯³ö.
+			ËùÒÔºóÃæ´òÓ¡Õ»¶¥Ê±,ÊıÁ¿»á²îÒ»¸ö 
+		*/
+	cout << "top:"<< L->top - L->base  << endl;
+
+	stackDump(L,1);
+	
+	
+	lua_pcall(L, 0, 0, 0); //Ö´ĞĞ cclosure
+	
+	stackDump(L,1);
+
+}
 
 
 
+
+
+void* GetObjectIndexData1(lua_State* L)
+{
+    lua_pushstring(L, "1");
+
+    cout << "top:" << L->top - L->base << endl;
+
+    lua_pushstring(L, "2");
+
+    cout << "top:" << L->top - L->base << endl;
+    lua_pushstring(L, "3");
+
+    cout << "top:" << L->top - L->base << endl;
+
+    auto sz = sizeof(TValue);
+    StkId o = restorestack(L, sz);
+    /*
+Ê¹ÓÃ restorestack Õâ¸öºêÀ´¶¨Î»Õ»ÉÏµÄµØÖ·,ÊÇÒòÎªÊı¾İÕ»µÄÄÚ´æµØÖ·ÊÇ»áËæ×ÅÊı¾İÕ»µÄ´óĞ¡¶ø±ä»¯¡£
+±£´æµØÖ·ÊÇ²»¿ÉÄÜµÄ£¬¶øÓ¦¸Ã¼Ç×¡Ò»¸öÏà¶ÔÁ¿¡£
+ savestack ºÍ restorestack ÕâÁ½¸öºê¾ÍÊÇ×öÕâ¸ö¹¤×÷µÄ¡£
+
+#define savestack(L,p) ((char )(p) - (char )L->stack)
+#define restorestack(L,n) ((TValue )((char )L->stack + (n)))
+
+        */
+
+    stackDump(L,0);
+
+    return NULL;
+}
+
+
+//lua_yield, resume
+void threadTest(lua_State* L)
+{
+    lua_getglobal(L, "Func1");
+    lua_pushinteger(L, 10); //Òª´«ÈëµÄ²ÎÊı
+
+    // ÔËĞĞÕâ¸öĞ­Í¬³ÌĞò, ´«ÈëÒ»¸ö²ÎÊı
+    // ÕâÀï·µ»Ø bRet ¶ÔÓ¦µ±Ç° L->status : 0,OK/ 1,LUA_YIELD / 2,LUA_ERRRUN	
+
+    auto bRet = lua_resume(L, 1); // ½Å±¾·½·¨ Func1 Àï»áµ÷ÓÃµ½ coroutine.yield
+    cout << " L->status bRet:" << bRet << endl;
+
+	// ½Å±¾  coroutine.yield ´«ÈëµÄ²ÎÊı»áÑ¹µ½Õ»ÉÏ,×îºó»á°Ñ²ÎÊı¸öÊıÑ¹Èë
+    // ´òÓ¡L1Õ»ÖĞ²ÎÊıµÄ¸öÊı
+    cout << "Element Num:" << lua_gettop(L) << endl;
+
+    // µ±Ç° yield ·µ»ØµÄÁ½¸öÖµ
+    cout << "Value 1:" << lua_tointeger(L, -2) << endl;
+    cout << "Value 2:" << lua_tointeger(L, -1) << endl;
+
+    // ÔÙ´ÎÆô¶¯Ğ­Í¬³ÌĞò, ´«Èë1¸ö²ÎÊı
+    // ÕâÀï·µ»Ø0
+    lua_pushinteger(L, 123); //Òª´«ÈëµÄ²ÎÊı, ÔÚ½Å±¾ÀïÍ¨¹ı coroutine.yield ·µ»ØÖµ½ÓÊÕ 
+    bRet = lua_resume(L, 1); //ÔÙ´Îµ÷¶Èµ½ LuaÏß³Ì Ö®Ç° yield ´¦ 
+    cout << "bRet:" << bRet << endl;
+    cout << "Element Num:" << lua_gettop(L) << endl;
+    cout << "Value 1:" << lua_tointeger(L, -1) << endl;
+}
+
+
+
+
+
+
+
+
+void testMetatable(lua_State* L)
+{
+    // »ñÈ¡ lua myTable 
+    //lua_getglobal(L, "myTable");
+}
+
+/*
+void CLuaBaseMetaClass::RegisterMetaClass(lua_State * pLuaState) const
+{
+	luaL_newmetatable(pLuaState, GetMetaClassName());
+	lua_pushstring(pLuaState, "__gc");
+	lua_pushcclosure(pLuaState, &CLuaBaseMetaClass::DoGarbageCollect, 0);
+	lua_settable(pLuaState, -3);
+	lua_pushstring(pLuaState, "__index");
+	lua_newtable(pLuaState);
+	RegisterMemberFunctions(pLuaState);
+	lua_settable(pLuaState, -3);
+	lua_pop(pLuaState, 1);
+}
+*/
+
+extern void testMapPath();
+
+int luaTestFunc(lua_State *L)
+{
+	int n = lua_gettop(L); //µ±Ç°Õ»Ñ¹ÁË¼¸¸öÊı¾İ(²ÎÊı)
+
+	lua_getmetatable(L,1);
+	
+	return 0; //0¸ö·µ»ØÖµ
+}
 
 
 int main(int argc, char* argv[])
 {
-	test001();
+	//test001(); // ÓĞ´òÓ¡ Proto
 	//test002();
 	//test003();
+    
+	//testMapPath();
+
+    lua_State* L= lua_open();
+
+	if (nullptr == L)
+	{
+		cout <<"lua init fail"<< endl;
+		return -1;
+	}
+
+	///< ¼ÓÔØÏà¹Ø¿âÎÄ¼ş
+	luaL_openlibs(L);
+
+	///< ¼ÓÔØluaÎÄ¼ş
+	std::string sf = dir_scripts + "/test004.lua";
+	//std::string sf = dir_scripts + "/test001.lua";
+	if (luaL_loadfile(L, sf.c_str()))
+	{
+		cout << "Lua ÎÄ¼ş¼ÓÔØÊ§°Ü" << endl;
+		cout << lua_tostring(L, -1) << endl;
+        return -2;
+    }
+
+	cout << "Lua ÎÄ¼ş¼ÓÔØ["<< sf <<"] ³É¹¦" << endl;
+
+    //p_func_proto(clvalue(L->top - 1)->l.p); //dump Ä¬ÈÏµÄ±Õ°ü·½·¨
+    
+	//Ö´ĞĞ½Å±¾¼ÓÔØºó,Ä¬ÈÏµÄ±Õ°ü·½·¨,³õÊ¼»¯µ±Ç°½Å±¾»·¾³
+	if (lua_pcall(L, 0, 0, 0))
+    {
+		cout << "½Å±¾³õÊ¼»¯Ê§°Ü" << endl;
+        cout << lua_tostring(L, -1) << endl;
+        return -3;
+    }
+
+	lua_register(L, "TestFunc", luaTestFunc);
+	
+	//²âÊÔ·½·¨
+    //TestCClosure(L);
+    //GetObjectIndexData1(L);
+    //testMetatable(L);
+    threadTest(L);
+
+	///Ö¸¶¨ lua Èë¿Úº¯Êı run 
+    lua_getglobal(L, "run_main");
+    //Ö´ĞĞ
+	if (lua_pcall(L, 0, 0, 0))
+    {
+		cout << "µ÷ÓÃ½Å±¾Èë¿Ú·½·¨Ê§°Ü" << endl;
+        cout << lua_tostring(L, -1) << endl;
+        return -3;
+    }
+
 	system("pause");
 	return 0;
 }
+
+
+

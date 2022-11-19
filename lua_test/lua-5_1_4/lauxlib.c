@@ -616,12 +616,14 @@ LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
     lf.f = freopen(filename, "rb", lf.f);  /* reopen in binary mode */
     if (lf.f == NULL) return errfile(L, "reopen", fnameindex);
     /* skip eventual `#!...' */
-   while ((c = getc(lf.f)) != EOF && c != LUA_SIGNATURE[0]) ;
+   while ((c = getc(lf.f)) != EOF && c != LUA_SIGNATURE[0]) ; //.faq ?
     lf.extraline = 0;
   }
   // 反退一个字符
-  ungetc(c, lf.f);
+  ungetc(c, lf.f); //.faq?
+
   // 这里lua_tostring(L, -1)取到的就是前面存储的输入文件名
+        //LUA_API int lua_load (lua_State *L, lua_Reader reader, void *data,const char *chunkname) 
   status = lua_load(L, getF, &lf, lua_tostring(L, -1));
   readstatus = ferror(lf.f);
   if (filename) fclose(lf.f);  /* close file (even in case of errors) */

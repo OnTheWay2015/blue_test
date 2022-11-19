@@ -59,7 +59,7 @@ static void stack_init (lua_State *L1, lua_State *L) {
   setnilvalue(L1->top++);  /* `function' entry for this `ci' */
   // 执行这句调用之后, base = top = stack + 1, 但是base是存放什么值的呢??
   L1->base = L1->ci->base = L1->top;
-  // 这里的意思是,每个lua函数最开始预留LUA_MINSTACK个栈位置,不够的时候再增加,见luaD_checkstack函数
+  // 这里的意思是,每个lua函数最开始预留LUA_MINSTACK个栈位置,不够的时候再增加,见 luaD_checkstack 函数
   L1->ci->top = L1->top + LUA_MINSTACK;
 }
 

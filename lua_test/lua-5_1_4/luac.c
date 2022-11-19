@@ -155,6 +155,9 @@ struct Smain {
  char** argv;
 };
 
+
+extern void PrintFunction(const Proto* f, int full);
+
 static int pmain(lua_State* L)
 {
  struct Smain* s = (struct Smain*)lua_touserdata(L, 1);
@@ -169,7 +172,7 @@ static int pmain(lua_State* L)
   if (luaL_loadfile(L,filename)!=0) fatal(lua_tostring(L,-1));
  }
  f=combine(L,argc);
- if (listing) luaU_print(f,listing>1);
+ if (listing) PrintFunction(f,listing>1);
  if (dumping)
  {
   FILE* D= (output==NULL) ? stdout : fopen(output,"wb");

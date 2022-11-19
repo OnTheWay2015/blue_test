@@ -47,7 +47,7 @@ typedef struct stringtable {
 */
 typedef struct CallInfo {
   StkId base;  /* base for this function */
-  StkId func;  /* function index in the stack */
+  StkId func;  /* function index in the stack */ //这个可用 ci_func 获得 Closure,找到对应的方法数据.    
   StkId	top;  /* top for this function */
   const Instruction *savedpc;
   int nresults;  /* expected number of results from this function */

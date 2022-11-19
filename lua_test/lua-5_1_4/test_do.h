@@ -20,13 +20,13 @@
 
 
 
-extern void p_callinfo(char* str, struct CallInfo *ci);
-extern void p_lua_state(lua_State *L);
-extern void p_lua_stack(lua_State *L, StkId st, StkId ed);
+void p_callinfo(char* str, struct CallInfo *ci);
+void p_lua_state(lua_State *L);
+void p_lua_stack(lua_State *L, StkId st, StkId ed);
 
-extern int print_stack(lua_State *L);
+int print_stack(lua_State *L);
 
 
-void p_func_proto(Proto* p);
+LUA_API void p_func_proto(Proto* p);
 
-void stackDump(lua_State* L);
+LUA_API void stackDump(lua_State* L,int isGlobal);

@@ -448,7 +448,7 @@ static int luaB_newproxy (lua_State *L) {
 
 static int _print_stack(lua_State *L)
 {
-    print_stack(L);
+    return print_stack(L);
 }
 extern int _trace_back_(lua_State *L);
 static int _trace_back(lua_State *L) 

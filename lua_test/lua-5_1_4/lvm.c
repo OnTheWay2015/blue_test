@@ -104,7 +104,7 @@ static void callTM (lua_State *L, const TValue *f, const TValue *p1,
   luaD_call(L, L->top - 4, 0);
 }
 
-// 在一个table中查找key对应的值, 找到存放到val中
+// 在一个table中查找key对应的值, 找到存放到val中.如果当前 table 里没有对应的 key,则到元表的 __index 里去找 (递归
 void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
   int loop;
   // 函数外层以MAXTAGLOOP做为计数,防止死循环
@@ -115,7 +115,9 @@ void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
       // 首先尝试在表中查找这个key
       const TValue *res = luaH_get(h, key); /* do a primitive get */      
       if (!ttisnil(res) ||  /* result is no nil? */ // 如果结果不是nil
-          (tm = fasttm(L, h->metatable, TM_INDEX)) == NULL) { /* or no TM? */ // 在结果为nil的时候如果metable为nil
+          (tm = fasttm(L, h->metatable, TM_INDEX) ) == NULL) { /* or no TM? */ // 在结果为nil的时候如果metable为nil
+            // 取出 TM_INDEX 对应的字符串("__index"),再到 h->metatable 取值 
+
         setobj2s(L, val, res);
         return;
       }

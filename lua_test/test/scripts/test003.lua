@@ -1,5 +1,4 @@
-
-
+-- Ê¹ÓÃ c++ ¿â,   luaL_register(pState, "testlib", testlib);
 
 sum = testlib.act01(1,2,3,4,5);
 avg = testlib.act02(10,20,30,40,50);

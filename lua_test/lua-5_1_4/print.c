@@ -15,7 +15,6 @@
 #include "lopcodes.h"
 #include "lundump.h"
 
-#define PrintFunction	luaU_print
 
 #define Sizeof(x)	((int)sizeof(x))
 #define VOID(p)		((const void*)(p))
@@ -177,7 +176,7 @@ printf("function Instructions end! \n");
 }
 
 //SS 打印单词 instruction 复数情况下后面要加 "s" 
-#define SS(x)	(x==1)?"":"s"
+#define SS(x)	(x<=1)?"":"s"
 #define S(x)	x,SS(x)
 
 static void PrintHeader(const Proto* f)
@@ -185,15 +184,15 @@ static void PrintHeader(const Proto* f)
     const char* s=getstr(f->source);
     if (*s=='@' || *s=='=')
     {
-        s++; //文件名？
+        //s++; //文件名？
     }
     else if (*s==LUA_SIGNATURE[0])
     {
-        s="(bstring)";
+        s="(binarry string)no filename";
     } 
     else
     {
-        s="(string)";
+        s="(string)no filename";
     }
 
     printf("\n%s <%s:%d,%d> (%d instruction%s, %d bytes at %p)\n",
@@ -205,7 +204,7 @@ static void PrintHeader(const Proto* f)
             f->sizecode*Sizeof(Instruction), /* 代码占用空间大小 */ 
             VOID(f) );
 
-    printf("%d%s param%s, %d slot%s(maxstacksize), %d upvalue%s, sizeupvalues[%d] ",
+    printf("%d%s param%s, %d slot%s(maxstacksize), %d upvalue%s, sizeupvalues[%d] \n",
         f->numparams, // 固定参数个数
         f->is_vararg ? "+" : "", //是否变参?
         SS(f->numparams),// 单词 param 是否复数
@@ -215,7 +214,7 @@ static void PrintHeader(const Proto* f)
     
     printf("%d local%s, %d constant%s, %d function%s\n",
             S(f->sizelocvars),//local 变量个数  
-            S(f->sizek),//
+            S(f->sizek),  //定义的常量数量 
             S(f->sizep)); //方法数量
 }
 
@@ -255,7 +254,7 @@ static void PrintUpvalues(const Proto* f)
 
 void PrintFunction(const Proto* f, int full)
 {
- int i,n=f->sizep;
+ int i,n=f->sizep;  /* size of `p' */
  PrintHeader(f);
  PrintCode(f);
  if (full)

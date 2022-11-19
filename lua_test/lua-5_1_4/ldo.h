@@ -21,7 +21,10 @@
 
 #define incr_top(L) {luaD_checkstack(L,1); L->top++;}
 
+
+//获得数值,记录上一个调用栈的栈顶位置,一般在调用方法时使用, 比如 luaD_pcall 
 #define savestack(L,p)		((char *)(p) - (char *)L->stack)
+
 #define restorestack(L,n)	((TValue *)((char *)L->stack + (n)))
 
 #define saveci(L,p)		((char *)(p) - (char *)L->base_ci)

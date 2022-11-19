@@ -15,6 +15,7 @@
 #include "lstate.h"
 #include "lundump.h"
 
+
 typedef struct {
  lua_State* L;
  lua_Writer writer;
@@ -22,6 +23,8 @@ typedef struct {
  int strip;
  int status;
 } DumpState;
+
+static void DumpFunction(const Proto* f, const TString* p, DumpState* D);
 
 #define DumpMem(b,n,size,D)	DumpBlock(b,(n)*(size),D)
 #define DumpVar(x,D)	 	DumpMem(&x,1,sizeof(x),D)
@@ -75,7 +78,6 @@ static void DumpString(const TString* s, DumpState* D)
 
 #define DumpCode(f,D)	 DumpVector(f->code,f->sizecode,sizeof(Instruction),D)
 
-static void DumpFunction(const Proto* f, const TString* p, DumpState* D);
 
 static void DumpConstants(const Proto* f, DumpState* D)
 {
@@ -108,6 +110,7 @@ static void DumpConstants(const Proto* f, DumpState* D)
  for (i=0; i<n; i++) DumpFunction(f->p[i],f->source,D);
 }
 
+
 static void DumpDebug(const Proto* f, DumpState* D)
 {
  int i,n;
@@ -135,7 +138,7 @@ static void DumpFunction(const Proto* f, const TString* p, DumpState* D)
  DumpChar(f->numparams,D);
  DumpChar(f->is_vararg,D);
  DumpChar(f->maxstacksize,D);
- DumpCode(f,D);
+ DumpCode(f,D);   // DumpVector(f->code,f->sizecode,sizeof(Instruction),D)
  DumpConstants(f,D);
  DumpDebug(f,D);
 }
@@ -149,6 +152,9 @@ static void DumpHeader(DumpState* D)
 
 /*
 ** dump Lua function as precompiled chunk
+* 
+* ldump.c - 用于保存经过预编译的Lua代码块：
+	实现了用于转储函数对象的 luaU_dump() 函数。 这种函数对象是从文件或字符串预编译而来的Lua代码块。
 */
 int luaU_dump (lua_State* L, const Proto* f, lua_Writer w, void* data, int strip)
 {

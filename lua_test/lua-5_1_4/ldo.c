@@ -517,8 +517,9 @@ LUA_API int lua_yield (lua_State *L, int nresults) {
 }
 
 
-  //status = luaD_pcall(L, f_parser, &p, savestack(L, L->top), L->errfunc);
+//status = luaD_pcall(L, f_parser, &p, savestack(L, L->top), L->errfunc);
 // 带错误保护的函数调用
+//ptrdiff_t old_top  数值,记录上一个调用栈的栈顶位置
 int luaD_pcall (lua_State *L, Pfunc func, void *u,
                 ptrdiff_t old_top, ptrdiff_t ef) {
   // 调用之前保存调用前的ci地址和top地址,用于可能发生的错误恢复
@@ -565,15 +566,15 @@ struct SParser {  /* data to `f_parser' */
 //把lua脚本文件解析成一个 Closuer 并放到栈顶
 static void f_parser (lua_State *L, void *ud) {
   int i;
-  Proto *tf;
+  Proto *tf; //把 二进制或文本脚本解析后获得的对象
   Closure *cl;
   struct SParser *p = cast(struct SParser *, ud);
   // 预读入第一个字符
   int c = luaZ_lookahead(p->z);
   luaC_checkGC(L);
-  // 根据之前预读的数据来决定下面的分析采用哪个函数
+  // 根据之前预读的数据来决定下面的分析采用哪个函数, luaU_undump 或 luaY_parser 
   tf = ((c == LUA_SIGNATURE[0]) ? luaU_undump /*编译过的二进制*/ : luaY_parser /*原脚本文件*/)(L, p->z,
-                                                             &p->buff, p->name); // .faq p->name 在哪赋值?
+                                                             &p->buff, p->name); //p->name 在哪赋值? 在 luaD_protectedparser 
   // tf->nups 函数调用的upval数量
   cl = luaF_newLclosure(L, tf->nups, hvalue(gt(L)));
   cl->l.p = tf;  // cl->l,lua型函数调用, cl->l.p 型数原型指向 tf;
@@ -584,7 +585,7 @@ static void f_parser (lua_State *L, void *ud) {
 }
 
 
-//luaL_loadfile ==>
+//luaL_loadfile ==>  lua_load  ==> luaD_protectedparser  ==> f_parser 
 //static void f_parser (lua_State *L, void *ud) {
 //Proto * luaY_parser (lua_State *L, ZIO *z, Mbuffer *buff, const char *name) {
 //     ==>[1] void luaX_next (LexState *ls) {

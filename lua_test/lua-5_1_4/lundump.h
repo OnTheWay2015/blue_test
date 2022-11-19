@@ -22,7 +22,7 @@ LUAI_FUNC int luaU_dump (lua_State* L, const Proto* f, lua_Writer w, void* data,
 #ifdef luac_c
 /* print one chunk; from print.c */
 //#error "lllllllllllllllll"  .faq luac_c 哪里定义了,做什么用的
-LUAI_FUNC void luaU_print (const Proto* f, int full);
+//LUAI_FUNC void luaU_print (const Proto* f, int full);
 #endif
 
 /* for header of binary files -- this is Lua 5.1 */

@@ -21,6 +21,9 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="scripts\test001.lua">
@@ -30,6 +33,12 @@
       <Filter>scripts</Filter>
     </None>
     <None Include="scripts\test003.lua">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\test000.lua">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\test004.lua">
       <Filter>scripts</Filter>
     </None>
   </ItemGroup>

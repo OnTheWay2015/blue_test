@@ -236,7 +236,8 @@ typedef union Udata {
 /*
 ** Function Prototypes
 */
-// 存放函数原型的数据结构
+// 存放函数原型的数据结构.  LuaF_newproto 
+// 使用的地方 struct LClosure.  搜索  Proto *p    / Proto *p = ci_func(L->ci)->l.p; /  Proto *p = f->l.p; 
 typedef struct Proto {
   CommonHeader;
   TValue *k;  /* constants used by the function */
@@ -250,17 +251,17 @@ typedef struct Proto {
   TString **upvalues;  /* upvalue names */
   TString  *source;
   int sizeupvalues;
-  int sizek;  /* size of `k' */
-  int sizecode;
+  int sizek;  /* size of `k' 定义的常量数量 */
+  int sizecode; //代码结构数量, 对应 Instruction *code;
   int sizelineinfo;
-  int sizep;  /* size of `p' */
-  int sizelocvars;
-  int linedefined;
-  int lastlinedefined;
+  int sizep;  /* size of `p' 当前方法中定义的其他方法数量  */
+  int sizelocvars; //local 变量数量  
+  int linedefined; //"function" 在文件的开始行 ,当 linedefined==0 时,为入口文件
+  int lastlinedefined;//"end" 在文件的结束行
   GCObject *gclist;
   lu_byte nups;  /* number of upvalues */
-  lu_byte numparams;
-  lu_byte is_vararg;
+  lu_byte numparams; //固定参数个数
+  lu_byte is_vararg; //是否变参?
   lu_byte maxstacksize;
 } Proto;
 
