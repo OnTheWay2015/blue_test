@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="testavl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="scripts\test000.lua" />

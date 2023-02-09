@@ -590,7 +590,6 @@ void CLuaBaseMetaClass::RegisterMetaClass(lua_State * pLuaState) const
 }
 */
 
-extern void testMapPath();
 
 int luaTestFunc(lua_State *L)
 {
@@ -602,6 +601,10 @@ int luaTestFunc(lua_State *L)
 }
 
 
+//typedef char *C,*CCC;
+
+extern void testMapPath();
+extern void testAVL();
 int main(int argc, char* argv[])
 {
 	//test001(); // ”–¥Ú”° Proto
@@ -609,6 +612,10 @@ int main(int argc, char* argv[])
 	//test003();
     
 	//testMapPath();
+	testAVL();
+	return 0;
+
+
 
     lua_State* L= lua_open();
 
