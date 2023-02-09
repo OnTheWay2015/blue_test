@@ -1,0 +1,14 @@
+ 
+syntax = "proto3";
+
+import "p1.proto";
+import "p2.proto";
+
+package t1;
+  
+message MSG_TEST { 
+  string name = 1; 
+  p1.MSG_P1 p1 =2;
+  p2.MSG_P2 p2 =3; 
+}
+ 

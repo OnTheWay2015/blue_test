@@ -1,0 +1,1 @@
+D:\__work\protobuf\cmake\build\protobuf.sln
