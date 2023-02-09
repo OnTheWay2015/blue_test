@@ -10,8 +10,8 @@ end
 
 
 set_config("vs", "2019")
-set_config("arch", "x86")
---set_config("arch","x86_64")
+--set_config("arch", "x86")
+set_config("arch","x64")
 
 
 add_rules("mode.debug", "mode.release")
@@ -27,15 +27,15 @@ if is_plat("windows") then
     end 
 end
 
---includes("./protocol")
---includes("./protocoltest")
---includes("./utils")
---includes("./netlib")
---includes("./vvv")
+includes("./protocol")
+includes("./protocoltest")
+includes("./utils")
+includes("./netlib")
+includes("./vvv")
 
 
 
-includes("./test")
+--includes("./test")
 
 --target("t")
 --    set_kind("binary")
