@@ -1,0 +1,13 @@
+.xmake
+objs
+.vs
+
+build
+out
+bin
+
+*.lib
+*.pdb
+*.a
+*.exe
+*.user

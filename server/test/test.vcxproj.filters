@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="async\async_main.cpp">
+      <Filter>async</Filter>
+    </ClCompile>
+    <ClCompile Include="async\async_test01.cpp">
+      <Filter>async</Filter>
+    </ClCompile>
+    <ClCompile Include="async\async_test02.cpp">
+      <Filter>async</Filter>
+    </ClCompile>
+    <ClCompile Include="class\test_class.cpp">
+      <Filter>class</Filter>
+    </ClCompile>
+    <ClCompile Include="maintest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="b_tree">
+      <UniqueIdentifier>{5b2bdc04-982b-40a6-8aed-8a2ec7763e12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="async">
+      <UniqueIdentifier>{2d68d03c-c4e0-4e1e-b5e4-d0f33aad9fe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class">
+      <UniqueIdentifier>{6fada5af-d635-4874-acb9-54b595dd0e0e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xmake.lua" />
+  </ItemGroup>
+</Project>
