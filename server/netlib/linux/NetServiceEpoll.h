@@ -15,7 +15,7 @@
 class CNetServer;
 
 class CNetService :	
-	public CBaseNetService,public IEpollEventHandler
+	public CBaseNetService,public IEpollEventHandler,public CBaseNetServiceInterface 
 {
 protected:
 	volatile bool								m_WantClose;
@@ -43,9 +43,7 @@ public:
 
 	
 
-	void SetServer(CNetServer * pServer);
 
-	CNetServer * GetServer();
 
 	virtual bool OnEpollEvent(UINT EventID);
 	
@@ -60,7 +58,6 @@ public:
 		bool IPv6Only = false);
 	virtual void Destory();
 	
-	bool StartListen(const CIPAddress& Address);
 	void Close();
 	void QueryClose();
 
@@ -79,6 +76,10 @@ public:
 
 	
 
+public:	
+	virtual bool StartListen(const CIPAddress& Address);
+	virtual void SetServer(CNetServer * pServer);
+	virtual CNetServer * GetServer();
 	
 	
 protected:	

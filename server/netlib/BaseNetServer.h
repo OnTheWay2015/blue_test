@@ -10,6 +10,65 @@
 /*                                                                          */
 /****************************************************************************/
 #pragma once
+//enum class SERVER_TYPE 
+//{
+//	MONITOR=1,
+//	GATE,
+//	GAME,
+//};
+
+enum class CLIENT_PROXY_TYPE  //connection 连接服务的类型
+{
+	SERVER_GAME=1,
+	SERVER_MONITOR,
+	SERVER_GATE,
+	CONNECT_MONITOR,
+};
+
+enum class CLIENT_PROXY_MODE
+{
+	NORMAL=1,
+	WEB_SOCKET,
+};
+
+typedef unsigned int	MSG_LEN_TYPE;
+typedef unsigned int	MSG_ID_TYPE;
+struct DOS_SIMPLE_MESSAGE_HEAD  
+{
+    MSG_LEN_TYPE	MsgLen;
+    MSG_ID_TYPE		MsgID;	//also use for sync id?
+    WORD			MsgFlag;
+    WORD			CRC;
+};
+
+struct DOS_SIMPLE_MESSAGE : DOS_SIMPLE_MESSAGE_HEAD
+{
+	CSmartPtr<void> MSG;
+};
+
+
+
+class CBaseNetConnectionInterface;
+class NetHandlerInterface
+{
+public:
+
+    virtual void OnAccept(CSmartPtr<CBaseNetConnectionInterface> s) =0;//接受连接
+    virtual void OnCreateConnectACK(CSmartPtr<CBaseNetConnectionInterface> s) = 0;//发起连接返回
+
+    virtual void OnDisConnect(CSmartPtr<CBaseNetConnectionInterface> s) = 0;//断开连接
+    virtual void DisConnectAck(UINT64 SessionID) = 0;//发起断开连接返回
+
+
+    virtual void OnMessage(CSmartPtr<CBaseNetConnectionInterface> s,  DOS_SIMPLE_MESSAGE_HEAD* pMsg) =0;//收到消息
+    virtual void SendMessageAck(/*xxx*/) = 0;//发送消息返回
+   
+
+    virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& remoteAddress,CLIENT_PROXY_TYPE type,CLIENT_PROXY_MODE mode)=0;
+ 
+};
+
+
 
 class CBaseNetServer :
 	protected CEasyThread
@@ -24,6 +83,8 @@ protected:
 	volatile UINT		m_TCPSendCount;
 	volatile UINT		m_UDPRecvCount;
 	volatile UINT		m_UDPSendCount;
+
+	CSmartPtr<NetHandlerInterface> m_NetHandler;
 
 public:
 	CBaseNetServer(void);
@@ -82,6 +143,11 @@ public:
 		return CEasyThread::GetThreadID();
 	}
 
+public:
+	void SetHandler(CSmartPtr<NetHandlerInterface> h)
+	{
+		m_NetHandler = h;
+	}
 protected:
 	virtual bool OnStartUp() = 0;
 	virtual void OnShutDown()=0;

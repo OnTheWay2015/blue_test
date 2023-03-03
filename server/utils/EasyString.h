@@ -332,14 +332,14 @@ public:
 		m_pBuffer = EMPTY_STR;
 		m_BufferSize=0;
 		m_StringLength=0;
-		SetString(Str.GetBuffer(),Str.GetLength());
+		SetString(Str.GetBuffer(),(int)Str.GetLength());
 	}
 	CEasyStringT(const CEasyStringT<WCHAR>& Str)
 	{
 		m_pBuffer = EMPTY_STR;
 		m_BufferSize=0;
 		m_StringLength=0;
-		SetString(Str.GetBuffer(),Str.GetLength());
+		SetString(Str.GetBuffer(),(int)Str.GetLength());
 	}
 	~CEasyStringT()
 	{
@@ -514,12 +514,12 @@ public:
 	}
 	CEasyStringT<T>& operator=(const CEasyStringT<char>& Str)
 	{
-		SetString(Str.GetBuffer(),Str.GetLength());
+		SetString(Str.GetBuffer(),(int)Str.GetLength());
 		return *this;
 	}
 	CEasyStringT<T>& operator=(const CEasyStringT<WCHAR>& Str)
 	{
-		SetString(Str.GetBuffer(),Str.GetLength());
+		SetString(Str.GetBuffer(),(int)Str.GetLength());
 		return *this;
 	}
 	int Compare(const T* pStr) const
@@ -656,7 +656,7 @@ public:
 	}
 	const CEasyStringT<T>& operator+=(const CEasyStringT<T>& Str)
 	{
-		AppendString(Str.m_pBuffer,Str.m_StringLength);
+		AppendString(Str.m_pBuffer,(int)Str.m_StringLength);
 		return *this;
 	}
 	friend CEasyStringT<T> operator+(const CEasyStringT<T>& Str1,const char * pStr2)
@@ -677,21 +677,21 @@ public:
 	{
 		CEasyStringT<T> String;
 		String=pStr1;
-		String.AppendString(Str2.m_pBuffer,Str2.m_StringLength);
+		String.AppendString(Str2.m_pBuffer,(int)Str2.m_StringLength);
 		return String;
 	}
 	friend CEasyStringT<T> operator+(const  WCHAR * pStr1,const CEasyStringT<T>& Str2)
 	{
 		CEasyStringT<T> String;
 		String=pStr1;
-		String.AppendString(Str2.m_pBuffer,Str2.m_StringLength);
+		String.AppendString(Str2.m_pBuffer,(int)Str2.m_StringLength);
 		return String;
 	}
 	friend CEasyStringT<T> operator+(const CEasyStringT<T>& Str1,const CEasyStringT<T>& Str2)
 	{
 		CEasyStringT<T> String;
 		String.SetString(Str1.m_pBuffer,Str1.m_StringLength);
-		String.AppendString(Str2.m_pBuffer,Str2.m_StringLength);
+		String.AppendString(Str2.m_pBuffer,(int)Str2.m_StringLength);
 		return String;
 	}
 	friend CEasyStringT<T> operator+(const CEasyStringT<T>& Str1,char Char2)
@@ -712,7 +712,7 @@ public:
 	{
 		CEasyStringT<T> String;
 		String=Char1;
-		String.AppendString(Str2.m_pBuffer,Str2.m_StringLength);
+		String.AppendString(Str2.m_pBuffer,(int)Str2.m_StringLength);
 		return String;
 	}
 	friend CEasyStringT<T> operator+(WCHAR Char1,const CEasyStringT<T>& Str2)
@@ -743,19 +743,19 @@ public:
 			Start=m_StringLength;
 		if(Start+Number>m_StringLength)
 			Number=m_StringLength-Start;
-		return CEasyStringT<T>(m_pBuffer+Start,Number);
+		return CEasyStringT<T>(m_pBuffer+Start,(int)Number);
 	}
 	CEasyStringT<T> Left(SIZE_TYPE Number) const
 	{
 		if(Number>m_StringLength)
 			return *this;
-		return CEasyStringT<T>(m_pBuffer,Number);
+		return CEasyStringT<T>(m_pBuffer,(int)Number);
 	}
 	CEasyStringT<T> Right(SIZE_TYPE Number) const
 	{
 		if(Number>m_StringLength)
 			return *this;
-		return CEasyStringT<T>(m_pBuffer+m_StringLength-Number,Number);
+		return CEasyStringT<T>(m_pBuffer+m_StringLength-Number,(int)Number);
 	}
 	void FormatVL(const char * pFormat,va_list vl);
 	void FormatVL(const WCHAR * pFormat,va_list vl);
@@ -965,17 +965,19 @@ public:
 		}
 	}
 
-	static SIZE_TYPE GetStrLen(const char * pStr)
+	//static SIZE_TYPE GetStrLen(const char * pStr)
+	static int GetStrLen(const char * pStr)
 	{
 		if(pStr)
-			return strlen(pStr);
+			return (int)strlen(pStr);
 		else
 			return 0;
 	}
-	static SIZE_TYPE GetStrLen(const WCHAR * pStr)
+	//static SIZE_TYPE GetStrLen(const WCHAR * pStr)
+	static int GetStrLen(const WCHAR * pStr)
 	{
 		if(pStr)
-			return wcslen(pStr);
+			return (int)wcslen(pStr);
 		else
 			return 0;
 	}

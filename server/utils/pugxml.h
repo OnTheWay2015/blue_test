@@ -356,7 +356,7 @@ inline static bool strcatgrown_impl(TCHAR** lhs,const TCHAR* rhs,unsigned int& l
 //<remarks>'lhs' is resized and 'rhs' is concatenated to it.</remarks>
 inline static bool strcatgrown(TCHAR** lhs,const TCHAR* rhs,unsigned int& lsize)
 {
-	const unsigned int rsize = _tcslen(rhs);
+	auto rsize= _tcslen(rhs);
 	return pug::strcatgrown_impl(lhs,rhs,lsize,rsize);
 }
 
@@ -375,7 +375,7 @@ inline static bool strwtrim(TCHAR** s,unsigned int& len)
 	{
 		if(!pug::chartype_space(*pse))
 		{
-			len = pse + 1 - *s;
+			len = (unsigned int)(pse + 1 - *s);
 			break;
 		}
 	}
@@ -844,7 +844,7 @@ inline static void free_node_recursive(xml_node_struct* root)
 #	define ENDSEG()			{ ch = *s; *s = 0; ++s; if(*s==0) return s; }
 #else
 #	define ENDSEG()			{ ch = *s; ++s; if(*s==0) return s; }
-#	define SETLEN()			( cursor->value_size = s - cursor->value )
+#	define SETLEN()			( cursor->value_size = (unsigned int)(s - cursor->value) )
 #	define ENDSEGDAT()		{ ch = *s; SETLEN(); ++s; if(*s==0) return s; }
 #	define ENDSEGNAM(S)		{ ch = *s; S->name_size = s - S->name; ++s; if(*s==0) return s; }
 #	define ENDSEGATT(S)		{ ch = *s; S->value_size = s - S->value; ++s; if(*s==0) return s; }
@@ -2196,7 +2196,7 @@ public:
                 // thus is fine. If this proves inadequate then do what append_attribute() does.
             def_attr->value = const_cast<TCHAR*>( def );
 #ifdef PUGOPT_NONSEG
-            def_attr->value_size = _tcslen( def );
+            def_attr->value_size = (unsigned int)_tcslen( def );
 #endif
             def_attr->value_insitu = true;
             def_attr->name = NULL;   // we don't need the name for xml_attribute cast functions.

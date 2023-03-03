@@ -9,7 +9,7 @@
 /*      必须保留此版权声明                                                  */
 /*                                                                          */
 /****************************************************************************/
-#include "../StdAfx.h"
+#include "StdAfx.h"
 #include "winfileaccessorobjectcreator.h"
 
 

@@ -12,11 +12,6 @@
 #include "stdafx.h"
 
 
-#ifdef _WIN32
-#define EWOULDBLOCK		WSAEWOULDBLOCK
-#define EINPROGRESS		WSAEWOULDBLOCK
-#endif
-
 
 CNetSocket::CNetSocket(void):CNameObject()
 {
@@ -434,15 +429,15 @@ bool CNetSocket::Select( bool * pbRead, bool * pbWrite, bool * pbExcept, DWORD d
 }
 
 #ifdef _WIN32
-bool CNetSocket::WMsgSelect(HWND hWnd,unsigned int wMsg,long lEvent)
-{
-	if(WSAAsyncSelect(m_Socket,hWnd,wMsg,lEvent)==SOCKET_ERROR)
-	{
-		int code = GetLastError();
-		return false;
-	}
-	return true;
-}
+//bool CNetSocket::WMsgSelect(HWND hWnd,unsigned int wMsg,long lEvent)
+//{
+//	if(WSAAsyncSelect(m_Socket,hWnd,wMsg,lEvent)==SOCKET_ERROR)
+//	{
+//		int code = GetLastError();
+//		return false;
+//	}
+//	return true;
+//}
 
 bool CNetSocket::EventSelect(WSAEVENT hEventObject,long lEvent)
 {

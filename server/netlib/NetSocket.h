@@ -74,7 +74,7 @@ public:
 	bool	Select( bool * pbRead, bool * pbWrite, bool * pbExcept, DWORD dwTimeOut );
 
 #ifdef _WIN32
-	bool	WMsgSelect(HWND hWnd,unsigned int wMsg,long lEvent);
+	//bool	WMsgSelect(HWND hWnd,unsigned int wMsg,long lEvent);
 	bool	EventSelect(WSAEVENT hEventObject,long lEvent);
 #endif
 

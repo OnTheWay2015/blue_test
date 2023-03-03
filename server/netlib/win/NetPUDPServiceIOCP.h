@@ -15,7 +15,7 @@
 class CNetServer;
 
 class CNetPUDPService :	
-	public CBaseNetService,public IIOCPEventHandler
+	public CBaseNetService,public IIOCPEventHandler,public CBaseNetServiceInterface	
 {
 protected:
 	volatile bool							m_WantClose;
@@ -32,9 +32,7 @@ public:
 	virtual ~CNetPUDPService(void);
 	
 
-	void SetServer(CNetServer * pServer);
 
-	CNetServer * GetServer();
 
 	virtual bool OnIOCPEvent(int EventID, COverLappedObject * pOverLappedObject);
 	
@@ -42,15 +40,33 @@ public:
 	virtual bool Create(UINT ParallelRecvCount = DEFAULT_PARALLEL_RECV);
 	virtual void Destory();
 	
-	bool StartListen(const CIPAddress& Address);
+	//CNetServer * GetServer();
+	//void SetServer(CNetServer * pServer);
+	//bool StartListen(const CIPAddress& Address);
+	//virtual void OnStartUp();
+	//virtual void OnClose();
 	void Close();	
 
-	virtual void OnStartUp();
-	virtual void OnClose();
 
 	bool QueryUDPSend(const CIPAddress& IPAddress, LPCVOID pData, int Size);
 
+public: //CBaseNetServiceInterface	
+	virtual bool StartListen(const CIPAddress& Address) override;
+	virtual void SetServer(CNetServer * pServer) override;
+	virtual CNetServer * GetServer() override;
+	virtual void OnStartUp();
+	virtual void OnClose();
+	virtual void OnRecvData(const CIPAddress& IPAddress, const BYTE * pData, UINT DataSize) override; //todo 
+
+	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT) override {return 0;}
+	virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress) override {return nullptr;}; 
+	virtual bool DeleteConnection(CSmartPtr<CBaseNetConnectionInterface> pConnection) override { return false;};
+
+
 	
+	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) {} //todo;
+	virtual void OnDisconnection(CSmartPtr<CBaseNetConnectionInterface> s) {}//todo;
+	virtual void OnRecvMessage(CSmartPtr<CBaseNetConnectionInterface> s, const BYTE * pData, UINT DataSize) {}//todo; 
 protected:	
 	bool QueryUDPRecv();
 	CSmartPtr<COverLappedObject> AllocOverLappedObject();

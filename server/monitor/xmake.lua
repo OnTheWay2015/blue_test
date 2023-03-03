@@ -7,9 +7,13 @@ target("monitorD")
         ,"../"
         ,"../utils"
     )
+if is_plat("windows") then
+   add_defines("WIN32_LEAN_AND_MEAN") 
+end
     
     add_deps("netlib")
     add_deps("utils")
+    add_deps("corelib")
 
     add_files("*.cpp")
 

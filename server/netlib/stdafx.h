@@ -44,151 +44,147 @@
 #endif
 
 
-#include <map>
-#include <vector>
-#include <iostream>
-#include <string>
-#include <memory>
-#include <queue>
-#include <deque>
-
-
-
-#define CStaticMap std::map
-#define CEasyArray std::vector
-#define CIDStorage std::vector
-
-//todo
-#define CThreadSafeIDStorage std::vector   
-#define CSmartPtr  std::shared_ptr
-#define CCycleQueue std::deque
-
-
-
-
-
-
-
-#ifdef _WIN32 
-    #include "utils/win/Win32AddOn.h"
-#endif 
-
-#ifdef __linux__
-    #include <stdarg.h>
-    #include <unistd.h>
-    #include <math.h>
-    #include <utime.h>
-    #include <signal.h>
-    #include <sys/types.h>
-    #include <sys/stat.h>
-    #include <sys/dir.h>
-    #include <sys/time.h>
-    
-    #include "iconv/miniconv.h"
-    #include "utils/linux/LinuxAddOn.h"
-#endif 
-
-
-
-#include "utils/tmp.h"
-
-#include "utils/config.h"
-
-
-#ifdef _WIN32 
-#include "utils/win/EasyCriticalSectionWin.h"
-#endif 
-#ifdef __linux__
-#include "utils/linux/EasyCriticalSectionLinux.h"
-#endif 
-
-
-#include "utils/ClassifiedID.h"
-
-
-#include "utils/AutoLock.h"
-
-#ifdef _WIN32 
-#include "utils/win/EasyReadWriteLockWin.h"
-#endif 
-#ifdef __linux__
-#include "utils/linux/EasyReadWriteLockLinux.h"
-#endif 
-
-
-
-#include "utils/AutoReadLock.h"
-#include "utils/AutoWriteLock.h"
-
-#ifdef _WIN32 
-#include "utils/win/EasyThreadWin.h"
-#endif 
-#ifdef __linux__
-#include "utils/linux/EasyThreadLinux.h"
-#endif 
-
-
-#include "utils/EasyString.h"
-#include "utils/EasyBuffer.h"
-#include "utils/CycleBuffer.h"
-#include "utils/ToolsAll.h"
-#ifdef _WIN32 
-#include "utils/win/ToolsWin.h"
-#endif 
-#ifdef __linux__
-#include "utils/linux/ToolsLinux.h"
-#endif 
-
-
-
-//#include "utils/CycleQueue.h"
-#include "utils/ThreadSafeCycleQueue.h"
-#include "utils/StaticObject.h"
-#include "utils/EasyTime.h"
-#include "utils/EasyTimer.h"
-#include "utils/EasyTimer64.h"
-#include "utils/EasyTimerEx.h"
-
-#ifdef _WIN32 
-#include "utils/win/EasyThreadWin.h"
-#endif 
-#ifdef __linux__
-#include "utils/linux/EasyThreadLinux.h"
-#endif 
-
-
-#include "utils/GuardThread.h"
-
-#include "utils/StringFile.h"
-#include "FileInfo.h"
-#include "utils/IFileObjectCreator.h"
-#include "utils/IFileAccessor.h"
-
-#include "utils/StandardFileAccessor.h"
-#include "utils/StandardFileObjectCreator.h"
-
-#ifdef _WIN32 
-#include "utils/win/WinFileAccessorObjectCreator.h"
-#include "utils/win/WinFileAccessor.h"
-#endif 
-#ifdef __linux__
-#include "utils/linux/LinuxFileAccessorObjectCreator.h"
-#include "utils/linux/LinuxFileAccessor.h"
-#endif 
-
-
-
-#include "utils/FileSystemManager.h"
-
-
-#include "utils/pugxml.h"
-#include "utils/blue_logskin.h"
-#include "utils/ILogPrinter.h"
-#include "utils/LogManager.h"
-
-
-
-
+//#include <map>
+//#include <vector>
+//#include <iostream>
+//#include <string>
+//#include <memory>
+//#include <queue>
+//#include <deque>
+//
+//
+//
+//#define CStaticMap std::map
+//#define CEasyArray std::vector
+//#define CIDStorage std::vector
+//
+////todo
+//#define CThreadSafeIDStorage std::vector   
+//#define CSmartPtr  std::shared_ptr
+//#define CCycleQueue std::deque
+//
+//
+//
+//
+//
+//
+//
+//#ifdef _WIN32 
+//    #include "utils/win/Win32AddOn.h"
+//#endif 
+//
+//#ifdef __linux__
+//    #include <stdarg.h>
+//    #include <unistd.h>
+//    #include <math.h>
+//    #include <utime.h>
+//    #include <signal.h>
+//    #include <sys/types.h>
+//    #include <sys/stat.h>
+//    #include <sys/dir.h>
+//    #include <sys/time.h>
+//    
+//    #include "iconv/miniconv.h"
+//    #include "utils/linux/LinuxAddOn.h"
+//#endif 
+//
+//
+//
+//#include "utils/tmp.h"
+//
+//#include "utils/config.h"
+//
+//
+//#ifdef _WIN32 
+//#include "utils/win/EasyCriticalSectionWin.h"
+//#endif 
+//#ifdef __linux__
+//#include "utils/linux/EasyCriticalSectionLinux.h"
+//#endif 
+//
+//
+//#include "utils/ClassifiedID.h"
+//
+//
+//#include "utils/AutoLock.h"
+//
+//#ifdef _WIN32 
+//#include "utils/win/EasyReadWriteLockWin.h"
+//#endif 
+//#ifdef __linux__
+//#include "utils/linux/EasyReadWriteLockLinux.h"
+//#endif 
+//
+//
+//
+//#include "utils/AutoReadLock.h"
+//#include "utils/AutoWriteLock.h"
+//
+//#ifdef _WIN32 
+//#include "utils/win/EasyThreadWin.h"
+//#endif 
+//#ifdef __linux__
+//#include "utils/linux/EasyThreadLinux.h"
+//#endif 
+//
+//
+//#include "utils/EasyString.h"
+//#include "utils/EasyBuffer.h"
+//#include "utils/CycleBuffer.h"
+//#include "utils/ToolsAll.h"
+//#ifdef _WIN32 
+//#include "utils/win/ToolsWin.h"
+//#endif 
+//#ifdef __linux__
+//#include "utils/linux/ToolsLinux.h"
+//#endif 
+//
+//
+//
+////#include "utils/CycleQueue.h"
+//#include "utils/ThreadSafeCycleQueue.h"
+//#include "utils/StaticObject.h"
+//#include "utils/EasyTime.h"
+//#include "utils/EasyTimer.h"
+//#include "utils/EasyTimer64.h"
+//#include "utils/EasyTimerEx.h"
+//
+//#ifdef _WIN32 
+//#include "utils/win/EasyThreadWin.h"
+//#endif 
+//#ifdef __linux__
+//#include "utils/linux/EasyThreadLinux.h"
+//#endif 
+//
+//
+//#include "utils/GuardThread.h"
+//
+//#include "utils/StringFile.h"
+//#include "FileInfo.h"
+//#include "utils/IFileObjectCreator.h"
+//#include "utils/IFileAccessor.h"
+//
+//#include "utils/StandardFileAccessor.h"
+//#include "utils/StandardFileObjectCreator.h"
+//
+//#ifdef _WIN32 
+//#include "utils/win/WinFileAccessorObjectCreator.h"
+//#include "utils/win/WinFileAccessor.h"
+//#endif 
+//#ifdef __linux__
+//#include "utils/linux/LinuxFileAccessorObjectCreator.h"
+//#include "utils/linux/LinuxFileAccessor.h"
+//#endif 
+//
+//
+//
+//#include "utils/FileSystemManager.h"
+//
+//
+//#include "utils/pugxml.h"
+//#include "utils/blue_logskin.h"
+//#include "utils/ILogPrinter.h"
+//#include "utils/LogManager.h"
 
 
 
@@ -199,6 +195,11 @@
 
 
 
+
+
+
+
+#include "utils/utils.h"
 #include "NetLib.h"
 
 

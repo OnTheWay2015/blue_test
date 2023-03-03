@@ -12,8 +12,6 @@
 #pragma once
 
 
-typedef unsigned int	MSG_LEN_TYPE;
-typedef unsigned int	MSG_ID_TYPE;
 
 
 class CProxyServiceDefault;
@@ -24,15 +22,6 @@ class CProxyConnectionDefault :
 	public  std::enable_shared_from_this<CProxyConnectionDefault>
 {
 public:
-	struct DOS_SIMPLE_MESSAGE_HEAD
-	{
-		MSG_LEN_TYPE	MsgLen;
-		MSG_ID_TYPE		MsgID;	//also use for sync id?
-		WORD			MsgFlag;
-		WORD			CRC;
-
-		
-	};	
 
 	enum STATUS
 	{
@@ -43,9 +32,9 @@ public:
 		STATUS_DESTORYED,
 	};
 protected:
-	CProxyServiceDefault *				m_pService;
-	CProxyConnectionGroup *			m_pGroup;
-	volatile STATUS								m_Status;
+    CBaseNetServiceInterface* m_pService;
+    CProxyConnectionGroup* m_pGroup;
+    volatile STATUS								m_Status;
 
 
 
@@ -73,7 +62,7 @@ protected:
 
 	UINT										m_ReleaseTime;
 
-	volatile UINT64								m_BroadcastGroupMask;
+	volatile SESSION_ID								m_BroadcastGroupMask;
 
 public:
 	CProxyConnectionDefault(void);
@@ -82,8 +71,9 @@ public:
 
 protected:
 	virtual void RecvMsg(DOS_SIMPLE_MESSAGE_HEAD* pMsg);
-	virtual void SendMsg(DOS_SIMPLE_MESSAGE_HEAD* pMsg);
 
+public:
+	virtual bool SendMsg(CSmartPtr<DOS_SIMPLE_MESSAGE> msg) override ;
 public:
 	virtual void OnRecvData(const BYTE * pData, UINT DataSize) override;
 	virtual void OnConnection(bool IsSucceed) override;
@@ -91,7 +81,7 @@ public:
 	virtual int Update(int ProcessPacketLimit = DEFAULT_SERVER_PROCESS_PACKET_LIMIT) override;
 public:
 	bool Init();
-	void SetService(CProxyServiceDefault * pService);
+	void SetService(CBaseNetServiceInterface* pService);
 
 
 

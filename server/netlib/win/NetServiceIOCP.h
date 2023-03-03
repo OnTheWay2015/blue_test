@@ -15,7 +15,7 @@
 class CNetServer;
 
 class CNetService :	
-	public CBaseNetService,public IIOCPEventHandler
+	public CBaseNetService,public IIOCPEventHandler,public CBaseNetServiceInterface 
 {
 protected:
 	friend class CIOCPListenThread;
@@ -45,9 +45,7 @@ public:
 
 	
 
-	void SetServer(CNetServer * pServer);
 
-	CNetServer * GetServer();
 
 	virtual bool OnIOCPEvent(int EventID,COverLappedObject * pOverLappedObject);
 	
@@ -62,26 +60,34 @@ public:
 		bool IPv6Only = false);
 	virtual void Destory();
 	
-	bool StartListen(const CIPAddress& Address);
 	void Close();
 	void QueryClose();
 
-	virtual void OnStartUp();
-	virtual void OnClose();
 
-	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT);
 
 	//virtual CBaseNetConnection * CreateConnection(CIPAddress& RemoteAddress);
-	virtual CSmartPtr<CBaseNetConnection> CreateConnection(CIPAddress& RemoteAddress); 
-	virtual bool DeleteConnection(CBaseNetConnection * pConnection);
 	
 
 	bool QueryUDPSend(const CIPAddress& IPAddress, LPCVOID pData, int Size);
 
-	virtual void OnRecvData(const CIPAddress& IPAddress, const BYTE * pData, UINT DataSize);
 
+public: //CBaseNetServiceInterface	
+	virtual bool StartListen(const CIPAddress& Address) override;
+	virtual void SetServer(CNetServer * pServer) override;
+	virtual CNetServer * GetServer() override;
+	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT) override;
+
+	virtual void OnStartUp() override;
+	virtual void OnClose() override;
+	virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress) override {return nullptr;}; 
+	virtual bool DeleteConnection(CSmartPtr<CBaseNetConnectionInterface> pConnection) override { return false;};
+	virtual void OnRecvData(const CIPAddress& IPAddress, const BYTE * pData, UINT DataSize) override;
+	virtual void OnRecvData(CSmartPtr<CBaseNetConnectionInterface> pConnection, DOS_SIMPLE_MESSAGE_HEAD* pData ) override { };
 	
 
+	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) override { };
+	virtual void OnDisconnection(CSmartPtr<CBaseNetConnectionInterface> s) override { };
+	virtual void OnRecvMessage(CSmartPtr<CBaseNetConnectionInterface> s,  DOS_SIMPLE_MESSAGE_HEAD* pMsg) override { }; 
 	
 	
 protected:

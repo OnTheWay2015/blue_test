@@ -11,29 +11,9 @@
 /****************************************************************************/
 #pragma once
 
-class CBaseNetConnection :
-	public CNameObject
+class CBaseNetConnectionInterface 
 {
-protected:
-	CNetSocket								m_Socket;
-	bool m_StopFlag;
-
 public:
-	CBaseNetConnection(void);
-	~CBaseNetConnection(void);
-
-	CNetSocket * GetSocket();
-
-	void SetRemoteAddress(const CIPAddress& IPAddress);
-	void SetLocalAddress(const CIPAddress& IPAddress);
-	CIPAddress& GetRemoteAddress();
-	CIPAddress& GetLocalAddress();
-	void SetAddressPair(const CIPAddressPair& AddressPair);
-	CIPAddressPair& GetAddressPair();
-
-	bool IsConnected();
-	bool IsDisconnected();
-
 	virtual bool Create(UINT RecvQueueSize, UINT SendQueueSize) = 0;
 	virtual bool Create(SOCKET Socket, UINT RecvQueueSize, UINT SendQueueSize) = 0;
 
@@ -47,11 +27,94 @@ public:
 	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT)=0;
 
 
+
+	virtual CNetSocket * GetSocket()=0;
+	virtual void SetRemoteAddress(const CIPAddress& IPAddress)=0;
+	virtual void SetLocalAddress(const CIPAddress& IPAddress)=0;
+	virtual CIPAddress& GetRemoteAddress()=0;
+	virtual CIPAddress& GetLocalAddress()=0;
+	virtual void SetAddressPair(const CIPAddressPair& AddressPair)=0;
+	virtual CIPAddressPair& GetAddressPair()=0;
+	
+	virtual void SetStop() =0;
+	virtual bool IsStop() =0;
+
+	virtual void SetService(CBaseNetServiceInterface* pService )=0;
+	virtual void SetClientProxy(CLIENT_PROXY_TYPE Type, CLIENT_PROXY_MODE Mode)=0;
+	virtual CLIENT_PROXY_TYPE GetClientProxyType()=0;
+	virtual CLIENT_PROXY_MODE GetClientProxyMode()=0;
+	virtual SESSION_ID GetSessionID()=0;
+	virtual bool SendMsg(CSmartPtr<DOS_SIMPLE_MESSAGE> msg) = 0;
+
+}; 
+class CBaseNetConnection :
+	public CNameObject
+	,public CBaseNetConnectionInterface 
+{
+protected:
+	CNetSocket								m_Socket;
+	bool m_StopFlag;
+    CLIENT_PROXY_TYPE	m_ClientProxyType;
+    CLIENT_PROXY_MODE	m_ClientProxyMode;
+    CBaseNetServiceInterface* m_pService;
+public:
+	CBaseNetConnection(void);
+	~CBaseNetConnection(void);
+
+public:
+	bool IsConnected();
+	bool IsDisconnected();
 	bool PrintConnectionLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...);
 
 	bool PrintConnectionDebugLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...);
-	void SetStop();
-	bool IsStop();
+public: //CBaseNetConnectionInterface 
+	virtual void SetService(CBaseNetServiceInterface* pService ) override { m_pService =pService; };
+	virtual CNetSocket * GetSocket() override ;
+	virtual void SetRemoteAddress(const CIPAddress& IPAddress) override ;
+	virtual void SetLocalAddress(const CIPAddress& IPAddress) override ;
+	virtual CIPAddress& GetRemoteAddress() override ;
+	virtual CIPAddress& GetLocalAddress() override ;
+	virtual void SetAddressPair(const CIPAddressPair& AddressPair) override ;
+	virtual CIPAddressPair& GetAddressPair() override ;
+
+	virtual void SetStop() override ;
+	virtual bool IsStop() override ;
+
+	virtual bool SendMsg(CSmartPtr<DOS_SIMPLE_MESSAGE> msg) override { return false;};
+	virtual bool Create(UINT RecvQueueSize, UINT SendQueueSize)  override { return false;};
+	virtual bool Create(SOCKET Socket, UINT RecvQueueSize, UINT SendQueueSize) override  {return false;};
+
+	virtual bool StartWork()  override {return false;};
+
+	virtual void OnConnection(bool IsSucceed) override  {};
+	virtual void OnDisconnection() override {};
+
+	virtual void OnRecvData(const BYTE * pData, UINT DataSize) override  {};
+
+	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT){return 0;};
+
+
+	virtual void SetClientProxy(CLIENT_PROXY_TYPE Type, CLIENT_PROXY_MODE Mode)
+    {
+        m_ClientProxyType = Type;
+        m_ClientProxyMode = Mode;
+    }
+
+	virtual CLIENT_PROXY_TYPE GetClientProxyType()
+    {
+        return m_ClientProxyType; 
+    }
+
+	virtual CLIENT_PROXY_MODE GetClientProxyMode()
+    {
+        return m_ClientProxyMode; 
+    }
+
+	virtual SESSION_ID GetSessionID()
+	{
+		return m_Socket.GetSocket();
+	}
+
 };
 
 inline void CBaseNetConnection::SetStop()

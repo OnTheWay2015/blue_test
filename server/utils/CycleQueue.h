@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 template < class T >
-class CCycleQueue
+class CCycleQueue_
 {
 protected:
 	T *							m_pBuffer;
@@ -10,7 +10,7 @@ protected:
 	volatile UINT				m_BufferTail;
 	LPCTSTR						m_Tag;
 public:	
-	CCycleQueue(LPCTSTR Tag = _T("CCycleQueue"))
+	CCycleQueue_(LPCTSTR Tag = _T("CCycleQueue_"))
 	{
 		m_pBuffer = NULL;
 		m_BufferSize = 0;
@@ -18,7 +18,7 @@ public:
 		m_BufferTail = 0;
 		m_Tag = Tag;
 	}
-	~CCycleQueue()
+	~CCycleQueue_()
 	{
 		Destory();
 	}

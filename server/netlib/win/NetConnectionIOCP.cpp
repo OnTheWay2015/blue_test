@@ -9,7 +9,7 @@
 /*      必须保留此版权声明                                                  */
 /*                                                                          */
 /****************************************************************************/
-#include "../StdAfx.h"
+#include "StdAfx.h"
 
 #undef  PrintNetLog
 #define PrintNetLog(_Format, ...)	PrintConnectionLogWithTag(_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
@@ -113,7 +113,11 @@ bool CNetConnection::OnIOCPEvent(int EventID,COverLappedObject * pOverLappedObje
 		}
 		else
         {
-				PrintNetLog(_T("Connection收到IOCP错误！"));
+			if (EventID==IOE_ERROR)
+			{
+				QueryDisconnect();
+			}
+			PrintNetLog(_T("Connection收到IOCP错误！err[%u]"), pOverLappedObject->GetErrorCode());
 				//PrintNetLog(_T("(%d)(%d)Connection IOCP出错时连接还未断开,连接关闭！"),GetID(),m_Session);
         }
 	}
@@ -272,8 +276,10 @@ bool CNetConnection::Connect(const CIPAddress& Address, DWORD TimeOut)
 }
 void CNetConnection::Disconnect()
 {
-	if (IsConnected())
-		OnDisconnection();
+	//if (IsConnected())
+	//{
+	//	OnDisconnection();
+	//}
 	
 	m_Socket.Close();
 	
@@ -287,7 +293,9 @@ void CNetConnection::Disconnect()
         m_RecvDataQueue.pop_front();
         ReleaseOverLappedObject(pOverLappedObject);
 	}	
+	OnDisconnection();
 }
+
 void CNetConnection::QueryDisconnect()
 {
 	m_DelayCloseTimer.SetTimeOut(1000);

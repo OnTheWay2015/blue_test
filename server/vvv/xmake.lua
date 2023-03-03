@@ -16,7 +16,7 @@ end
     
     add_deps("netlib")
     add_deps("utils")
-    add_deps("protocol")
+    --add_deps("protocol")
 
 
     add_files("*.cpp")

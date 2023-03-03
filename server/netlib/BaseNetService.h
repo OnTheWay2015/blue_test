@@ -11,12 +11,59 @@
 /****************************************************************************/
 #pragma once
 
+class CNetServer;
+class NetHandlerInterface;
+
+
+
+//class CBaseNetConnectionHolderInterface
+//{
+//public:
+//	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) =0;
+//
+//	virtual void OnDisconnection(CSmartPtr<CBaseNetConnectionInterface> s)=0;
+//	//virtual void OnRecvData(CSmartPtr<CBaseNetConnectionInterface> s, const BYTE * pData, UINT DataSize)=0;
+//	virtual void OnRecvMessage(CSmartPtr<CBaseNetConnectionInterface> s, const BYTE * pData, UINT DataSize)=0; //todo
+//};
+
+class CBaseNetServiceInterface
+{
+public:
+	virtual bool StartListen(const CIPAddress& Address)=0;
+	virtual void SetServer(CNetServer* Svr) =0;//todo  CNetServerInterface
+	virtual CNetServer* GetServer() =0;
+	//virtual void SetHandler(NetHandlerInterface* h) {};
+	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT) =0;
+
+	virtual void OnStartUp()=0;
+	virtual void OnClose()=0;
+	virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress)=0;
+	virtual bool DeleteConnection(CSmartPtr<CBaseNetConnectionInterface>  pConnection) = 0;
+
+
+	virtual void OnRecvData(const CIPAddress& IPAddress, const BYTE * pData, UINT DataSize) = 0; //UDP
+	virtual void OnRecvData(CSmartPtr<CBaseNetConnectionInterface> pConnection, DOS_SIMPLE_MESSAGE_HEAD* pData ) = 0;
+//DOS_SIMPLE_MESSAGE_HEAD
+
+
+//Connection holder
+	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) =0;
+	virtual void OnDisconnection(CSmartPtr<CBaseNetConnectionInterface> s)=0;
+	virtual void OnRecvMessage(CSmartPtr<CBaseNetConnectionInterface> s, DOS_SIMPLE_MESSAGE_HEAD* pMsg)=0; 
+
+};
+
+
+
 class CBaseNetService :
-	public CNameObject
+    public CNameObject
 {
 protected:
-	CNetSocket								m_Socket;	
-	bool m_StopFlag;
+    CNetSocket								m_Socket;
+    bool m_StopFlag;
+	NetHandlerInterface* m_NetHandler;
+    CLIENT_PROXY_TYPE	m_ClientProxyType;
+    CLIENT_PROXY_MODE	m_ClientProxyMode;
 
 public:
 	CBaseNetService(void);
@@ -33,18 +80,66 @@ public:
 
 	bool IsWorking();
 
-	virtual void OnStartUp()=0;
-	virtual void OnClose()=0;
-
-	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT)=0;
-
-	virtual CSmartPtr<CBaseNetConnection> CreateConnection(CIPAddress& RemoteAddress)=0;
-	virtual bool DeleteConnection(CBaseNetConnection * pConnection) = 0;
-
-	virtual void OnRecvData(const CIPAddress& IPAddress, const BYTE * pData, UINT DataSize) = 0;
 	
 	void SetStop();
 	bool IsStop();
+	void SetHandler(NetHandlerInterface* h)
+	{
+		m_NetHandler = h;
+	}
+
+	void SetClientProxy(CLIENT_PROXY_TYPE Type, CLIENT_PROXY_MODE Mode)
+    {
+        m_ClientProxyType = Type;
+        m_ClientProxyMode = Mode;
+    }
+
+	CLIENT_PROXY_TYPE GetClientProxyType()
+    {
+        return m_ClientProxyType; 
+    }
+
+	CLIENT_PROXY_MODE GetClientProxyMode()
+    {
+        return m_ClientProxyMode; 
+    }
+
+	//virtual void OnStartUp()=0;
+	//virtual void OnClose()=0;
+	//virtual void OnRecvData(const CIPAddress& IPAddress, const BYTE * pData, UINT DataSize) = 0;
+	//virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress)=0;
+	//virtual bool DeleteConnection(CSmartPtr<CBaseNetConnectionInterface>  pConnection) = 0;
+	
+
+protected:
+    void OnAccept(CSmartPtr<CBaseNetConnectionInterface> s )
+	{
+		m_NetHandler->OnAccept(s);
+	}
+    void OnCreateConnectACK(CSmartPtr<CBaseNetConnectionInterface> s )
+	{
+		m_NetHandler->OnCreateConnectACK(s);
+	}
+
+    void OnDisConnect(CSmartPtr<CBaseNetConnectionInterface> s )
+	{
+		m_NetHandler->OnDisConnect(s);
+	}
+
+    void DisConnectAck(CSmartPtr<CBaseNetConnectionInterface> s )
+	{
+		//m_NetHandler->DisConnectAck(s);
+	}
+
+    void OnMessage(/*xxx*/)
+	{
+		//m_NetHandler->OnMessage(); //todo?
+	}
+    void SendMessageAck(/*xxx*/)
+	{
+		m_NetHandler->SendMessageAck();
+	}
+
 };
 
 inline void CBaseNetService::SetStop()

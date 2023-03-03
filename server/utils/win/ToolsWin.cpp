@@ -1,4 +1,4 @@
-﻿#include "../stdafx.h"
+﻿#include "stdafx.h"
 
 #pragma pack(push)
 #pragma pack(1)

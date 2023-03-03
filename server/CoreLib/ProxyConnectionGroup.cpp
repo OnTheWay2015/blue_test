@@ -20,10 +20,16 @@ void CProxyConnectionGroup::Init()
 }
 
 
-bool CProxyConnectionGroup::AddConnection(CSmartPtr<CProxyConnectionDefault> pConnection)
+bool CProxyConnectionGroup::RemoveConnection(CSmartPtr<CBaseNetConnectionInterface> pConnection)
 {
 	CAutoLock Lock(m_EasyCriticalSection);
-	m_ConnectionPool.insert({pConnection->GetID(), pConnection});
+    m_ConnectionPool.erase(pConnection->GetSessionID());
+	return true;
+}		
+bool CProxyConnectionGroup::AddConnection(CSmartPtr<CBaseNetConnectionInterface> pConnection)
+{
+	CAutoLock Lock(m_EasyCriticalSection);
+	m_ConnectionPool.insert({pConnection->GetSessionID(), pConnection});
 
 	return true;
 }		
@@ -63,4 +69,23 @@ void CProxyConnectionGroup::OnTerminate()
 {
 }
 
+void CProxyConnectionGroup::SendSessionMessage(CSmartPtr<CoreSessionMessage> msg)
+{
+	auto SID = msg->SID;
+	auto s = m_ConnectionPool.find(SID);
+	if (s == m_ConnectionPool.end())
+	{
+		//todo log err
+		return;
+	}
+
+    auto m = std::make_shared<DOS_SIMPLE_MESSAGE>();
+    m->MsgID = msg->Header->MsgID;
+    m->MsgLen = msg->Header->MsgLen;
+    m->MSG = msg->Msg;
+	
+	s->second->SendMsg(m);
+
+	
+}
 

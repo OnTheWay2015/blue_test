@@ -74,7 +74,7 @@ bool CProxyConnectionDefault::Init()
     }
 	return true;
 }
-void CProxyConnectionDefault::SetService(CProxyServiceDefault * pService)
+void CProxyConnectionDefault::SetService(CBaseNetServiceInterface* pService)
 {
 	m_pService = pService;
 	SetServer(pService->GetServer());
@@ -109,6 +109,7 @@ void CProxyConnectionDefault::OnRecvData(const BYTE * pData, UINT DataSize)// CN
 					//Disconnect();
 					QueryDisconnect();	
 					//PrintDOSLog( _T("对象代理收到非法包，连接断开！"));
+					break;
 				}
 				
 				DOS_SIMPLE_MESSAGE_HEAD* pMsg = (DOS_SIMPLE_MESSAGE_HEAD*)m_AssembleBuffer.GetBuffer();
@@ -126,18 +127,22 @@ void CProxyConnectionDefault::OnRecvData(const BYTE * pData, UINT DataSize)// CN
 	}
 }
 
-void CProxyConnectionDefault::RecvMsg(DOS_SIMPLE_MESSAGE_HEAD* pMsg)
+void CProxyConnectionDefault::RecvMsg(DOS_SIMPLE_MESSAGE_HEAD* m)
 {
-//test
-	auto m = std::make_shared<DOS_SIMPLE_MESSAGE_HEAD>();
-	m->MsgLen = sizeof(DOS_SIMPLE_MESSAGE_HEAD);
-	m->MsgFlag =123;
-	SendMsg(m.get());
-}
+	m_pService->OnRecvMessage(shared_from_this(), m);	
 
-void CProxyConnectionDefault::SendMsg(DOS_SIMPLE_MESSAGE_HEAD* pMsg)
+}
+bool CProxyConnectionDefault::SendMsg(CSmartPtr<DOS_SIMPLE_MESSAGE> msg) 
 {
-	Send(pMsg,pMsg->MsgLen);	
+	//Send(pMsg,pMsg->MsgLen);
+		
+	Send(msg.get(),sizeof(DOS_SIMPLE_MESSAGE_HEAD));
+	
+	auto buf = ProtobufParseMessage::GetInstance()->SerializeToArray(msg->MSG);		
+	Send(&(*buf)[0],buf->size());
+	
+	return true;
+
 }
 
 
@@ -149,35 +154,27 @@ void CProxyConnectionDefault::OnConnection(bool IsSucceed)
 	m_RecentPingDelay = 0;
 	m_RecvCount = 0;
 	m_RecvFlow = 0;
-
 	if (IsSucceed)
 	{
 		//PrintDOSDebugLog(_T("收到代理对象的连接！IP=%s"), GetRemoteAddress().GetIPString());		
 		m_Status = STATUS_CONNECTED;
-		if (m_pService)	
-		{
-			m_pService->AcceptConnection(shared_from_this());
-		}
-
 		//SendProtocolOption();
-
-
 //test
-        auto m = std::make_shared<DOS_SIMPLE_MESSAGE_HEAD>();
-        m->MsgLen = sizeof(DOS_SIMPLE_MESSAGE_HEAD);
-        m->MsgFlag = 123;
-        SendMsg(m.get());
+       // auto m = std::make_shared<DOS_SIMPLE_MESSAGE_HEAD>();
+       // m->MsgLen = sizeof(DOS_SIMPLE_MESSAGE_HEAD);
+       // m->MsgFlag = 123;
+       // SendMsg(m.get());
 
 	}
 	else
 	{
 		//PrintDOSLog(_T("连接初始化失败！IP=%s"), GetRemoteAddress().GetIPString());
 		m_Status = STATUS_DISCONNECTED;
-		if (m_pService)	
-        {
-            m_pService->QueryDestoryConnection(this);
-        }
 	}
+
+	//m_pService->OnConnection(shared_from_this(),IsSucceed);
+
+
 }
 void CProxyConnectionDefault::OnDisconnection()
 {
@@ -186,6 +183,7 @@ void CProxyConnectionDefault::OnDisconnection()
 	//SendDisconnectNotify();
 
 	m_Status = STATUS_DISCONNECTED;
+	m_pService->OnDisconnection(shared_from_this());	
 }
 
 int CProxyConnectionDefault::Update(int ProcessPacketLimit)

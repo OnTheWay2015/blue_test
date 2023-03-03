@@ -9,7 +9,7 @@
 /*      必须保留此版权声明                                                  */
 /*                                                                          */
 /****************************************************************************/
-#include "../stdafx.h""
+#include "stdafx.h""
 
 
 COverLappedObject::COverLappedObject(void)		
@@ -44,7 +44,7 @@ void COverLappedObject::Clear()
 	m_AcceptSocket = INVALID_SOCKET;
 	m_pIOCPEventRouter = NULL;
 	m_RouterSession = 0;
-	m_Address.SetIP((ULONG)0);
+	m_Address.SetIP(_T(""));
 	m_Address.SetPort(0);
 	m_AddressLen = sizeof(CIPAddress);
 	m_ParentID = 0;

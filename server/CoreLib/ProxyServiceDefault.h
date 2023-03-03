@@ -28,9 +28,9 @@ protected:
 	CGuardThread														m_GuardThread;
 
 
-	CIDStorage<CSmartPtr<CProxyConnectionDefault>>			m_ConnectionPool;
+	//CIDStorage<CSmartPtr<CProxyConnectionDefault>>			m_ConnectionPool;
 	//CThreadSafeIDStorage<CProxyConnectionDefault *>			m_DestoryConnectionList;
-	CEasyArray<CSmartPtr<CProxyConnectionGroup>>							m_ConnectionGroups;
+	//CEasyArray<CSmartPtr<CProxyConnectionGroup>>							m_ConnectionGroups;
 
 	//CHashMap<CIPAddress, IP_INFO>										m_IPBlackList;
 	//CHashMap<CIPAddress, IP_INFO>										m_RecvProtectedIPList;
@@ -45,15 +45,21 @@ public:
 public:
 
 	virtual int Update(int ProcessPacketLimit = DEFAULT_SERVER_PROCESS_PACKET_LIMIT) override;
-	virtual CSmartPtr<CBaseNetConnection> CreateConnection(CIPAddress& RemoteAddress) override;
-	virtual bool DeleteConnection(CBaseNetConnection * pConnection) override;
+	virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress) override;
+	virtual bool DeleteConnection(CSmartPtr<CBaseNetConnectionInterface> pConnection) override;
 	virtual CProxyConnectionDefault* GetConnection(UINT ID);
 	virtual LPVOID GetFirstConnectionPos();
 	virtual CProxyConnectionDefault* GetNextConnection(LPVOID& Pos);
+
+	virtual void OnRecvData(CSmartPtr<CBaseNetConnectionInterface> pConnection, DOS_SIMPLE_MESSAGE_HEAD* pData ) override ;
+
+	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) override ;
+	virtual void OnDisconnection(CSmartPtr<CBaseNetConnectionInterface> s) override ;
+	virtual void OnRecvMessage(CSmartPtr<CBaseNetConnectionInterface> s, DOS_SIMPLE_MESSAGE_HEAD* pMsg) override ; 
 public:
 
 	void Init();
-	void AcceptConnection(CSmartPtr<CProxyConnectionDefault >  pConnection);
+	//void AcceptConnection(CSmartPtr<CProxyConnectionDefault >  pConnection);
 	void QueryDestoryConnection(CProxyConnectionDefault * pConnection);
 
 

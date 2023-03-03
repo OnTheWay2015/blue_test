@@ -522,13 +522,13 @@ inline CEasyStringA UnicodeToUTF8(const WCHAR* SrcStr, int SrcLen = -1)
 inline CEasyStringA AnsiToUTF8(const char* SrcStr, int SrcLen = -1)
 {
 	CEasyStringW UnicodeStr = AnsiToUnicode(SrcStr, SrcLen);
-	return UnicodeToUTF8(UnicodeStr, UnicodeStr.GetLength());
+	return UnicodeToUTF8(UnicodeStr, (int)UnicodeStr.GetLength());
 }
 
 inline CEasyStringA UTF8ToAnsi(const char* SrcStr, int SrcLen = -10)
 {
 	CEasyStringW UnicodeStr = UTF8ToUnicode(SrcStr, SrcLen);
-	return UnicodeToAnsi(UnicodeStr, UnicodeStr.GetLength());
+	return UnicodeToAnsi(UnicodeStr, (int)UnicodeStr.GetLength());
 }
 #else
 inline CEasyStringA AnsiToUTF8(const char* SrcStr, int SrcLen = -1)

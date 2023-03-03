@@ -58,3 +58,5 @@ protected:
 	void PrintDumpLog(IFileAccessor * pLogFile, LPCTSTR Format, ...);
 	void DumpThreadCallStack();
 };
+
+

@@ -146,10 +146,10 @@ inline BOOL PrintNetDebugLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...)
 
 #include "NetSocket.h"
 
-#include "BaseNetConnection.h"
-#include "BaseNetService.h"
-#include "BaseNetServer.h"
 
+#include "BaseNetServer.h"
+#include "BaseNetService.h"
+#include "BaseNetConnection.h"
 
 #ifdef _WIN32
 
@@ -177,4 +177,13 @@ inline BOOL PrintNetDebugLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...)
 #endif
 
 
+//#ifdef _WIN32
+//#define EWOULDBLOCK		WSAEWOULDBLOCK
+//#define EINPROGRESS		WSAEWOULDBLOCK
+//#endif
+
+
+
+#include "PacketFactoryBase.h"
+#include "PacketManager.h"
 

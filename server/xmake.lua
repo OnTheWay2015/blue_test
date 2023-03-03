@@ -27,11 +27,13 @@ if is_plat("windows") then
     end 
 end
 
-includes("./protocol")
-includes("./protocoltest")
+--includes("./protocol")
+--includes("./protocoltest")
 includes("./utils")
 includes("./netlib")
-includes("./vvv")
+includes("./corelib")
+--includes("./vvv")
+includes("./monitor")
 
 
 

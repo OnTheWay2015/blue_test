@@ -135,7 +135,7 @@ bool CLogManager::DelChannel(UINT ChannelID)
 
 bool CLogManager::PrintLogDirect(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Msg)
 {
-	*m_log << Msg;
+	//*m_log << Msg;
 	std::cout << Msg << std::endl;
 	return false;
 }
@@ -152,7 +152,7 @@ bool CLogManager::PrintLog(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Forma
 	
 	std::cout << m_MsgBuff<< std::endl;;
 
-	*m_log << m_MsgBuff;
+	//*m_log << m_MsgBuff;
 	return false;
 }
 bool CLogManager::PrintLogVL(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Format, va_list vl)
@@ -162,7 +162,7 @@ bool CLogManager::PrintLogVL(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR For
 
 	std::cout << m_MsgBuff<< std::endl;;
 
-	*m_log << m_MsgBuff;
+	//*m_log << m_MsgBuff;
 	return false;
 }
 

@@ -95,7 +95,8 @@ public:
         }
 		
 		*pValue = this->front();
-		CCycleQueue<T>::pop_front();	
+		this->pop_front();
+		//CCycleQueue<T>::pop_front();	
 		return true;
 	}
 };

@@ -1,14 +1,14 @@
 ﻿#pragma once
 
 class CProxyServiceDefault;
-
+class CoreSessionMessage;
 class CProxyConnectionGroup :
 	public CEasyThread
 {
 protected:
 	CProxyServiceDefault *								m_pService;
 	UINT														m_Index;
-	CStaticMap<UINT, CSmartPtr<CProxyConnectionDefault>>			m_ConnectionPool;
+	CHashMap<SESSION_ID,CSmartPtr<CBaseNetConnectionInterface> >			m_ConnectionPool;
 	CEasyCriticalSection										m_EasyCriticalSection;
 
 
@@ -17,7 +17,9 @@ public:
 	~CProxyConnectionGroup();
 
 	void Init();
-	bool AddConnection( CSmartPtr<CProxyConnectionDefault> pConnection);
+	bool AddConnection( CSmartPtr<CBaseNetConnectionInterface> pConnection);
+	bool RemoveConnection( CSmartPtr<CBaseNetConnectionInterface> pConnection);
+    void SendSessionMessage(CSmartPtr<CoreSessionMessage> msg);
 
 
 	

@@ -40,6 +40,7 @@ void protobuf_AssignDesc_t1_2eproto();
 void protobuf_ShutdownFile_t1_2eproto();
 
 class MSG_TEST;
+class MSG_TEST_RES;
 
 // ===================================================================
 
@@ -117,19 +118,25 @@ class MSG_TEST : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
-  // optional .p1.MSG_P1 p1 = 2;
+  // optional int32 packet_id = 2;
+  void clear_packet_id();
+  static const int kPacketIdFieldNumber = 2;
+  ::google::protobuf::int32 packet_id() const;
+  void set_packet_id(::google::protobuf::int32 value);
+
+  // optional .p1.MSG_P1 p1 = 3;
   bool has_p1() const;
   void clear_p1();
-  static const int kP1FieldNumber = 2;
+  static const int kP1FieldNumber = 3;
   const ::p1::MSG_P1& p1() const;
   ::p1::MSG_P1* mutable_p1();
   ::p1::MSG_P1* release_p1();
   void set_allocated_p1(::p1::MSG_P1* p1);
 
-  // optional .p2.MSG_P2 p2 = 3;
+  // optional .p2.MSG_P2 p2 = 4;
   bool has_p2() const;
   void clear_p2();
-  static const int kP2FieldNumber = 3;
+  static const int kP2FieldNumber = 4;
   const ::p2::MSG_P2& p2() const;
   ::p2::MSG_P2* mutable_p2();
   ::p2::MSG_P2* release_p2();
@@ -142,6 +149,7 @@ class MSG_TEST : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::p1::MSG_P1* p1_;
   ::p2::MSG_P2* p2_;
+  ::google::protobuf::int32 packet_id_;
   mutable int _cached_size_;
   friend void  protobuf_InitDefaults_t1_2eproto_impl();
   friend void  protobuf_AddDesc_t1_2eproto_impl();
@@ -151,6 +159,118 @@ class MSG_TEST : public ::google::protobuf::Message /* @@protoc_insertion_point(
   void InitAsDefaultInstance();
 };
 extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_TEST> MSG_TEST_default_instance_;
+
+// -------------------------------------------------------------------
+
+class MSG_TEST_RES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:t1.MSG_TEST_RES) */ {
+ public:
+  MSG_TEST_RES();
+  virtual ~MSG_TEST_RES();
+
+  MSG_TEST_RES(const MSG_TEST_RES& from);
+
+  inline MSG_TEST_RES& operator=(const MSG_TEST_RES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MSG_TEST_RES& default_instance();
+
+  static const MSG_TEST_RES* internal_default_instance();
+
+  void Swap(MSG_TEST_RES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline MSG_TEST_RES* New() const { return New(NULL); }
+
+  MSG_TEST_RES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MSG_TEST_RES& from);
+  void MergeFrom(const MSG_TEST_RES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  size_t ByteSizeLong() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(MSG_TEST_RES* other);
+  void UnsafeMergeFrom(const MSG_TEST_RES& from);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string name_res = 1;
+  void clear_name_res();
+  static const int kNameResFieldNumber = 1;
+  const ::std::string& name_res() const;
+  void set_name_res(const ::std::string& value);
+  void set_name_res(const char* value);
+  void set_name_res(const char* value, size_t size);
+  ::std::string* mutable_name_res();
+  ::std::string* release_name_res();
+  void set_allocated_name_res(::std::string* name_res);
+
+  // optional int32 packet_id = 2;
+  void clear_packet_id();
+  static const int kPacketIdFieldNumber = 2;
+  ::google::protobuf::int32 packet_id() const;
+  void set_packet_id(::google::protobuf::int32 value);
+
+  // optional int32 a1 = 3;
+  void clear_a1();
+  static const int kA1FieldNumber = 3;
+  ::google::protobuf::int32 a1() const;
+  void set_a1(::google::protobuf::int32 value);
+
+  // optional int32 a2 = 4;
+  void clear_a2();
+  static const int kA2FieldNumber = 4;
+  ::google::protobuf::int32 a2() const;
+  void set_a2(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:t1.MSG_TEST_RES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr name_res_;
+  ::google::protobuf::int32 packet_id_;
+  ::google::protobuf::int32 a1_;
+  ::google::protobuf::int32 a2_;
+  mutable int _cached_size_;
+  friend void  protobuf_InitDefaults_t1_2eproto_impl();
+  friend void  protobuf_AddDesc_t1_2eproto_impl();
+  friend void protobuf_AssignDesc_t1_2eproto();
+  friend void protobuf_ShutdownFile_t1_2eproto();
+
+  void InitAsDefaultInstance();
+};
+extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_TEST_RES> MSG_TEST_RES_default_instance_;
 
 // ===================================================================
 
@@ -204,7 +324,21 @@ inline void MSG_TEST::set_allocated_name(::std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:t1.MSG_TEST.name)
 }
 
-// optional .p1.MSG_P1 p1 = 2;
+// optional int32 packet_id = 2;
+inline void MSG_TEST::clear_packet_id() {
+  packet_id_ = 0;
+}
+inline ::google::protobuf::int32 MSG_TEST::packet_id() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_TEST.packet_id)
+  return packet_id_;
+}
+inline void MSG_TEST::set_packet_id(::google::protobuf::int32 value) {
+  
+  packet_id_ = value;
+  // @@protoc_insertion_point(field_set:t1.MSG_TEST.packet_id)
+}
+
+// optional .p1.MSG_P1 p1 = 3;
 inline bool MSG_TEST::has_p1() const {
   return this != internal_default_instance() && p1_ != NULL;
 }
@@ -243,7 +377,7 @@ inline void MSG_TEST::set_allocated_p1(::p1::MSG_P1* p1) {
   // @@protoc_insertion_point(field_set_allocated:t1.MSG_TEST.p1)
 }
 
-// optional .p2.MSG_P2 p2 = 3;
+// optional .p2.MSG_P2 p2 = 4;
 inline bool MSG_TEST::has_p2() const {
   return this != internal_default_instance() && p2_ != NULL;
 }
@@ -285,7 +419,102 @@ inline void MSG_TEST::set_allocated_p2(::p2::MSG_P2* p2) {
 inline const MSG_TEST* MSG_TEST::internal_default_instance() {
   return &MSG_TEST_default_instance_.get();
 }
+// -------------------------------------------------------------------
+
+// MSG_TEST_RES
+
+// optional string name_res = 1;
+inline void MSG_TEST_RES::clear_name_res() {
+  name_res_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& MSG_TEST_RES::name_res() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_TEST_RES.name_res)
+  return name_res_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void MSG_TEST_RES::set_name_res(const ::std::string& value) {
+  
+  name_res_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:t1.MSG_TEST_RES.name_res)
+}
+inline void MSG_TEST_RES::set_name_res(const char* value) {
+  
+  name_res_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:t1.MSG_TEST_RES.name_res)
+}
+inline void MSG_TEST_RES::set_name_res(const char* value, size_t size) {
+  
+  name_res_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:t1.MSG_TEST_RES.name_res)
+}
+inline ::std::string* MSG_TEST_RES::mutable_name_res() {
+  
+  // @@protoc_insertion_point(field_mutable:t1.MSG_TEST_RES.name_res)
+  return name_res_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* MSG_TEST_RES::release_name_res() {
+  // @@protoc_insertion_point(field_release:t1.MSG_TEST_RES.name_res)
+  
+  return name_res_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void MSG_TEST_RES::set_allocated_name_res(::std::string* name_res) {
+  if (name_res != NULL) {
+    
+  } else {
+    
+  }
+  name_res_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name_res);
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_TEST_RES.name_res)
+}
+
+// optional int32 packet_id = 2;
+inline void MSG_TEST_RES::clear_packet_id() {
+  packet_id_ = 0;
+}
+inline ::google::protobuf::int32 MSG_TEST_RES::packet_id() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_TEST_RES.packet_id)
+  return packet_id_;
+}
+inline void MSG_TEST_RES::set_packet_id(::google::protobuf::int32 value) {
+  
+  packet_id_ = value;
+  // @@protoc_insertion_point(field_set:t1.MSG_TEST_RES.packet_id)
+}
+
+// optional int32 a1 = 3;
+inline void MSG_TEST_RES::clear_a1() {
+  a1_ = 0;
+}
+inline ::google::protobuf::int32 MSG_TEST_RES::a1() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_TEST_RES.a1)
+  return a1_;
+}
+inline void MSG_TEST_RES::set_a1(::google::protobuf::int32 value) {
+  
+  a1_ = value;
+  // @@protoc_insertion_point(field_set:t1.MSG_TEST_RES.a1)
+}
+
+// optional int32 a2 = 4;
+inline void MSG_TEST_RES::clear_a2() {
+  a2_ = 0;
+}
+inline ::google::protobuf::int32 MSG_TEST_RES::a2() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_TEST_RES.a2)
+  return a2_;
+}
+inline void MSG_TEST_RES::set_a2(::google::protobuf::int32 value) {
+  
+  a2_ = value;
+  // @@protoc_insertion_point(field_set:t1.MSG_TEST_RES.a2)
+}
+
+inline const MSG_TEST_RES* MSG_TEST_RES::internal_default_instance() {
+  return &MSG_TEST_RES_default_instance_.get();
+}
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 

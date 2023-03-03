@@ -9,7 +9,7 @@
 /*      必须保留此版权声明                                                  */
 /*                                                                          */
 /****************************************************************************/
-#include "../stdafx.h"
+#include "stdafx.h"
 
 
 CNetService::CNetService()
@@ -61,7 +61,7 @@ bool CNetService::OnIOCPEvent(int EventID, COverLappedObject * pOverLappedObject
 					SOL_SOCKET, SO_UPDATE_ACCEPT_CONTEXT, 
 					(char *)&ListenSocket, sizeof(ListenSocket))!=SOCKET_ERROR)
 				{
-					m_AcceptQueue.push_back(pOverLappedObject);
+					m_AcceptQueue.PushBack(&pOverLappedObject);
 					return true;
 				}				
 				else
@@ -264,7 +264,8 @@ bool CNetService::StartListen(const CIPAddress& Address)
 
 		if(m_IsUseListenThread)
 		{
-			PrintNetLog(_T("(%d)Service启用线程侦听模式！"),GetID());
+
+			PrintNetLog(_T("(%d)Service启用线程侦听模式！ port[%d] GetClientProxyType[%d] GetClientProxyMode[%d]"),GetID(),Address.GetPort(),GetClientProxyType(),GetClientProxyMode());
 			if (m_pListenThread == NULL)
 				m_pListenThread = MONITORED_NEW(_T("CNetService"), CIOCPListenThread);
 			m_pListenThread->Init(this,m_Socket.GetSocket());
@@ -272,7 +273,7 @@ bool CNetService::StartListen(const CIPAddress& Address)
 		}
 		else
 		{		
-			PrintNetLog(_T("(%d)Service启用IOCP侦听模式！"),GetID());
+			PrintNetLog(_T("(%d)Service启用IOCP侦听模式！ port[%d] GetClientProxyType[%d] GetClientProxyMode[%d]"),GetID(),Address.GetPort(),GetClientProxyType(),GetClientProxyMode());
 			for (UINT i = 0; i<m_ParallelAcceptCount; i++)
 			{
 				if(!QueryAccept())
@@ -377,15 +378,15 @@ int CNetService::Update(int ProcessPacketLimit)
 	return PacketCount;
 }
 
-CSmartPtr<CBaseNetConnection> CNetService::CreateConnection(CIPAddress& RemoteAddress)
-{
-	return NULL;
-}
+//CSmartPtr<CBaseNetConnection> CNetService::CreateConnection(CIPAddress& RemoteAddress)
+//{
+//	return NULL;
+//}
 
-bool CNetService::DeleteConnection(CBaseNetConnection * pConnection)
-{
-	return false;
-}
+//bool CNetService::DeleteConnection(CBaseNetConnection * pConnection)
+//{
+//	return false;
+//}
 
 
 bool CNetService::QueryAccept()
@@ -538,7 +539,8 @@ bool CNetService::AcceptSocket(SOCKET Socket)
 			pConnection->SetLocalAddress(LocalAddress);					
 
 			if(pConnection->StartWork())
-			{				
+			{
+				OnAccept(pConnection);	
 				return true;	
 			}
 			else
@@ -549,7 +551,8 @@ bool CNetService::AcceptSocket(SOCKET Socket)
 			PrintNetLog(_T("初始化Connection失败！"));
 			closesocket(Socket);
 		}
-		DeleteConnection(pConnection.get());
+		//DeleteConnection(pConnection);
+		//OnDisConnect(pConnection);
 	}
 	else
 	{
@@ -598,6 +601,7 @@ bool CNetService::AcceptSocketEx(SOCKET Socket,CEasyBuffer * pAcceptData)
 
 			if(pConnection->StartWork())//创建的 pConnection 放入管理器中,在管理器循环调用 pConnection->Update()
 			{				
+				OnAccept(pConnection);	
 				return true;	
 			}
 			else
@@ -608,7 +612,8 @@ bool CNetService::AcceptSocketEx(SOCKET Socket,CEasyBuffer * pAcceptData)
 			PrintNetLog(_T("初始化Connection失败！"));
 			closesocket(Socket);
 		}
-		DeleteConnection(pConnection.get());
+		//DeleteConnection(pConnection);
+		//OnDisConnect(pConnection);
 	}
 	else
 	{

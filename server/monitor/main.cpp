@@ -2,22 +2,26 @@
 
 
 
-int main_svr()
-{
-    
-
-    return 0;
-}
-
-
-
+extern void proc_init();
 
 int main()
 {
-    main_svr();
+    proc_init();
+
+    CoreBase C;
+    C.Init("./configd.xml");
+    ProtobufParseMessage::GetInstance()->Init();
+
+    MonitorCoreHandler::GetInstance()->Init(); 
+
+
+    C.AddHandler(MonitorCoreHandler::GetInstance(),CLIENT_PROXY_TYPE::SERVER_MONITOR);
+    C.SetParseMessageHandler(ProtobufParseMessage::GetInstance());
+
 
     while(1)
     {
+        C.Update();
         DoSleep(10);
     }
     return 0;

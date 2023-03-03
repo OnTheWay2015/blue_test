@@ -8,9 +8,11 @@
 	#endif
 #endif
 
+extern void Stringsplit(const std::wstring& str, const wchar_t split, std::vector<std::wstring>& res);
+extern void Stringsplit(const std::wstring& str, const std::wstring& splits, std::vector<std::wstring>& res);
+
 extern void Stringsplit(const std::string& str, const char split, std::vector<std::string>& res);
 extern void Stringsplit(const std::string& str, const std::string& splits, std::vector<std::string>& res);
-
 
 
 
@@ -31,21 +33,21 @@ private:
    unsigned int m_UseRef;
 
 public:
-	void SetID(UINT id);
-	UINT GetID() ;
+	void SetID(UINT64 id);
+	UINT64 GetID() ;
 
 private:
-	UINT m_ID;
+	UINT64 m_ID;
 
 };
 
 
-inline void CNameObject::SetID(UINT id)
+inline void CNameObject::SetID(UINT64 id)
 {
     m_ID = id;
 }
 
-inline UINT CNameObject::GetID()
+inline UINT64 CNameObject::GetID()
 {
     return m_ID;
 }

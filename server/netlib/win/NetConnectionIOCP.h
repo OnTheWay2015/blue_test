@@ -52,7 +52,8 @@ public:
 	bool StartWork();
 
 
-	bool Send(LPCVOID pData, UINT Size);
+	virtual bool SendMsg(CSmartPtr<DOS_SIMPLE_MESSAGE> msg) override { return false;};
+	bool Send(LPCVOID pData, UINT Size) ;
 	bool SendMulti(LPCVOID * pDataBuffers, const UINT * pDataSizes, UINT BufferCount);
 	UINT GetSendBufferFreeSize();
 

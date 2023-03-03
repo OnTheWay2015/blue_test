@@ -9,7 +9,7 @@
 /*      必须保留此版权声明                                                  */
 /*                                                                          */
 /****************************************************************************/
-#include "../StdAfx.h"
+#include "StdAfx.h"
 
 
 CNetServer::CNetServer(void):CBaseNetServer()
