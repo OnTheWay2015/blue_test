@@ -280,7 +280,7 @@ int CNetService::Update(int ProcessPacketLimit)
 	return PacketCount;
 }
 
-CSmartPtr<CBaseNetConnection> CNetService::CreateConnection(CIPAddress& RemoteAddress)
+CSmartPtr<CBaseNetConnectionInterface> CNetService::CreateConnection(CIPAddress& RemoteAddress)
 {
 	return NULL;
 }
@@ -352,6 +352,7 @@ bool CNetService::AcceptSocket(SOCKET Socket)
 
 			if(pConnection->StartWork())
 			{
+				OnAccept(pConnection);	
 				return true;
 			}
 			else
@@ -362,7 +363,7 @@ bool CNetService::AcceptSocket(SOCKET Socket)
 			PrintNetLog("(%d)Service初始化Connection失败！",GetID());
 			closesocket(Socket);
 		}
-		DeleteConnection(pConnection.get());
+		//DeleteConnection(pConnection.get());
 	}
 	else
 	{

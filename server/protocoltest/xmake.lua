@@ -5,18 +5,34 @@ target("protocoltest")
     set_kind("binary")
     add_includedirs(
         "./"
+    )
+
+
+if is_plat("linux") then
+    add_includedirs(
+        "./../3rds/include/linux"
         ,"./../3rds/include"
     )
+elseif is_plat("windows") then
+    add_includedirs(
+        "./../3rds/include/win"
+        ,"./../3rds/include"
+    )
+end
+
+
 
 
 
 if is_plat("windows") then
+    add_linkdirs("./../3rds/libs/win")
     add_links("libprotobufd")
-    add_linkdirs("./../3rds/libs")
+elseif is_plat("linux") then
+    add_linkdirs("./../3rds/libs/linux")
+    add_links("protobuf")
 end
     
     add_deps("protocol")
-
 
     add_files("*.cpp")
 

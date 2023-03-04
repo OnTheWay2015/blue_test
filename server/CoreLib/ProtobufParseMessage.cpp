@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "../protocol/protocol.h"
+#include "google/protobuf/message.h"
 
 CSmartPtr<void> ProtobufParseMessage::ParseMessage(DOS_SIMPLE_MESSAGE_HEAD* h)
 {

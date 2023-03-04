@@ -5,11 +5,13 @@
 
 if is_plat("linux") then
     set_config("cxxflags", "-fpermissive")
+
+elseif is_plat("windows") then
+    set_config("vs", "2019")
 end
 
 
 
-set_config("vs", "2019")
 --set_config("arch", "x86")
 set_config("arch","x64")
 
@@ -27,14 +29,15 @@ if is_plat("windows") then
     end 
 end
 
---includes("./protocol")
---includes("./protocoltest")
+includes("./protocol")
 includes("./utils")
 includes("./netlib")
 includes("./corelib")
---includes("./vvv")
-includes("./monitor")
+includes("./vvv")
+--includes("./monitor")
 
+--includes("./protocoltest")
+--includes("./protocoltest01")
 
 
 --includes("./test")

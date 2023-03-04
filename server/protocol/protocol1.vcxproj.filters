@@ -15,6 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="p1.pb.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="p2.pb.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
     <ClInclude Include="protocol.h">
       <Filter>源文件</Filter>
     </ClInclude>
@@ -26,6 +32,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="p1.pb.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="p2.pb.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

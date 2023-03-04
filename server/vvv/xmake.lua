@@ -6,29 +6,51 @@ target("vvvD")
         "./"
         ,"../"
         ,"../utils"
-        ,"./../3rds/include"
     )
 
-if is_plat("windows") then
-    add_links("libprotobufd")
-    add_linkdirs("./../3rds/libs")
-end
-    
-    add_deps("netlib")
-    add_deps("utils")
-    --add_deps("protocol")
 
+if is_plat("linux") then
+    add_includedirs(
+        "./../3rds/include/linux"
+        ,"./../3rds/include"
+    )
+elseif is_plat("windows") then
+    --add_defines("WIN32_LEAN_AND_MEAN") 
+    add_includedirs(
+        "./../3rds/include/win"
+        ,"./../3rds/include"
+    )
+end
+
+
+
+
+    
 
     add_files("*.cpp")
 
 
 
 
+    --add_deps("netlib")
+    --add_deps("utils")
+    --add_deps("corelib")
+    --add_deps("protocol")
 
 if is_plat("linux") then
+    add_linkdirs("./../3rds/libs/linux")
+    --add_linkdirs("./../build/linux/x64/debug")
+    add_linkdirs("$(buildir)/$(os)/$(arch)/$(mode)")
+
+    add_links("protocol")
+    add_links("corelib")
+    add_links("protobuf")
+    add_links("netlib")
+    add_links("utils")
     add_links("pthread","dl")
+elseif is_plat("windows") then
+    add_linkdirs("./../3rds/libs/win")
+    add_links("libprotobufd")
 end
 
-if is_plat("windows") then
-end
 

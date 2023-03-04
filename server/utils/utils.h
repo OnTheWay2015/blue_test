@@ -59,8 +59,6 @@
     #include "win/Win32AddOn.h"
 #endif 
 
-typedef unsigned __int64 SESSION_ID; 
-
 #ifdef __linux__
     #include <stdarg.h>
     #include <unistd.h>
@@ -76,6 +74,10 @@ typedef unsigned __int64 SESSION_ID;
     //#include "linux/TCharLinux.h"
     #include "linux/LinuxAddOn.h"
 #endif 
+
+
+typedef unsigned __int64 SESSION_ID; 
+
 #include "tmp.h"
 
 #include "config.h"

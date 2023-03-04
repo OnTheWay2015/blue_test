@@ -66,7 +66,7 @@ public:
 
 	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT);
 
-	virtual CSmartPtr<CBaseNetConnection> CreateConnection(CIPAddress& RemoteAddress);
+	virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress);
 	virtual bool DeleteConnection(CBaseNetConnection * pConnection);
 	
 

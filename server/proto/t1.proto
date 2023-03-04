@@ -1,13 +1,12 @@
  
 syntax = "proto3"; 	// proto3 仅仅支持 repeated 字段修饰， 不支持 required，optional
 
- 
+
 package t1;
   
 message MSG_TEST { 
   string name = 1  ; 
   int32  packet_id = 2  ; 
- 
 }
 
 

@@ -3,29 +3,29 @@
 
 
 /*
-* ¹ØÓÚprotobuf3 Ä¬ÈÏÖµÎÊÌâ
-     * Ê×ÏÈ£¬pb¶ÔÏóµÄget·½·¨ÓÀÔ¶²»»áÓĞnull£¬Èç¹ûÃ»ÓĞÉèÖÃ£¬»áÉú³É¶ÔÓ¦µÄÄ¬ÈÏÖµ
-     * Èç¹ûÊôĞÔÖµÊÇÒ»¸ömessage£¬ÄÇÃ´pb»áÎªÕâ¸öÊôĞÔÉú³ÉÒ»¸öhasXXX·½·¨£¬¿ÉÒÔÓÃÕâ¸ö·½·¨ÅĞ¶ÏÊÇ·ñÉèÖÃÁËÕâ¸öÊôĞÔ
-     * ¶ÔÓÚÆäËûÊôĞÔ£¬±ÈÈçstring£¬uint32µÈµÈ£¬Èç¹ûÃ»ÓĞÉèÖÃ£¬get³öÀ´µÄ½«»áÊÇ¿ÕÖµ£¬±ÈÈçstring¾ÍÊÇ""£¬uint32¾ÍÊÇ0£¬´ËÊ±ÎŞ·¨Çø·ÖÊÇÃ»ÓĞÉèÖÃ»¹ÊÇÉèÖÃÁËÄ¬ÈÏÖµ£¬ĞèÒªÒµÎñ×ÔĞĞÔ¼¶¨£¬±ÈÈç´«Ò»¸ö"-1"µÈÌØÊâµÄÖµ±êÊ¶
+* å…³äºprotobuf3 é»˜è®¤å€¼é—®é¢˜
+     * é¦–å…ˆï¼Œpbå¯¹è±¡çš„getæ–¹æ³•æ°¸è¿œä¸ä¼šæœ‰nullï¼Œå¦‚æœæ²¡æœ‰è®¾ç½®ï¼Œä¼šç”Ÿæˆå¯¹åº”çš„é»˜è®¤å€¼
+     * å¦‚æœå±æ€§å€¼æ˜¯ä¸€ä¸ªmessageï¼Œé‚£ä¹ˆpbä¼šä¸ºè¿™ä¸ªå±æ€§ç”Ÿæˆä¸€ä¸ªhasXXXæ–¹æ³•ï¼Œå¯ä»¥ç”¨è¿™ä¸ªæ–¹æ³•åˆ¤æ–­æ˜¯å¦è®¾ç½®äº†è¿™ä¸ªå±æ€§
+     * å¯¹äºå…¶ä»–å±æ€§ï¼Œæ¯”å¦‚stringï¼Œuint32ç­‰ç­‰ï¼Œå¦‚æœæ²¡æœ‰è®¾ç½®ï¼Œgetå‡ºæ¥çš„å°†ä¼šæ˜¯ç©ºå€¼ï¼Œæ¯”å¦‚stringå°±æ˜¯""ï¼Œuint32å°±æ˜¯0ï¼Œæ­¤æ—¶æ— æ³•åŒºåˆ†æ˜¯æ²¡æœ‰è®¾ç½®è¿˜æ˜¯è®¾ç½®äº†é»˜è®¤å€¼ï¼Œéœ€è¦ä¸šåŠ¡è‡ªè¡Œçº¦å®šï¼Œæ¯”å¦‚ä¼ ä¸€ä¸ª"-1"ç­‰ç‰¹æ®Šçš„å€¼æ ‡è¯†
 */
 
 /*
-Àà Descriptor Ö÷ÒªÊÇ¶Ô Message ½øĞĞÃèÊö£¬°üÀ¨ message µÄÃû×Ö¡¢ËùÓĞ×Ö¶ÎµÄÃèÊö¡¢Ô­Ê¼ proto ÎÄ¼şÄÚÈİµÈ£¬ÏÂÃæ½éÉÜ¸ÃÀàÖĞ°üº¬µÄº¯Êı¡£
-Ê×ÏÈÊÇ»ñÈ¡×ÔÉíĞÅÏ¢µÄº¯Êı£º
+ç±» Descriptor ä¸»è¦æ˜¯å¯¹ Message è¿›è¡Œæè¿°ï¼ŒåŒ…æ‹¬ message çš„åå­—ã€æ‰€æœ‰å­—æ®µçš„æè¿°ã€åŸå§‹ proto æ–‡ä»¶å†…å®¹ç­‰ï¼Œä¸‹é¢ä»‹ç»è¯¥ç±»ä¸­åŒ…å«çš„å‡½æ•°ã€‚
+é¦–å…ˆæ˜¯è·å–è‡ªèº«ä¿¡æ¯çš„å‡½æ•°ï¼š
 
-const std::string & name() const; // »ñÈ¡message×ÔÉíÃû×Ö
-int field_count() const; // »ñÈ¡¸ÃmessageÖĞÓĞ¶àÉÙ×Ö¶Î
+const std::string & name() const; // è·å–messageè‡ªèº«åå­—
+int field_count() const; // è·å–è¯¥messageä¸­æœ‰å¤šå°‘å­—æ®µ
 const FileDescriptor* file() const; // The .proto file in which this message type was defined. Never nullptr.
 
-ÔÚÀà Descriptor ÖĞ£¬¿ÉÒÔÍ¨¹ıÈçÏÂ·½·¨»ñÈ¡Àà FieldDescriptor£º
+åœ¨ç±» Descriptor ä¸­ï¼Œå¯ä»¥é€šè¿‡å¦‚ä¸‹æ–¹æ³•è·å–ç±» FieldDescriptorï¼š
 
-const FieldDescriptor* field(int index) const; // ¸ù¾İ¶¨ÒåË³ĞòË÷Òı»ñÈ¡£¬¼´´Ó0¿ªÊ¼µ½×î´ó¶¨ÒåµÄÌõÄ¿
-const FieldDescriptor* FindFieldByNumber(int number) const; // ¸ù¾İ¶¨ÒåµÄmessageÀïÃæµÄË³ĞòÖµ»ñÈ¡£¨option string name=3£¬3¼´Îªnumber£©
-const FieldDescriptor* FindFieldByName(const string& name) const; // ¸ù¾İfield name»ñÈ¡
-const FieldDescriptor* Descriptor::FindFieldByLowercaseName(const std::string & lowercase_name)const; // ¸ù¾İĞ¡Ğ´µÄfield name»ñÈ¡
-const FieldDescriptor* Descriptor::FindFieldByCamelcaseName(const std::string & camelcase_name) const; // ¸ù¾İÍÕ·åµÄfield name»ñÈ¡
+const FieldDescriptor* field(int index) const; // æ ¹æ®å®šä¹‰é¡ºåºç´¢å¼•è·å–ï¼Œå³ä»0å¼€å§‹åˆ°æœ€å¤§å®šä¹‰çš„æ¡ç›®
+const FieldDescriptor* FindFieldByNumber(int number) const; // æ ¹æ®å®šä¹‰çš„messageé‡Œé¢çš„é¡ºåºå€¼è·å–ï¼ˆoption string name=3ï¼Œ3å³ä¸ºnumberï¼‰
+const FieldDescriptor* FindFieldByName(const string& name) const; // æ ¹æ®field nameè·å–
+const FieldDescriptor* Descriptor::FindFieldByLowercaseName(const std::string & lowercase_name)const; // æ ¹æ®å°å†™çš„field nameè·å–
+const FieldDescriptor* Descriptor::FindFieldByCamelcaseName(const std::string & camelcase_name) const; // æ ¹æ®é©¼å³°çš„field nameè·å–
 
-ÆäÖĞFieldDescriptor* field(int index)ºÍFieldDescriptor* FindFieldByNumber(int number)Õâ¸öº¯ÊıÖĞindexºÍnumberµÄº¬ÒåÊÇ²»Ò»ÑùµÄ
+å…¶ä¸­FieldDescriptor* field(int index)å’ŒFieldDescriptor* FindFieldByNumber(int number)è¿™ä¸ªå‡½æ•°ä¸­indexå’Œnumberçš„å«ä¹‰æ˜¯ä¸ä¸€æ ·çš„
 
 message Student{
 optional string name = 1;
@@ -79,7 +79,7 @@ std::memcpy(pbuf+PACKET_HEAD_SIZE, mb.msgbuff.c_str(), len);
     }
 
     const ::google::protobuf::Reflection*  ref = a.GetReflection();
-    if (ref->HasField(a, field)) // set_name ÉèÖÃºóÎª true
+    if (ref->HasField(a, field)) // set_name è®¾ç½®åä¸º true
     {
         if (type == ::google::protobuf::FieldDescriptor::CppType::CPPTYPE_STRING) 
         {

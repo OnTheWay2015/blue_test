@@ -121,7 +121,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rds\include\win;$(SolutionDir)3rds\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rds\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -146,11 +146,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="p1.pb.h" />
+    <ClInclude Include="p2.pb.h" />
     <ClInclude Include="protocol.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="t1.pb.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="p1.pb.cc" />
+    <ClCompile Include="p2.pb.cc" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="t1.pb.cc" />
   </ItemGroup>
