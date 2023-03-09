@@ -9,4 +9,11 @@ enum class PACKET_IDS {
 
 };
 
-#include "t1.pb.h"
+
+#ifdef _WIN32 
+    #include "win/t1.pb.h"
+#endif 
+
+#ifdef __linux__
+    #include "linux/t1.pb.h"
+#endif 
