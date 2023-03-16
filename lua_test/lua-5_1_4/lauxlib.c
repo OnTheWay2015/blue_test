@@ -246,11 +246,11 @@ LUALIB_API void luaI_openlib (lua_State *L, const char *libname,
     int size = libsize(l);
     /* check whether lib already exists */
     // 首先从registry中获得_LOADED表, 返回后top - 1是_LOADED表(如果找到的话)
-    luaL_findtable(L, LUA_REGISTRYINDEX, "_LOADED", 1);
+    luaL_findtable(L, LUA_REGISTRYINDEX, "_LOADED", 1);//查到的结果会压栈
     // 其次从_LOADED表尝试查找libname库
-    lua_getfield(L, -1, libname);  /* get _LOADED[libname] */
+    lua_getfield(L, -1, libname);  /* get _LOADED[libname] */ //查到的结果会压栈
     if (!lua_istable(L, -1)) {  /* not found? */
-      // 没找到, 把刚才的查找结果pop出来
+      // 没找到, 把刚才 lua_getfield 的查找结果pop出来
       lua_pop(L, 1);  /* remove previous result */
       /* try global variable (and create one if it does not exist) */
       // 从global表中查找, 如果有则存在冲突了,否则新创建一个表同时放在global表中

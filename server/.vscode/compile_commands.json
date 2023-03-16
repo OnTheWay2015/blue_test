@@ -1,23 +1,168 @@
 [
 {
   "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.monitorD.pdb", "/Od", "/MTd", "/Imonitor", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\monitorD\\windows\\x64\\debug\\monitor\\main.cpp.obj", "monitor\\main.cpp"],
-  "file": "monitor\\main.cpp"
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\BaseNetConnection.cpp.obj", "netlib\\BaseNetConnection.cpp"],
+  "file": "netlib\\BaseNetConnection.cpp"
 },
 {
   "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.monitorD.pdb", "/Od", "/MTd", "/Imonitor", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\monitorD\\windows\\x64\\debug\\monitor\\monitor_corehandler.cpp.obj", "monitor\\monitor_corehandler.cpp"],
-  "file": "monitor\\monitor_corehandler.cpp"
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\BaseNetServer.cpp.obj", "netlib\\BaseNetServer.cpp"],
+  "file": "netlib\\BaseNetServer.cpp"
 },
 {
   "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.monitorD.pdb", "/Od", "/MTd", "/Imonitor", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\monitorD\\windows\\x64\\debug\\monitor\\proc_monitor_packet.cpp.obj", "monitor\\proc_monitor_packet.cpp"],
-  "file": "monitor\\proc_monitor_packet.cpp"
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\BaseNetService.cpp.obj", "netlib\\BaseNetService.cpp"],
+  "file": "netlib\\BaseNetService.cpp"
 },
 {
   "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.monitorD.pdb", "/Od", "/MTd", "/Imonitor", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\monitorD\\windows\\x64\\debug\\monitor\\stdafx.cpp.obj", "monitor\\stdafx.cpp"],
-  "file": "monitor\\stdafx.cpp"
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\NetAdapterInfos.cpp.obj", "netlib\\NetAdapterInfos.cpp"],
+  "file": "netlib\\NetAdapterInfos.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\NetSocket.cpp.obj", "netlib\\NetSocket.cpp"],
+  "file": "netlib\\NetSocket.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\stdafx.cpp.obj", "netlib\\stdafx.cpp"],
+  "file": "netlib\\stdafx.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\IIOCPEventHandler.cpp.obj", "netlib\\win\\IIOCPEventHandler.cpp"],
+  "file": "netlib\\win\\IIOCPEventHandler.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\IOCPEventRouter.cpp.obj", "netlib\\win\\IOCPEventRouter.cpp"],
+  "file": "netlib\\win\\IOCPEventRouter.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\IOCPListenThread.cpp.obj", "netlib\\win\\IOCPListenThread.cpp"],
+  "file": "netlib\\win\\IOCPListenThread.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\IOCPThread.cpp.obj", "netlib\\win\\IOCPThread.cpp"],
+  "file": "netlib\\win\\IOCPThread.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\NetConnectionIOCP.cpp.obj", "netlib\\win\\NetConnectionIOCP.cpp"],
+  "file": "netlib\\win\\NetConnectionIOCP.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\NetPUDPServiceIOCP.cpp.obj", "netlib\\win\\NetPUDPServiceIOCP.cpp"],
+  "file": "netlib\\win\\NetPUDPServiceIOCP.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\NetServerIOCP.cpp.obj", "netlib\\win\\NetServerIOCP.cpp"],
+  "file": "netlib\\win\\NetServerIOCP.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\NetServiceIOCP.cpp.obj", "netlib\\win\\NetServiceIOCP.cpp"],
+  "file": "netlib\\win\\NetServiceIOCP.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\OverLappedObject.cpp.obj", "netlib\\win\\OverLappedObject.cpp"],
+  "file": "netlib\\win\\OverLappedObject.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\protocol.pdb", "/Od", "/MTd", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/Iprotocol", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\protocol\\windows\\x64\\debug\\protocol\\win\\p1.pb.cc.obj", "protocol\\win\\p1.pb.cc"],
+  "file": "protocol\\win\\p1.pb.cc"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\protocol.pdb", "/Od", "/MTd", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/Iprotocol", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\protocol\\windows\\x64\\debug\\protocol\\win\\p2.pb.cc.obj", "protocol\\win\\p2.pb.cc"],
+  "file": "protocol\\win\\p2.pb.cc"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\protocol.pdb", "/Od", "/MTd", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/Iprotocol", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\protocol\\windows\\x64\\debug\\protocol\\win\\t1.pb.cc.obj", "protocol\\win\\t1.pb.cc"],
+  "file": "protocol\\win\\t1.pb.cc"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.vvvD.pdb", "/Od", "/MTd", "/Ivvv", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\vvvD\\windows\\x64\\debug\\vvv\\main.cpp.obj", "vvv\\main.cpp"],
+  "file": "vvv\\main.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.vvvD.pdb", "/Od", "/MTd", "/Ivvv", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\vvvD\\windows\\x64\\debug\\vvv\\monitor_connecter.cpp.obj", "vvv\\monitor_connecter.cpp"],
+  "file": "vvv\\monitor_connecter.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.vvvD.pdb", "/Od", "/MTd", "/Ivvv", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\vvvD\\windows\\x64\\debug\\vvv\\proc_vvv_packet.cpp.obj", "vvv\\proc_vvv_packet.cpp"],
+  "file": "vvv\\proc_vvv_packet.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.vvvD.pdb", "/Od", "/MTd", "/Ivvv", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\vvvD\\windows\\x64\\debug\\vvv\\stdafx.cpp.obj", "vvv\\stdafx.cpp"],
+  "file": "vvv\\stdafx.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\CoreBase.cpp.obj", "corelib\\CoreBase.cpp"],
+  "file": "corelib\\CoreBase.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\CoreConfig.cpp.obj", "corelib\\CoreConfig.cpp"],
+  "file": "corelib\\CoreConfig.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\CoreMessageQueue.cpp.obj", "corelib\\CoreMessageQueue.cpp"],
+  "file": "corelib\\CoreMessageQueue.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\CoreNetManager.cpp.obj", "corelib\\CoreNetManager.cpp"],
+  "file": "corelib\\CoreNetManager.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\CorePlugin.cpp.obj", "corelib\\CorePlugin.cpp"],
+  "file": "corelib\\CorePlugin.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\ProtobufParseMessage.cpp.obj", "corelib\\ProtobufParseMessage.cpp"],
+  "file": "corelib\\ProtobufParseMessage.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\ProxyConnectionDefault.cpp.obj", "corelib\\ProxyConnectionDefault.cpp"],
+  "file": "corelib\\ProxyConnectionDefault.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\ProxyConnectionGroup.cpp.obj", "corelib\\ProxyConnectionGroup.cpp"],
+  "file": "corelib\\ProxyConnectionGroup.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\ProxyServiceDefault.cpp.obj", "corelib\\ProxyServiceDefault.cpp"],
+  "file": "corelib\\ProxyServiceDefault.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\ServiceActConnect.cpp.obj", "corelib\\ServiceActConnect.cpp"],
+  "file": "corelib\\ServiceActConnect.cpp"
+},
+{
+  "directory": "d:\\__work\\blue_test\\server",
+  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\stdafx.cpp.obj", "corelib\\stdafx.cpp"],
+  "file": "corelib\\stdafx.cpp"
 },
 {
   "directory": "d:\\__work\\blue_test\\server",
@@ -123,169 +268,4 @@
   "directory": "d:\\__work\\blue_test\\server",
   "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\utils.pdb", "/Od", "/MTd", "/Iutils", "/EHsc", "/Fobuild\\.objs\\utils\\windows\\x64\\debug\\utils\\win\\WinFileAccessorObjectCreator.cpp.obj", "utils\\win\\WinFileAccessorObjectCreator.cpp"],
   "file": "utils\\win\\WinFileAccessorObjectCreator.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.vvvD.pdb", "/Od", "/MTd", "/Ivvv", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\vvvD\\windows\\x64\\debug\\vvv\\main.cpp.obj", "vvv\\main.cpp"],
-  "file": "vvv\\main.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.vvvD.pdb", "/Od", "/MTd", "/Ivvv", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\vvvD\\windows\\x64\\debug\\vvv\\monitor_connecter.cpp.obj", "vvv\\monitor_connecter.cpp"],
-  "file": "vvv\\monitor_connecter.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.vvvD.pdb", "/Od", "/MTd", "/Ivvv", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\vvvD\\windows\\x64\\debug\\vvv\\proc_vvv_packet.cpp.obj", "vvv\\proc_vvv_packet.cpp"],
-  "file": "vvv\\proc_vvv_packet.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\compile.vvvD.pdb", "/Od", "/MTd", "/Ivvv", "/I.", "/Iutils", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\vvvD\\windows\\x64\\debug\\vvv\\stdafx.cpp.obj", "vvv\\stdafx.cpp"],
-  "file": "vvv\\stdafx.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\protocol.pdb", "/Od", "/MTd", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/Iprotocol", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\protocol\\windows\\x64\\debug\\protocol\\win\\p1.pb.cc.obj", "protocol\\win\\p1.pb.cc"],
-  "file": "protocol\\win\\p1.pb.cc"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\protocol.pdb", "/Od", "/MTd", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/Iprotocol", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\protocol\\windows\\x64\\debug\\protocol\\win\\p2.pb.cc.obj", "protocol\\win\\p2.pb.cc"],
-  "file": "protocol\\win\\p2.pb.cc"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\protocol.pdb", "/Od", "/MTd", "/Iprotocol\\win", "/I3rds\\include\\win", "/I3rds\\include", "/Iprotocol", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\protocol\\windows\\x64\\debug\\protocol\\win\\t1.pb.cc.obj", "protocol\\win\\t1.pb.cc"],
-  "file": "protocol\\win\\t1.pb.cc"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\CoreBase.cpp.obj", "corelib\\CoreBase.cpp"],
-  "file": "corelib\\CoreBase.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\CoreConfig.cpp.obj", "corelib\\CoreConfig.cpp"],
-  "file": "corelib\\CoreConfig.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\CoreMessageQueue.cpp.obj", "corelib\\CoreMessageQueue.cpp"],
-  "file": "corelib\\CoreMessageQueue.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\CoreNetManager.cpp.obj", "corelib\\CoreNetManager.cpp"],
-  "file": "corelib\\CoreNetManager.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\CorePlugin.cpp.obj", "corelib\\CorePlugin.cpp"],
-  "file": "corelib\\CorePlugin.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\ProtobufParseMessage.cpp.obj", "corelib\\ProtobufParseMessage.cpp"],
-  "file": "corelib\\ProtobufParseMessage.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\ProxyConnectionDefault.cpp.obj", "corelib\\ProxyConnectionDefault.cpp"],
-  "file": "corelib\\ProxyConnectionDefault.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\ProxyConnectionGroup.cpp.obj", "corelib\\ProxyConnectionGroup.cpp"],
-  "file": "corelib\\ProxyConnectionGroup.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\ProxyServiceDefault.cpp.obj", "corelib\\ProxyServiceDefault.cpp"],
-  "file": "corelib\\ProxyServiceDefault.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\ServiceActConnect.cpp.obj", "corelib\\ServiceActConnect.cpp"],
-  "file": "corelib\\ServiceActConnect.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\corelib.pdb", "/Od", "/MTd", "/Icorelib", "/I.", "/Iutils", "/I3rds\\include\\win", "/I3rds\\include", "/DWIN32_LEAN_AND_MEAN", "/EHsc", "/Fobuild\\.objs\\corelib\\windows\\x64\\debug\\corelib\\stdafx.cpp.obj", "corelib\\stdafx.cpp"],
-  "file": "corelib\\stdafx.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\BaseNetConnection.cpp.obj", "netlib\\BaseNetConnection.cpp"],
-  "file": "netlib\\BaseNetConnection.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\BaseNetServer.cpp.obj", "netlib\\BaseNetServer.cpp"],
-  "file": "netlib\\BaseNetServer.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\BaseNetService.cpp.obj", "netlib\\BaseNetService.cpp"],
-  "file": "netlib\\BaseNetService.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\NetAdapterInfos.cpp.obj", "netlib\\NetAdapterInfos.cpp"],
-  "file": "netlib\\NetAdapterInfos.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\NetSocket.cpp.obj", "netlib\\NetSocket.cpp"],
-  "file": "netlib\\NetSocket.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\stdafx.cpp.obj", "netlib\\stdafx.cpp"],
-  "file": "netlib\\stdafx.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\IIOCPEventHandler.cpp.obj", "netlib\\win\\IIOCPEventHandler.cpp"],
-  "file": "netlib\\win\\IIOCPEventHandler.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\IOCPEventRouter.cpp.obj", "netlib\\win\\IOCPEventRouter.cpp"],
-  "file": "netlib\\win\\IOCPEventRouter.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\IOCPListenThread.cpp.obj", "netlib\\win\\IOCPListenThread.cpp"],
-  "file": "netlib\\win\\IOCPListenThread.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\IOCPThread.cpp.obj", "netlib\\win\\IOCPThread.cpp"],
-  "file": "netlib\\win\\IOCPThread.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\NetConnectionIOCP.cpp.obj", "netlib\\win\\NetConnectionIOCP.cpp"],
-  "file": "netlib\\win\\NetConnectionIOCP.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\NetPUDPServiceIOCP.cpp.obj", "netlib\\win\\NetPUDPServiceIOCP.cpp"],
-  "file": "netlib\\win\\NetPUDPServiceIOCP.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\NetServerIOCP.cpp.obj", "netlib\\win\\NetServerIOCP.cpp"],
-  "file": "netlib\\win\\NetServerIOCP.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\NetServiceIOCP.cpp.obj", "netlib\\win\\NetServiceIOCP.cpp"],
-  "file": "netlib\\win\\NetServiceIOCP.cpp"
-},
-{
-  "directory": "d:\\__work\\blue_test\\server",
-  "arguments": ["d:\\Program", "Files", "(x86)\\Microsoft", "Visual", "Studio\\2019\\Enterprise\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe", "/c", "/nologo", "/Zi", "/FS", "/Fdbuild\\windows\\x64\\debug\\netlib.pdb", "/Od", "/MTd", "/Inetlib", "/Iutils", "/Iutils\\iconv", "/I.", "/EHsc", "/Fobuild\\.objs\\netlib\\windows\\x64\\debug\\netlib\\win\\OverLappedObject.cpp.obj", "netlib\\win\\OverLappedObject.cpp"],
-  "file": "netlib\\win\\OverLappedObject.cpp"
 }]

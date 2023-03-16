@@ -214,7 +214,7 @@ typedef union TString {
   } tsv;
 } TString;
 
-//字符串实体保存在 ts(TString)对像之后
+//字符串实体保存在 ts(TString)对像之后,如  (char*)((TString*)0x0000024326f48b00+1)
 #define getstr(ts)	cast(const char *, (ts) + 1)
 #define svalue(o)       getstr(rawtsvalue(o))
 

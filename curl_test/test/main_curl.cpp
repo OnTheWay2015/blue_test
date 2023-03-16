@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include <memory>
 
-#include "../include/curl/curl.h"
+#include "curl/curl.h"
 
 
 
@@ -297,6 +298,7 @@ void FreeRequest(REQUEST_INFO* pRequestInfo)
     }
     delete pRequestInfo;
 }
+
 void ProcessRequestEnd(REQUEST_INFO * pRequestInfo,CURLcode Result,int ResponseCode)
 {
 	printf("(%u)Result=%s,ResponseCode=%d\n",
@@ -309,8 +311,18 @@ void ProcessRequestEnd(REQUEST_INFO * pRequestInfo,CURLcode Result,int ResponseC
 		printf("OK RequestID[%u] RequestType[%d]\n",
 					pRequestInfo->RequestID, pRequestInfo->RequestType);
 	
-			//pRequestInfo->RecvBuffer
-			//REQUEST_TYPE_POST:
+		auto sz = pRequestInfo->RecvBuffer.size() + 1;
+		
+		//char* buf = (char*)malloc(sz);
+		//buf[sz-1]='\0';
+		//memcpy(buf,	&pRequestInfo->RecvBuffer[0],sz);
+		//printf("RecvBuffer[%s]\n",buf);
+		//free(buf);
+		
+		auto buf = std::make_shared<std::vector<char>>();
+		*buf = pRequestInfo->RecvBuffer;	
+		
+
 	}
 	else
 	{

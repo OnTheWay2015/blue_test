@@ -139,7 +139,7 @@ bool CNetConnection::Create(UINT RecvQueueSize, UINT SendQueueSize)
 		return false;
 	}
 
-	Close();
+	Close(); //todo .faq 为什么要 close?
 
 	if(m_pIOCPEventRouter==NULL)
 	{

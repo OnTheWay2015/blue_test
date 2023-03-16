@@ -1,0 +1,19 @@
+﻿if MMO==nil then
+	MMO={};
+end
+
+
+
+MMO.CURRENCY_TYPE=
+{
+	CURRENCY_TYPE_NONE = 0,
+	CURRENCY_TYPE_RMB = 1,
+	CURRENCY_TYPE_DOLLLAR = 2,
+	CURRENCY_TYPE_EURO = 3,
+
+};
+
+
+
+
+

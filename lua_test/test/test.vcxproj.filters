@@ -24,7 +24,10 @@
     <ClCompile Include="test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="testavl.cpp">
+    <ClCompile Include="default.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="test_game.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

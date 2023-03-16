@@ -2,7 +2,7 @@
   "configurations": [
     {
       "name": "linux",
-      "includePath": ["${workspaceFolder}/netlib","${workspaceFolder}/utils","${workspaceFolder}/3rds/include","${workspaceFolder}/protocol","${workspaceFolder}"],
+      "includePath": ["${workspaceFolder}/netlib","${workspaceFolder}/utils","${workspaceFolder}/3rds/include/win","${workspaceFolder}/protocol","${workspaceFolder}"],
       //"includePath": ["${workspaceFolder}/**"],
       //"includePath": ["${workspaceFolder}/**","f:/ptest"],
       //"includePath": ["${execPath}/../**"],
@@ -13,8 +13,8 @@
       //"compilerPath": "D:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.16.27023/bin/HostX86/x64/cl.exe",
       "cStandard": "c11",
       "cppStandard": "c++11",
-      //"intelliSenseMode": "msvc-x64"
-      "intelliSenseMode": "linux-gcc-x64"
+      "intelliSenseMode": "msvc-x64"
+      //"intelliSenseMode": "linux-gcc-x64"
     }
   ],
   "version": 4

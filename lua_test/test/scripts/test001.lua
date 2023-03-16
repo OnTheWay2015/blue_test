@@ -5,6 +5,16 @@ mystr = "I'm lua"
 myTable = {name = "xiaomign", id = 123456}
 myAry= {"a1","a2"}
 
+
+function myTable.test()
+  print("hello myTable")
+end
+
+function myTable:test_self()
+  print("hello:".. self.name)
+end
+
+
 function print_hello()
   print("hello lua")
 end

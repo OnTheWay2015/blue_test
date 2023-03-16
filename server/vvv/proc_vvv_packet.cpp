@@ -8,6 +8,7 @@ void proc_init()
 bool MSG_TEST_RES_factory::packet_process(CSmartPtr<CBaseNetConnectionInterface> session, CSmartPtr<MSG_TEST_RES> msg)
 {	
 
+    printf("packet_process msg:%s",msg->DebugString().c_str()); 
 	return false;
 }
  

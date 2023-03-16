@@ -147,9 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="default.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
-    <ClCompile Include="testavl.cpp" />
+    <ClCompile Include="test_game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="scripts\test000.lua" />
