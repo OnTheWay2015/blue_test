@@ -1,10 +1,13 @@
 .xmake
-objs
+.objs
+.out
 .vs
 
-build
+objs
 out
+build
 bin
+
 
 *.lib
 *.pdb
