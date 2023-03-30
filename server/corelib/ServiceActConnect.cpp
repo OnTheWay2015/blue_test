@@ -74,7 +74,7 @@ void ServiceActConnect::OnConnection(CSmartPtr<CBaseNetConnectionInterface> c, b
     //    else
     //    {
     //        //c->Disconnect();
-    //        //PrintDOSLog(_T("н╢дэур╣╫╨ойй╣да╛╫свИ"));
+    //        //PrintDOSLog(_T("Ф°╙Х┐╫Ф┴╬Е┬╟Е░┬И─┌Г └Х©·Ф▌╔Г╩└"));
     //    }
     //}
     //else

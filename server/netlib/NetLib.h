@@ -119,26 +119,6 @@ struct EASY_NET_LINK_INFO
 };
 
 
-inline BOOL PrintNetLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...)
-{
-	va_list vl;
-	va_start(vl,Format);
-	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
-	va_end(vl);
-	return ret;
-}
-
-inline BOOL PrintNetDebugLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...)
-{
-	va_list vl;
-	va_start(vl,Format);
-	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_DEBUG, Tag, Format, vl);
-	va_end(vl);
-	return ret;
-}
-
-#define PrintNetLog(_Format, ...)	PrintNetLogWithTag(_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
-#define PrintNetDebugLog(_Format, ...)	PrintNetDebugLogWithTag(_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
 
 #include "IPAddress.h"
 #include "IPPattern.h"

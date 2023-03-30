@@ -147,7 +147,7 @@ public:
 	}
 	void Unlock()
 	{
-		CAutoLock Lock(m_WriteLock);
+		CAutoLock Lock(&m_WriteLock);
 
 		if ( m_LockLevel == LL_READ )
 		{

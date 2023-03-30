@@ -35,6 +35,7 @@ CNetService::~CNetService(void)
 
 bool CNetService::OnEpollEvent(UINT EventID)
 {
+	PrintNetLog("CNetService::OnEpollEvent(%d)", EventID);
 	m_IsEventProcessing = true;
 	if(IsWorking())
 	{
@@ -48,17 +49,26 @@ bool CNetService::OnEpollEvent(UINT EventID)
 		if(EventID&EPOLLIN)
 		{
 			if(m_CurProtocol==IPPROTO_UDP)
+			{
+				PrintNetLog("CNetService::OnEpollEvent EPOLLIN IPPROTO_UDP");
 				DoUDPRecv();
+			}
 			else
+			{
+				PrintNetLog("CNetService::OnEpollEvent EPOLLIN IPPROTO_TCP");
 				DoAcceptSocket();
+			}
 		}
 		if(EventID&EPOLLOUT)
 		{
+			PrintNetLog("CNetService::OnEpollEvent EPOLLOUT");
 			DoUDPSend();
 		}
 	}
 	else
+	{
 		PrintNetLog("Service未启用，事件被忽略！");
+	}
 	m_IsEventProcessing = false;
 	return false;
 }
@@ -292,7 +302,7 @@ bool CNetService::DeleteConnection(CBaseNetConnection * pConnection)
 
 bool CNetService::QueryUDPSend(const CIPAddress& IPAddress,LPCVOID pData,int Size)
 {
-	CAutoLock Lock(m_SendLock);
+	CAutoLock Lock(&m_SendLock);
 
 	//CEpollEventObject * pEpollEventObject = m_SendQueue.GetFreeTail();
 	//if(pEpollEventObject==NULL)
@@ -345,13 +355,16 @@ bool CNetService::AcceptSocket(SOCKET Socket)
 	auto pConnection=CreateConnection(RemoteAddress);
 	if(pConnection)
 	{
+		PrintNetLog("(%d)CreateConnection OK ！",GetID());
 		if(pConnection->Create(Socket,m_RecvQueueSize,m_SendQueueSize))
 		{
+			PrintNetLog("(%d) Connection Create OK ！",GetID());
 			pConnection->SetRemoteAddress(RemoteAddress);
 			pConnection->SetLocalAddress(LocalAddress);
 
 			if(pConnection->StartWork())
 			{
+				PrintNetLog("(%d) Connection StartWork OK ！",GetID());
 				OnAccept(pConnection);	
 				return true;
 			}
@@ -376,6 +389,8 @@ bool CNetService::AcceptSocket(SOCKET Socket)
 void CNetService::DoAcceptSocket()
 {
 	CIPAddress Address;
+			
+	PrintNetLog("CNetService::DoAcceptSocket");
 
 	while(true)
 	{
@@ -385,16 +400,20 @@ void CNetService::DoAcceptSocket()
 		if(AcceptSocket==INVALID_SOCKET)
 		{
 			int ErrorCode=errno;
-			//if(ErrorCode==EAGAIN)
+			//if(ErrorCode==EAGAIN)// EAGAIN, EWOULDBLOCK(11)
 			//{
+			//	PrintNetLog("CNetService::DoAcceptSocket EAGAIN, continue");
 			//	DoSleep(1);
 			//	continue;
 			//}
-			PrintNetLog("Accept失败(%u)(%u/%u)", ErrorCode, m_AcceptQueue.size());
+			
+			PrintNetLog("Accept fail, errno(%u)  acceptQueue_size(%u)", ErrorCode, m_AcceptQueue.size());
 			break;
 		}
 
 		m_AcceptQueue.push_back(AcceptSocket);
+		PrintNetLog("Accept OK socketid[%lu] acceptQueue_size(%u)", AcceptSocket, m_AcceptQueue.size());
+
 		//{
 		//	closesocket(AcceptSocket);
 		//	PrintNetLog("CNetService创建Accept用EpollEventObject失败(%u)！", m_AcceptQueue.size());
@@ -470,7 +489,7 @@ void CNetService::DoUDPRecv()
 
 void CNetService::DoUDPSend()
 {
-	//CAutoLock Lock(m_SendLock);
+	//CAutoLock Lock(&m_SendLock);
 
 	//CEpollEventObject * pEpollEventObject = m_SendQueue.GetUsedTop();
 	//while (pEpollEventObject)

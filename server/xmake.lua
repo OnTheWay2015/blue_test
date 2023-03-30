@@ -33,9 +33,8 @@ includes("./protocol")
 includes("./utils")
 includes("./netlib")
 includes("./corelib")
-includes("./vvv")
-
---includes("./monitor")
+--includes("./vvv")
+includes("./monitor")
 
 --includes("./protocoltest")
 --includes("./protocoltest01")

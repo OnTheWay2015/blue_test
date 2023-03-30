@@ -48,8 +48,8 @@ public:
 
 }; 
 class CBaseNetConnection :
-	public CNameObject
-	,public CBaseNetConnectionInterface 
+	public CBaseNetConnectionInterface 
+	,public CNameObject
 {
 protected:
 	CNetSocket								m_Socket;
@@ -59,7 +59,7 @@ protected:
     CBaseNetServiceInterface* m_pService;
 public:
 	CBaseNetConnection(void);
-	~CBaseNetConnection(void);
+	virtual ~CBaseNetConnection(void);
 
 public:
 	bool IsConnected();
@@ -178,7 +178,13 @@ inline bool CBaseNetConnection::PrintConnectionLogWithTag(LPCTSTR szFunction, LP
 	//bool ret = CLogManager::GetInstance()->PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
 	//va_end(vl);
 	//return ret;
-	return false;
+	//return false;
+
+	va_list vl;
+	va_start(vl,Format);
+	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, szFunction, Format, vl);
+	va_end(vl);
+
 }
 
 inline bool CBaseNetConnection::PrintConnectionDebugLogWithTag(LPCTSTR szFunction, LPCTSTR Format, ...)
@@ -191,5 +197,10 @@ inline bool CBaseNetConnection::PrintConnectionDebugLogWithTag(LPCTSTR szFunctio
 	//bool ret = CLogManager::GetInstance()->PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_DEBUG, Tag, Format, vl);
 	//va_end(vl);
 	//return ret;
+	va_list vl;
+	va_start(vl,Format);
+	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, szFunction, Format, vl);
+	va_end(vl);
+
     return false;
 }

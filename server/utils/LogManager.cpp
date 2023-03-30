@@ -150,7 +150,7 @@ bool CLogManager::PrintLog(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Forma
     _vstprintf_s(m_MsgBuff, 4096, Format, vl);
 	va_end( vl);
 	
-	std::cout << m_MsgBuff<< std::endl;;
+	std::cout << Tag << " | " << m_MsgBuff<< std::endl;;
 
 	//*m_log << m_MsgBuff;
 	return false;
@@ -160,7 +160,7 @@ bool CLogManager::PrintLogVL(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR For
 	memset(m_MsgBuff,0,4096);
     _vstprintf_s(m_MsgBuff, 4096, Format, vl);
 
-	std::cout << m_MsgBuff<< std::endl;;
+	std::cout << Tag << " | " << m_MsgBuff<< std::endl;;
 
 	//*m_log << m_MsgBuff;
 	return false;

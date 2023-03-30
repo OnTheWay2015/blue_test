@@ -1,6 +1,8 @@
 
 #include "stdafx.h"
 
+
+
 CoreBase::CoreBase()
 {
 }
@@ -10,11 +12,11 @@ CoreBase::~CoreBase()
 
 bool CoreBase::Init(LPCTSTR FileName)
 {
+
     //m_CoreConfig.LoadConfig("./configD.xml");
     m_CoreConfig.LoadConfig(FileName);
     m_CoreNetManager= std::make_shared<CoreNetManager>();
     m_CoreNetManager->Init(this,m_CoreConfig);
-
 
     return true;
 }

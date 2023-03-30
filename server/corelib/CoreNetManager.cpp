@@ -36,7 +36,7 @@ bool CoreNetManager::Init(CoreBase* base, CoreConfig& config)
         EventObjectPoolGrowSize,
         EventObjectPoolGrowLimit,
         EventRouterPoolGrowSize,
-        EventRouterPoolGrowlimit);//ÓĞ³õÊ¼»¯ÍøÂçÏß³Ì, iocp ÔÚÍøÂçÏß³ÌÀï¶ÁÈ¡Íø¿¨Êı¾İ
+        EventRouterPoolGrowlimit);//æœ‰åˆå§‹åŒ–ç½‘ç»œçº¿ç¨‹, iocp åœ¨ç½‘ç»œçº¿ç¨‹é‡Œè¯»å–ç½‘å¡æ•°æ®
 
 
 
@@ -58,12 +58,12 @@ bool CoreNetManager::Init(CoreBase* base, CoreConfig& config)
         ))
         {
 
-            // PrintDOSLog( _T("´úÀí·şÎñ[%u]´´½¨Ê§°Ü£¡"), GetID());
+            // PrintDOSLog( _T("ä»£ç†æœåŠ¡[%u]åˆ›å»ºå¤±è´¥ï¼"), GetID());
             continue;
         }
 
 
-        ss->Init(); // ÓĞ³õÊ¼»¯¹¤×÷Ïß³Ì
+        ss->Init(); // æœ‰åˆå§‹åŒ–å·¥ä½œçº¿ç¨‹
 
         CIPAddress addr;
         addr.SetIP(conf.ListenIP.c_str());
@@ -71,7 +71,7 @@ bool CoreNetManager::Init(CoreBase* base, CoreConfig& config)
         addr.SetPort(conf.ListenPort);
         if (!ss->StartListen(addr)) // m_Config.ListenAddress
         {
-            // PrintDOSLog( _T("´úÀí·şÎñ[%u]ÕìÌıÓÚ(%s:%u)Ê§°Ü£¡"),
+            // PrintDOSLog( _T("ä»£ç†æœåŠ¡[%u]ä¾¦å¬äº(%s:%u)å¤±è´¥ï¼"),
             //	GetID(),
             //	m_Config.ListenAddress.GetIPString(),
             //	m_Config.ListenAddress.GetPort());
@@ -136,7 +136,7 @@ void CoreNetManager::DisConnectAck(SESSION_ID SessionID)
 {
 }
 
-void CoreNetManager::OnMessage(CSmartPtr<CBaseNetConnectionInterface> c,  DOS_SIMPLE_MESSAGE_HEAD* Msg) //ÊÕµ½ÏûÏ¢
+void CoreNetManager::OnMessage(CSmartPtr<CBaseNetConnectionInterface> c,  DOS_SIMPLE_MESSAGE_HEAD* Msg) //æ”¶åˆ°æ¶ˆæ¯
 {
     auto m = std::make_shared<CoreSessionMessage>();
     auto h = std::make_shared<DOS_SIMPLE_MESSAGE_HEAD>();
@@ -184,15 +184,15 @@ void CoreNetManager::RemoveConnection(CSmartPtr<CBaseNetConnectionInterface> c)
     m->SID= c->GetSessionID(); 
     m->ClientProxyType = c->GetClientProxyType();
 
-    if (m_ConnectionGroups.size() > 0)
-    {
-        UINT Index = c->GetSessionID() % m_ConnectionGroups.size();
-        m_ConnectionGroups[Index]->RemoveConnection(c);
-    }
-    else
-    {
-        //PrintDOSLog(_T("Î´ÄÜÕÒµ½ºÏÊÊµÄÁ¬½Ó×é"));
-    }
+    //if (m_ConnectionGroups.size() > 0) //é€šè¿‡ connection çš„ stop çŠ¶æ€,åœ¨ groupé‡Œæ£€æµ‹åˆ é™¤
+    //{
+    //    UINT Index = c->GetSessionID() % m_ConnectionGroups.size();
+    //    m_ConnectionGroups[Index]->RemoveConnection(c);
+    //}
+    //else
+    //{
+    //    //PrintDOSLog(_T("æœªèƒ½æ‰¾åˆ°åˆé€‚çš„è¿æ¥ç»„"));
+    //}
 
     PushMessage(m);
 }
@@ -214,7 +214,7 @@ void CoreNetManager::AddConnection(CSmartPtr<CBaseNetConnectionInterface> c)
     else
     {
         //c->Disconnect();
-        //PrintDOSLog(_T("Î´ÄÜÕÒµ½ºÏÊÊµÄÁ¬½Ó×é"));
+        //PrintDOSLog(_T("æœªèƒ½æ‰¾åˆ°åˆé€‚çš„è¿æ¥ç»„"));
     }
 }
 

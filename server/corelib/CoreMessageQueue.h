@@ -20,7 +20,7 @@ public:
 template<class M>
 void CoreMessageQueue<M>::UpdateProcessMessage(int processCount)
 {
-    CAutoLock lock(m_EasyCriticalSection); //todo safe deque
+    CAutoLock lock(&m_EasyCriticalSection); //todo safe deque
     auto count = 0;
     while (count < processCount && !m_Messages.empty())
     {
@@ -34,7 +34,7 @@ void CoreMessageQueue<M>::UpdateProcessMessage(int processCount)
 template<class M>
 void CoreMessageQueue<M>::PushMessage(CSmartPtr<M> msg)
 {
-    CAutoLock lock(m_EasyCriticalSection); //todo safe deque
+    CAutoLock lock(&m_EasyCriticalSection); //todo safe deque
     m_Messages.push(msg);
 }
 

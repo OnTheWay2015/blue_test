@@ -4,8 +4,12 @@
 
 extern void proc_init();
 
+
+
+
 int main()
 {
+
     proc_init();
 
     CoreBase C;
@@ -13,7 +17,6 @@ int main()
     ProtobufParseMessage::GetInstance()->Init();
 
     MonitorCoreHandler::GetInstance()->Init(); 
-
 
     C.AddHandler(MonitorCoreHandler::GetInstance(),CLIENT_PROXY_TYPE::SERVER_MONITOR);
     C.SetParseMessageHandler(ProtobufParseMessage::GetInstance());

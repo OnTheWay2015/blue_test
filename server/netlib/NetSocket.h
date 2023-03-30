@@ -165,10 +165,12 @@ inline int CNetSocket::GetState()
 	return m_State;
 }
 
-inline void CNetSocket::SetState( int State)
-{ 
-	m_State=(SOCKET_STATE)State;
-}
+//inline void CNetSocket::SetState( int State)
+//{ 
+//
+//
+//	m_State=(SOCKET_STATE)State;
+//}
 
 inline void CNetSocket::Clear()
 { 

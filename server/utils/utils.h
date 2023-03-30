@@ -75,10 +75,11 @@
     #include "linux/LinuxAddOn.h"
 #endif 
 
-
 typedef unsigned __int64 SESSION_ID; 
 
 #include "tmp.h"
+
+
 
 #include "config.h"
 
@@ -88,13 +89,13 @@ typedef unsigned __int64 SESSION_ID;
 #include "CycleQueue.h"
 #include "ToolsAll.h"
 
+
 #ifdef _WIN32 
     #include "win/ToolsWin.h"
 #endif 
 #ifdef __linux__
     #include "linux/ToolsLinux.h"
 #endif 
-
 
 #include "StaticObject.h"
 #include "EasyTime.h"
@@ -143,6 +144,8 @@ typedef unsigned __int64 SESSION_ID;
 #include "AutoReadLock.h"
 #include "AutoWriteLock.h"
 
+
+
 #ifdef _WIN32 
 #include "win/EasyThreadWin.h"
 #endif 
@@ -161,6 +164,5 @@ typedef unsigned __int64 SESSION_ID;
 #include "blue_logskin.h"
 #include "ILogPrinter.h"
 #include "LogManager.h"
-
 
 

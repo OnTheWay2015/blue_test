@@ -53,13 +53,13 @@ public:
    void SetParseMessageHandler(MessageHandlerInterface* h); 
 public://NetHandlerInterface
     virtual void OnAccept(CSmartPtr<CBaseNetConnectionInterface> s) override;
-    virtual void OnCreateConnectACK(CSmartPtr<CBaseNetConnectionInterface> s)  override ;//·¢ÆğÁ¬½Ó·µ»Ø
+    virtual void OnCreateConnectACK(CSmartPtr<CBaseNetConnectionInterface> s)  override ;//å‘èµ·è¿æ¥è¿”å›
 
-    virtual void OnDisConnect(CSmartPtr<CBaseNetConnectionInterface> s)  override ; //¶Ï¿ªÁ¬½Ó
-    virtual void DisConnectAck(SESSION_ID SessionID)  override ;//·¢Æğ¶Ï¿ªÁ¬½Ó·µ»Ø
+    virtual void OnDisConnect(CSmartPtr<CBaseNetConnectionInterface> s)  override ; //æ–­å¼€è¿æ¥
+    virtual void DisConnectAck(SESSION_ID SessionID)  override ;//å‘èµ·æ–­å¼€è¿æ¥è¿”å›
     
-    virtual void OnMessage(CSmartPtr<CBaseNetConnectionInterface> s,  DOS_SIMPLE_MESSAGE_HEAD* pMsg)  override ;//ÊÕµ½ÏûÏ¢
-    virtual void SendMessageAck(/*xxx*/)  override ;//·¢ËÍÏûÏ¢·µ»Ø
+    virtual void OnMessage(CSmartPtr<CBaseNetConnectionInterface> s,  DOS_SIMPLE_MESSAGE_HEAD* pMsg)  override ;//æ”¶åˆ°æ¶ˆæ¯
+    virtual void SendMessageAck(/*xxx*/)  override ;//å‘é€æ¶ˆæ¯è¿”å›
 
     virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress,CLIENT_PROXY_TYPE type,CLIENT_PROXY_MODE mode) override ;;
 public://CoreMessageQueue

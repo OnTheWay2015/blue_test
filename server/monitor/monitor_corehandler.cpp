@@ -12,7 +12,6 @@ MonitorCoreHandler::~MonitorCoreHandler()
 
 void MonitorCoreHandler::Init()
 {
-
 }
 
 
@@ -30,10 +29,7 @@ void MonitorCoreHandler::OnNetMessage(CSmartPtr<CoreSessionMessage> msg)
         }
         else
         {
-            //log err
-}
+            // log err
+        }
     }
-
-
 }
-

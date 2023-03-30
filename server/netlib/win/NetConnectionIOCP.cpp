@@ -83,7 +83,7 @@ bool CNetConnection::OnIOCPEvent(int EventID,COverLappedObject * pOverLappedObje
 					bool Ret = false;
 					{
 						//这里加个锁，以免和Destory调用并发而导致OverLappedObject未正确释放
-						CAutoLock Lock(m_OverLappedObjectPoolLock);
+						CAutoLock Lock(&m_OverLappedObjectPoolLock);
 						//PrintNetLog(_T("Recv=%u,(%u/%u)"), pOverLappedObject->GetDataBuff()->GetUsedSize(), m_RecvDataQueue.GetUsedSize(), m_RecvDataQueue.GetBufferSize());
 						 m_RecvDataQueue.push_back(pOverLappedObject);
 						Ret = true;
@@ -139,7 +139,7 @@ bool CNetConnection::Create(UINT RecvQueueSize, UINT SendQueueSize)
 		return false;
 	}
 
-	Close(); //todo .faq 为什么要 close?
+	Close();
 
 	if(m_pIOCPEventRouter==NULL)
 	{
@@ -214,7 +214,7 @@ void CNetConnection::Destory()
 	
 	if (GetServer())
 	{
-		CAutoLock Lock(m_OverLappedObjectPoolLock);
+		CAutoLock Lock(&m_OverLappedObjectPoolLock);
 
 		//GetServer()->ReleaseOverLappedObject(m_RecvDataQueue);
 		m_RecvDataQueue.clear();
@@ -281,6 +281,8 @@ void CNetConnection::Disconnect()
 	//	OnDisconnection();
 	//}
 	
+	SetStop();	
+
 	m_Socket.Close();
 	
 	m_WantClose = false;
@@ -500,7 +502,7 @@ int CNetConnection::Update(int ProcessPacketLimit)
 
 CSmartPtr<COverLappedObject> CNetConnection::AllocOverLappedObject()
 {
-    CAutoLock Lock(m_OverLappedObjectPoolLock);
+    CAutoLock Lock(&m_OverLappedObjectPoolLock);
 	auto pObject = m_pServer->AllocOverLappedObject(GetID());
 
     //auto pObject = std::make_shared<COverLappedObject>();
@@ -518,7 +520,7 @@ CSmartPtr<COverLappedObject> CNetConnection::AllocOverLappedObject()
 }
 bool CNetConnection::ReleaseOverLappedObject( CSmartPtr<COverLappedObject> pObject)
 {
-	CAutoLock Lock(m_OverLappedObjectPoolLock);
+	CAutoLock Lock(&m_OverLappedObjectPoolLock);
 
 	if (pObject->GetStatus() != OVERLAPPED_OBJECT_STATUS_USING)
 	{

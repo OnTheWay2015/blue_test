@@ -129,7 +129,7 @@ bool CNetConnection::Create(SOCKET Socket, UINT RecvQueueSize, UINT SendQueueSiz
 	}
 
 
-	Close();
+	//Close(); //todo check
 
 	RecvQueueSize *= NET_DATA_BLOCK_SIZE;
 	SendQueueSize *= NET_DATA_BLOCK_SIZE;
@@ -197,6 +197,12 @@ bool CNetConnection::Connect(const CIPAddress& Address, DWORD TimeOut)
 	if(GetServer()==NULL)
 		return false;
 
+	if (m_pEpollEventRouter == NULL)
+	{
+		if (!Create())
+			return false;
+	}
+
 	if (Address.IsIPv4())
 		m_CurAddressFamily = AF_INET;
 	else if (Address.IsIPv6())
@@ -226,7 +232,7 @@ bool CNetConnection::Connect(const CIPAddress& Address, DWORD TimeOut)
 }
 void CNetConnection::Disconnect()
 {
-	//PrintNetLog("(%d)Connection关闭",GetID());
+	PrintNetLog("(%d)Connection关闭 socketid[%u]",GetID(),m_Socket.GetSocket());
 
 	//PrintNetLog("%s连接关闭",GetName());
 	if (IsConnected())
@@ -241,11 +247,12 @@ void CNetConnection::Disconnect()
 		{
 			if (GetServer()->UnbindSocket(m_Socket.GetSocket(), m_pEpollEventRouter))
 			{
-				PrintNetDebugLog("(%d)Connection已解除Epoll绑定", GetID());
+				PrintNetDebugLog("(%d)Connection已解除Epoll绑定 socketid[%u]", GetID(),m_Socket.GetSocket());
 			}
 		}
 	}
-		
+
+	SetStop();	
 
 	m_Socket.Close();
 
@@ -257,6 +264,7 @@ void CNetConnection::Disconnect()
 }
 void CNetConnection::QueryDisconnect()
 {
+	PrintNetDebugLog("(%d)Connection 请求解除Epoll绑定 socketid[%u]  act", GetID(),m_Socket.GetSocket());
 	if(!m_WantClose)
 	{
 		if (GetServer() && m_pEpollEventRouter)
@@ -265,7 +273,7 @@ void CNetConnection::QueryDisconnect()
 			{
 				if (GetServer()->UnbindSocket(m_Socket.GetSocket(), m_pEpollEventRouter))
 				{
-					PrintNetDebugLog("(%d)Connection已解除Epoll绑定", GetID());
+					PrintNetDebugLog("(%d)Connection 请求解除Epoll绑定 socketid[%u] done", GetID(),m_Socket.GetSocket());
 				}
 			}
 		}
@@ -315,7 +323,7 @@ bool CNetConnection::StartWork()
 
 bool CNetConnection::SendMulti(LPCVOID * pDataBuffers, const UINT * pDataSizes, UINT BufferCount)
 {
-	CAutoLockEx Lock(m_SendLock);
+	CAutoLockEx Lock(&m_SendLock);
 
 	if(m_Socket.IsConnected())
 	{
@@ -479,7 +487,7 @@ void CNetConnection::DoRecv()
 }
 void CNetConnection::DoSend()
 {
-	CAutoLockEx Lock(m_SendLock);
+	CAutoLockEx Lock(&m_SendLock);
 
 	UINT DataSize = m_SendQueue.GetSmoothUsedSize();
 	while (DataSize)

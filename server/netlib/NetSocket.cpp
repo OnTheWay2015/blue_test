@@ -605,3 +605,11 @@ bool CNetSocket::StealFrom(CNameObject * pObject,UINT Param)
 	//}
 	return false;
 }
+
+
+
+void CNetSocket::SetState( int State)
+{
+	PrintNetLog("SocketID[%u] last[%d]  now[%d] ",GetSocket(), m_Socket,State);
+	m_State=(SOCKET_STATE)State;
+}

@@ -47,7 +47,7 @@ BOOL CGuardThread::OnRun()
 {
 	if (m_Enable)
 	{
-		CAutoLock Lock(m_EasyCriticalSection);
+		CAutoLock Lock(&m_EasyCriticalSection);
 		UINT CurTime = CEasyTimer::GetTime();
 		if (CEasyTimer::GetTimeToTime(m_RecentKeepAliveTime, CurTime) > m_KeepAliveTime)
 		{

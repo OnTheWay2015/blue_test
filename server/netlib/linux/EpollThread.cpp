@@ -135,11 +135,14 @@ BOOL CEpollThread::OnRun()
 	epoll_event Events[DEFAULT_EPOLL_EVENT_WAIT_NUM];
 
 	int EventCount=epoll_wait(m_hEpoll,Events,DEFAULT_EPOLL_EVENT_WAIT_NUM,100);
+		// 返回0 表示没有就绪的socket,大于0 就表示有几个就绪的 socket,-1 表示异常
 
 	if(EventCount>0)
 	{
+		PrintNetLog("Epoll事件 EventCount[%d]",EventCount);
 		for(int i=0;i<EventCount;i++)
 		{
+
 			UINT64_CONVERTER Param64;
 
 			Param64.QuadPart=Events[i].data.u64;

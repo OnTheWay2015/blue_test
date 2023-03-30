@@ -249,7 +249,7 @@ int CEasyThread::GetCallStack(HANDLE hThread, LPVOID * CallStacks, UINT MaxDepth
 		return backtrace(CallStacks, MaxDepth);
 	}
 
-	CAutoLock Lock(m_GetCallStackLock);
+	CAutoLock Lock(&m_GetCallStackLock);
 
 	m_GetCallStackCaller = pthread_self();
 	m_GetCallStackTarget = (pthread_t)hThread;

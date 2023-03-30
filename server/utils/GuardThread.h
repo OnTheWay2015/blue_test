@@ -44,7 +44,7 @@ public:
 
 	void MakeKeepAlive()
 	{
-		CAutoLock Lock(m_EasyCriticalSection);
+		CAutoLock Lock(&m_EasyCriticalSection);
 		m_RecentKeepAliveTime=CEasyTimer::GetTime();
 		m_LostAliveCount=0;
 	}

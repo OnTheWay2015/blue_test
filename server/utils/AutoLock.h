@@ -16,9 +16,9 @@ class CAutoLock
 protected:
 	CEasyCriticalSection * m_pSection;
 public:
-	CAutoLock(CEasyCriticalSection& Section)
+	CAutoLock(CEasyCriticalSection* Section)
 	{
-		m_pSection=&Section;
+		m_pSection=Section;
 		m_pSection->Lock();
 	}
 	~CAutoLock()
@@ -36,9 +36,9 @@ public:
 	{
 		m_pSection=NULL;
 	}
-	CAutoLockEx(CEasyCriticalSection& Section)
+	CAutoLockEx(CEasyCriticalSection* Section)
 	{
-		m_pSection=&Section;
+		m_pSection=Section;
 		m_pSection->Lock();
 	}
 	void Lock(CEasyCriticalSection& Section)
@@ -46,11 +46,11 @@ public:
 		m_pSection=&Section;
 		m_pSection->Lock();
 	}	
-	BOOL TryLock(CEasyCriticalSection& Section)
+	BOOL TryLock(CEasyCriticalSection* Section)
 	{
-		if(Section.TryLock())
+		if(Section->TryLock())
 		{
-			m_pSection=&Section;
+			m_pSection=Section;
 			return TRUE;
 		}
 		return FALSE;

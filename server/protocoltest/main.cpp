@@ -87,10 +87,158 @@ std::memcpy(pbuf+PACKET_HEAD_SIZE, mb.msgbuff.c_str(), len);
 
     return 0;
 }
+void ttt()
+{
+    std::map<int,int> b{{1,2},{3,4}};
+
+    std::vector<int> a {1,2,3,4};
+
+    int c = 0x123456;
+
+}
+/*
+class axx
+{
+    public:
+    axx() {
+    }
+    virtual ~axx(){}
+};
+
+class ax
+{
+    public:
+        virtual void axtest() = 0;
+};
+class ab :public ax , public axx
+{
+public:
+    ab(){
+    }
+    virtual ~ab(){}
+    virtual void axtest() override {}
+public:
+    bool value_ab;
+};
+
+
+class abc:public ab
+{
+public:
+    abc(){
+    }
+    virtual ~abc(){}
+public:
+    bool value_abc;
+};
+
+class abcd:
+	public abc 
+{
+protected:
+    volatile  int m_Status;
+
+
+public:
+	abcd(void) {}
+	virtual ~abcd(void) {}
+};
+*/
+
+#include <unordered_map>
+#include <vector>
+#include <map>
+#include <memory>
+
+
+//typedef std::shared_ptr<ax> ABC;
+
+
+//typedef std::shared_ptr<ConnectionDefault> CCC;
+//typedef std::shared_ptr<BaseNetConnectionInterface > CCC;
+//void fff( ABC dd)
+
+//std::map<int, CCC> mm;
+//void fff(  CCC dd)
+//{
+//    auto id = dd->GetSessionID();
+//    mm[id] = dd;
+//
+//}
+
+
+
+
+class axx
+{
+public:
+    axx(){
+    }
+    virtual ~axx() {}
+
+
+};
+
+class ax 
+{
+public:
+    ax(){
+    }
+    virtual ~ax() {}
+public:
+	virtual bool Create(int RecvQueueSize, int SendQueueSize) = 0;
+}; 
+class ab:
+	public ax
+	,public axx
+{
+public:
+	bool m_StopFlag;
+public:
+	ab(void) {
+
+    }
+	virtual ~ab(void){}
+
+	virtual bool Create(int RecvQueueSize, int SendQueueSize) override {} 
+
+};
+
+
 
 int main()
 {
-    pb_001();
+    auto xx = std::make_shared<ConnectionDefault>();
+    std::map<int, std::shared_ptr<BaseNetConnectionInterface> > mmm;
+    mmm[123] = xx;
+
+    //auto xx = std::make_shared<ab>();
+    //std::map<int, std::shared_ptr<ax> > mmm;
+    //mmm[123] = xx;
+
+    //std::map<int, BaseNetConnectionInterface* > mmm1;
+    
+    //BaseNetConnectionInterface* xxx = xx.get(); 
+    //mmm1[xx->GetID()] = xxx;
+
+    
+    //std::map<int, ax* > mmm1;
+    //auto xx = std::make_shared<abc>(123);
+    //ax* xxx = xx.get(); 
+    //mmm1[123] = xxx;
+
+
+
+    //abc a(123);
+
+    //auto xx = std::make_shared<abc>(123);
+    //fff(xx);
+
+
+
+
+    //ttt();
+    //pb_001();
     return 0;
 }
 

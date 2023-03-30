@@ -22,6 +22,7 @@
 #define LOG_DOS_MSG_STATE_CHANNEL		1303
 #define LOG_DOS_MEM_STATE_CHANNEL		1304
 #define LOG_MONO_CHANNEL				1401
+#define LOG_CORE_CHANNEL				1501
 
 #define IMPORTANT_LOG_FILE_NAME	_T("ImportantError")
 #define DEFAULT_ASYNC_LOG_WORK_THREAD_COUNT	2
@@ -57,22 +58,51 @@ private :
 
 inline bool PrintSystemLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...)
 {
-	//va_list vl;
-	//va_start(vl, Format);
-	//bool ret = CLogManager::GetInstance()->PrintLogVL(LOG_SYSTEM_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
-	//va_end(vl);
-	//return ret;
-	return true;
+	va_list vl;
+	va_start(vl, Format);
+	bool ret = CLogManager::GetInstance()->PrintLogVL(LOG_SYSTEM_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
+	va_end(vl);
+	return ret;
 }
 #define PrintSystemLog(_Format, ...)	PrintSystemLogWithTag(_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
 
 inline bool PrintImportantLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...)
 {
-	//va_list vl;
-	//va_start(vl, Format);
-	//bool ret = CLogManager::GetInstance()->PrintLogVL(LOG_IMPORTANT_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
-	//va_end(vl);
-	//return ret;
-	return true;
+	va_list vl;
+	va_start(vl,Format);
+	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_IMPORTANT_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
+	va_end(vl);
+	return ret;
 }
 #define PrintImportantLog(_Format, ...)		PrintImportantLogWithTag(_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
+
+
+
+//==========================================================================================================================
+
+inline BOOL PrintLogWithTag(int LOG_CHANNEL, LPCTSTR Tag, LPCTSTR Format, ...)
+{
+	va_list vl;
+	va_start(vl,Format);
+	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
+	va_end(vl);
+	return ret;
+}
+
+inline BOOL PrintDebugLogWithTag(int LOG_CHANNEL,LPCTSTR Tag, LPCTSTR Format, ...)
+{
+	va_list vl;
+	va_start(vl,Format);
+	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_CHANNEL, ILogPrinter::LOG_LEVEL_DEBUG, Tag, Format, vl);
+	va_end(vl);
+	return ret;
+}
+
+
+
+#define PrintCoreLog(_Format, ...)	PrintLogWithTag(LOG_CORE_CHANNEL,_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
+#define PrintCoreDebugLog(_Format, ...)	PrintDebugLogWithTag(LOG_CORE_CHANNEL,_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
+
+
+#define PrintNetLog(_Format, ...)	PrintLogWithTag(LOG_NET_CHANNEL,_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
+#define PrintNetDebugLog(_Format, ...)	PrintDebugLogWithTag(LOG_NET_CHANNEL,_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)

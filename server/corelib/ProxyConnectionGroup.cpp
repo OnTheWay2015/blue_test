@@ -22,13 +22,13 @@ void CProxyConnectionGroup::Init()
 
 bool CProxyConnectionGroup::RemoveConnection(CSmartPtr<CBaseNetConnectionInterface> pConnection)
 {
-	CAutoLock Lock(m_EasyCriticalSection);
+	CAutoLock Lock(&m_EasyCriticalSection);
     m_ConnectionPool.erase(pConnection->GetSessionID());
 	return true;
 }		
 bool CProxyConnectionGroup::AddConnection(CSmartPtr<CBaseNetConnectionInterface> pConnection)
 {
-	CAutoLock Lock(m_EasyCriticalSection);
+	CAutoLock Lock(&m_EasyCriticalSection);
 	m_ConnectionPool.insert({pConnection->GetSessionID(), pConnection});
 
 	return true;
@@ -42,21 +42,23 @@ BOOL CProxyConnectionGroup::OnStart()
 
 BOOL CProxyConnectionGroup::OnRun()
 {
+	// CAutoLock Lock(m_EasyCriticalSection);
+	m_EasyCriticalSection.Lock();
 	int ProcessCount = 0;
-    for (auto it= m_ConnectionPool.begin();it!=m_ConnectionPool.end();)
-    {
-		//if (!it->second->IsConnected()) //使用自定义移除标识,主动标记移除.防止并发时处理有异常,比如元素已回收,却还有引用到元素的调用 
+	for (auto it = m_ConnectionPool.begin(); it != m_ConnectionPool.end();)
+	{
+		// if (!it->second->IsConnected()) //使用自定义移除标识,主动标记移除.防止并发时处理有异常,比如元素已回收,却还有引用到元素的调用
 		if (it->second->IsStop())
 		{
-			CAutoLock Lock(m_EasyCriticalSection);
 			it = m_ConnectionPool.erase(it);
-//		m_pService->QueryDestoryConnection(pConnection);
+			//		m_pService->QueryDestoryConnection(pConnection);
 			continue;
 		}
 		ProcessCount += it->second->Update();
 		it++;
-    }
+	}
 
+	m_EasyCriticalSection.Unlock();
 
 	if (ProcessCount == 0)
 	{
@@ -71,6 +73,7 @@ void CProxyConnectionGroup::OnTerminate()
 
 void CProxyConnectionGroup::SendSessionMessage(CSmartPtr<CoreSessionMessage> msg)
 {
+	CAutoLock Lock(&m_EasyCriticalSection);
 	auto SID = msg->SID;
 	auto s = m_ConnectionPool.find(SID);
 	if (s == m_ConnectionPool.end())

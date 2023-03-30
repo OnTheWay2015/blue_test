@@ -100,7 +100,7 @@ inline bool CNetConnection::Send(LPCVOID pData, UINT Size)
 }
 inline UINT CNetConnection::GetSendBufferFreeSize()
 {
-	CAutoLockEx Lock(m_SendLock);
+	CAutoLockEx Lock(&m_SendLock);
 
 	return m_SendQueue.GetFreeSize();
 }

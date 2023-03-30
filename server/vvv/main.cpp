@@ -5,7 +5,7 @@ int main()
     proc_init();
     
     CoreBase C;
-    C.Init("./configclient.xml");
+    C.Init("./ConfigClient.xml");
     
     ProtobufParseMessage::GetInstance()->Init();
     MonitorConnecter::GetInstance()->Init(&C); 
