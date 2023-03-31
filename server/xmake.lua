@@ -1,4 +1,3 @@
-
 --add_defines("WIN32","_WINDOWS", "_UNICODE","UNICODE")
 
 
@@ -33,15 +32,26 @@ includes("./protocol")
 includes("./utils")
 includes("./netlib")
 includes("./corelib")
---includes("./vvv")
+includes("./vvv")
 includes("./monitor")
 
---includes("./protocoltest")
+includes("./protocoltest")
 --includes("./protocoltest01")
 
 
 --includes("./test")
 
 --target("t")
---    set_kind("binary")
+--    set_kind("binary"
 --    add_files("a.cpp")
+
+
+after_build(function (target)
+    local from ="$(projectdir)/conf/*.xml"
+    local to ="$(buildir)/$(os)/$(arch)/$(mode)"
+    --print(target)
+    --print(">>>>>>target["..target.."] from["..from .."] to["..to.."] ")
+    --print(">>>>>>target from["..from .."] to["..to.."] ")
+    os.cp(from,to)
+    --os.run("ldid -S %s", target:targetfile())
+end)

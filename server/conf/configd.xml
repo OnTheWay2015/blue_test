@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Main ServiceName="monitor" ServiceDesc="monitor" ServiceID="1" ServerType="1">  
+  <Net NetWorkThreadCount="2"> 
+  </Net>
+	<Monitor Port="61000"> 
+	</Monitor>  
+  <ClientProxys>   
+		<ClientProxy ProxyType="2" ProxyMode="1" ListenIP="0" ListenPort="64000" ConnectionGroupCount="4" 
+                 KeepAliveTime="10000" 
+                 MsgQueueSize="256"   
+                 EnableGuardThread="true" GuardThreadKeepAliveTime="20000" GuardThreadKeepAliveCount="5"/>
+	    
+  </ClientProxys>
+  <Plugins ExistWhenNoPlugin="false"> 
+	<Plugin  Name="LogAdapter" />  
+  </Plugins>  
+</Main>
+
