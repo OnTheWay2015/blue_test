@@ -67,6 +67,14 @@ bool CoreConfig::LoadConfig(LPCTSTR FileName)
 					m_NetConfig.NetWorkThreadCount = Net.attribute("NetWorkThreadCount");
 			}
 
+			xml_node Leader=Config;
+			if(Leader.moveto_child("Leader"))
+			{
+				if(Leader.has_attribute("Port"))
+					m_LeaderConfig.Port= Leader.attribute("Port");
+				if(Leader.has_attribute("IP"))
+					m_LeaderConfig.IP = Leader.attribute("IP").getvalue();
+			}
 
 
 			xml_node ClientProxys=Config;

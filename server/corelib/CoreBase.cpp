@@ -18,6 +18,8 @@ bool CoreBase::Init(LPCTSTR FileName)
     m_CoreNetManager= std::make_shared<CoreNetManager>();
     m_CoreNetManager->Init(this,m_CoreConfig);
 
+    //m_CoreConfig.GetLeaderConfig();
+
     return true;
 }
 

@@ -123,7 +123,7 @@ void CNetServer::OnTerminate()
 	CloseHandle( m_hIOCP );
 	m_hIOCP = NULL;	
 
-	CAutoLock Lock(m_OverLappedObjectPoolLock);
+	CAutoLock Lock(&m_OverLappedObjectPoolLock);
 
 	if(m_OverLappedObjectPool.size())
 	{		
@@ -139,7 +139,7 @@ void CNetServer::OnTerminate()
 
 CSmartPtr<COverLappedObject >CNetServer::AllocOverLappedObject(UINT ParantID)
 {
-	CAutoLock Lock(m_OverLappedObjectPoolLock);
+	CAutoLock Lock(&m_OverLappedObjectPoolLock);
 
     auto pOverLappedObject = std::make_shared<COverLappedObject >();
     pOverLappedObject->Create(this);
@@ -152,7 +152,7 @@ CSmartPtr<COverLappedObject >CNetServer::AllocOverLappedObject(UINT ParantID)
 
 bool CNetServer::ReleaseOverLappedObject(UINT ParantID)
 {
-    CAutoLock Lock(m_OverLappedObjectPoolLock);
+    CAutoLock Lock(&m_OverLappedObjectPoolLock);
 
     for (auto it = m_OverLappedObjectPool.begin(); it != m_OverLappedObjectPool.end(); )
     {
@@ -170,7 +170,7 @@ bool CNetServer::ReleaseOverLappedObject(UINT ParantID)
 
 bool CNetServer::ReleaseOverLappedObject( CSmartPtr<COverLappedObject> obj)
 {
-	CAutoLock Lock(m_OverLappedObjectPoolLock);
+	CAutoLock Lock(&m_OverLappedObjectPoolLock);
 
     for (auto it=m_OverLappedObjectPool.begin();it!=m_OverLappedObjectPool.end();it++)
     {
@@ -292,7 +292,7 @@ int CNetServer::Update(int ProcessPacketLimit)
 
 void CNetServer::PrintObjectStatus()
 {
-	CAutoLock Lock(m_OverLappedObjectPoolLock);
+	CAutoLock Lock(&m_OverLappedObjectPoolLock);
 
 	int AcceptCount=0;
 	int RecvCount=0;

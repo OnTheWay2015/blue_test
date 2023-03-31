@@ -1,12 +1,15 @@
 #pragma once
 //----------------------------------------------------------
-//#if !defined(__PRETTY_FUNCTION__)
-//	#ifdef _WIN32
-//		#define __PRETTY_FUNCTION__ __FUNCSIG__
-//	#else
-//		#define __PRETTY_FUNCTION__ __FUNCTION__
-//	#endif
-//#endif
+#if !defined(__PRETTY_FUNCTION__)
+	#ifdef _WIN32
+		#define __PRETTY_FUNCTION__ __FUNCSIG__
+	#else
+		#define __PRETTY_FUNCTION__ __FUNCTION__
+	#endif
+#endif
+
+//这个 __PRETTY_FUNCTION__ 定义属于 Gcc的 不属于MSVC
+
 
 extern void Stringsplit(const std::wstring& str, const wchar_t split, std::vector<std::wstring>& res);
 extern void Stringsplit(const std::wstring& str, const std::wstring& splits, std::vector<std::wstring>& res);

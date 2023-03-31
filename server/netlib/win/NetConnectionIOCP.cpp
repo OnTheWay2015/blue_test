@@ -139,7 +139,7 @@ bool CNetConnection::Create(UINT RecvQueueSize, UINT SendQueueSize)
 		return false;
 	}
 
-	Close();
+	//Close();
 
 	if(m_pIOCPEventRouter==NULL)
 	{
@@ -173,7 +173,7 @@ bool CNetConnection::Create(SOCKET Socket, UINT RecvQueueSize, UINT SendQueueSiz
 	}
 		
 		
-	Close();
+	//Close();
 
 	if(m_pIOCPEventRouter==NULL)
 	{

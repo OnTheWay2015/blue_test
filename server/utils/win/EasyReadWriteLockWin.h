@@ -35,24 +35,24 @@ public:
 	}
 	~CEasyReadWriteLock()
 	{
-		CAutoLockEx Lock1(m_ReadLock);
-		CAutoLockEx Lock2(m_WriteLock);
+		CAutoLockEx Lock1(&m_ReadLock);
+		CAutoLockEx Lock2(&m_WriteLock);
 		CloseHandle(m_UnlockEvent);
 	}
 	void LockRead()
 	{
-		CAutoLockEx Lock1(m_ReadLock);
+		CAutoLockEx Lock1(&m_ReadLock);
 		if(m_LockLevel == LL_WRITE)
 		{
 			WaitForSingleObject( m_UnlockEvent,INFINITE);
-			CAutoLockEx Lock2(m_WriteLock);
+			CAutoLockEx Lock2(&m_WriteLock);
 			m_LockLevel = LL_READ;
 			m_ReadCount ++;
 			ResetEvent(m_UnlockEvent);
 		}
 		else
 		{
-			CAutoLockEx Lock2(m_WriteLock);
+			CAutoLockEx Lock2(&m_WriteLock);
 			m_LockLevel = LL_READ;
 			m_ReadCount ++;
 			ResetEvent(m_UnlockEvent);
@@ -62,14 +62,14 @@ public:
 	BOOL TryLockRead()
 	{
 		CAutoLockEx Lock1;
-		if(Lock1.TryLock(m_ReadLock))
+		if(Lock1.TryLock(&m_ReadLock))
 		{
 			if(m_LockLevel == LL_WRITE)
 			{
 				if(WaitForSingleObject( m_UnlockEvent,0) == WAIT_OBJECT_0)
 				{
 					CAutoLockEx Lock2;
-					if(Lock2.TryLock(m_WriteLock))
+					if(Lock2.TryLock(&m_WriteLock))
 					{
 						m_LockLevel = LL_READ;
 						m_ReadCount ++;
@@ -83,7 +83,7 @@ public:
 			else
 			{
 				CAutoLockEx Lock2;
-				if(Lock2.TryLock(m_WriteLock))
+				if(Lock2.TryLock(&m_WriteLock))
 				{
 					m_LockLevel = LL_READ;
 					m_ReadCount ++;
@@ -97,18 +97,18 @@ public:
 	}	
 	void LockWrite()
 	{
-		CAutoLockEx Lock1(m_ReadLock);
+		CAutoLockEx Lock1(&m_ReadLock);
 
 		if(m_LockLevel == LL_NONE)
 		{
-			CAutoLockEx Lock2(m_WriteLock);
+			CAutoLockEx Lock2(&m_WriteLock);
 			m_LockLevel = LL_WRITE;
 			ResetEvent(m_UnlockEvent);
 		}
 		else
 		{
 			WaitForSingleObject( m_UnlockEvent,INFINITE);
-			CAutoLockEx Lock2(m_WriteLock);
+			CAutoLockEx Lock2(&m_WriteLock);
 			m_LockLevel = LL_WRITE;
 			ResetEvent(m_UnlockEvent);
 		}
@@ -117,12 +117,12 @@ public:
 	{
 		CAutoLockEx Lock1;
 
-		if(Lock1.TryLock(m_ReadLock))
+		if(Lock1.TryLock(&m_ReadLock))
 		{
 			if(m_LockLevel == LL_NONE)
 			{
 				CAutoLockEx Lock2;
-				if(Lock2.TryLock(m_WriteLock))
+				if(Lock2.TryLock(&m_WriteLock))
 				{
 					m_LockLevel = LL_WRITE;
 					ResetEvent(m_UnlockEvent);
@@ -134,7 +134,7 @@ public:
 				if(WaitForSingleObject( m_UnlockEvent,0) == WAIT_OBJECT_0)
 				{
 					CAutoLockEx Lock2;
-					if(Lock2.TryLock(m_WriteLock))
+					if(Lock2.TryLock(&m_WriteLock))
 					{
 						m_LockLevel = LL_WRITE;
 						ResetEvent(m_UnlockEvent);

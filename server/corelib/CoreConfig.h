@@ -1,7 +1,6 @@
 ﻿#pragma once
 
-class CoreConfig :
-	public CStaticObject4<CoreConfig>
+class CoreConfig 
 {
 public:
 	struct NET_CONFIG
@@ -12,12 +11,14 @@ public:
 			NetWorkThreadCount = 2;
 		}
 	};
-	struct MONITOR_CONFIG
+	struct LEADER_CONFIG
 	{
 		UINT					Port;
-		MONITOR_CONFIG()
+		std::string IP;
+		LEADER_CONFIG()
 		{
 			Port= 0;
+			IP= "";
 		}
 	};
 
@@ -51,7 +52,7 @@ protected:
 	UINT m_ServerType; // 服务分类 monitor/gate/game...
 
 	NET_CONFIG								m_NetConfig;
-	MONITOR_CONFIG							m_MonitorConfig;
+	LEADER_CONFIG							m_LeaderConfig;
 	CEasyArray<CLIENT_PROXY_CONFIG> m_ClientProxys;
 
 	//DOS_CONFIG								m_DOSConfig;
@@ -79,6 +80,11 @@ public:
 	bool HaveServiceName()
 	{
 		return !(m_ServiceName.IsEmpty()||m_ServiceDesc.IsEmpty());
+	}
+
+	const LEADER_CONFIG& GetLeaderConfig()
+	{
+		return m_LeaderConfig;
 	}
 
 	const NET_CONFIG& GetNetConfig()

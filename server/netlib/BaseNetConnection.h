@@ -184,7 +184,7 @@ inline bool CBaseNetConnection::PrintConnectionLogWithTag(LPCTSTR szFunction, LP
 	va_start(vl,Format);
 	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, szFunction, Format, vl);
 	va_end(vl);
-
+	return true;
 }
 
 inline bool CBaseNetConnection::PrintConnectionDebugLogWithTag(LPCTSTR szFunction, LPCTSTR Format, ...)

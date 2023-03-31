@@ -17,6 +17,7 @@ CSmartPtr<void> ProtobufParseMessage::ParseMessage(DOS_SIMPLE_MESSAGE_HEAD* h)
         //todo log err
         return nullptr;
     }
+    PrintCoreDebugLog("---- pb parse:\n%s", msg->DebugString().c_str());
     return msg;
 }
 CSmartPtr<std::vector<unsigned char>> ProtobufParseMessage::SerializeToArray(CSmartPtr<void> h)
@@ -28,7 +29,7 @@ CSmartPtr<std::vector<unsigned char>> ProtobufParseMessage::SerializeToArray(CSm
     {
         //todo log err
     }
-
+    PrintCoreDebugLog("---- pb serialize:\n%s", msg->DebugString().c_str());
     return vec;
 }
 

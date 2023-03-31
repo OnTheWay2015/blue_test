@@ -26,7 +26,7 @@ public:
 	BaseNetConnection(void) {}
 	virtual ~BaseNetConnection(void){}
 
-	virtual bool Create(int RecvQueueSize, int SendQueueSize) override {} 
+	virtual bool Create(int RecvQueueSize, int SendQueueSize) override { return false;} 
 
 };
 

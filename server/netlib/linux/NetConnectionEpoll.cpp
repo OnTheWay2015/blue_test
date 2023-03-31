@@ -80,7 +80,7 @@ bool CNetConnection::Create(UINT RecvQueueSize, UINT SendQueueSize)
 	}
 
 
-	Close();
+	//Close(); //todo check
 
 	RecvQueueSize *= NET_DATA_BLOCK_SIZE;
 	SendQueueSize *= NET_DATA_BLOCK_SIZE;

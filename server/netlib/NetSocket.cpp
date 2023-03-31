@@ -512,14 +512,19 @@ bool CNetSocket::RecvOverlapped( LPVOID lpDataBuf, int nBufsize, DWORD &dwBytesR
 	wsabuf.len = nBufsize;
 
 	if( WSARecv( m_Socket, &wsabuf, 1, &dwBytesReceived, &dwFlag, lpOverlapped, NULL ) == SOCKET_ERROR )
-	{
-		int code = GetLastError();
-		if( code != WSA_IO_PENDING )
-		{
-			PrintNetLog(_T("(%d)WSARecv() 失败！"),code);
-			return false;
-		}
-	}
+    {
+
+        /*
+                WSAECONNRESET/10054   当连接已经关闭时去读取sokcet,会报这个错
+        */
+
+        int code = GetLastError(); //
+        if (code != WSA_IO_PENDING /*997*/)
+        {
+            PrintNetLog(_T("(%d)WSARecv() 失败！"), code);
+            return false;
+        }
+    }
 	return true;
 }
 

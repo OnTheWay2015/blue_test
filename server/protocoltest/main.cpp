@@ -42,7 +42,7 @@ optional string phone = 5;
 
 int pb_001()
 {
-    t1::MSG_TEST b;
+    MSG_TEST b;
     b.set_name("test");
    
 /*
@@ -53,14 +53,14 @@ std::memcpy(pbuf+PACKET_HEAD_SIZE, mb.msgbuff.c_str(), len);
     std::vector<unsigned char> vec(b.ByteSize());
     b.SerializeToArray( &vec[0], b.ByteSize());
     
-    t1::MSG_TEST c;
+    MSG_TEST c;
     c.ParseFromArray(&vec[0], b.ByteSize());
 
 
     std::string sstr;
     b.SerializeToString(&sstr);
 
-    t1::MSG_TEST a;
+    MSG_TEST a;
     a.ParseFromString(sstr);
  
     //const ::google::protobuf::Descriptor* desc = t1::MSG_TEST::descriptor();

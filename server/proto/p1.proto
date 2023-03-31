@@ -3,8 +3,33 @@ syntax = "proto3";
 
 package p1;
   
-message MSG_P1 { 
-  string name = 1; 
-  //repeated int32 ary_int32 = 2; 
+
+message MSG_TEST { 
+  string name = 1  ; 
+}
+
+
+message MSG_TEST_RES { 
+  string name_res = 1  ; 
+  int32  a1 = 3  ; 
+  int32  a2 = 4  ; 
 }
  
+
+
+
+message REG_TO_LEADER{ 
+  int32  packet_id = 2; 
+  string name = 1  ; 
+}
+
+
+message REG_TO_LEADER_RES{ 
+  string name_res = 1  ; 
+  int32  packet_id = 2  ; 
+  int32  a1 = 3  ; 
+  int32  a2 = 4  ; 
+  
+}
+ 
+

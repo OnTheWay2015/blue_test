@@ -13,13 +13,13 @@ MonitorConnecter::~MonitorConnecter()
 void MonitorConnecter::Init(CoreBase* base)
 {
     m_pCorebase = base;
-    
     CIPAddress  addr;
-    //addr.SetIP("127.0.0.1");
-    //addr.SetPort(64000);
+    auto& coreConf = base->GetCoreConfig();
+    addr.SetIP(coreConf.GetLeaderConfig().IP.c_str());
+    addr.SetPort(coreConf.GetLeaderConfig().Port);
 
-    addr.SetIP("192.168.100.157");
-    addr.SetPort(64000);
+    //addr.SetIP("192.168.100.157");
+    //addr.SetPort(64000);
     auto connect = base->CreateConnect(addr,CLIENT_PROXY_TYPE::CONNECT_MONITOR,CLIENT_PROXY_MODE::NORMAL);
     base->AddHandler(this,CLIENT_PROXY_TYPE::CONNECT_MONITOR);
 
@@ -41,10 +41,12 @@ void MonitorConnecter::OnNetMessage(CSmartPtr<CoreSessionMessage> msg)
         else
         {
             //log err
-}
+        }
     }
     else if (msg->EventType == CORE_EVENT::SESSION_ADD)
     {
+
+        /*
         int packet_id = 666;
         //t1::MSG_TEST b;
         auto b = PACKET_CREATE(t1::MSG_TEST, packet_id );
@@ -55,11 +57,18 @@ void MonitorConnecter::OnNetMessage(CSmartPtr<CoreSessionMessage> msg)
         m->MSG = b;
       
         msg->Session->SendMsg(m);
+        */
          
-       //SendMsg(m.get());
-         
-
+       
  
+        int packet_id = MSG_BASE::MsgCase::kMsgTest;
+        auto b = PACKET_CREATE(MSG_TEST, packet_id );
+        b->set_name("test_name");
+        auto m = std::make_shared<DOS_SIMPLE_MESSAGE>();
+        m->MsgID = packet_id;
+        m->MsgLen = b->ByteSize() + sizeof(DOS_SIMPLE_MESSAGE_HEAD) ;
+        m->MSG = b;
+        msg->Session->SendMsg(m);
     }
     else if (msg->EventType == CORE_EVENT::SESSION_REMOVE)
     {

@@ -33,6 +33,7 @@ public://NetHandlerInterface
 public:
     virtual bool Init(LPCTSTR FileName)=0;
     virtual void Update()=0;
+    virtual const CoreConfig& GetCoreConfig()=0; 
 };
 
 class CoreBaseNetInterface 
@@ -64,14 +65,14 @@ public:
 public://CoreBaseInterface 
     virtual bool Init(LPCTSTR FileName) override;
     virtual void Update() override;
+    virtual CoreConfig& GetCoreConfig()override { return m_CoreConfig;} 
 public://CoreBaseNetInterface 
     virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnect(CIPAddress& remoteAddress,CLIENT_PROXY_TYPE type,CLIENT_PROXY_MODE mode) override ;//发起连接
     virtual void DisConnect(SESSION_ID SessionID)  override;//发起断开连接
 
     virtual void SendSessionMessage(CSmartPtr<CoreSessionMessage> msg)  override;//发送消息
     virtual void OnNetMessage(CSmartPtr<CoreSessionMessage> msg)  override;//发送消息
-    
-   virtual void AddHandler(CoreHandlerInterface* h, CLIENT_PROXY_TYPE type)  override;//注册模块(消息处理模块)
+    virtual void AddHandler(CoreHandlerInterface* h, CLIENT_PROXY_TYPE type)  override;//注册模块(消息处理模块)
 };
 
 

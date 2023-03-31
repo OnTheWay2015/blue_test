@@ -28,7 +28,7 @@ public:
 	virtual CSmartPtr<void> create(int id) override
 	{
 		auto m = std::make_shared<T>();
-		m->set_packet_id(id);
+		//m->set_packet_id(id);
 		return m; 
 	}
 	virtual bool packet_process(CSmartPtr<CBaseNetConnectionInterface> session, CSmartPtr<void> msg) override {return false;};
