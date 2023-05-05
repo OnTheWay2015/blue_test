@@ -20,8 +20,8 @@ void MonitorConnecter::Init(CoreBase* base)
 
     //addr.SetIP("192.168.100.157");
     //addr.SetPort(64000);
-    auto connect = base->CreateConnect(addr,CLIENT_PROXY_TYPE::CONNECT_MONITOR,CLIENT_PROXY_MODE::NORMAL);
-    base->AddHandler(this,CLIENT_PROXY_TYPE::CONNECT_MONITOR);
+    auto connect = base->CreateConnect(addr,CLIENT_PROXY_TYPE::CONNECT_MONITOR_LOCAL,CLIENT_PROXY_MODE::NORMAL);
+    base->AddHandler(this,CLIENT_PROXY_TYPE::CONNECT_MONITOR_LOCAL);
 
 }
 

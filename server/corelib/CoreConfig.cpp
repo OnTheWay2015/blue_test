@@ -56,8 +56,8 @@ bool CoreConfig::LoadConfig(LPCTSTR FileName)
 
 			if(Config.has_attribute("ServiceID"))
 				m_ServiceID=Config.attribute("ServiceID");
-			if(Config.has_attribute("ServerType"))
-				m_ServerType=Config.attribute("ServerType");
+			if(Config.has_attribute("ServiceType"))
+				m_ServiceType=Config.attribute("ServiceType");
 
 
 			xml_node Net=Config;

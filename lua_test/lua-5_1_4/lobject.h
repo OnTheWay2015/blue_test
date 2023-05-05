@@ -346,7 +346,7 @@ typedef union TKey {
 // 每个节点都有key和val
 typedef struct Node {
   TValue i_val;
-  TKey i_key;
+  TKey i_key;//key, 有链表 next 指针
 } Node;
 
 
@@ -358,8 +358,8 @@ typedef struct Table {
   lu_byte flags;  /* 1<<p means tagmethod(p) is not present */ 
   lu_byte lsizenode;  /* log2 of size of `node' array 以2的lsizenode次方作为哈希表长度 */
   struct Table *metatable; //元表 
-  TValue *array;  /* array part   数组*/
-  Node *node; // ？
+  TValue *array;  /* array part   保存数组时的数据*/
+  Node *node; // 保存map时的数据
   Node *lastfree;  /* any free position is before this position  指向最后一个为闲置的链表空间*/
   GCObject *gclist;
   int sizearray;  /* size of `array' array */

@@ -30,8 +30,8 @@ function test01()
 	print("myTable.name:" .. myTable.name)
 
 	myTable.ftestget(myTable)
-	myTable.f(myTable) -- 修改对象自身的属性 name
-	myTable1:ff() -- 修改对象自身的属性 id 
+	myTable.f(myTable) -- 修改对象自身的属性 name 为 "xiaomign"
+	myTable1:ff() -- 修改对象自身的属性 id 为 1000
 	
 	print("myTable.name:" .. myTable.name)  -- xiaomign
 	print("myTable1.name:" .. myTable1.name) -- 666

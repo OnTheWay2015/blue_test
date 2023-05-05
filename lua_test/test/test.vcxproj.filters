@@ -30,6 +30,12 @@
     <ClCompile Include="test_game.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="test_bind.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bind01.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="scripts\test001.lua">
@@ -45,6 +51,12 @@
       <Filter>scripts</Filter>
     </None>
     <None Include="scripts\test004.lua">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\test005.lua">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\test006.lua">
       <Filter>scripts</Filter>
     </None>
   </ItemGroup>

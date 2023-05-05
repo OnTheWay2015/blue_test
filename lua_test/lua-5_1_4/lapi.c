@@ -365,7 +365,7 @@ LUA_API int lua_lessthan (lua_State *L, int index1, int index2) {
 }
 
 
-
+//把给定索引处的 Lua 值转换为 lua_Number(double) 这样一个 C 类型。 这个 Lua 值必须是一个数字或是一个可转换为数字的字符串， 否则，lua_tonumber 返回 0 
 LUA_API lua_Number lua_tonumber (lua_State *L, int idx) {
   TValue n;
   const TValue *o = index2adr(L, idx);
@@ -375,7 +375,7 @@ LUA_API lua_Number lua_tonumber (lua_State *L, int idx) {
     return 0;
 }
 
-
+//把给定索引处的 Lua 值转换为 lua_Integer(__int64) 这样一个有符号整数类型。 这个 Lua 值必须是一个数字或是一个可以转换为数字的字符串， 否则 lua_tointeger 返回 0 。
 LUA_API lua_Integer lua_tointeger (lua_State *L, int idx) {
   TValue n;
   const TValue *o = index2adr(L, idx);
@@ -390,12 +390,32 @@ LUA_API lua_Integer lua_tointeger (lua_State *L, int idx) {
 }
 
 
+/*
+把指定的索引处的的 Lua 值转换为一个 C 中的 boolean 值（ 0 或是 1 ） 
+和 Lua 中做的所有测试一样, lua_toboolean 会把任何 不同于 false 和 nil 的值当作 1 返回 
+否则就返回 0.  如果用一个无效索引去调用也会返回 0 
+
+如果想只接收真正的 boolean 值，就需要使用 lua_isboolean 来测试值的类型。
+*/
 LUA_API int lua_toboolean (lua_State *L, int idx) {
   const TValue *o = index2adr(L, idx);
   return !l_isfalse(o);
 }
 
 
+
+/*
+*
+lua_tostring 是利用 lua_tolstring 的一个宏 . 
+lua_tolstring 返回 Lua 状态机中字符串的以对齐指针.
+这个字符串总能保证最后一个字符为零 ('\0') ,而且它允许在字符串内包含多个这样的零.
+因为 Lua 中可能发生垃圾收集,所以不保证 lua_tolstring 返回的指针,在对应的值从堆栈中移除后依然有效. 
+ 
+ 
+把给定索引处的 Lua 值转换为一个 C 字符串. 如果 len 不为 NULL , 它还把字符串长度设到 *len 中. 
+这个 Lua 值必须是一个字符串或是一个数字； 否则返回返回 NULL . 
+如果值是一个数字,lua_tolstring 还会把堆栈中的那个值的实际类型转换为一个字符串.
+*/
 LUA_API const char *lua_tolstring (lua_State *L, int idx, size_t *len) {
   StkId o = index2adr(L, idx);
   if (!ttisstring(o)) {
@@ -432,12 +452,24 @@ LUA_API size_t lua_objlen (lua_State *L, int idx) {
 }
 
 
+/*
+
+可能你会疑惑为什么有 lua_isfunction 和 lua_iscfunction 函数,但却只有 lua_tocfunction 而没有 lua_tofunction 函数,
+其实仔细想想就知道只有转化成c function才有意义,假设是一个 lua function 在 c 代码里是没有用处的.
+  
+
+ 
+把给定索引处的 Lua 值转换为一个 C 函数. 这个值必须是一个 C 函数；如果不是就返回 NULL .
+*/
 LUA_API lua_CFunction lua_tocfunction (lua_State *L, int idx) {
   StkId o = index2adr(L, idx);
   return (!iscfunction(o)) ? NULL : clvalue(o)->c.f;
 }
 
-
+/*
+如果给定索引处的值是一个完整的 userdata ,函数返回内存块的地址. 
+如果值是一个 light userdata ,那么就返回它表示的指针. 否则返回 NULL 
+*/
 LUA_API void *lua_touserdata (lua_State *L, int idx) {
   StkId o = index2adr(L, idx);
   switch (ttype(o)) {
@@ -447,13 +479,16 @@ LUA_API void *lua_touserdata (lua_State *L, int idx) {
   }
 }
 
-
+/*
+把给定索引处的值转换为一个 Lua 线程（由 lua_State* 代表）. 这个值必须是一个线程；否则函数返回 NULL .
+*/
 LUA_API lua_State *lua_tothread (lua_State *L, int idx) {
   StkId o = index2adr(L, idx);
   return (!ttisthread(o)) ? NULL : thvalue(o);
 }
 
-
+// 把给定索引处的值转换为一般的 C 指针 (void*) . 这个值可以是一个 userdata ,table ,thread 或是一个 function  
+// 否则,lua_topointer 返回 NULL . 不同的对象有不同的指针. 不存在把指针再转回原有类型的方法.
 LUA_API const void *lua_topointer (lua_State *L, int idx) {
   StkId o = index2adr(L, idx);
   switch (ttype(o)) {

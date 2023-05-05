@@ -21,8 +21,11 @@ function test01(arg1,arg2)
 
 end
 
+g_tt = {a=100,b=300}
+
 -- 入口方法 
 function run_main()
+    --print(g_tt)
     print({a=1,b=2,c=test01})
     local tt= {a=1,b=2,c=test01}
     tt.c(1,2)

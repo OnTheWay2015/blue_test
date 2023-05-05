@@ -49,7 +49,7 @@ protected:
 	CEasyString m_ServiceName;
 	CEasyString m_ServiceDesc;
 	UINT m_ServiceID;
-	UINT m_ServerType; // 服务分类 monitor/gate/game...
+	UINT m_ServiceType; // 服务分类 monitor/gate/game...
 
 	NET_CONFIG								m_NetConfig;
 	LEADER_CONFIG							m_LeaderConfig;
@@ -72,6 +72,14 @@ public:
 	LPCTSTR GetServiceName()
 	{
 		return m_ServiceName;
+	}
+	UINT GetServiceType()
+	{
+		return m_ServiceType;
+	}
+	UINT GetServiceID()
+	{
+		return m_ServiceID;
 	}
 	LPCTSTR GetServiceDesc()
 	{

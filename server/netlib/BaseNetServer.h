@@ -23,6 +23,7 @@ enum class CLIENT_PROXY_TYPE  //connection 连接服务的类型
 	SERVER_MONITOR,
 	SERVER_GATE,
 	CONNECT_MONITOR,
+	CONNECT_MONITOR_LOCAL, //本地发起连接
 };
 
 enum class CLIENT_PROXY_MODE

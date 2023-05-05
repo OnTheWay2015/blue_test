@@ -40,7 +40,8 @@ void protobuf_AssignDesc_t1_2eproto() {
       "t1.proto");
   GOOGLE_CHECK(file != NULL);
   MSG_BASE_descriptor_ = file->message_type(0);
-  static const int MSG_BASE_offsets_[3] = {
+  static const int MSG_BASE_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MSG_BASE, msgfromid_),
     PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_test_),
     PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_test_res_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MSG_BASE, msg_),
@@ -101,10 +102,10 @@ void protobuf_AddDesc_t1_2eproto_impl() {
 
   protobuf_InitDefaults_t1_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\010t1.proto\022\002t1\032\010p1.proto\"]\n\010MSG_BASE\022 \n\010"
-    "msg_test\030\001 \001(\0132\014.p1.MSG_TESTH\000\022(\n\014msg_te"
-    "st_res\030\002 \001(\0132\020.p1.MSG_TEST_RESH\000B\005\n\003msgb"
-    "\006proto3", 127);
+    "\n\010t1.proto\022\002t1\032\010p1.proto\"r\n\010MSG_BASE\022\021\n\t"
+    "MsgFromID\030\001 \001(\005\022!\n\010msg_test\030\350\007 \001(\0132\014.p1."
+    "MSG_TESTH\000\022)\n\014msg_test_res\030\320\017 \001(\0132\020.p1.M"
+    "SG_TEST_RESH\000B\005\n\003msgb\006proto3", 148);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "t1.proto", &protobuf_RegisterTypes);
   ::p1::protobuf_AddDesc_p1_2eproto();
@@ -136,6 +137,7 @@ static void MergeFromFail(int line) {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int MSG_BASE::kMsgFromIDFieldNumber;
 const int MSG_BASE::kMsgTestFieldNumber;
 const int MSG_BASE::kMsgTestResFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -163,6 +165,7 @@ MSG_BASE::MSG_BASE(const MSG_BASE& from)
 }
 
 void MSG_BASE::SharedCtor() {
+  msgfromid_ = 0;
   clear_has_msg();
   _cached_size_ = 0;
 }
@@ -224,6 +227,7 @@ void MSG_BASE::clear_msg() {
 
 void MSG_BASE::Clear() {
 // @@protoc_insertion_point(message_clear_start:t1.MSG_BASE)
+  msgfromid_ = 0;
   clear_msg();
 }
 
@@ -233,13 +237,28 @@ bool MSG_BASE::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:t1.MSG_BASE)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .p1.MSG_TEST msg_test = 1;
+      // optional int32 MsgFromID = 1;
       case 1: {
-        if (tag == 10) {
+        if (tag == 8) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &msgfromid_)));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(8002)) goto parse_msg_test;
+        break;
+      }
+
+      // optional .p1.MSG_TEST msg_test = 1000;
+      case 1000: {
+        if (tag == 8002) {
+         parse_msg_test:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_msg_test()));
         } else {
@@ -249,9 +268,9 @@ bool MSG_BASE::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .p1.MSG_TEST_RES msg_test_res = 2;
-      case 2: {
-        if (tag == 18) {
+      // optional .p1.MSG_TEST_RES msg_test_res = 2000;
+      case 2000: {
+        if (tag == 16002) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_msg_test_res()));
         } else {
@@ -286,16 +305,21 @@ failure:
 void MSG_BASE::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:t1.MSG_BASE)
-  // optional .p1.MSG_TEST msg_test = 1;
-  if (has_msg_test()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *msg_.msg_test_, output);
+  // optional int32 MsgFromID = 1;
+  if (this->msgfromid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->msgfromid(), output);
   }
 
-  // optional .p1.MSG_TEST_RES msg_test_res = 2;
+  // optional .p1.MSG_TEST msg_test = 1000;
+  if (has_msg_test()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1000, *msg_.msg_test_, output);
+  }
+
+  // optional .p1.MSG_TEST_RES msg_test_res = 2000;
   if (has_msg_test_res()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *msg_.msg_test_res_, output);
+      2000, *msg_.msg_test_res_, output);
   }
 
   // @@protoc_insertion_point(serialize_end:t1.MSG_BASE)
@@ -305,18 +329,23 @@ void MSG_BASE::SerializeWithCachedSizes(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:t1.MSG_BASE)
-  // optional .p1.MSG_TEST msg_test = 1;
+  // optional int32 MsgFromID = 1;
+  if (this->msgfromid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->msgfromid(), target);
+  }
+
+  // optional .p1.MSG_TEST msg_test = 1000;
   if (has_msg_test()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        1, *msg_.msg_test_, false, target);
+        1000, *msg_.msg_test_, false, target);
   }
 
-  // optional .p1.MSG_TEST_RES msg_test_res = 2;
+  // optional .p1.MSG_TEST_RES msg_test_res = 2000;
   if (has_msg_test_res()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        2, *msg_.msg_test_res_, false, target);
+        2000, *msg_.msg_test_res_, false, target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:t1.MSG_BASE)
@@ -327,17 +356,24 @@ size_t MSG_BASE::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:t1.MSG_BASE)
   size_t total_size = 0;
 
+  // optional int32 MsgFromID = 1;
+  if (this->msgfromid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->msgfromid());
+  }
+
   switch (msg_case()) {
-    // optional .p1.MSG_TEST msg_test = 1;
+    // optional .p1.MSG_TEST msg_test = 1000;
     case kMsgTest: {
-      total_size += 1 +
+      total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *msg_.msg_test_);
       break;
     }
-    // optional .p1.MSG_TEST_RES msg_test_res = 2;
+    // optional .p1.MSG_TEST_RES msg_test_res = 2000;
     case kMsgTestRes: {
-      total_size += 1 +
+      total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *msg_.msg_test_res_);
       break;
@@ -392,6 +428,9 @@ void MSG_BASE::UnsafeMergeFrom(const MSG_BASE& from) {
       break;
     }
   }
+  if (from.msgfromid() != 0) {
+    set_msgfromid(from.msgfromid());
+  }
 }
 
 void MSG_BASE::CopyFrom(const ::google::protobuf::Message& from) {
@@ -418,6 +457,7 @@ void MSG_BASE::Swap(MSG_BASE* other) {
   InternalSwap(other);
 }
 void MSG_BASE::InternalSwap(MSG_BASE* other) {
+  std::swap(msgfromid_, other->msgfromid_);
   std::swap(msg_, other->msg_);
   std::swap(_oneof_case_[0], other->_oneof_case_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -435,7 +475,21 @@ void MSG_BASE::InternalSwap(MSG_BASE* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // MSG_BASE
 
-// optional .p1.MSG_TEST msg_test = 1;
+// optional int32 MsgFromID = 1;
+void MSG_BASE::clear_msgfromid() {
+  msgfromid_ = 0;
+}
+::google::protobuf::int32 MSG_BASE::msgfromid() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MsgFromID)
+  return msgfromid_;
+}
+void MSG_BASE::set_msgfromid(::google::protobuf::int32 value) {
+  
+  msgfromid_ = value;
+  // @@protoc_insertion_point(field_set:t1.MSG_BASE.MsgFromID)
+}
+
+// optional .p1.MSG_TEST msg_test = 1000;
 bool MSG_BASE::has_msg_test() const {
   return msg_case() == kMsgTest;
 }
@@ -483,7 +537,7 @@ void MSG_BASE::set_allocated_msg_test(::p1::MSG_TEST* msg_test) {
   // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.msg_test)
 }
 
-// optional .p1.MSG_TEST_RES msg_test_res = 2;
+// optional .p1.MSG_TEST_RES msg_test_res = 2000;
 bool MSG_BASE::has_msg_test_res() const {
   return msg_case() == kMsgTestRes;
 }

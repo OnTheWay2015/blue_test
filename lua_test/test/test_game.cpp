@@ -14,7 +14,7 @@ using namespace std;
 
 
 
-static string game_scripts = "../../test/scripts/lua";
+static string game_scripts = "../../../test/scripts/lua";
 
 
 

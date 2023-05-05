@@ -7,13 +7,16 @@ import "p1.proto";
 package t1;
 
 message MSG_BASE { 
+  int32 MsgFromID = 1;
   oneof msg {
-    p1.MSG_TEST msg_test =1;
-    p1.MSG_TEST_RES msg_test_res =2;
+    p1.MSG_TEST msg_test =1000;
+    p1.MSG_TEST_RES msg_test_res =2000;
   }
 }
  
-
+ 
+ 
+ 
 
 
 

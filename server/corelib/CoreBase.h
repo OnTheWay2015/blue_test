@@ -57,6 +57,7 @@ public :
     ~CoreBase();
 
 private:
+	CEasyCriticalSection m_EasyCriticalSection;
     CoreConfig m_CoreConfig; 
    CSmartPtr<CoreNetManager> m_CoreNetManager;
    CHashMap<CLIENT_PROXY_TYPE,CoreHandlerInterface* > m_CoreHandlers; 

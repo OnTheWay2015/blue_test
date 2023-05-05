@@ -58,8 +58,8 @@ class MSG_BASE : public ::google::protobuf::Message /* @@protoc_insertion_point(
   static const MSG_BASE& default_instance();
 
   enum MsgCase {
-    kMsgTest = 1,
-    kMsgTestRes = 2,
+    kMsgTest = 1000,
+    kMsgTestRes = 2000,
     MSG_NOT_SET = 0,
   };
 
@@ -111,19 +111,25 @@ class MSG_BASE : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // optional .p1.MSG_TEST msg_test = 1;
+  // optional int32 MsgFromID = 1;
+  void clear_msgfromid();
+  static const int kMsgFromIDFieldNumber = 1;
+  ::google::protobuf::int32 msgfromid() const;
+  void set_msgfromid(::google::protobuf::int32 value);
+
+  // optional .p1.MSG_TEST msg_test = 1000;
   bool has_msg_test() const;
   void clear_msg_test();
-  static const int kMsgTestFieldNumber = 1;
+  static const int kMsgTestFieldNumber = 1000;
   const ::p1::MSG_TEST& msg_test() const;
   ::p1::MSG_TEST* mutable_msg_test();
   ::p1::MSG_TEST* release_msg_test();
   void set_allocated_msg_test(::p1::MSG_TEST* msg_test);
 
-  // optional .p1.MSG_TEST_RES msg_test_res = 2;
+  // optional .p1.MSG_TEST_RES msg_test_res = 2000;
   bool has_msg_test_res() const;
   void clear_msg_test_res();
-  static const int kMsgTestResFieldNumber = 2;
+  static const int kMsgTestResFieldNumber = 2000;
   const ::p1::MSG_TEST_RES& msg_test_res() const;
   ::p1::MSG_TEST_RES* mutable_msg_test_res();
   ::p1::MSG_TEST_RES* release_msg_test_res();
@@ -140,6 +146,7 @@ class MSG_BASE : public ::google::protobuf::Message /* @@protoc_insertion_point(
   inline void clear_has_msg();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::int32 msgfromid_;
   union MsgUnion {
     MsgUnion() {}
     ::p1::MSG_TEST* msg_test_;
@@ -165,7 +172,21 @@ extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_BASE> MSG_BASE_de
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
 // MSG_BASE
 
-// optional .p1.MSG_TEST msg_test = 1;
+// optional int32 MsgFromID = 1;
+inline void MSG_BASE::clear_msgfromid() {
+  msgfromid_ = 0;
+}
+inline ::google::protobuf::int32 MSG_BASE::msgfromid() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MsgFromID)
+  return msgfromid_;
+}
+inline void MSG_BASE::set_msgfromid(::google::protobuf::int32 value) {
+  
+  msgfromid_ = value;
+  // @@protoc_insertion_point(field_set:t1.MSG_BASE.MsgFromID)
+}
+
+// optional .p1.MSG_TEST msg_test = 1000;
 inline bool MSG_BASE::has_msg_test() const {
   return msg_case() == kMsgTest;
 }
@@ -213,7 +234,7 @@ inline void MSG_BASE::set_allocated_msg_test(::p1::MSG_TEST* msg_test) {
   // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.msg_test)
 }
 
-// optional .p1.MSG_TEST_RES msg_test_res = 2;
+// optional .p1.MSG_TEST_RES msg_test_res = 2000;
 inline bool MSG_BASE::has_msg_test_res() const {
   return msg_case() == kMsgTestRes;
 }

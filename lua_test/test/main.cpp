@@ -14,8 +14,11 @@ using namespace std;
 
 
 
-static string dir_scripts = "../../test/scripts";
+static string dir_scripts = "../../../test/scripts";
+bool DumpTable(lua_State* L, int idx);
 
+int LuaPrintIdx(lua_State* L, int idx);
+int LuaPrint(lua_State* L);
 
 int n_act01(lua_State* L)
 {
@@ -157,27 +160,135 @@ int Average(lua_State *L)
 
 }
 
+int LuaTestArgs(lua_State *L)
+{
+	//lua_gettop 是取出栈顶的索引值。此时栈顶的索引值大小就是栈内元素的个数
+	int n = lua_gettop(L);
+	double sum = 0;
+	
+	//从1开始,访问栈内元素，通过对应方法 lua_tonumber/ ..., 取出栈内的值，然后进行相加操作。
+	{
+		int idx = 1;
+		auto v = lua_tonumber(L, idx);
+		cout << "argn["<<n<<"]  idx["<<idx<<"] v["<<v<<"]" << endl;
+
+	}
+	{
+		int idx = 2;
+		auto v = lua_tointeger(L, idx);
+		cout << "argn["<<n<<"]  idx["<<idx<<"] v["<<v<<"]" << endl;
+
+	}
+	{
+		int idx = 3;
+		auto v = lua_toboolean(L, idx);
+		cout << "argn["<<n<<"]  idx["<<idx<<"] v["<<v<<"]" << endl;
+
+	}
+	
+	{
+		int idx = 4;
+		auto v = lua_tolstring(L, idx,nullptr);
+		cout << "argn["<<n<<"]  idx["<<idx<<"] v["<<v<<"]" << endl;
+
+	}
+	{
+		int idx = 5;
+		auto v = lua_topointer(L, idx);
+		cout << "argn["<<n<<"]  idx["<<idx<<"] v["<<v<<"]" << endl;
+
+	}
+    {
+        //array
+        int idx = 6;
+        cout << "argn[" << n << "]  idx[" << idx << "] array: " << endl;
+        DumpTable(L, idx);
+
+        auto len = lua_objlen(L, idx);
+
+        //打印数组
+        for (int i = 1; i <= len; ++i) {
+            lua_pushnumber(L, i);  //往栈里面压入i
+            lua_gettable(L, idx);  //table位于 idx 的位置, 读取table[i] 到 top。
+            //lua_rawget(L, idx);  //lua_gettable也可以用lua_rawget来替换
+            cout << lua_tostring(L, -1) << endl;
+            lua_pop(L, 1); //弹出top读取到的table[i]
+        }
+
+        //修改 数组
+        for (int i = 1; i <= len; ++i) {
+            lua_pushnumber(L, i);
+            char buf[256];
+            sprintf(buf, "hehe%d", i);
+            lua_pushstring(L, buf);
+            //lua_settable(L, -3);// table 位于 -3 的位置; -1,是要修改值在 table 的下标;-2 是新值
+            lua_rawset(L, idx);
+        }
+
+        //打印修改后数组
+        for (int i = 1; i <= len; ++i) {
+            lua_pushnumber(L, i);  //往栈里面压入i
+            lua_gettable(L, idx);  //table位于-2的位置, 读取table[i] 到 top。
+            //lua_rawget(L, -2);  //lua_gettable也可以用lua_rawget来替换
+            cout << lua_tostring(L, -1) << endl;
+            lua_pop(L, 1); //弹出top读取到的table[i]
+        }
 
 
+    }
+	{
+//table
+		int idx = 7;
+		cout << "argn["<<n<<"]  idx["<<idx<<"] table: " << endl;
+		DumpTable(L,idx);
+	
+		lua_getfield(L, idx, "x"); //table位于 idx 的位置, 结果压栈
+        cout << "x:" << lua_tonumber(L, -1) << endl;
+        lua_pop(L, 1);
+	}
+
+
+
+//bool DumpTable(lua_State* L, int idx)
+
+/*
+LUA_API size_t          (lua_objlen) (lua_State *L, int idx);
+LUA_API lua_CFunction   (lua_tocfunction) (lua_State *L, int idx);
+LUA_API void	       *(lua_touserdata) (lua_State *L, int idx);
+LUA_API lua_State      *(lua_tothread) (lua_State *L, int idx);
+*/	
+
+
+	
+	lua_pushnumber(L, 1);//res 把要返回的值压入栈
+	return 1; //告诉lua主程序，返回1个值。lua这是可以用参数接受这两个值
+
+}
+
+int LuaDumpObj(lua_State *L)
+{
+	DumpTable(L,1);//打印第一个参数
+	return 1;
+}
 
 
 //lua　使用 c++ 里的方法
 void test002()
 {
-	lua_State *pState = lua_open();
+	lua_State *L = lua_open();
 
-	if (nullptr == pState)
+	if (nullptr == L)
 	{
 		cout <<"lua init fail"<< endl;
 		return;
 	}
 
 	///< 加载相关库文件
-	luaL_openlibs(pState);
+	luaL_openlibs(L);
 
 	///< 加载lua文件
 	std::string sf = dir_scripts + "/test002.lua";
-	if (luaL_loadfile(pState, sf.c_str()))
+	if (luaL_loadfile(L, sf.c_str()))
 	{
 		cout << "Lua 文件加载失败" << endl;
 		return;
@@ -186,23 +297,65 @@ void test002()
 	//code1 lua_register 注册函数把 Lua 函数和 C++ 函数进行绑定。
 	//其实就是先用lua_pushcfunction把在c++中定义的函数压如栈中，
 	//然后lua_setglobal来设置栈顶的元素对应的值，这样就可以把lua函数和栈顶的c++函数建立引用关系。
-	lua_register(pState, "average", Average);
+	lua_register(L, "average", Average);
+	lua_register(L, "testArgs", LuaTestArgs);
+	lua_register(L, "DUMP", LuaDumpObj);
 	//code2  加载并执行lua脚本，此时lua中的函数average被执行，同时向栈中压如5个参数。参考栈的运行图Log index 1
 	//luaL_dofile(L, "testLC.lua");
-	 if (lua_pcall(pState, 0, 0, 0))
+	 if (lua_pcall(L, 0, 0, 0))
 	 {
-		 cout << lua_tostring(pState, -1) << endl;
+		 cout << lua_tostring(L, -1) << endl;
 		 return;
 	 }
+	
+
+
+
+    lua_getglobal(L, "run_main");
+	int nargs = 6; //压入参数个数
+	lua_pushnumber(L,123);
+	lua_pushinteger(L,999);
+	lua_pushstring(L,"string");
+	lua_pushboolean(L,false);
+
+	lua_newtable(L);//array 压栈 
+	for (auto ii=0;ii<5;ii++)
+    {
+        lua_pushnumber(L, ii+1);  // push key 
+        lua_pushnumber(L, ii);  //push value
+        lua_settable(L, -3);  // table["key1"] = 199, pop key(-2) & value(-1)
+    }
+
+
+	
+	lua_newtable(L);//table 压栈
+	lua_pushstring(L,"key1");  // push key 
+	lua_pushnumber(L,199);  //push value
+    lua_settable(L,-3);  // table["key1"] = 199, pop key(-2) & value(-1)
+
+	lua_pushstring(L,"key2");  // push key 
+	lua_pushnumber(L,300);  //push value
+    lua_settable(L,-3);  // table["key2"] = 300, pop key(-2) & value(-1)
+
+
+    //执行
+	if (lua_pcall(L, nargs, 0, 0)) //设置了 errfunc 和没有设置,触发失败后的栈会不一样.设置了 errfunc 时,栈项的错误结果要在 errfunc 里处理
+    {
+		cout << "调用脚本入口方法失败" << endl;
+		cout << lua_tostring(L,-1) << endl;  //没有设置 errfunc 时,栈项的错误结果要在这里处理
+        return ;
+    }
+
+
+ 
 	 
-	 
-	 lua_close(pState);
+	 lua_close(L);
 }
 
 //遍历 Table
 bool DumpTable(lua_State* L, int idx)
 {
-    try{
+    //try{
         lua_pushnil(L);
 /*
 lua_next() 这个函数的工作过程是：
@@ -269,22 +422,23 @@ lua_next() 这个函数的工作过程是：
             }
             lua_pop(L, 1);
         }
-    }catch(const char* s){
-       string errMsg = s;
-       lua_pop(L,1);
-       cout << errMsg << endl;
-       return false;
-    }catch(std::exception& e){
-        const char* errMsg = e.what();
-        lua_pop(L,1);
-        cout << errMsg << endl;
-        return false;
-    }catch(...){
-        const char* errMsg = lua_tostring(L,-1);
-        lua_pop(L,1);
-        cout << errMsg << endl;
-        return false;
-    }
+    //}
+	//catch(const char* s){
+    //   string errMsg = s;
+    //   lua_pop(L,1);
+    //   cout << errMsg << endl;
+    //   return false;
+    //}catch(std::exception& e){
+    //    const char* errMsg = e.what();
+    //    lua_pop(L,1);
+    //    cout << errMsg << endl;
+    //    return false;
+    //}catch(...){
+    //    const char* errMsg = lua_tostring(L,-1);
+    //    lua_pop(L,1);
+    //    cout << errMsg << endl;
+    //    return false;
+    //}
     return true;
 }
  
@@ -336,12 +490,12 @@ int test001()
 
 			///< 获取 lua myTable 表中数据
 			lua_getglobal(L, "myTable");
-			lua_getfield(L, -1, "name");
+			lua_getfield(L, -1, "name");//table位于 -1 的位置, 结果压栈
 			cout << lua_tostring(L, -1) << endl;
 			lua_pop(L, 1); 
 
 
-			lua_getfield(L, -1, "id");
+			lua_getfield(L, -1, "id");//table位于 -1 的位置, 结果压栈
 			cout << lua_tonumber(L, -1) << endl;
 			lua_pop(L, 1); 
 
@@ -460,7 +614,7 @@ int ActFunc(lua_State* L)
 	//stackDump(G(L)->mainthread);
 	
 	void* buffer;
-	buffer = lua_touserdata(L, lua_upvalueindex(1)); //在 lua_pushcclosure 关联的数据
+	buffer = lua_touserdata(L, lua_upvalueindex(1)); //在 lua_pushcclosure 关联的数据,查看 TestCClosure-->lua_pushcclosure
 
 	cout <<"buffer store string:" << (char*)buffer <<endl;
 
@@ -620,9 +774,11 @@ void testtable(lua_State* L)
     lua_newtable(L);
     //lua_pushinteger(L, 123);
     lua_pushstring(L, "123");
-    lua_newtable(L);
+    lua_pushstring(L, "aaaa");
+    //lua_newtable(L);
     lua_settable(L, -3);
 
+	LuaPrintIdx(L,-1);
 
     lua_newtable(L);
 	lua_pushstring(L, "key");  
@@ -728,20 +884,28 @@ void DumpLuaValue(lua_State* L, int Index, std::stringstream& OutBugger, std::st
 		}
 		break;
 	case LUA_TTABLE:
+	{
 		lua_checkstack(L, lua_gettop(L) + 2);
 		OutBugger << PrevStr << "{";	
 
-		lua_pushnil(L);
-		Space =PrevStr +  tabkey ;
-		
-		while (lua_next(L, Index) != 0)
-		{
-			DumpLuaValue(L, lua_gettop(L) - 1, OutBugger, Space, ForceSameLine, Deep);
-			OutBugger << ((" : "));
-			DumpLuaValue(L, lua_gettop(L), OutBugger, (""), true, Deep);
-			lua_pop(L, 1);
-		}
+
+		//size_t len = lua_objlen(L,Index);  //array,table
+		//if (len > 0)
+        {
+            lua_pushnil(L);
+            Space = PrevStr + tabkey;
+
+            while (lua_next(L, Index) != 0)
+            {
+                DumpLuaValue(L, lua_gettop(L) - 1, OutBugger, Space, ForceSameLine, Deep);
+                OutBugger << ((" : "));
+                DumpLuaValue(L, lua_gettop(L), OutBugger, Space, true, Deep);
+                lua_pop(L, 1);
+            }
+
+        }
 		OutBugger << "\r\n"<< PrevStr << "}";	
+	}
 		break;
 	case LUA_TFUNCTION:
 		{
@@ -801,6 +965,17 @@ int LuaPrint(lua_State* L)
 	return 0;
 }
 
+int LuaPrintIdx(lua_State* L, int idx)
+{
+	std::stringstream ss;
+	lua_pushvalue(L,idx);
+	DumpLuaValue(L, lua_gettop(L), ss, (""), false, 0);
+	std::cout << ss.str() << std::endl;	
+	
+	lua_pop(L,1);
+	
+	return 0;
+}
 
 
 static const struct luaL_Reg printlib [] = {
@@ -821,22 +996,59 @@ void ReSetLuaPrint(lua_State *L)
 		lua_setglobal(GetLuaState(), "print");
 */
 
+class cc 
+{
+	public :
+		cc():v1(0x123456),v2(0x10000) {}
+		~cc() {}
+	public :
+		int v1;
+		int v2;
+	public :
+		cc& testRetRef(){
+			return *this;
+		}
+		int testRet(){
+			return *(int*)this;
+		}
+		cc* testThisPtr(){
+			return this;
+		}
+		int* testThis(){
+			return (int*)this;
+		}
+};
 
+
+void tttt()
+{
+	cc g;
+	g.testRetRef();
+	g.testRet();
+	g.testThisPtr();
+	g.testThis();
+}
 
 
 extern int testGameLua(lua_State *L);
 extern int testDefault(lua_State *L);
 extern void testMapPath();
 extern void testAVL();
+extern int main_bind();
+extern int main_bind01();
 int main(int argc, char* argv[])
 {
 	//test001(); // 有打印 Proto
-	//return 0;	
-	//test002();
+	//test002(); //c++/lua 数据相互使用
 	//test003();
     
 	//testMapPath();
 	//testAVL();
+
+
+	//main_bind();
+	//main_bind01();
+	//tttt();
 	//return 0;
 
 
@@ -860,7 +1072,7 @@ int main(int argc, char* argv[])
     
 	ReSetLuaPrint(L);
 
-    testGameLua(L);
+    //testGameLua(L);
 
     ///< 加载lua文件
     std::string sf = dir_scripts + "/test004.lua";
@@ -888,12 +1100,21 @@ int main(int argc, char* argv[])
 
     testDefault(L);
 	lua_register(L, "TestFunc", luaTestFunc);
+
+
+
+    //lua_getglobal(L, "g_tt");
+	//LuaPrintIdx(L,-1);
+	//lua_pop(L,1);
+
 	
 	//测试方法
     //TestCClosure(L);
     //GetObjectIndexData1(L);
     //threadTest(L);
-	testtable(L);
+	
+
+	//testtable(L); //todo
 
 
 	lua_pushcfunction(L,PcallErrorFunc);

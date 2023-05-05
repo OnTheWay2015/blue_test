@@ -8,7 +8,7 @@
 	#endif
 #endif
 
-//Õâ¸ö __PRETTY_FUNCTION__ ¶¨ÒåÊôÓÚ GccµÄ ²»ÊôÓÚMSVC
+//è¿™ä¸ª __PRETTY_FUNCTION__ å®šä¹‰å±äº Gccçš„ ä¸å±äºMSVC
 
 
 extern void Stringsplit(const std::wstring& str, const wchar_t split, std::vector<std::wstring>& res);

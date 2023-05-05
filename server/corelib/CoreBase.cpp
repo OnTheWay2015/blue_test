@@ -32,8 +32,10 @@ void CoreBase::Update()
 }
 
 
+//在初始化时完成添加
 void CoreBase::AddHandler(CoreHandlerInterface* h, CLIENT_PROXY_TYPE type)
 {
+    //CAutoLock lock(&m_EasyCriticalSection);
     if (m_CoreHandlers.find(type) != m_CoreHandlers.end())
     {
         //log warning
@@ -56,6 +58,7 @@ void CoreBase::DisConnect(SESSION_ID SessionID)
 
 void CoreBase::OnNetMessage(CSmartPtr<CoreSessionMessage> msg) 
 {
+    //CAutoLock lock(&m_EasyCriticalSection);
     m_CoreHandlers[msg->ClientProxyType]->OnNetMessage(msg);
     //if (msg->EventType == CORE_EVENT::SESSION_ADD)
     //{
