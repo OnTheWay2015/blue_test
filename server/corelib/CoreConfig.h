@@ -42,18 +42,30 @@ public:
 		}
 	};
 
+	struct SERVICE_CONFIG
+	{
+		UINT ServiceType;
+		UINT ServiceID;
+		std::string Desc;
+		std::string Name;
+		CEasyArray<CLIENT_PROXY_CONFIG> m_ClientProxys;
+		SERVICE_CONFIG()
+		{
+		}
+	};
 
 
 	
 protected:
-	CEasyString m_ServiceName;
-	CEasyString m_ServiceDesc;
-	UINT m_ServiceID;
-	UINT m_ServiceType; // 服务分类 monitor/gate/game...
+	CEasyString m_ServerName;
+	CEasyString m_ServerDesc;
+	UINT m_ServerID;
+	//UINT m_ServiceID;
+	//UINT m_ServiceType; // 服务分类 monitor/gate/game...
 
 	NET_CONFIG								m_NetConfig;
 	LEADER_CONFIG							m_LeaderConfig;
-	CEasyArray<CLIENT_PROXY_CONFIG> m_ClientProxys;
+	CEasyArray<SERVICE_CONFIG> m_Services;
 
 	//DOS_CONFIG								m_DOSConfig;
 	//MONO_CONFIG								m_MonoConfig;
@@ -71,23 +83,23 @@ public:
 
 	LPCTSTR GetServiceName()
 	{
-		return m_ServiceName;
+		return m_ServerName;
 	}
-	UINT GetServiceType()
+	//UINT GetServiceType()
+	//{
+	//	return m_ServiceType;
+	//}
+	//UINT GetServiceID()
+	//{
+	//	return m_ServiceID;
+	//}
+	LPCTSTR GetServerDesc()
 	{
-		return m_ServiceType;
+		return m_ServerDesc;
 	}
-	UINT GetServiceID()
+	bool HaveServerName()
 	{
-		return m_ServiceID;
-	}
-	LPCTSTR GetServiceDesc()
-	{
-		return m_ServiceDesc;
-	}
-	bool HaveServiceName()
-	{
-		return !(m_ServiceName.IsEmpty()||m_ServiceDesc.IsEmpty());
+		return !(m_ServerName.IsEmpty()||m_ServerDesc.IsEmpty());
 	}
 
 	const LEADER_CONFIG& GetLeaderConfig()
@@ -100,10 +112,14 @@ public:
 		return m_NetConfig;
 	}
 
-	const CEasyArray<CLIENT_PROXY_CONFIG>& GetClientProxyList()
+	const CEasyArray<SERVICE_CONFIG>& GetServiceList()
 	{
-		return m_ClientProxys;
+		return m_Services;
 	}
+	//const CEasyArray<CLIENT_PROXY_CONFIG>& GetClientProxyList()
+	//{
+	//	return m_ClientProxys;
+	//}
 	const CEasyArray<PLUGIN_INFO>& GetPluginList()
 	{
 		return m_PluginList;

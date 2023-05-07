@@ -9,11 +9,37 @@ void proc_init()
 	//PACKET_FACTORY_REGISTER(MSG_TEST_RES,PACKET_IDS::MSG_TEST_RES);
 
 
-	PACKET_FACTORY_REGISTER(MSG_TEST, MSG_BASE::MsgCase::kMsgTest);
-	PACKET_FACTORY_REGISTER(MSG_TEST_RES,MSG_BASE::MsgCase::kMsgTestRes);
+	//PACKET_FACTORY_REGISTER(MSG_TEST, MSG_BASE::MsgCase::kMSGTEST);
+	//PACKET_FACTORY_REGISTER(MSG_TEST_RES,MSG_BASE::MsgCase::kMSGTESTRES);
+	
+    //PACKET_FACTORY_REGISTER(MSG_BASE,0);
+    
+    PACKET_FACTORY_REGISTER(MSG_HEARTBEAT,MSG_BASE::MsgCase::kMSGHEARTBEAT);
+    //PACKET_FACTORY_REGISTER(MSG_HEARTBEAT_RES,MSG_BASE::MsgCase::kMSGHEARTBEATRES);
+
+
+    PACKET_FACTORY_REGISTER(MSG_LEADER_REG,MSG_BASE::MsgCase::kMSGLEADERREG);
+    //PACKET_FACTORY_REGISTER(MSG_TEST_RES,MSG_BASE::MsgCase::kMSGLEADERREGRES);
+
+    PACKET_FACTORY_REGISTER(MSG_LEADER_SERVER_LIST,MSG_BASE::MsgCase::kMSGLEADERSERVERLIST);
+    //PACKET_FACTORY_REGISTER(MSG_TEST_RES,MSG_BASE::MsgCase::kMSGLEADERSERVERLISTRES);
+
+
+
+
+    //PACKET_FACTORY_REGISTER(MSG_TEST_RES,MSG_BASE::MsgCase::kMSGLEADERBROADCASTADD);
+    //PACKET_FACTORY_REGISTER(MSG_TEST_RES,MSG_BASE::MsgCase::kMSGLEADERBROADCASTREMOVE);
+
 
 }
-bool MSG_TEST_factory::packet_process(CSmartPtr<CBaseNetConnectionInterface> session, CSmartPtr<MSG_TEST> msg)
+//bool MSG_BASE_factory::packet_process(CSmartPtr<CBaseNetConnectionInterface> session, CSmartPtr<MSG_BASE> msg)
+//{
+//
+//
+//    return false;
+//}
+
+bool MSG_HEARTBEAT_factory::packet_process(CSmartPtr<CBaseNetConnectionInterface> session, CSmartPtr<MSG_HEARTBEAT> msg)
 {	
     //auto msgstr = msg->DebugString();
     //int packet_id = 667;
@@ -27,4 +53,24 @@ bool MSG_TEST_factory::packet_process(CSmartPtr<CBaseNetConnectionInterface> ses
     //session->SendMsg(m);
     return false;
 }
+
+
+bool MSG_LEADER_REG_factory::packet_process(CSmartPtr<CBaseNetConnectionInterface> session, CSmartPtr<MSG_LEADER_REG> msg)
+{	
+    return false;
+}
+
+
+bool  MSG_LEADER_SERVER_LIST_factory::packet_process(CSmartPtr<CBaseNetConnectionInterface> session, CSmartPtr<MSG_LEADER_SERVER_LIST> msg)
+{	
+    return false;
+}
+
+
+
+
+
+
+
+
  

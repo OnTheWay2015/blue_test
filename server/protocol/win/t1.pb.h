@@ -58,8 +58,14 @@ class MSG_BASE : public ::google::protobuf::Message /* @@protoc_insertion_point(
   static const MSG_BASE& default_instance();
 
   enum MsgCase {
-    kMsgTest = 1000,
-    kMsgTestRes = 2000,
+    kMSGHEARTBEAT = 1000,
+    kMSGLEADERREG = 1001,
+    kMSGLEADERSERVERLIST = 1002,
+    kMSGHEARTBEATRES = 2000,
+    kMSGLEADERREGRES = 2001,
+    kMSGLEADERSERVERLISTRES = 2002,
+    kMSGLEADERBROADCASTADD = 3001,
+    kMSGLEADERBROADCASTREMOVE = 3002,
     MSG_NOT_SET = 0,
   };
 
@@ -111,46 +117,112 @@ class MSG_BASE : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // optional int32 MsgFromID = 1;
-  void clear_msgfromid();
-  static const int kMsgFromIDFieldNumber = 1;
-  ::google::protobuf::int32 msgfromid() const;
-  void set_msgfromid(::google::protobuf::int32 value);
+  // optional int32 SessionID = 1;
+  void clear_sessionid();
+  static const int kSessionIDFieldNumber = 1;
+  ::google::protobuf::int32 sessionid() const;
+  void set_sessionid(::google::protobuf::int32 value);
 
-  // optional .p1.MSG_TEST msg_test = 1000;
-  bool has_msg_test() const;
-  void clear_msg_test();
-  static const int kMsgTestFieldNumber = 1000;
-  const ::p1::MSG_TEST& msg_test() const;
-  ::p1::MSG_TEST* mutable_msg_test();
-  ::p1::MSG_TEST* release_msg_test();
-  void set_allocated_msg_test(::p1::MSG_TEST* msg_test);
+  // optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT = 1000;
+  bool has_msg_heartbeat() const;
+  void clear_msg_heartbeat();
+  static const int kMSGHEARTBEATFieldNumber = 1000;
+  const ::p1::MSG_HEARTBEAT& msg_heartbeat() const;
+  ::p1::MSG_HEARTBEAT* mutable_msg_heartbeat();
+  ::p1::MSG_HEARTBEAT* release_msg_heartbeat();
+  void set_allocated_msg_heartbeat(::p1::MSG_HEARTBEAT* msg_heartbeat);
 
-  // optional .p1.MSG_TEST_RES msg_test_res = 2000;
-  bool has_msg_test_res() const;
-  void clear_msg_test_res();
-  static const int kMsgTestResFieldNumber = 2000;
-  const ::p1::MSG_TEST_RES& msg_test_res() const;
-  ::p1::MSG_TEST_RES* mutable_msg_test_res();
-  ::p1::MSG_TEST_RES* release_msg_test_res();
-  void set_allocated_msg_test_res(::p1::MSG_TEST_RES* msg_test_res);
+  // optional .p1.MSG_LEADER_REG MSG_LEADER_REG = 1001;
+  bool has_msg_leader_reg() const;
+  void clear_msg_leader_reg();
+  static const int kMSGLEADERREGFieldNumber = 1001;
+  const ::p1::MSG_LEADER_REG& msg_leader_reg() const;
+  ::p1::MSG_LEADER_REG* mutable_msg_leader_reg();
+  ::p1::MSG_LEADER_REG* release_msg_leader_reg();
+  void set_allocated_msg_leader_reg(::p1::MSG_LEADER_REG* msg_leader_reg);
+
+  // optional .p1.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 1002;
+  bool has_msg_leader_server_list() const;
+  void clear_msg_leader_server_list();
+  static const int kMSGLEADERSERVERLISTFieldNumber = 1002;
+  const ::p1::MSG_LEADER_SERVER_LIST& msg_leader_server_list() const;
+  ::p1::MSG_LEADER_SERVER_LIST* mutable_msg_leader_server_list();
+  ::p1::MSG_LEADER_SERVER_LIST* release_msg_leader_server_list();
+  void set_allocated_msg_leader_server_list(::p1::MSG_LEADER_SERVER_LIST* msg_leader_server_list);
+
+  // optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 2000;
+  bool has_msg_heartbeat_res() const;
+  void clear_msg_heartbeat_res();
+  static const int kMSGHEARTBEATRESFieldNumber = 2000;
+  const ::p1::MSG_HEARTBEAT& msg_heartbeat_res() const;
+  ::p1::MSG_HEARTBEAT* mutable_msg_heartbeat_res();
+  ::p1::MSG_HEARTBEAT* release_msg_heartbeat_res();
+  void set_allocated_msg_heartbeat_res(::p1::MSG_HEARTBEAT* msg_heartbeat_res);
+
+  // optional .p1.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 2001;
+  bool has_msg_leader_reg_res() const;
+  void clear_msg_leader_reg_res();
+  static const int kMSGLEADERREGRESFieldNumber = 2001;
+  const ::p1::MSG_LEADER_REG_RES& msg_leader_reg_res() const;
+  ::p1::MSG_LEADER_REG_RES* mutable_msg_leader_reg_res();
+  ::p1::MSG_LEADER_REG_RES* release_msg_leader_reg_res();
+  void set_allocated_msg_leader_reg_res(::p1::MSG_LEADER_REG_RES* msg_leader_reg_res);
+
+  // optional .p1.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 2002;
+  bool has_msg_leader_server_list_res() const;
+  void clear_msg_leader_server_list_res();
+  static const int kMSGLEADERSERVERLISTRESFieldNumber = 2002;
+  const ::p1::MSG_LEADER_SERVER_LIST_RES& msg_leader_server_list_res() const;
+  ::p1::MSG_LEADER_SERVER_LIST_RES* mutable_msg_leader_server_list_res();
+  ::p1::MSG_LEADER_SERVER_LIST_RES* release_msg_leader_server_list_res();
+  void set_allocated_msg_leader_server_list_res(::p1::MSG_LEADER_SERVER_LIST_RES* msg_leader_server_list_res);
+
+  // optional .p1.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 3001;
+  bool has_msg_leader_broadcast_add() const;
+  void clear_msg_leader_broadcast_add();
+  static const int kMSGLEADERBROADCASTADDFieldNumber = 3001;
+  const ::p1::MSG_LEADER_BROADCAST_ADD& msg_leader_broadcast_add() const;
+  ::p1::MSG_LEADER_BROADCAST_ADD* mutable_msg_leader_broadcast_add();
+  ::p1::MSG_LEADER_BROADCAST_ADD* release_msg_leader_broadcast_add();
+  void set_allocated_msg_leader_broadcast_add(::p1::MSG_LEADER_BROADCAST_ADD* msg_leader_broadcast_add);
+
+  // optional .p1.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 3002;
+  bool has_msg_leader_broadcast_remove() const;
+  void clear_msg_leader_broadcast_remove();
+  static const int kMSGLEADERBROADCASTREMOVEFieldNumber = 3002;
+  const ::p1::MSG_LEADER_BROADCAST_REMOVE& msg_leader_broadcast_remove() const;
+  ::p1::MSG_LEADER_BROADCAST_REMOVE* mutable_msg_leader_broadcast_remove();
+  ::p1::MSG_LEADER_BROADCAST_REMOVE* release_msg_leader_broadcast_remove();
+  void set_allocated_msg_leader_broadcast_remove(::p1::MSG_LEADER_BROADCAST_REMOVE* msg_leader_broadcast_remove);
 
   MsgCase msg_case() const;
   // @@protoc_insertion_point(class_scope:t1.MSG_BASE)
  private:
-  inline void set_has_msg_test();
-  inline void set_has_msg_test_res();
+  inline void set_has_msg_heartbeat();
+  inline void set_has_msg_leader_reg();
+  inline void set_has_msg_leader_server_list();
+  inline void set_has_msg_heartbeat_res();
+  inline void set_has_msg_leader_reg_res();
+  inline void set_has_msg_leader_server_list_res();
+  inline void set_has_msg_leader_broadcast_add();
+  inline void set_has_msg_leader_broadcast_remove();
 
   inline bool has_msg() const;
   void clear_msg();
   inline void clear_has_msg();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::int32 msgfromid_;
+  ::google::protobuf::int32 sessionid_;
   union MsgUnion {
     MsgUnion() {}
-    ::p1::MSG_TEST* msg_test_;
-    ::p1::MSG_TEST_RES* msg_test_res_;
+    ::p1::MSG_HEARTBEAT* msg_heartbeat_;
+    ::p1::MSG_LEADER_REG* msg_leader_reg_;
+    ::p1::MSG_LEADER_SERVER_LIST* msg_leader_server_list_;
+    ::p1::MSG_HEARTBEAT* msg_heartbeat_res_;
+    ::p1::MSG_LEADER_REG_RES* msg_leader_reg_res_;
+    ::p1::MSG_LEADER_SERVER_LIST_RES* msg_leader_server_list_res_;
+    ::p1::MSG_LEADER_BROADCAST_ADD* msg_leader_broadcast_add_;
+    ::p1::MSG_LEADER_BROADCAST_REMOVE* msg_leader_broadcast_remove_;
   } msg_;
   mutable int _cached_size_;
   ::google::protobuf::uint32 _oneof_case_[1];
@@ -172,114 +244,402 @@ extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_BASE> MSG_BASE_de
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
 // MSG_BASE
 
-// optional int32 MsgFromID = 1;
-inline void MSG_BASE::clear_msgfromid() {
-  msgfromid_ = 0;
+// optional int32 SessionID = 1;
+inline void MSG_BASE::clear_sessionid() {
+  sessionid_ = 0;
 }
-inline ::google::protobuf::int32 MSG_BASE::msgfromid() const {
-  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MsgFromID)
-  return msgfromid_;
+inline ::google::protobuf::int32 MSG_BASE::sessionid() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.SessionID)
+  return sessionid_;
 }
-inline void MSG_BASE::set_msgfromid(::google::protobuf::int32 value) {
+inline void MSG_BASE::set_sessionid(::google::protobuf::int32 value) {
   
-  msgfromid_ = value;
-  // @@protoc_insertion_point(field_set:t1.MSG_BASE.MsgFromID)
+  sessionid_ = value;
+  // @@protoc_insertion_point(field_set:t1.MSG_BASE.SessionID)
 }
 
-// optional .p1.MSG_TEST msg_test = 1000;
-inline bool MSG_BASE::has_msg_test() const {
-  return msg_case() == kMsgTest;
+// optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT = 1000;
+inline bool MSG_BASE::has_msg_heartbeat() const {
+  return msg_case() == kMSGHEARTBEAT;
 }
-inline void MSG_BASE::set_has_msg_test() {
-  _oneof_case_[0] = kMsgTest;
+inline void MSG_BASE::set_has_msg_heartbeat() {
+  _oneof_case_[0] = kMSGHEARTBEAT;
 }
-inline void MSG_BASE::clear_msg_test() {
-  if (has_msg_test()) {
-    delete msg_.msg_test_;
+inline void MSG_BASE::clear_msg_heartbeat() {
+  if (has_msg_heartbeat()) {
+    delete msg_.msg_heartbeat_;
     clear_has_msg();
   }
 }
-inline  const ::p1::MSG_TEST& MSG_BASE::msg_test() const {
-  // @@protoc_insertion_point(field_get:t1.MSG_BASE.msg_test)
-  return has_msg_test()
-      ? *msg_.msg_test_
-      : ::p1::MSG_TEST::default_instance();
+inline  const ::p1::MSG_HEARTBEAT& MSG_BASE::msg_heartbeat() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_HEARTBEAT)
+  return has_msg_heartbeat()
+      ? *msg_.msg_heartbeat_
+      : ::p1::MSG_HEARTBEAT::default_instance();
 }
-inline ::p1::MSG_TEST* MSG_BASE::mutable_msg_test() {
-  if (!has_msg_test()) {
+inline ::p1::MSG_HEARTBEAT* MSG_BASE::mutable_msg_heartbeat() {
+  if (!has_msg_heartbeat()) {
     clear_msg();
-    set_has_msg_test();
-    msg_.msg_test_ = new ::p1::MSG_TEST;
+    set_has_msg_heartbeat();
+    msg_.msg_heartbeat_ = new ::p1::MSG_HEARTBEAT;
   }
-  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.msg_test)
-  return msg_.msg_test_;
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_HEARTBEAT)
+  return msg_.msg_heartbeat_;
 }
-inline ::p1::MSG_TEST* MSG_BASE::release_msg_test() {
-  // @@protoc_insertion_point(field_release:t1.MSG_BASE.msg_test)
-  if (has_msg_test()) {
+inline ::p1::MSG_HEARTBEAT* MSG_BASE::release_msg_heartbeat() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_HEARTBEAT)
+  if (has_msg_heartbeat()) {
     clear_has_msg();
-    ::p1::MSG_TEST* temp = msg_.msg_test_;
-    msg_.msg_test_ = NULL;
+    ::p1::MSG_HEARTBEAT* temp = msg_.msg_heartbeat_;
+    msg_.msg_heartbeat_ = NULL;
     return temp;
   } else {
     return NULL;
   }
 }
-inline void MSG_BASE::set_allocated_msg_test(::p1::MSG_TEST* msg_test) {
+inline void MSG_BASE::set_allocated_msg_heartbeat(::p1::MSG_HEARTBEAT* msg_heartbeat) {
   clear_msg();
-  if (msg_test) {
-    set_has_msg_test();
-    msg_.msg_test_ = msg_test;
+  if (msg_heartbeat) {
+    set_has_msg_heartbeat();
+    msg_.msg_heartbeat_ = msg_heartbeat;
   }
-  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.msg_test)
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_HEARTBEAT)
 }
 
-// optional .p1.MSG_TEST_RES msg_test_res = 2000;
-inline bool MSG_BASE::has_msg_test_res() const {
-  return msg_case() == kMsgTestRes;
+// optional .p1.MSG_LEADER_REG MSG_LEADER_REG = 1001;
+inline bool MSG_BASE::has_msg_leader_reg() const {
+  return msg_case() == kMSGLEADERREG;
 }
-inline void MSG_BASE::set_has_msg_test_res() {
-  _oneof_case_[0] = kMsgTestRes;
+inline void MSG_BASE::set_has_msg_leader_reg() {
+  _oneof_case_[0] = kMSGLEADERREG;
 }
-inline void MSG_BASE::clear_msg_test_res() {
-  if (has_msg_test_res()) {
-    delete msg_.msg_test_res_;
+inline void MSG_BASE::clear_msg_leader_reg() {
+  if (has_msg_leader_reg()) {
+    delete msg_.msg_leader_reg_;
     clear_has_msg();
   }
 }
-inline  const ::p1::MSG_TEST_RES& MSG_BASE::msg_test_res() const {
-  // @@protoc_insertion_point(field_get:t1.MSG_BASE.msg_test_res)
-  return has_msg_test_res()
-      ? *msg_.msg_test_res_
-      : ::p1::MSG_TEST_RES::default_instance();
+inline  const ::p1::MSG_LEADER_REG& MSG_BASE::msg_leader_reg() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_REG)
+  return has_msg_leader_reg()
+      ? *msg_.msg_leader_reg_
+      : ::p1::MSG_LEADER_REG::default_instance();
 }
-inline ::p1::MSG_TEST_RES* MSG_BASE::mutable_msg_test_res() {
-  if (!has_msg_test_res()) {
+inline ::p1::MSG_LEADER_REG* MSG_BASE::mutable_msg_leader_reg() {
+  if (!has_msg_leader_reg()) {
     clear_msg();
-    set_has_msg_test_res();
-    msg_.msg_test_res_ = new ::p1::MSG_TEST_RES;
+    set_has_msg_leader_reg();
+    msg_.msg_leader_reg_ = new ::p1::MSG_LEADER_REG;
   }
-  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.msg_test_res)
-  return msg_.msg_test_res_;
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_REG)
+  return msg_.msg_leader_reg_;
 }
-inline ::p1::MSG_TEST_RES* MSG_BASE::release_msg_test_res() {
-  // @@protoc_insertion_point(field_release:t1.MSG_BASE.msg_test_res)
-  if (has_msg_test_res()) {
+inline ::p1::MSG_LEADER_REG* MSG_BASE::release_msg_leader_reg() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_REG)
+  if (has_msg_leader_reg()) {
     clear_has_msg();
-    ::p1::MSG_TEST_RES* temp = msg_.msg_test_res_;
-    msg_.msg_test_res_ = NULL;
+    ::p1::MSG_LEADER_REG* temp = msg_.msg_leader_reg_;
+    msg_.msg_leader_reg_ = NULL;
     return temp;
   } else {
     return NULL;
   }
 }
-inline void MSG_BASE::set_allocated_msg_test_res(::p1::MSG_TEST_RES* msg_test_res) {
+inline void MSG_BASE::set_allocated_msg_leader_reg(::p1::MSG_LEADER_REG* msg_leader_reg) {
   clear_msg();
-  if (msg_test_res) {
-    set_has_msg_test_res();
-    msg_.msg_test_res_ = msg_test_res;
+  if (msg_leader_reg) {
+    set_has_msg_leader_reg();
+    msg_.msg_leader_reg_ = msg_leader_reg;
   }
-  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.msg_test_res)
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_REG)
+}
+
+// optional .p1.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 1002;
+inline bool MSG_BASE::has_msg_leader_server_list() const {
+  return msg_case() == kMSGLEADERSERVERLIST;
+}
+inline void MSG_BASE::set_has_msg_leader_server_list() {
+  _oneof_case_[0] = kMSGLEADERSERVERLIST;
+}
+inline void MSG_BASE::clear_msg_leader_server_list() {
+  if (has_msg_leader_server_list()) {
+    delete msg_.msg_leader_server_list_;
+    clear_has_msg();
+  }
+}
+inline  const ::p1::MSG_LEADER_SERVER_LIST& MSG_BASE::msg_leader_server_list() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_SERVER_LIST)
+  return has_msg_leader_server_list()
+      ? *msg_.msg_leader_server_list_
+      : ::p1::MSG_LEADER_SERVER_LIST::default_instance();
+}
+inline ::p1::MSG_LEADER_SERVER_LIST* MSG_BASE::mutable_msg_leader_server_list() {
+  if (!has_msg_leader_server_list()) {
+    clear_msg();
+    set_has_msg_leader_server_list();
+    msg_.msg_leader_server_list_ = new ::p1::MSG_LEADER_SERVER_LIST;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_SERVER_LIST)
+  return msg_.msg_leader_server_list_;
+}
+inline ::p1::MSG_LEADER_SERVER_LIST* MSG_BASE::release_msg_leader_server_list() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_SERVER_LIST)
+  if (has_msg_leader_server_list()) {
+    clear_has_msg();
+    ::p1::MSG_LEADER_SERVER_LIST* temp = msg_.msg_leader_server_list_;
+    msg_.msg_leader_server_list_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline void MSG_BASE::set_allocated_msg_leader_server_list(::p1::MSG_LEADER_SERVER_LIST* msg_leader_server_list) {
+  clear_msg();
+  if (msg_leader_server_list) {
+    set_has_msg_leader_server_list();
+    msg_.msg_leader_server_list_ = msg_leader_server_list;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_SERVER_LIST)
+}
+
+// optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 2000;
+inline bool MSG_BASE::has_msg_heartbeat_res() const {
+  return msg_case() == kMSGHEARTBEATRES;
+}
+inline void MSG_BASE::set_has_msg_heartbeat_res() {
+  _oneof_case_[0] = kMSGHEARTBEATRES;
+}
+inline void MSG_BASE::clear_msg_heartbeat_res() {
+  if (has_msg_heartbeat_res()) {
+    delete msg_.msg_heartbeat_res_;
+    clear_has_msg();
+  }
+}
+inline  const ::p1::MSG_HEARTBEAT& MSG_BASE::msg_heartbeat_res() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_HEARTBEAT_RES)
+  return has_msg_heartbeat_res()
+      ? *msg_.msg_heartbeat_res_
+      : ::p1::MSG_HEARTBEAT::default_instance();
+}
+inline ::p1::MSG_HEARTBEAT* MSG_BASE::mutable_msg_heartbeat_res() {
+  if (!has_msg_heartbeat_res()) {
+    clear_msg();
+    set_has_msg_heartbeat_res();
+    msg_.msg_heartbeat_res_ = new ::p1::MSG_HEARTBEAT;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_HEARTBEAT_RES)
+  return msg_.msg_heartbeat_res_;
+}
+inline ::p1::MSG_HEARTBEAT* MSG_BASE::release_msg_heartbeat_res() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_HEARTBEAT_RES)
+  if (has_msg_heartbeat_res()) {
+    clear_has_msg();
+    ::p1::MSG_HEARTBEAT* temp = msg_.msg_heartbeat_res_;
+    msg_.msg_heartbeat_res_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline void MSG_BASE::set_allocated_msg_heartbeat_res(::p1::MSG_HEARTBEAT* msg_heartbeat_res) {
+  clear_msg();
+  if (msg_heartbeat_res) {
+    set_has_msg_heartbeat_res();
+    msg_.msg_heartbeat_res_ = msg_heartbeat_res;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_HEARTBEAT_RES)
+}
+
+// optional .p1.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 2001;
+inline bool MSG_BASE::has_msg_leader_reg_res() const {
+  return msg_case() == kMSGLEADERREGRES;
+}
+inline void MSG_BASE::set_has_msg_leader_reg_res() {
+  _oneof_case_[0] = kMSGLEADERREGRES;
+}
+inline void MSG_BASE::clear_msg_leader_reg_res() {
+  if (has_msg_leader_reg_res()) {
+    delete msg_.msg_leader_reg_res_;
+    clear_has_msg();
+  }
+}
+inline  const ::p1::MSG_LEADER_REG_RES& MSG_BASE::msg_leader_reg_res() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_REG_RES)
+  return has_msg_leader_reg_res()
+      ? *msg_.msg_leader_reg_res_
+      : ::p1::MSG_LEADER_REG_RES::default_instance();
+}
+inline ::p1::MSG_LEADER_REG_RES* MSG_BASE::mutable_msg_leader_reg_res() {
+  if (!has_msg_leader_reg_res()) {
+    clear_msg();
+    set_has_msg_leader_reg_res();
+    msg_.msg_leader_reg_res_ = new ::p1::MSG_LEADER_REG_RES;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_REG_RES)
+  return msg_.msg_leader_reg_res_;
+}
+inline ::p1::MSG_LEADER_REG_RES* MSG_BASE::release_msg_leader_reg_res() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_REG_RES)
+  if (has_msg_leader_reg_res()) {
+    clear_has_msg();
+    ::p1::MSG_LEADER_REG_RES* temp = msg_.msg_leader_reg_res_;
+    msg_.msg_leader_reg_res_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline void MSG_BASE::set_allocated_msg_leader_reg_res(::p1::MSG_LEADER_REG_RES* msg_leader_reg_res) {
+  clear_msg();
+  if (msg_leader_reg_res) {
+    set_has_msg_leader_reg_res();
+    msg_.msg_leader_reg_res_ = msg_leader_reg_res;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_REG_RES)
+}
+
+// optional .p1.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 2002;
+inline bool MSG_BASE::has_msg_leader_server_list_res() const {
+  return msg_case() == kMSGLEADERSERVERLISTRES;
+}
+inline void MSG_BASE::set_has_msg_leader_server_list_res() {
+  _oneof_case_[0] = kMSGLEADERSERVERLISTRES;
+}
+inline void MSG_BASE::clear_msg_leader_server_list_res() {
+  if (has_msg_leader_server_list_res()) {
+    delete msg_.msg_leader_server_list_res_;
+    clear_has_msg();
+  }
+}
+inline  const ::p1::MSG_LEADER_SERVER_LIST_RES& MSG_BASE::msg_leader_server_list_res() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_SERVER_LIST_RES)
+  return has_msg_leader_server_list_res()
+      ? *msg_.msg_leader_server_list_res_
+      : ::p1::MSG_LEADER_SERVER_LIST_RES::default_instance();
+}
+inline ::p1::MSG_LEADER_SERVER_LIST_RES* MSG_BASE::mutable_msg_leader_server_list_res() {
+  if (!has_msg_leader_server_list_res()) {
+    clear_msg();
+    set_has_msg_leader_server_list_res();
+    msg_.msg_leader_server_list_res_ = new ::p1::MSG_LEADER_SERVER_LIST_RES;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_SERVER_LIST_RES)
+  return msg_.msg_leader_server_list_res_;
+}
+inline ::p1::MSG_LEADER_SERVER_LIST_RES* MSG_BASE::release_msg_leader_server_list_res() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_SERVER_LIST_RES)
+  if (has_msg_leader_server_list_res()) {
+    clear_has_msg();
+    ::p1::MSG_LEADER_SERVER_LIST_RES* temp = msg_.msg_leader_server_list_res_;
+    msg_.msg_leader_server_list_res_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline void MSG_BASE::set_allocated_msg_leader_server_list_res(::p1::MSG_LEADER_SERVER_LIST_RES* msg_leader_server_list_res) {
+  clear_msg();
+  if (msg_leader_server_list_res) {
+    set_has_msg_leader_server_list_res();
+    msg_.msg_leader_server_list_res_ = msg_leader_server_list_res;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_SERVER_LIST_RES)
+}
+
+// optional .p1.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 3001;
+inline bool MSG_BASE::has_msg_leader_broadcast_add() const {
+  return msg_case() == kMSGLEADERBROADCASTADD;
+}
+inline void MSG_BASE::set_has_msg_leader_broadcast_add() {
+  _oneof_case_[0] = kMSGLEADERBROADCASTADD;
+}
+inline void MSG_BASE::clear_msg_leader_broadcast_add() {
+  if (has_msg_leader_broadcast_add()) {
+    delete msg_.msg_leader_broadcast_add_;
+    clear_has_msg();
+  }
+}
+inline  const ::p1::MSG_LEADER_BROADCAST_ADD& MSG_BASE::msg_leader_broadcast_add() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_BROADCAST_ADD)
+  return has_msg_leader_broadcast_add()
+      ? *msg_.msg_leader_broadcast_add_
+      : ::p1::MSG_LEADER_BROADCAST_ADD::default_instance();
+}
+inline ::p1::MSG_LEADER_BROADCAST_ADD* MSG_BASE::mutable_msg_leader_broadcast_add() {
+  if (!has_msg_leader_broadcast_add()) {
+    clear_msg();
+    set_has_msg_leader_broadcast_add();
+    msg_.msg_leader_broadcast_add_ = new ::p1::MSG_LEADER_BROADCAST_ADD;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_BROADCAST_ADD)
+  return msg_.msg_leader_broadcast_add_;
+}
+inline ::p1::MSG_LEADER_BROADCAST_ADD* MSG_BASE::release_msg_leader_broadcast_add() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_BROADCAST_ADD)
+  if (has_msg_leader_broadcast_add()) {
+    clear_has_msg();
+    ::p1::MSG_LEADER_BROADCAST_ADD* temp = msg_.msg_leader_broadcast_add_;
+    msg_.msg_leader_broadcast_add_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline void MSG_BASE::set_allocated_msg_leader_broadcast_add(::p1::MSG_LEADER_BROADCAST_ADD* msg_leader_broadcast_add) {
+  clear_msg();
+  if (msg_leader_broadcast_add) {
+    set_has_msg_leader_broadcast_add();
+    msg_.msg_leader_broadcast_add_ = msg_leader_broadcast_add;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_BROADCAST_ADD)
+}
+
+// optional .p1.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 3002;
+inline bool MSG_BASE::has_msg_leader_broadcast_remove() const {
+  return msg_case() == kMSGLEADERBROADCASTREMOVE;
+}
+inline void MSG_BASE::set_has_msg_leader_broadcast_remove() {
+  _oneof_case_[0] = kMSGLEADERBROADCASTREMOVE;
+}
+inline void MSG_BASE::clear_msg_leader_broadcast_remove() {
+  if (has_msg_leader_broadcast_remove()) {
+    delete msg_.msg_leader_broadcast_remove_;
+    clear_has_msg();
+  }
+}
+inline  const ::p1::MSG_LEADER_BROADCAST_REMOVE& MSG_BASE::msg_leader_broadcast_remove() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_BROADCAST_REMOVE)
+  return has_msg_leader_broadcast_remove()
+      ? *msg_.msg_leader_broadcast_remove_
+      : ::p1::MSG_LEADER_BROADCAST_REMOVE::default_instance();
+}
+inline ::p1::MSG_LEADER_BROADCAST_REMOVE* MSG_BASE::mutable_msg_leader_broadcast_remove() {
+  if (!has_msg_leader_broadcast_remove()) {
+    clear_msg();
+    set_has_msg_leader_broadcast_remove();
+    msg_.msg_leader_broadcast_remove_ = new ::p1::MSG_LEADER_BROADCAST_REMOVE;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_BROADCAST_REMOVE)
+  return msg_.msg_leader_broadcast_remove_;
+}
+inline ::p1::MSG_LEADER_BROADCAST_REMOVE* MSG_BASE::release_msg_leader_broadcast_remove() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_BROADCAST_REMOVE)
+  if (has_msg_leader_broadcast_remove()) {
+    clear_has_msg();
+    ::p1::MSG_LEADER_BROADCAST_REMOVE* temp = msg_.msg_leader_broadcast_remove_;
+    msg_.msg_leader_broadcast_remove_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline void MSG_BASE::set_allocated_msg_leader_broadcast_remove(::p1::MSG_LEADER_BROADCAST_REMOVE* msg_leader_broadcast_remove) {
+  clear_msg();
+  if (msg_leader_broadcast_remove) {
+    set_has_msg_leader_broadcast_remove();
+    msg_.msg_leader_broadcast_remove_ = msg_leader_broadcast_remove;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_BROADCAST_REMOVE)
 }
 
 inline bool MSG_BASE::has_msg() const {

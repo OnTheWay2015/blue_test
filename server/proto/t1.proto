@@ -6,11 +6,36 @@ import "p1.proto";
 
 package t1;
 
+
+/*
+  int8 	FromSvrID = 1; 
+  int24 FromSessionID = 2; 
+  int8 	ToSvrID = 3; 
+  int24 ToSessionID = 4; 
+  int32 MsgID = 5;
+*/
+
+
 message MSG_BASE { 
-  int32 MsgFromID = 1;
+  //int32 SessionID = 1;  //gate 转发时使用
   oneof msg {
-    p1.MSG_TEST msg_test =1000;
-    p1.MSG_TEST_RES msg_test_res =2000;
+    p1.MSG_HEARTBEAT MSG_HEARTBEAT =1000;
+    p1.MSG_LEADER_REG MSG_LEADER_REG =1001;
+    p1.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST =1002;
+ 	
+	
+    p1.MSG_HEARTBEAT MSG_HEARTBEAT_RES =2000; 
+    p1.MSG_LEADER_REG_RES MSG_LEADER_REG_RES =2001;
+    p1.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES =2002;
+	 
+	
+    p1.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD =3001;
+    p1.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE =3002;
+	
+	
+	
+	
+	
   }
 }
  

@@ -37,10 +37,17 @@ void protobuf_InitDefaults_p1_2eproto();
 void protobuf_AssignDesc_p1_2eproto();
 void protobuf_ShutdownFile_p1_2eproto();
 
+class MSG_HEARTBEAT;
+class MSG_HEARTBEAT_RES;
+class MSG_LEADER_BROADCAST_ADD;
+class MSG_LEADER_BROADCAST_REMOVE;
+class MSG_LEADER_REG;
+class MSG_LEADER_REG_RES;
+class MSG_LEADER_SERVER_LIST;
+class MSG_LEADER_SERVER_LIST_RES;
 class MSG_TEST;
 class MSG_TEST_RES;
-class REG_TO_LEADER;
-class REG_TO_LEADER_RES;
+class SERVER_INFO;
 
 // ===================================================================
 
@@ -240,34 +247,34 @@ extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_TEST_RES> MSG_TES
 
 // -------------------------------------------------------------------
 
-class REG_TO_LEADER : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.REG_TO_LEADER) */ {
+class SERVER_INFO : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.SERVER_INFO) */ {
  public:
-  REG_TO_LEADER();
-  virtual ~REG_TO_LEADER();
+  SERVER_INFO();
+  virtual ~SERVER_INFO();
 
-  REG_TO_LEADER(const REG_TO_LEADER& from);
+  SERVER_INFO(const SERVER_INFO& from);
 
-  inline REG_TO_LEADER& operator=(const REG_TO_LEADER& from) {
+  inline SERVER_INFO& operator=(const SERVER_INFO& from) {
     CopyFrom(from);
     return *this;
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const REG_TO_LEADER& default_instance();
+  static const SERVER_INFO& default_instance();
 
-  static const REG_TO_LEADER* internal_default_instance();
+  static const SERVER_INFO* internal_default_instance();
 
-  void Swap(REG_TO_LEADER* other);
+  void Swap(SERVER_INFO* other);
 
   // implements Message ----------------------------------------------
 
-  inline REG_TO_LEADER* New() const { return New(NULL); }
+  inline SERVER_INFO* New() const { return New(NULL); }
 
-  REG_TO_LEADER* New(::google::protobuf::Arena* arena) const;
+  SERVER_INFO* New(::google::protobuf::Arena* arena) const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const REG_TO_LEADER& from);
-  void MergeFrom(const REG_TO_LEADER& from);
+  void CopyFrom(const SERVER_INFO& from);
+  void MergeFrom(const SERVER_INFO& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -286,8 +293,8 @@ class REG_TO_LEADER : public ::google::protobuf::Message /* @@protoc_insertion_p
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(REG_TO_LEADER* other);
-  void UnsafeMergeFrom(const REG_TO_LEADER& from);
+  void InternalSwap(SERVER_INFO* other);
+  void UnsafeMergeFrom(const SERVER_INFO& from);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return _internal_metadata_.arena();
@@ -303,29 +310,43 @@ class REG_TO_LEADER : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   // accessors -------------------------------------------------------
 
-  // optional int32 packet_id = 2;
-  void clear_packet_id();
-  static const int kPacketIdFieldNumber = 2;
-  ::google::protobuf::int32 packet_id() const;
-  void set_packet_id(::google::protobuf::int32 value);
+  // optional int64 svrid = 1;
+  void clear_svrid();
+  static const int kSvridFieldNumber = 1;
+  ::google::protobuf::int64 svrid() const;
+  void set_svrid(::google::protobuf::int64 value);
 
-  // optional string name = 1;
-  void clear_name();
-  static const int kNameFieldNumber = 1;
-  const ::std::string& name() const;
-  void set_name(const ::std::string& value);
-  void set_name(const char* value);
-  void set_name(const char* value, size_t size);
-  ::std::string* mutable_name();
-  ::std::string* release_name();
-  void set_allocated_name(::std::string* name);
+  // optional int32 type = 2;
+  void clear_type();
+  static const int kTypeFieldNumber = 2;
+  ::google::protobuf::int32 type() const;
+  void set_type(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:p1.REG_TO_LEADER)
+  // optional string ipstr = 3;
+  void clear_ipstr();
+  static const int kIpstrFieldNumber = 3;
+  const ::std::string& ipstr() const;
+  void set_ipstr(const ::std::string& value);
+  void set_ipstr(const char* value);
+  void set_ipstr(const char* value, size_t size);
+  ::std::string* mutable_ipstr();
+  ::std::string* release_ipstr();
+  void set_allocated_ipstr(::std::string* ipstr);
+
+  // optional int32 port = 4;
+  void clear_port();
+  static const int kPortFieldNumber = 4;
+  ::google::protobuf::int32 port() const;
+  void set_port(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:p1.SERVER_INFO)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr name_;
-  ::google::protobuf::int32 packet_id_;
+  ::google::protobuf::internal::ArenaStringPtr ipstr_;
+  ::google::protobuf::int64 svrid_;
+  ::google::protobuf::int32 type_;
+  ::google::protobuf::int32 port_;
   mutable int _cached_size_;
   friend void  protobuf_InitDefaults_p1_2eproto_impl();
   friend void  protobuf_AddDesc_p1_2eproto_impl();
@@ -334,38 +355,38 @@ class REG_TO_LEADER : public ::google::protobuf::Message /* @@protoc_insertion_p
 
   void InitAsDefaultInstance();
 };
-extern ::google::protobuf::internal::ExplicitlyConstructed<REG_TO_LEADER> REG_TO_LEADER_default_instance_;
+extern ::google::protobuf::internal::ExplicitlyConstructed<SERVER_INFO> SERVER_INFO_default_instance_;
 
 // -------------------------------------------------------------------
 
-class REG_TO_LEADER_RES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.REG_TO_LEADER_RES) */ {
+class MSG_HEARTBEAT : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.MSG_HEARTBEAT) */ {
  public:
-  REG_TO_LEADER_RES();
-  virtual ~REG_TO_LEADER_RES();
+  MSG_HEARTBEAT();
+  virtual ~MSG_HEARTBEAT();
 
-  REG_TO_LEADER_RES(const REG_TO_LEADER_RES& from);
+  MSG_HEARTBEAT(const MSG_HEARTBEAT& from);
 
-  inline REG_TO_LEADER_RES& operator=(const REG_TO_LEADER_RES& from) {
+  inline MSG_HEARTBEAT& operator=(const MSG_HEARTBEAT& from) {
     CopyFrom(from);
     return *this;
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const REG_TO_LEADER_RES& default_instance();
+  static const MSG_HEARTBEAT& default_instance();
 
-  static const REG_TO_LEADER_RES* internal_default_instance();
+  static const MSG_HEARTBEAT* internal_default_instance();
 
-  void Swap(REG_TO_LEADER_RES* other);
+  void Swap(MSG_HEARTBEAT* other);
 
   // implements Message ----------------------------------------------
 
-  inline REG_TO_LEADER_RES* New() const { return New(NULL); }
+  inline MSG_HEARTBEAT* New() const { return New(NULL); }
 
-  REG_TO_LEADER_RES* New(::google::protobuf::Arena* arena) const;
+  MSG_HEARTBEAT* New(::google::protobuf::Arena* arena) const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const REG_TO_LEADER_RES& from);
-  void MergeFrom(const REG_TO_LEADER_RES& from);
+  void CopyFrom(const MSG_HEARTBEAT& from);
+  void MergeFrom(const MSG_HEARTBEAT& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -384,8 +405,8 @@ class REG_TO_LEADER_RES : public ::google::protobuf::Message /* @@protoc_inserti
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(REG_TO_LEADER_RES* other);
-  void UnsafeMergeFrom(const REG_TO_LEADER_RES& from);
+  void InternalSwap(MSG_HEARTBEAT* other);
+  void UnsafeMergeFrom(const MSG_HEARTBEAT& from);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return _internal_metadata_.arena();
@@ -401,43 +422,10 @@ class REG_TO_LEADER_RES : public ::google::protobuf::Message /* @@protoc_inserti
 
   // accessors -------------------------------------------------------
 
-  // optional string name_res = 1;
-  void clear_name_res();
-  static const int kNameResFieldNumber = 1;
-  const ::std::string& name_res() const;
-  void set_name_res(const ::std::string& value);
-  void set_name_res(const char* value);
-  void set_name_res(const char* value, size_t size);
-  ::std::string* mutable_name_res();
-  ::std::string* release_name_res();
-  void set_allocated_name_res(::std::string* name_res);
-
-  // optional int32 packet_id = 2;
-  void clear_packet_id();
-  static const int kPacketIdFieldNumber = 2;
-  ::google::protobuf::int32 packet_id() const;
-  void set_packet_id(::google::protobuf::int32 value);
-
-  // optional int32 a1 = 3;
-  void clear_a1();
-  static const int kA1FieldNumber = 3;
-  ::google::protobuf::int32 a1() const;
-  void set_a1(::google::protobuf::int32 value);
-
-  // optional int32 a2 = 4;
-  void clear_a2();
-  static const int kA2FieldNumber = 4;
-  ::google::protobuf::int32 a2() const;
-  void set_a2(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:p1.REG_TO_LEADER_RES)
+  // @@protoc_insertion_point(class_scope:p1.MSG_HEARTBEAT)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::ArenaStringPtr name_res_;
-  ::google::protobuf::int32 packet_id_;
-  ::google::protobuf::int32 a1_;
-  ::google::protobuf::int32 a2_;
   mutable int _cached_size_;
   friend void  protobuf_InitDefaults_p1_2eproto_impl();
   friend void  protobuf_AddDesc_p1_2eproto_impl();
@@ -446,7 +434,610 @@ class REG_TO_LEADER_RES : public ::google::protobuf::Message /* @@protoc_inserti
 
   void InitAsDefaultInstance();
 };
-extern ::google::protobuf::internal::ExplicitlyConstructed<REG_TO_LEADER_RES> REG_TO_LEADER_RES_default_instance_;
+extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_HEARTBEAT> MSG_HEARTBEAT_default_instance_;
+
+// -------------------------------------------------------------------
+
+class MSG_HEARTBEAT_RES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.MSG_HEARTBEAT_RES) */ {
+ public:
+  MSG_HEARTBEAT_RES();
+  virtual ~MSG_HEARTBEAT_RES();
+
+  MSG_HEARTBEAT_RES(const MSG_HEARTBEAT_RES& from);
+
+  inline MSG_HEARTBEAT_RES& operator=(const MSG_HEARTBEAT_RES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MSG_HEARTBEAT_RES& default_instance();
+
+  static const MSG_HEARTBEAT_RES* internal_default_instance();
+
+  void Swap(MSG_HEARTBEAT_RES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline MSG_HEARTBEAT_RES* New() const { return New(NULL); }
+
+  MSG_HEARTBEAT_RES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MSG_HEARTBEAT_RES& from);
+  void MergeFrom(const MSG_HEARTBEAT_RES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  size_t ByteSizeLong() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(MSG_HEARTBEAT_RES* other);
+  void UnsafeMergeFrom(const MSG_HEARTBEAT_RES& from);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:p1.MSG_HEARTBEAT_RES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  mutable int _cached_size_;
+  friend void  protobuf_InitDefaults_p1_2eproto_impl();
+  friend void  protobuf_AddDesc_p1_2eproto_impl();
+  friend void protobuf_AssignDesc_p1_2eproto();
+  friend void protobuf_ShutdownFile_p1_2eproto();
+
+  void InitAsDefaultInstance();
+};
+extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_HEARTBEAT_RES> MSG_HEARTBEAT_RES_default_instance_;
+
+// -------------------------------------------------------------------
+
+class MSG_LEADER_REG : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.MSG_LEADER_REG) */ {
+ public:
+  MSG_LEADER_REG();
+  virtual ~MSG_LEADER_REG();
+
+  MSG_LEADER_REG(const MSG_LEADER_REG& from);
+
+  inline MSG_LEADER_REG& operator=(const MSG_LEADER_REG& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MSG_LEADER_REG& default_instance();
+
+  static const MSG_LEADER_REG* internal_default_instance();
+
+  void Swap(MSG_LEADER_REG* other);
+
+  // implements Message ----------------------------------------------
+
+  inline MSG_LEADER_REG* New() const { return New(NULL); }
+
+  MSG_LEADER_REG* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MSG_LEADER_REG& from);
+  void MergeFrom(const MSG_LEADER_REG& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  size_t ByteSizeLong() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(MSG_LEADER_REG* other);
+  void UnsafeMergeFrom(const MSG_LEADER_REG& from);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .p1.SERVER_INFO info = 1;
+  bool has_info() const;
+  void clear_info();
+  static const int kInfoFieldNumber = 1;
+  const ::p1::SERVER_INFO& info() const;
+  ::p1::SERVER_INFO* mutable_info();
+  ::p1::SERVER_INFO* release_info();
+  void set_allocated_info(::p1::SERVER_INFO* info);
+
+  // @@protoc_insertion_point(class_scope:p1.MSG_LEADER_REG)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::p1::SERVER_INFO* info_;
+  mutable int _cached_size_;
+  friend void  protobuf_InitDefaults_p1_2eproto_impl();
+  friend void  protobuf_AddDesc_p1_2eproto_impl();
+  friend void protobuf_AssignDesc_p1_2eproto();
+  friend void protobuf_ShutdownFile_p1_2eproto();
+
+  void InitAsDefaultInstance();
+};
+extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_LEADER_REG> MSG_LEADER_REG_default_instance_;
+
+// -------------------------------------------------------------------
+
+class MSG_LEADER_SERVER_LIST : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.MSG_LEADER_SERVER_LIST) */ {
+ public:
+  MSG_LEADER_SERVER_LIST();
+  virtual ~MSG_LEADER_SERVER_LIST();
+
+  MSG_LEADER_SERVER_LIST(const MSG_LEADER_SERVER_LIST& from);
+
+  inline MSG_LEADER_SERVER_LIST& operator=(const MSG_LEADER_SERVER_LIST& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MSG_LEADER_SERVER_LIST& default_instance();
+
+  static const MSG_LEADER_SERVER_LIST* internal_default_instance();
+
+  void Swap(MSG_LEADER_SERVER_LIST* other);
+
+  // implements Message ----------------------------------------------
+
+  inline MSG_LEADER_SERVER_LIST* New() const { return New(NULL); }
+
+  MSG_LEADER_SERVER_LIST* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MSG_LEADER_SERVER_LIST& from);
+  void MergeFrom(const MSG_LEADER_SERVER_LIST& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  size_t ByteSizeLong() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(MSG_LEADER_SERVER_LIST* other);
+  void UnsafeMergeFrom(const MSG_LEADER_SERVER_LIST& from);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:p1.MSG_LEADER_SERVER_LIST)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  mutable int _cached_size_;
+  friend void  protobuf_InitDefaults_p1_2eproto_impl();
+  friend void  protobuf_AddDesc_p1_2eproto_impl();
+  friend void protobuf_AssignDesc_p1_2eproto();
+  friend void protobuf_ShutdownFile_p1_2eproto();
+
+  void InitAsDefaultInstance();
+};
+extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_LEADER_SERVER_LIST> MSG_LEADER_SERVER_LIST_default_instance_;
+
+// -------------------------------------------------------------------
+
+class MSG_LEADER_BROADCAST_ADD : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.MSG_LEADER_BROADCAST_ADD) */ {
+ public:
+  MSG_LEADER_BROADCAST_ADD();
+  virtual ~MSG_LEADER_BROADCAST_ADD();
+
+  MSG_LEADER_BROADCAST_ADD(const MSG_LEADER_BROADCAST_ADD& from);
+
+  inline MSG_LEADER_BROADCAST_ADD& operator=(const MSG_LEADER_BROADCAST_ADD& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MSG_LEADER_BROADCAST_ADD& default_instance();
+
+  static const MSG_LEADER_BROADCAST_ADD* internal_default_instance();
+
+  void Swap(MSG_LEADER_BROADCAST_ADD* other);
+
+  // implements Message ----------------------------------------------
+
+  inline MSG_LEADER_BROADCAST_ADD* New() const { return New(NULL); }
+
+  MSG_LEADER_BROADCAST_ADD* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MSG_LEADER_BROADCAST_ADD& from);
+  void MergeFrom(const MSG_LEADER_BROADCAST_ADD& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  size_t ByteSizeLong() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(MSG_LEADER_BROADCAST_ADD* other);
+  void UnsafeMergeFrom(const MSG_LEADER_BROADCAST_ADD& from);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .p1.SERVER_INFO info = 1;
+  bool has_info() const;
+  void clear_info();
+  static const int kInfoFieldNumber = 1;
+  const ::p1::SERVER_INFO& info() const;
+  ::p1::SERVER_INFO* mutable_info();
+  ::p1::SERVER_INFO* release_info();
+  void set_allocated_info(::p1::SERVER_INFO* info);
+
+  // @@protoc_insertion_point(class_scope:p1.MSG_LEADER_BROADCAST_ADD)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::p1::SERVER_INFO* info_;
+  mutable int _cached_size_;
+  friend void  protobuf_InitDefaults_p1_2eproto_impl();
+  friend void  protobuf_AddDesc_p1_2eproto_impl();
+  friend void protobuf_AssignDesc_p1_2eproto();
+  friend void protobuf_ShutdownFile_p1_2eproto();
+
+  void InitAsDefaultInstance();
+};
+extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_LEADER_BROADCAST_ADD> MSG_LEADER_BROADCAST_ADD_default_instance_;
+
+// -------------------------------------------------------------------
+
+class MSG_LEADER_BROADCAST_REMOVE : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.MSG_LEADER_BROADCAST_REMOVE) */ {
+ public:
+  MSG_LEADER_BROADCAST_REMOVE();
+  virtual ~MSG_LEADER_BROADCAST_REMOVE();
+
+  MSG_LEADER_BROADCAST_REMOVE(const MSG_LEADER_BROADCAST_REMOVE& from);
+
+  inline MSG_LEADER_BROADCAST_REMOVE& operator=(const MSG_LEADER_BROADCAST_REMOVE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MSG_LEADER_BROADCAST_REMOVE& default_instance();
+
+  static const MSG_LEADER_BROADCAST_REMOVE* internal_default_instance();
+
+  void Swap(MSG_LEADER_BROADCAST_REMOVE* other);
+
+  // implements Message ----------------------------------------------
+
+  inline MSG_LEADER_BROADCAST_REMOVE* New() const { return New(NULL); }
+
+  MSG_LEADER_BROADCAST_REMOVE* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MSG_LEADER_BROADCAST_REMOVE& from);
+  void MergeFrom(const MSG_LEADER_BROADCAST_REMOVE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  size_t ByteSizeLong() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(MSG_LEADER_BROADCAST_REMOVE* other);
+  void UnsafeMergeFrom(const MSG_LEADER_BROADCAST_REMOVE& from);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .p1.SERVER_INFO info = 1;
+  bool has_info() const;
+  void clear_info();
+  static const int kInfoFieldNumber = 1;
+  const ::p1::SERVER_INFO& info() const;
+  ::p1::SERVER_INFO* mutable_info();
+  ::p1::SERVER_INFO* release_info();
+  void set_allocated_info(::p1::SERVER_INFO* info);
+
+  // @@protoc_insertion_point(class_scope:p1.MSG_LEADER_BROADCAST_REMOVE)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::p1::SERVER_INFO* info_;
+  mutable int _cached_size_;
+  friend void  protobuf_InitDefaults_p1_2eproto_impl();
+  friend void  protobuf_AddDesc_p1_2eproto_impl();
+  friend void protobuf_AssignDesc_p1_2eproto();
+  friend void protobuf_ShutdownFile_p1_2eproto();
+
+  void InitAsDefaultInstance();
+};
+extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_LEADER_BROADCAST_REMOVE> MSG_LEADER_BROADCAST_REMOVE_default_instance_;
+
+// -------------------------------------------------------------------
+
+class MSG_LEADER_REG_RES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.MSG_LEADER_REG_RES) */ {
+ public:
+  MSG_LEADER_REG_RES();
+  virtual ~MSG_LEADER_REG_RES();
+
+  MSG_LEADER_REG_RES(const MSG_LEADER_REG_RES& from);
+
+  inline MSG_LEADER_REG_RES& operator=(const MSG_LEADER_REG_RES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MSG_LEADER_REG_RES& default_instance();
+
+  static const MSG_LEADER_REG_RES* internal_default_instance();
+
+  void Swap(MSG_LEADER_REG_RES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline MSG_LEADER_REG_RES* New() const { return New(NULL); }
+
+  MSG_LEADER_REG_RES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MSG_LEADER_REG_RES& from);
+  void MergeFrom(const MSG_LEADER_REG_RES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  size_t ByteSizeLong() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(MSG_LEADER_REG_RES* other);
+  void UnsafeMergeFrom(const MSG_LEADER_REG_RES& from);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 result = 1;
+  void clear_result();
+  static const int kResultFieldNumber = 1;
+  ::google::protobuf::int32 result() const;
+  void set_result(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:p1.MSG_LEADER_REG_RES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::int32 result_;
+  mutable int _cached_size_;
+  friend void  protobuf_InitDefaults_p1_2eproto_impl();
+  friend void  protobuf_AddDesc_p1_2eproto_impl();
+  friend void protobuf_AssignDesc_p1_2eproto();
+  friend void protobuf_ShutdownFile_p1_2eproto();
+
+  void InitAsDefaultInstance();
+};
+extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_LEADER_REG_RES> MSG_LEADER_REG_RES_default_instance_;
+
+// -------------------------------------------------------------------
+
+class MSG_LEADER_SERVER_LIST_RES : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:p1.MSG_LEADER_SERVER_LIST_RES) */ {
+ public:
+  MSG_LEADER_SERVER_LIST_RES();
+  virtual ~MSG_LEADER_SERVER_LIST_RES();
+
+  MSG_LEADER_SERVER_LIST_RES(const MSG_LEADER_SERVER_LIST_RES& from);
+
+  inline MSG_LEADER_SERVER_LIST_RES& operator=(const MSG_LEADER_SERVER_LIST_RES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MSG_LEADER_SERVER_LIST_RES& default_instance();
+
+  static const MSG_LEADER_SERVER_LIST_RES* internal_default_instance();
+
+  void Swap(MSG_LEADER_SERVER_LIST_RES* other);
+
+  // implements Message ----------------------------------------------
+
+  inline MSG_LEADER_SERVER_LIST_RES* New() const { return New(NULL); }
+
+  MSG_LEADER_SERVER_LIST_RES* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MSG_LEADER_SERVER_LIST_RES& from);
+  void MergeFrom(const MSG_LEADER_SERVER_LIST_RES& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  size_t ByteSizeLong() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(MSG_LEADER_SERVER_LIST_RES* other);
+  void UnsafeMergeFrom(const MSG_LEADER_SERVER_LIST_RES& from);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .p1.SERVER_INFO infos = 1;
+  int infos_size() const;
+  void clear_infos();
+  static const int kInfosFieldNumber = 1;
+  const ::p1::SERVER_INFO& infos(int index) const;
+  ::p1::SERVER_INFO* mutable_infos(int index);
+  ::p1::SERVER_INFO* add_infos();
+  ::google::protobuf::RepeatedPtrField< ::p1::SERVER_INFO >*
+      mutable_infos();
+  const ::google::protobuf::RepeatedPtrField< ::p1::SERVER_INFO >&
+      infos() const;
+
+  // @@protoc_insertion_point(class_scope:p1.MSG_LEADER_SERVER_LIST_RES)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::p1::SERVER_INFO > infos_;
+  mutable int _cached_size_;
+  friend void  protobuf_InitDefaults_p1_2eproto_impl();
+  friend void  protobuf_AddDesc_p1_2eproto_impl();
+  friend void protobuf_AssignDesc_p1_2eproto();
+  friend void protobuf_ShutdownFile_p1_2eproto();
+
+  void InitAsDefaultInstance();
+};
+extern ::google::protobuf::internal::ExplicitlyConstructed<MSG_LEADER_SERVER_LIST_RES> MSG_LEADER_SERVER_LIST_RES_default_instance_;
 
 // ===================================================================
 
@@ -584,163 +1175,329 @@ inline const MSG_TEST_RES* MSG_TEST_RES::internal_default_instance() {
 }
 // -------------------------------------------------------------------
 
-// REG_TO_LEADER
+// SERVER_INFO
 
-// optional int32 packet_id = 2;
-inline void REG_TO_LEADER::clear_packet_id() {
-  packet_id_ = 0;
+// optional int64 svrid = 1;
+inline void SERVER_INFO::clear_svrid() {
+  svrid_ = GOOGLE_LONGLONG(0);
 }
-inline ::google::protobuf::int32 REG_TO_LEADER::packet_id() const {
-  // @@protoc_insertion_point(field_get:p1.REG_TO_LEADER.packet_id)
-  return packet_id_;
+inline ::google::protobuf::int64 SERVER_INFO::svrid() const {
+  // @@protoc_insertion_point(field_get:p1.SERVER_INFO.svrid)
+  return svrid_;
 }
-inline void REG_TO_LEADER::set_packet_id(::google::protobuf::int32 value) {
+inline void SERVER_INFO::set_svrid(::google::protobuf::int64 value) {
   
-  packet_id_ = value;
-  // @@protoc_insertion_point(field_set:p1.REG_TO_LEADER.packet_id)
+  svrid_ = value;
+  // @@protoc_insertion_point(field_set:p1.SERVER_INFO.svrid)
 }
 
-// optional string name = 1;
-inline void REG_TO_LEADER::clear_name() {
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// optional int32 type = 2;
+inline void SERVER_INFO::clear_type() {
+  type_ = 0;
 }
-inline const ::std::string& REG_TO_LEADER::name() const {
-  // @@protoc_insertion_point(field_get:p1.REG_TO_LEADER.name)
-  return name_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::google::protobuf::int32 SERVER_INFO::type() const {
+  // @@protoc_insertion_point(field_get:p1.SERVER_INFO.type)
+  return type_;
 }
-inline void REG_TO_LEADER::set_name(const ::std::string& value) {
+inline void SERVER_INFO::set_type(::google::protobuf::int32 value) {
   
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:p1.REG_TO_LEADER.name)
+  type_ = value;
+  // @@protoc_insertion_point(field_set:p1.SERVER_INFO.type)
 }
-inline void REG_TO_LEADER::set_name(const char* value) {
-  
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:p1.REG_TO_LEADER.name)
+
+// optional string ipstr = 3;
+inline void SERVER_INFO::clear_ipstr() {
+  ipstr_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void REG_TO_LEADER::set_name(const char* value, size_t size) {
+inline const ::std::string& SERVER_INFO::ipstr() const {
+  // @@protoc_insertion_point(field_get:p1.SERVER_INFO.ipstr)
+  return ipstr_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void SERVER_INFO::set_ipstr(const ::std::string& value) {
   
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  ipstr_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:p1.SERVER_INFO.ipstr)
+}
+inline void SERVER_INFO::set_ipstr(const char* value) {
+  
+  ipstr_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:p1.SERVER_INFO.ipstr)
+}
+inline void SERVER_INFO::set_ipstr(const char* value, size_t size) {
+  
+  ipstr_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:p1.REG_TO_LEADER.name)
+  // @@protoc_insertion_point(field_set_pointer:p1.SERVER_INFO.ipstr)
 }
-inline ::std::string* REG_TO_LEADER::mutable_name() {
+inline ::std::string* SERVER_INFO::mutable_ipstr() {
   
-  // @@protoc_insertion_point(field_mutable:p1.REG_TO_LEADER.name)
-  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:p1.SERVER_INFO.ipstr)
+  return ipstr_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* REG_TO_LEADER::release_name() {
-  // @@protoc_insertion_point(field_release:p1.REG_TO_LEADER.name)
+inline ::std::string* SERVER_INFO::release_ipstr() {
+  // @@protoc_insertion_point(field_release:p1.SERVER_INFO.ipstr)
   
-  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return ipstr_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void REG_TO_LEADER::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
+inline void SERVER_INFO::set_allocated_ipstr(::std::string* ipstr) {
+  if (ipstr != NULL) {
     
   } else {
     
   }
-  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:p1.REG_TO_LEADER.name)
+  ipstr_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ipstr);
+  // @@protoc_insertion_point(field_set_allocated:p1.SERVER_INFO.ipstr)
 }
 
-inline const REG_TO_LEADER* REG_TO_LEADER::internal_default_instance() {
-  return &REG_TO_LEADER_default_instance_.get();
+// optional int32 port = 4;
+inline void SERVER_INFO::clear_port() {
+  port_ = 0;
+}
+inline ::google::protobuf::int32 SERVER_INFO::port() const {
+  // @@protoc_insertion_point(field_get:p1.SERVER_INFO.port)
+  return port_;
+}
+inline void SERVER_INFO::set_port(::google::protobuf::int32 value) {
+  
+  port_ = value;
+  // @@protoc_insertion_point(field_set:p1.SERVER_INFO.port)
+}
+
+inline const SERVER_INFO* SERVER_INFO::internal_default_instance() {
+  return &SERVER_INFO_default_instance_.get();
 }
 // -------------------------------------------------------------------
 
-// REG_TO_LEADER_RES
+// MSG_HEARTBEAT
 
-// optional string name_res = 1;
-inline void REG_TO_LEADER_RES::clear_name_res() {
-  name_res_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline const MSG_HEARTBEAT* MSG_HEARTBEAT::internal_default_instance() {
+  return &MSG_HEARTBEAT_default_instance_.get();
 }
-inline const ::std::string& REG_TO_LEADER_RES::name_res() const {
-  // @@protoc_insertion_point(field_get:p1.REG_TO_LEADER_RES.name_res)
-  return name_res_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// -------------------------------------------------------------------
+
+// MSG_HEARTBEAT_RES
+
+inline const MSG_HEARTBEAT_RES* MSG_HEARTBEAT_RES::internal_default_instance() {
+  return &MSG_HEARTBEAT_RES_default_instance_.get();
 }
-inline void REG_TO_LEADER_RES::set_name_res(const ::std::string& value) {
+// -------------------------------------------------------------------
+
+// MSG_LEADER_REG
+
+// optional .p1.SERVER_INFO info = 1;
+inline bool MSG_LEADER_REG::has_info() const {
+  return this != internal_default_instance() && info_ != NULL;
+}
+inline void MSG_LEADER_REG::clear_info() {
+  if (GetArenaNoVirtual() == NULL && info_ != NULL) delete info_;
+  info_ = NULL;
+}
+inline const ::p1::SERVER_INFO& MSG_LEADER_REG::info() const {
+  // @@protoc_insertion_point(field_get:p1.MSG_LEADER_REG.info)
+  return info_ != NULL ? *info_
+                         : *::p1::SERVER_INFO::internal_default_instance();
+}
+inline ::p1::SERVER_INFO* MSG_LEADER_REG::mutable_info() {
   
-  name_res_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:p1.REG_TO_LEADER_RES.name_res)
+  if (info_ == NULL) {
+    info_ = new ::p1::SERVER_INFO;
+  }
+  // @@protoc_insertion_point(field_mutable:p1.MSG_LEADER_REG.info)
+  return info_;
 }
-inline void REG_TO_LEADER_RES::set_name_res(const char* value) {
+inline ::p1::SERVER_INFO* MSG_LEADER_REG::release_info() {
+  // @@protoc_insertion_point(field_release:p1.MSG_LEADER_REG.info)
   
-  name_res_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:p1.REG_TO_LEADER_RES.name_res)
+  ::p1::SERVER_INFO* temp = info_;
+  info_ = NULL;
+  return temp;
 }
-inline void REG_TO_LEADER_RES::set_name_res(const char* value, size_t size) {
-  
-  name_res_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:p1.REG_TO_LEADER_RES.name_res)
-}
-inline ::std::string* REG_TO_LEADER_RES::mutable_name_res() {
-  
-  // @@protoc_insertion_point(field_mutable:p1.REG_TO_LEADER_RES.name_res)
-  return name_res_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* REG_TO_LEADER_RES::release_name_res() {
-  // @@protoc_insertion_point(field_release:p1.REG_TO_LEADER_RES.name_res)
-  
-  return name_res_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void REG_TO_LEADER_RES::set_allocated_name_res(::std::string* name_res) {
-  if (name_res != NULL) {
+inline void MSG_LEADER_REG::set_allocated_info(::p1::SERVER_INFO* info) {
+  delete info_;
+  info_ = info;
+  if (info) {
     
   } else {
     
   }
-  name_res_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name_res);
-  // @@protoc_insertion_point(field_set_allocated:p1.REG_TO_LEADER_RES.name_res)
+  // @@protoc_insertion_point(field_set_allocated:p1.MSG_LEADER_REG.info)
 }
 
-// optional int32 packet_id = 2;
-inline void REG_TO_LEADER_RES::clear_packet_id() {
-  packet_id_ = 0;
+inline const MSG_LEADER_REG* MSG_LEADER_REG::internal_default_instance() {
+  return &MSG_LEADER_REG_default_instance_.get();
 }
-inline ::google::protobuf::int32 REG_TO_LEADER_RES::packet_id() const {
-  // @@protoc_insertion_point(field_get:p1.REG_TO_LEADER_RES.packet_id)
-  return packet_id_;
+// -------------------------------------------------------------------
+
+// MSG_LEADER_SERVER_LIST
+
+inline const MSG_LEADER_SERVER_LIST* MSG_LEADER_SERVER_LIST::internal_default_instance() {
+  return &MSG_LEADER_SERVER_LIST_default_instance_.get();
 }
-inline void REG_TO_LEADER_RES::set_packet_id(::google::protobuf::int32 value) {
+// -------------------------------------------------------------------
+
+// MSG_LEADER_BROADCAST_ADD
+
+// optional .p1.SERVER_INFO info = 1;
+inline bool MSG_LEADER_BROADCAST_ADD::has_info() const {
+  return this != internal_default_instance() && info_ != NULL;
+}
+inline void MSG_LEADER_BROADCAST_ADD::clear_info() {
+  if (GetArenaNoVirtual() == NULL && info_ != NULL) delete info_;
+  info_ = NULL;
+}
+inline const ::p1::SERVER_INFO& MSG_LEADER_BROADCAST_ADD::info() const {
+  // @@protoc_insertion_point(field_get:p1.MSG_LEADER_BROADCAST_ADD.info)
+  return info_ != NULL ? *info_
+                         : *::p1::SERVER_INFO::internal_default_instance();
+}
+inline ::p1::SERVER_INFO* MSG_LEADER_BROADCAST_ADD::mutable_info() {
   
-  packet_id_ = value;
-  // @@protoc_insertion_point(field_set:p1.REG_TO_LEADER_RES.packet_id)
+  if (info_ == NULL) {
+    info_ = new ::p1::SERVER_INFO;
+  }
+  // @@protoc_insertion_point(field_mutable:p1.MSG_LEADER_BROADCAST_ADD.info)
+  return info_;
 }
-
-// optional int32 a1 = 3;
-inline void REG_TO_LEADER_RES::clear_a1() {
-  a1_ = 0;
-}
-inline ::google::protobuf::int32 REG_TO_LEADER_RES::a1() const {
-  // @@protoc_insertion_point(field_get:p1.REG_TO_LEADER_RES.a1)
-  return a1_;
-}
-inline void REG_TO_LEADER_RES::set_a1(::google::protobuf::int32 value) {
+inline ::p1::SERVER_INFO* MSG_LEADER_BROADCAST_ADD::release_info() {
+  // @@protoc_insertion_point(field_release:p1.MSG_LEADER_BROADCAST_ADD.info)
   
-  a1_ = value;
-  // @@protoc_insertion_point(field_set:p1.REG_TO_LEADER_RES.a1)
+  ::p1::SERVER_INFO* temp = info_;
+  info_ = NULL;
+  return temp;
+}
+inline void MSG_LEADER_BROADCAST_ADD::set_allocated_info(::p1::SERVER_INFO* info) {
+  delete info_;
+  info_ = info;
+  if (info) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:p1.MSG_LEADER_BROADCAST_ADD.info)
 }
 
-// optional int32 a2 = 4;
-inline void REG_TO_LEADER_RES::clear_a2() {
-  a2_ = 0;
+inline const MSG_LEADER_BROADCAST_ADD* MSG_LEADER_BROADCAST_ADD::internal_default_instance() {
+  return &MSG_LEADER_BROADCAST_ADD_default_instance_.get();
 }
-inline ::google::protobuf::int32 REG_TO_LEADER_RES::a2() const {
-  // @@protoc_insertion_point(field_get:p1.REG_TO_LEADER_RES.a2)
-  return a2_;
+// -------------------------------------------------------------------
+
+// MSG_LEADER_BROADCAST_REMOVE
+
+// optional .p1.SERVER_INFO info = 1;
+inline bool MSG_LEADER_BROADCAST_REMOVE::has_info() const {
+  return this != internal_default_instance() && info_ != NULL;
 }
-inline void REG_TO_LEADER_RES::set_a2(::google::protobuf::int32 value) {
+inline void MSG_LEADER_BROADCAST_REMOVE::clear_info() {
+  if (GetArenaNoVirtual() == NULL && info_ != NULL) delete info_;
+  info_ = NULL;
+}
+inline const ::p1::SERVER_INFO& MSG_LEADER_BROADCAST_REMOVE::info() const {
+  // @@protoc_insertion_point(field_get:p1.MSG_LEADER_BROADCAST_REMOVE.info)
+  return info_ != NULL ? *info_
+                         : *::p1::SERVER_INFO::internal_default_instance();
+}
+inline ::p1::SERVER_INFO* MSG_LEADER_BROADCAST_REMOVE::mutable_info() {
   
-  a2_ = value;
-  // @@protoc_insertion_point(field_set:p1.REG_TO_LEADER_RES.a2)
+  if (info_ == NULL) {
+    info_ = new ::p1::SERVER_INFO;
+  }
+  // @@protoc_insertion_point(field_mutable:p1.MSG_LEADER_BROADCAST_REMOVE.info)
+  return info_;
+}
+inline ::p1::SERVER_INFO* MSG_LEADER_BROADCAST_REMOVE::release_info() {
+  // @@protoc_insertion_point(field_release:p1.MSG_LEADER_BROADCAST_REMOVE.info)
+  
+  ::p1::SERVER_INFO* temp = info_;
+  info_ = NULL;
+  return temp;
+}
+inline void MSG_LEADER_BROADCAST_REMOVE::set_allocated_info(::p1::SERVER_INFO* info) {
+  delete info_;
+  info_ = info;
+  if (info) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:p1.MSG_LEADER_BROADCAST_REMOVE.info)
 }
 
-inline const REG_TO_LEADER_RES* REG_TO_LEADER_RES::internal_default_instance() {
-  return &REG_TO_LEADER_RES_default_instance_.get();
+inline const MSG_LEADER_BROADCAST_REMOVE* MSG_LEADER_BROADCAST_REMOVE::internal_default_instance() {
+  return &MSG_LEADER_BROADCAST_REMOVE_default_instance_.get();
+}
+// -------------------------------------------------------------------
+
+// MSG_LEADER_REG_RES
+
+// optional int32 result = 1;
+inline void MSG_LEADER_REG_RES::clear_result() {
+  result_ = 0;
+}
+inline ::google::protobuf::int32 MSG_LEADER_REG_RES::result() const {
+  // @@protoc_insertion_point(field_get:p1.MSG_LEADER_REG_RES.result)
+  return result_;
+}
+inline void MSG_LEADER_REG_RES::set_result(::google::protobuf::int32 value) {
+  
+  result_ = value;
+  // @@protoc_insertion_point(field_set:p1.MSG_LEADER_REG_RES.result)
+}
+
+inline const MSG_LEADER_REG_RES* MSG_LEADER_REG_RES::internal_default_instance() {
+  return &MSG_LEADER_REG_RES_default_instance_.get();
+}
+// -------------------------------------------------------------------
+
+// MSG_LEADER_SERVER_LIST_RES
+
+// repeated .p1.SERVER_INFO infos = 1;
+inline int MSG_LEADER_SERVER_LIST_RES::infos_size() const {
+  return infos_.size();
+}
+inline void MSG_LEADER_SERVER_LIST_RES::clear_infos() {
+  infos_.Clear();
+}
+inline const ::p1::SERVER_INFO& MSG_LEADER_SERVER_LIST_RES::infos(int index) const {
+  // @@protoc_insertion_point(field_get:p1.MSG_LEADER_SERVER_LIST_RES.infos)
+  return infos_.Get(index);
+}
+inline ::p1::SERVER_INFO* MSG_LEADER_SERVER_LIST_RES::mutable_infos(int index) {
+  // @@protoc_insertion_point(field_mutable:p1.MSG_LEADER_SERVER_LIST_RES.infos)
+  return infos_.Mutable(index);
+}
+inline ::p1::SERVER_INFO* MSG_LEADER_SERVER_LIST_RES::add_infos() {
+  // @@protoc_insertion_point(field_add:p1.MSG_LEADER_SERVER_LIST_RES.infos)
+  return infos_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::p1::SERVER_INFO >*
+MSG_LEADER_SERVER_LIST_RES::mutable_infos() {
+  // @@protoc_insertion_point(field_mutable_list:p1.MSG_LEADER_SERVER_LIST_RES.infos)
+  return &infos_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::p1::SERVER_INFO >&
+MSG_LEADER_SERVER_LIST_RES::infos() const {
+  // @@protoc_insertion_point(field_list:p1.MSG_LEADER_SERVER_LIST_RES.infos)
+  return infos_;
+}
+
+inline const MSG_LEADER_SERVER_LIST_RES* MSG_LEADER_SERVER_LIST_RES::internal_default_instance() {
+  return &MSG_LEADER_SERVER_LIST_RES_default_instance_.get();
 }
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

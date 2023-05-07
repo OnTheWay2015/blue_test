@@ -7,4 +7,61 @@ message MSG_P1 {
   string name = 1; 
   //repeated int32 ary_int32 = 2; 
 }
+
+
+
+
+
+message SERVER_INFO { 
+  int64 svrid = 1; 
+  int32 type = 2; 
+  string  ipstr = 3;
+  int32 port = 4;  
+}
+
+
+
+// s <--> s 
+message MSG_HEARTBEAT {
+}
+
+
+
+// --> leader
+message MSG_LEADER_REG { 
+  SERVER_INFO info = 1; 
+   
+}
+
+message MSG_LEADER_SERVER_LIST {  
+}
+
+
+message MSG_LEADER_BROADCAST_ADD { 
+  SERVER_INFO info = 1; 
+}
+
+
+message MSG_LEADER_BROADCAST_REMOVE { 
+  SERVER_INFO info = 1; 
+}
+
+// <-- leader
+message MSG_LEADER_REG_RES {  
+  int32 result = 1;  
+}
+
+
+message MSG_LEADER_SERVER_LIST_RES {  
+	repeated SERVER_INFO  infos = 1; 
+}
+
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+

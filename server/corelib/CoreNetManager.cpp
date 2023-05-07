@@ -39,48 +39,52 @@ bool CoreNetManager::Init(CoreBase* base, CoreConfig& config)
         EventRouterPoolGrowlimit);//有初始化网络线程, iocp 在网络线程里读取网卡数据
 
 
+    auto& servicesConfig = config.GetServiceList();
+    for (auto& conf : servicesConfig )
+	{
+		auto& clientProxys = conf.m_ClientProxys;
+		for (auto& conf : clientProxys)
+		{
+			auto ss = std::make_shared<CProxyServiceDefault >();
+			ss->SetServer(m_NetServer.get());
+			ss->SetClientProxy(conf.ProxyType, conf.ProxyMode);
 
-    auto clientProxys = config.GetClientProxyList();
-    for (auto& conf : clientProxys)
-    {
-        auto ss = std::make_shared<CProxyServiceDefault >();
-        ss->SetServer(m_NetServer.get());
-        ss->SetClientProxy(conf.ProxyType, conf.ProxyMode);
+			if (!ss->Create(
+				IPPROTO_TCP,
+				16,       // AcceptQueueSize
+				1024 * 5, // RecvBufferSize
+				1024 * 5, // SendBufferSize
+				1,        // ParallelAcceptCount
+				64,       // DEFAULT_PARALLEL_RECV
+				false     // IPv6Only
+			))
+			{
 
-        if (!ss->Create(
-            IPPROTO_TCP,
-            16,       // AcceptQueueSize
-            1024 * 5, // RecvBufferSize
-            1024 * 5, // SendBufferSize
-            1,        // ParallelAcceptCount
-            64,       // DEFAULT_PARALLEL_RECV
-            false     // IPv6Only
-        ))
-        {
-
-            // PrintDOSLog( _T("代理服务[%u]创建失败！"), GetID());
-            continue;
-        }
+				// PrintDOSLog( _T("代理服务[%u]创建失败！"), GetID());
+				continue;
+			}
 
 
-        ss->Init(); // 有初始化工作线程
+			//ss->Init(); 
 
-        CIPAddress addr;
-        addr.SetIP(conf.ListenIP.c_str());
-        // addr.SetIP("127.0.0.1");
-        addr.SetPort(conf.ListenPort);
-        if (!ss->StartListen(addr)) // m_Config.ListenAddress
-        {
-            // PrintDOSLog( _T("代理服务[%u]侦听于(%s:%u)失败！"),
-            //	GetID(),
-            //	m_Config.ListenAddress.GetIPString(),
-            //	m_Config.ListenAddress.GetPort());
-            continue; 
-        }
+			CIPAddress addr;
+			addr.SetIP(conf.ListenIP.c_str());
+			// addr.SetIP("127.0.0.1");
+			addr.SetPort(conf.ListenPort);
+			if (!ss->StartListen(addr)) // m_Config.ListenAddress
+			{
+				// PrintDOSLog( _T("代理服务[%u]侦听于(%s:%u)失败！"),
+				//	GetID(),
+				//	m_Config.ListenAddress.GetIPString(),
+				//	m_Config.ListenAddress.GetPort());
+				continue;
+			}
 
-        ss->SetHandler(this);
-        m_NetServices.push_back(ss);
-    }
+			ss->SetHandler(this);
+			m_NetServices.push_back(ss);
+		}
+	}
+
     
     m_NetServiceActConnect = std::make_shared<ServiceActConnect>();
     m_NetServiceActConnect->Init();

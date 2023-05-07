@@ -49,15 +49,15 @@ bool CoreConfig::LoadConfig(LPCTSTR FileName)
 		xml_node Config=Parser.document();
 		if(Config.moveto_child("Main"))
 		{
-			if(Config.has_attribute("ServiceName"))
-				m_ServiceName=Config.attribute("ServiceName").getvalue();
-			if(Config.has_attribute("ServiceDesc"))
-				m_ServiceDesc=Config.attribute("ServiceDesc").getvalue();
+			if(Config.has_attribute("ServerName"))
+				m_ServerName=Config.attribute("ServerName").getvalue();
+			if(Config.has_attribute("ServerDesc"))
+				m_ServerDesc=Config.attribute("ServerDesc").getvalue();
 
-			if(Config.has_attribute("ServiceID"))
-				m_ServiceID=Config.attribute("ServiceID");
-			if(Config.has_attribute("ServiceType"))
-				m_ServiceType=Config.attribute("ServiceType");
+			if(Config.has_attribute("ServerID"))
+				m_ServerID=Config.attribute("ServerID");
+			//if(Config.has_attribute("ServiceType"))
+			//	m_ServiceType=Config.attribute("ServiceType");
 
 
 			xml_node Net=Config;
@@ -76,25 +76,47 @@ bool CoreConfig::LoadConfig(LPCTSTR FileName)
 					m_LeaderConfig.IP = Leader.attribute("IP").getvalue();
 			}
 
-
-			xml_node ClientProxys=Config;
-			if(ClientProxys.moveto_child("ClientProxys"))
+			xml_node Services=Config;
+			if (Services.moveto_child("Services"))
 			{
-				for (UINT i = 0; i < ClientProxys.children(); i++)
+				for (UINT i = 0; i < Services.children(); i++)
 				{
-					xml_node ClientProxy = ClientProxys.child(i);
-					if (_stricmp(ClientProxys.name(), "ClientProxy"))
+					xml_node Service = Services.child(i);
+					if (_stricmp(Service.name(), "Service"))
 					{
-						CLIENT_PROXY_CONFIG ProxyConfig;
-						if (ReadProxyConfig(ClientProxy, ProxyConfig))
+
+						SERVICE_CONFIG ServiceConfig;
+						if (Service.has_attribute("Name"))
+							ServiceConfig.Name = Service.attribute("Name").getvalue();
+						if (Service.has_attribute("Desc"))
+							ServiceConfig.Desc = Service.attribute("Desc").getvalue();
+
+
+						xml_node ClientProxys = Service;
+						if (ClientProxys.moveto_child("ClientProxys"))
 						{
-							m_ClientProxys.push_back(ProxyConfig);
+							for (UINT i = 0; i < ClientProxys.children(); i++)
+							{
+								xml_node ClientProxy = ClientProxys.child(i);
+								if (_stricmp(ClientProxys.name(), "ClientProxy"))
+								{
+									CLIENT_PROXY_CONFIG ProxyConfig;
+									if (ReadProxyConfig(ClientProxy, ProxyConfig))
+									{
+										ServiceConfig.m_ClientProxys.push_back(ProxyConfig);
+									}
+								}
+							}
 						}
+
+
+
+						m_Services.push_back(ServiceConfig);
 					}
 				}
+
+
 			}
-
-
 
 			xml_node Plugins=Config;
 			if(Plugins.moveto_child("Plugins"))

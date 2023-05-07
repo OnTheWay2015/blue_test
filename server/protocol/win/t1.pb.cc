@@ -25,8 +25,14 @@ const ::google::protobuf::Descriptor* MSG_BASE_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   MSG_BASE_reflection_ = NULL;
 struct MSG_BASEOneofInstance {
-  const ::p1::MSG_TEST* msg_test_;
-  const ::p1::MSG_TEST_RES* msg_test_res_;
+  const ::p1::MSG_HEARTBEAT* msg_heartbeat_;
+  const ::p1::MSG_LEADER_REG* msg_leader_reg_;
+  const ::p1::MSG_LEADER_SERVER_LIST* msg_leader_server_list_;
+  const ::p1::MSG_HEARTBEAT* msg_heartbeat_res_;
+  const ::p1::MSG_LEADER_REG_RES* msg_leader_reg_res_;
+  const ::p1::MSG_LEADER_SERVER_LIST_RES* msg_leader_server_list_res_;
+  const ::p1::MSG_LEADER_BROADCAST_ADD* msg_leader_broadcast_add_;
+  const ::p1::MSG_LEADER_BROADCAST_REMOVE* msg_leader_broadcast_remove_;
 }* MSG_BASE_default_oneof_instance_ = NULL;
 
 }  // namespace
@@ -40,10 +46,16 @@ void protobuf_AssignDesc_t1_2eproto() {
       "t1.proto");
   GOOGLE_CHECK(file != NULL);
   MSG_BASE_descriptor_ = file->message_type(0);
-  static const int MSG_BASE_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MSG_BASE, msgfromid_),
-    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_test_),
-    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_test_res_),
+  static const int MSG_BASE_offsets_[10] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MSG_BASE, sessionid_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_heartbeat_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_leader_reg_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_leader_server_list_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_heartbeat_res_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_leader_reg_res_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_leader_server_list_res_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_leader_broadcast_add_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(MSG_BASE_default_oneof_instance_, msg_leader_broadcast_remove_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MSG_BASE, msg_),
   };
   MSG_BASE_reflection_ =
@@ -102,10 +114,20 @@ void protobuf_AddDesc_t1_2eproto_impl() {
 
   protobuf_InitDefaults_t1_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\010t1.proto\022\002t1\032\010p1.proto\"r\n\010MSG_BASE\022\021\n\t"
-    "MsgFromID\030\001 \001(\005\022!\n\010msg_test\030\350\007 \001(\0132\014.p1."
-    "MSG_TESTH\000\022)\n\014msg_test_res\030\320\017 \001(\0132\020.p1.M"
-    "SG_TEST_RESH\000B\005\n\003msgb\006proto3", 148);
+    "\n\010t1.proto\022\002t1\032\010p1.proto\"\372\003\n\010MSG_BASE\022\021\n"
+    "\tSessionID\030\001 \001(\005\022+\n\rMSG_HEARTBEAT\030\350\007 \001(\013"
+    "2\021.p1.MSG_HEARTBEATH\000\022-\n\016MSG_LEADER_REG\030"
+    "\351\007 \001(\0132\022.p1.MSG_LEADER_REGH\000\022=\n\026MSG_LEAD"
+    "ER_SERVER_LIST\030\352\007 \001(\0132\032.p1.MSG_LEADER_SE"
+    "RVER_LISTH\000\022/\n\021MSG_HEARTBEAT_RES\030\320\017 \001(\0132"
+    "\021.p1.MSG_HEARTBEATH\000\0225\n\022MSG_LEADER_REG_R"
+    "ES\030\321\017 \001(\0132\026.p1.MSG_LEADER_REG_RESH\000\022E\n\032M"
+    "SG_LEADER_SERVER_LIST_RES\030\322\017 \001(\0132\036.p1.MS"
+    "G_LEADER_SERVER_LIST_RESH\000\022A\n\030MSG_LEADER"
+    "_BROADCAST_ADD\030\271\027 \001(\0132\034.p1.MSG_LEADER_BR"
+    "OADCAST_ADDH\000\022G\n\033MSG_LEADER_BROADCAST_RE"
+    "MOVE\030\272\027 \001(\0132\037.p1.MSG_LEADER_BROADCAST_RE"
+    "MOVEH\000B\005\n\003msgb\006proto3", 541);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "t1.proto", &protobuf_RegisterTypes);
   ::p1::protobuf_AddDesc_p1_2eproto();
@@ -137,9 +159,15 @@ static void MergeFromFail(int line) {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int MSG_BASE::kMsgFromIDFieldNumber;
-const int MSG_BASE::kMsgTestFieldNumber;
-const int MSG_BASE::kMsgTestResFieldNumber;
+const int MSG_BASE::kSessionIDFieldNumber;
+const int MSG_BASE::kMSGHEARTBEATFieldNumber;
+const int MSG_BASE::kMSGLEADERREGFieldNumber;
+const int MSG_BASE::kMSGLEADERSERVERLISTFieldNumber;
+const int MSG_BASE::kMSGHEARTBEATRESFieldNumber;
+const int MSG_BASE::kMSGLEADERREGRESFieldNumber;
+const int MSG_BASE::kMSGLEADERSERVERLISTRESFieldNumber;
+const int MSG_BASE::kMSGLEADERBROADCASTADDFieldNumber;
+const int MSG_BASE::kMSGLEADERBROADCASTREMOVEFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 MSG_BASE::MSG_BASE()
@@ -150,10 +178,22 @@ MSG_BASE::MSG_BASE()
 }
 
 void MSG_BASE::InitAsDefaultInstance() {
-  MSG_BASE_default_oneof_instance_->msg_test_ = const_cast< ::p1::MSG_TEST*>(
-      ::p1::MSG_TEST::internal_default_instance());
-  MSG_BASE_default_oneof_instance_->msg_test_res_ = const_cast< ::p1::MSG_TEST_RES*>(
-      ::p1::MSG_TEST_RES::internal_default_instance());
+  MSG_BASE_default_oneof_instance_->msg_heartbeat_ = const_cast< ::p1::MSG_HEARTBEAT*>(
+      ::p1::MSG_HEARTBEAT::internal_default_instance());
+  MSG_BASE_default_oneof_instance_->msg_leader_reg_ = const_cast< ::p1::MSG_LEADER_REG*>(
+      ::p1::MSG_LEADER_REG::internal_default_instance());
+  MSG_BASE_default_oneof_instance_->msg_leader_server_list_ = const_cast< ::p1::MSG_LEADER_SERVER_LIST*>(
+      ::p1::MSG_LEADER_SERVER_LIST::internal_default_instance());
+  MSG_BASE_default_oneof_instance_->msg_heartbeat_res_ = const_cast< ::p1::MSG_HEARTBEAT*>(
+      ::p1::MSG_HEARTBEAT::internal_default_instance());
+  MSG_BASE_default_oneof_instance_->msg_leader_reg_res_ = const_cast< ::p1::MSG_LEADER_REG_RES*>(
+      ::p1::MSG_LEADER_REG_RES::internal_default_instance());
+  MSG_BASE_default_oneof_instance_->msg_leader_server_list_res_ = const_cast< ::p1::MSG_LEADER_SERVER_LIST_RES*>(
+      ::p1::MSG_LEADER_SERVER_LIST_RES::internal_default_instance());
+  MSG_BASE_default_oneof_instance_->msg_leader_broadcast_add_ = const_cast< ::p1::MSG_LEADER_BROADCAST_ADD*>(
+      ::p1::MSG_LEADER_BROADCAST_ADD::internal_default_instance());
+  MSG_BASE_default_oneof_instance_->msg_leader_broadcast_remove_ = const_cast< ::p1::MSG_LEADER_BROADCAST_REMOVE*>(
+      ::p1::MSG_LEADER_BROADCAST_REMOVE::internal_default_instance());
 }
 
 MSG_BASE::MSG_BASE(const MSG_BASE& from)
@@ -165,7 +205,7 @@ MSG_BASE::MSG_BASE(const MSG_BASE& from)
 }
 
 void MSG_BASE::SharedCtor() {
-  msgfromid_ = 0;
+  sessionid_ = 0;
   clear_has_msg();
   _cached_size_ = 0;
 }
@@ -209,12 +249,36 @@ MSG_BASE* MSG_BASE::New(::google::protobuf::Arena* arena) const {
 void MSG_BASE::clear_msg() {
 // @@protoc_insertion_point(one_of_clear_start:t1.MSG_BASE)
   switch (msg_case()) {
-    case kMsgTest: {
-      delete msg_.msg_test_;
+    case kMSGHEARTBEAT: {
+      delete msg_.msg_heartbeat_;
       break;
     }
-    case kMsgTestRes: {
-      delete msg_.msg_test_res_;
+    case kMSGLEADERREG: {
+      delete msg_.msg_leader_reg_;
+      break;
+    }
+    case kMSGLEADERSERVERLIST: {
+      delete msg_.msg_leader_server_list_;
+      break;
+    }
+    case kMSGHEARTBEATRES: {
+      delete msg_.msg_heartbeat_res_;
+      break;
+    }
+    case kMSGLEADERREGRES: {
+      delete msg_.msg_leader_reg_res_;
+      break;
+    }
+    case kMSGLEADERSERVERLISTRES: {
+      delete msg_.msg_leader_server_list_res_;
+      break;
+    }
+    case kMSGLEADERBROADCASTADD: {
+      delete msg_.msg_leader_broadcast_add_;
+      break;
+    }
+    case kMSGLEADERBROADCASTREMOVE: {
+      delete msg_.msg_leader_broadcast_remove_;
       break;
     }
     case MSG_NOT_SET: {
@@ -227,7 +291,7 @@ void MSG_BASE::clear_msg() {
 
 void MSG_BASE::Clear() {
 // @@protoc_insertion_point(message_clear_start:t1.MSG_BASE)
-  msgfromid_ = 0;
+  sessionid_ = 0;
   clear_msg();
 }
 
@@ -237,46 +301,119 @@ bool MSG_BASE::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:t1.MSG_BASE)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(24018);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int32 MsgFromID = 1;
+      // optional int32 SessionID = 1;
       case 1: {
         if (tag == 8) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &msgfromid_)));
+                 input, &sessionid_)));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(8002)) goto parse_msg_test;
+        if (input->ExpectTag(8002)) goto parse_MSG_HEARTBEAT;
         break;
       }
 
-      // optional .p1.MSG_TEST msg_test = 1000;
+      // optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT = 1000;
       case 1000: {
         if (tag == 8002) {
-         parse_msg_test:
+         parse_MSG_HEARTBEAT:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_msg_test()));
+               input, mutable_msg_heartbeat()));
         } else {
           goto handle_unusual;
         }
-        goto after_msg_test_res;
+        goto after_msg_leader_broadcast_remove;
         break;
       }
 
-      // optional .p1.MSG_TEST_RES msg_test_res = 2000;
+      // optional .p1.MSG_LEADER_REG MSG_LEADER_REG = 1001;
+      case 1001: {
+        if (tag == 8010) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_msg_leader_reg()));
+        } else {
+          goto handle_unusual;
+        }
+        goto after_msg_leader_broadcast_remove;
+        break;
+      }
+
+      // optional .p1.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 1002;
+      case 1002: {
+        if (tag == 8018) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_msg_leader_server_list()));
+        } else {
+          goto handle_unusual;
+        }
+        goto after_msg_leader_broadcast_remove;
+        break;
+      }
+
+      // optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 2000;
       case 2000: {
         if (tag == 16002) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_msg_test_res()));
+               input, mutable_msg_heartbeat_res()));
         } else {
           goto handle_unusual;
         }
-       after_msg_test_res:
+        goto after_msg_leader_broadcast_remove;
+        break;
+      }
+
+      // optional .p1.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 2001;
+      case 2001: {
+        if (tag == 16010) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_msg_leader_reg_res()));
+        } else {
+          goto handle_unusual;
+        }
+        goto after_msg_leader_broadcast_remove;
+        break;
+      }
+
+      // optional .p1.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 2002;
+      case 2002: {
+        if (tag == 16018) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_msg_leader_server_list_res()));
+        } else {
+          goto handle_unusual;
+        }
+        goto after_msg_leader_broadcast_remove;
+        break;
+      }
+
+      // optional .p1.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 3001;
+      case 3001: {
+        if (tag == 24010) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_msg_leader_broadcast_add()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24018)) goto parse_MSG_LEADER_BROADCAST_REMOVE;
+        break;
+      }
+
+      // optional .p1.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 3002;
+      case 3002: {
+        if (tag == 24018) {
+         parse_MSG_LEADER_BROADCAST_REMOVE:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_msg_leader_broadcast_remove()));
+        } else {
+          goto handle_unusual;
+        }
+       after_msg_leader_broadcast_remove:
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -305,21 +442,57 @@ failure:
 void MSG_BASE::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:t1.MSG_BASE)
-  // optional int32 MsgFromID = 1;
-  if (this->msgfromid() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->msgfromid(), output);
+  // optional int32 SessionID = 1;
+  if (this->sessionid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->sessionid(), output);
   }
 
-  // optional .p1.MSG_TEST msg_test = 1000;
-  if (has_msg_test()) {
+  // optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT = 1000;
+  if (has_msg_heartbeat()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1000, *msg_.msg_test_, output);
+      1000, *msg_.msg_heartbeat_, output);
   }
 
-  // optional .p1.MSG_TEST_RES msg_test_res = 2000;
-  if (has_msg_test_res()) {
+  // optional .p1.MSG_LEADER_REG MSG_LEADER_REG = 1001;
+  if (has_msg_leader_reg()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2000, *msg_.msg_test_res_, output);
+      1001, *msg_.msg_leader_reg_, output);
+  }
+
+  // optional .p1.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 1002;
+  if (has_msg_leader_server_list()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1002, *msg_.msg_leader_server_list_, output);
+  }
+
+  // optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 2000;
+  if (has_msg_heartbeat_res()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2000, *msg_.msg_heartbeat_res_, output);
+  }
+
+  // optional .p1.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 2001;
+  if (has_msg_leader_reg_res()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2001, *msg_.msg_leader_reg_res_, output);
+  }
+
+  // optional .p1.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 2002;
+  if (has_msg_leader_server_list_res()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2002, *msg_.msg_leader_server_list_res_, output);
+  }
+
+  // optional .p1.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 3001;
+  if (has_msg_leader_broadcast_add()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3001, *msg_.msg_leader_broadcast_add_, output);
+  }
+
+  // optional .p1.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 3002;
+  if (has_msg_leader_broadcast_remove()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3002, *msg_.msg_leader_broadcast_remove_, output);
   }
 
   // @@protoc_insertion_point(serialize_end:t1.MSG_BASE)
@@ -329,23 +502,65 @@ void MSG_BASE::SerializeWithCachedSizes(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:t1.MSG_BASE)
-  // optional int32 MsgFromID = 1;
-  if (this->msgfromid() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->msgfromid(), target);
+  // optional int32 SessionID = 1;
+  if (this->sessionid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->sessionid(), target);
   }
 
-  // optional .p1.MSG_TEST msg_test = 1000;
-  if (has_msg_test()) {
+  // optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT = 1000;
+  if (has_msg_heartbeat()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        1000, *msg_.msg_test_, false, target);
+        1000, *msg_.msg_heartbeat_, false, target);
   }
 
-  // optional .p1.MSG_TEST_RES msg_test_res = 2000;
-  if (has_msg_test_res()) {
+  // optional .p1.MSG_LEADER_REG MSG_LEADER_REG = 1001;
+  if (has_msg_leader_reg()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        2000, *msg_.msg_test_res_, false, target);
+        1001, *msg_.msg_leader_reg_, false, target);
+  }
+
+  // optional .p1.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 1002;
+  if (has_msg_leader_server_list()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        1002, *msg_.msg_leader_server_list_, false, target);
+  }
+
+  // optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 2000;
+  if (has_msg_heartbeat_res()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2000, *msg_.msg_heartbeat_res_, false, target);
+  }
+
+  // optional .p1.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 2001;
+  if (has_msg_leader_reg_res()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2001, *msg_.msg_leader_reg_res_, false, target);
+  }
+
+  // optional .p1.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 2002;
+  if (has_msg_leader_server_list_res()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        2002, *msg_.msg_leader_server_list_res_, false, target);
+  }
+
+  // optional .p1.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 3001;
+  if (has_msg_leader_broadcast_add()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        3001, *msg_.msg_leader_broadcast_add_, false, target);
+  }
+
+  // optional .p1.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 3002;
+  if (has_msg_leader_broadcast_remove()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        3002, *msg_.msg_leader_broadcast_remove_, false, target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:t1.MSG_BASE)
@@ -356,26 +571,68 @@ size_t MSG_BASE::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:t1.MSG_BASE)
   size_t total_size = 0;
 
-  // optional int32 MsgFromID = 1;
-  if (this->msgfromid() != 0) {
+  // optional int32 SessionID = 1;
+  if (this->sessionid() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->msgfromid());
+        this->sessionid());
   }
 
   switch (msg_case()) {
-    // optional .p1.MSG_TEST msg_test = 1000;
-    case kMsgTest: {
+    // optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT = 1000;
+    case kMSGHEARTBEAT: {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          *msg_.msg_test_);
+          *msg_.msg_heartbeat_);
       break;
     }
-    // optional .p1.MSG_TEST_RES msg_test_res = 2000;
-    case kMsgTestRes: {
+    // optional .p1.MSG_LEADER_REG MSG_LEADER_REG = 1001;
+    case kMSGLEADERREG: {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          *msg_.msg_test_res_);
+          *msg_.msg_leader_reg_);
+      break;
+    }
+    // optional .p1.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 1002;
+    case kMSGLEADERSERVERLIST: {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *msg_.msg_leader_server_list_);
+      break;
+    }
+    // optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 2000;
+    case kMSGHEARTBEATRES: {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *msg_.msg_heartbeat_res_);
+      break;
+    }
+    // optional .p1.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 2001;
+    case kMSGLEADERREGRES: {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *msg_.msg_leader_reg_res_);
+      break;
+    }
+    // optional .p1.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 2002;
+    case kMSGLEADERSERVERLISTRES: {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *msg_.msg_leader_server_list_res_);
+      break;
+    }
+    // optional .p1.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 3001;
+    case kMSGLEADERBROADCASTADD: {
+      total_size += 3 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *msg_.msg_leader_broadcast_add_);
+      break;
+    }
+    // optional .p1.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 3002;
+    case kMSGLEADERBROADCASTREMOVE: {
+      total_size += 3 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *msg_.msg_leader_broadcast_remove_);
       break;
     }
     case MSG_NOT_SET: {
@@ -416,20 +673,44 @@ void MSG_BASE::MergeFrom(const MSG_BASE& from) {
 void MSG_BASE::UnsafeMergeFrom(const MSG_BASE& from) {
   GOOGLE_DCHECK(&from != this);
   switch (from.msg_case()) {
-    case kMsgTest: {
-      mutable_msg_test()->::p1::MSG_TEST::MergeFrom(from.msg_test());
+    case kMSGHEARTBEAT: {
+      mutable_msg_heartbeat()->::p1::MSG_HEARTBEAT::MergeFrom(from.msg_heartbeat());
       break;
     }
-    case kMsgTestRes: {
-      mutable_msg_test_res()->::p1::MSG_TEST_RES::MergeFrom(from.msg_test_res());
+    case kMSGLEADERREG: {
+      mutable_msg_leader_reg()->::p1::MSG_LEADER_REG::MergeFrom(from.msg_leader_reg());
+      break;
+    }
+    case kMSGLEADERSERVERLIST: {
+      mutable_msg_leader_server_list()->::p1::MSG_LEADER_SERVER_LIST::MergeFrom(from.msg_leader_server_list());
+      break;
+    }
+    case kMSGHEARTBEATRES: {
+      mutable_msg_heartbeat_res()->::p1::MSG_HEARTBEAT::MergeFrom(from.msg_heartbeat_res());
+      break;
+    }
+    case kMSGLEADERREGRES: {
+      mutable_msg_leader_reg_res()->::p1::MSG_LEADER_REG_RES::MergeFrom(from.msg_leader_reg_res());
+      break;
+    }
+    case kMSGLEADERSERVERLISTRES: {
+      mutable_msg_leader_server_list_res()->::p1::MSG_LEADER_SERVER_LIST_RES::MergeFrom(from.msg_leader_server_list_res());
+      break;
+    }
+    case kMSGLEADERBROADCASTADD: {
+      mutable_msg_leader_broadcast_add()->::p1::MSG_LEADER_BROADCAST_ADD::MergeFrom(from.msg_leader_broadcast_add());
+      break;
+    }
+    case kMSGLEADERBROADCASTREMOVE: {
+      mutable_msg_leader_broadcast_remove()->::p1::MSG_LEADER_BROADCAST_REMOVE::MergeFrom(from.msg_leader_broadcast_remove());
       break;
     }
     case MSG_NOT_SET: {
       break;
     }
   }
-  if (from.msgfromid() != 0) {
-    set_msgfromid(from.msgfromid());
+  if (from.sessionid() != 0) {
+    set_sessionid(from.sessionid());
   }
 }
 
@@ -457,7 +738,7 @@ void MSG_BASE::Swap(MSG_BASE* other) {
   InternalSwap(other);
 }
 void MSG_BASE::InternalSwap(MSG_BASE* other) {
-  std::swap(msgfromid_, other->msgfromid_);
+  std::swap(sessionid_, other->sessionid_);
   std::swap(msg_, other->msg_);
   std::swap(_oneof_case_[0], other->_oneof_case_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -475,114 +756,402 @@ void MSG_BASE::InternalSwap(MSG_BASE* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // MSG_BASE
 
-// optional int32 MsgFromID = 1;
-void MSG_BASE::clear_msgfromid() {
-  msgfromid_ = 0;
+// optional int32 SessionID = 1;
+void MSG_BASE::clear_sessionid() {
+  sessionid_ = 0;
 }
-::google::protobuf::int32 MSG_BASE::msgfromid() const {
-  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MsgFromID)
-  return msgfromid_;
+::google::protobuf::int32 MSG_BASE::sessionid() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.SessionID)
+  return sessionid_;
 }
-void MSG_BASE::set_msgfromid(::google::protobuf::int32 value) {
+void MSG_BASE::set_sessionid(::google::protobuf::int32 value) {
   
-  msgfromid_ = value;
-  // @@protoc_insertion_point(field_set:t1.MSG_BASE.MsgFromID)
+  sessionid_ = value;
+  // @@protoc_insertion_point(field_set:t1.MSG_BASE.SessionID)
 }
 
-// optional .p1.MSG_TEST msg_test = 1000;
-bool MSG_BASE::has_msg_test() const {
-  return msg_case() == kMsgTest;
+// optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT = 1000;
+bool MSG_BASE::has_msg_heartbeat() const {
+  return msg_case() == kMSGHEARTBEAT;
 }
-void MSG_BASE::set_has_msg_test() {
-  _oneof_case_[0] = kMsgTest;
+void MSG_BASE::set_has_msg_heartbeat() {
+  _oneof_case_[0] = kMSGHEARTBEAT;
 }
-void MSG_BASE::clear_msg_test() {
-  if (has_msg_test()) {
-    delete msg_.msg_test_;
+void MSG_BASE::clear_msg_heartbeat() {
+  if (has_msg_heartbeat()) {
+    delete msg_.msg_heartbeat_;
     clear_has_msg();
   }
 }
- const ::p1::MSG_TEST& MSG_BASE::msg_test() const {
-  // @@protoc_insertion_point(field_get:t1.MSG_BASE.msg_test)
-  return has_msg_test()
-      ? *msg_.msg_test_
-      : ::p1::MSG_TEST::default_instance();
+ const ::p1::MSG_HEARTBEAT& MSG_BASE::msg_heartbeat() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_HEARTBEAT)
+  return has_msg_heartbeat()
+      ? *msg_.msg_heartbeat_
+      : ::p1::MSG_HEARTBEAT::default_instance();
 }
-::p1::MSG_TEST* MSG_BASE::mutable_msg_test() {
-  if (!has_msg_test()) {
+::p1::MSG_HEARTBEAT* MSG_BASE::mutable_msg_heartbeat() {
+  if (!has_msg_heartbeat()) {
     clear_msg();
-    set_has_msg_test();
-    msg_.msg_test_ = new ::p1::MSG_TEST;
+    set_has_msg_heartbeat();
+    msg_.msg_heartbeat_ = new ::p1::MSG_HEARTBEAT;
   }
-  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.msg_test)
-  return msg_.msg_test_;
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_HEARTBEAT)
+  return msg_.msg_heartbeat_;
 }
-::p1::MSG_TEST* MSG_BASE::release_msg_test() {
-  // @@protoc_insertion_point(field_release:t1.MSG_BASE.msg_test)
-  if (has_msg_test()) {
+::p1::MSG_HEARTBEAT* MSG_BASE::release_msg_heartbeat() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_HEARTBEAT)
+  if (has_msg_heartbeat()) {
     clear_has_msg();
-    ::p1::MSG_TEST* temp = msg_.msg_test_;
-    msg_.msg_test_ = NULL;
+    ::p1::MSG_HEARTBEAT* temp = msg_.msg_heartbeat_;
+    msg_.msg_heartbeat_ = NULL;
     return temp;
   } else {
     return NULL;
   }
 }
-void MSG_BASE::set_allocated_msg_test(::p1::MSG_TEST* msg_test) {
+void MSG_BASE::set_allocated_msg_heartbeat(::p1::MSG_HEARTBEAT* msg_heartbeat) {
   clear_msg();
-  if (msg_test) {
-    set_has_msg_test();
-    msg_.msg_test_ = msg_test;
+  if (msg_heartbeat) {
+    set_has_msg_heartbeat();
+    msg_.msg_heartbeat_ = msg_heartbeat;
   }
-  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.msg_test)
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_HEARTBEAT)
 }
 
-// optional .p1.MSG_TEST_RES msg_test_res = 2000;
-bool MSG_BASE::has_msg_test_res() const {
-  return msg_case() == kMsgTestRes;
+// optional .p1.MSG_LEADER_REG MSG_LEADER_REG = 1001;
+bool MSG_BASE::has_msg_leader_reg() const {
+  return msg_case() == kMSGLEADERREG;
 }
-void MSG_BASE::set_has_msg_test_res() {
-  _oneof_case_[0] = kMsgTestRes;
+void MSG_BASE::set_has_msg_leader_reg() {
+  _oneof_case_[0] = kMSGLEADERREG;
 }
-void MSG_BASE::clear_msg_test_res() {
-  if (has_msg_test_res()) {
-    delete msg_.msg_test_res_;
+void MSG_BASE::clear_msg_leader_reg() {
+  if (has_msg_leader_reg()) {
+    delete msg_.msg_leader_reg_;
     clear_has_msg();
   }
 }
- const ::p1::MSG_TEST_RES& MSG_BASE::msg_test_res() const {
-  // @@protoc_insertion_point(field_get:t1.MSG_BASE.msg_test_res)
-  return has_msg_test_res()
-      ? *msg_.msg_test_res_
-      : ::p1::MSG_TEST_RES::default_instance();
+ const ::p1::MSG_LEADER_REG& MSG_BASE::msg_leader_reg() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_REG)
+  return has_msg_leader_reg()
+      ? *msg_.msg_leader_reg_
+      : ::p1::MSG_LEADER_REG::default_instance();
 }
-::p1::MSG_TEST_RES* MSG_BASE::mutable_msg_test_res() {
-  if (!has_msg_test_res()) {
+::p1::MSG_LEADER_REG* MSG_BASE::mutable_msg_leader_reg() {
+  if (!has_msg_leader_reg()) {
     clear_msg();
-    set_has_msg_test_res();
-    msg_.msg_test_res_ = new ::p1::MSG_TEST_RES;
+    set_has_msg_leader_reg();
+    msg_.msg_leader_reg_ = new ::p1::MSG_LEADER_REG;
   }
-  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.msg_test_res)
-  return msg_.msg_test_res_;
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_REG)
+  return msg_.msg_leader_reg_;
 }
-::p1::MSG_TEST_RES* MSG_BASE::release_msg_test_res() {
-  // @@protoc_insertion_point(field_release:t1.MSG_BASE.msg_test_res)
-  if (has_msg_test_res()) {
+::p1::MSG_LEADER_REG* MSG_BASE::release_msg_leader_reg() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_REG)
+  if (has_msg_leader_reg()) {
     clear_has_msg();
-    ::p1::MSG_TEST_RES* temp = msg_.msg_test_res_;
-    msg_.msg_test_res_ = NULL;
+    ::p1::MSG_LEADER_REG* temp = msg_.msg_leader_reg_;
+    msg_.msg_leader_reg_ = NULL;
     return temp;
   } else {
     return NULL;
   }
 }
-void MSG_BASE::set_allocated_msg_test_res(::p1::MSG_TEST_RES* msg_test_res) {
+void MSG_BASE::set_allocated_msg_leader_reg(::p1::MSG_LEADER_REG* msg_leader_reg) {
   clear_msg();
-  if (msg_test_res) {
-    set_has_msg_test_res();
-    msg_.msg_test_res_ = msg_test_res;
+  if (msg_leader_reg) {
+    set_has_msg_leader_reg();
+    msg_.msg_leader_reg_ = msg_leader_reg;
   }
-  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.msg_test_res)
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_REG)
+}
+
+// optional .p1.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 1002;
+bool MSG_BASE::has_msg_leader_server_list() const {
+  return msg_case() == kMSGLEADERSERVERLIST;
+}
+void MSG_BASE::set_has_msg_leader_server_list() {
+  _oneof_case_[0] = kMSGLEADERSERVERLIST;
+}
+void MSG_BASE::clear_msg_leader_server_list() {
+  if (has_msg_leader_server_list()) {
+    delete msg_.msg_leader_server_list_;
+    clear_has_msg();
+  }
+}
+ const ::p1::MSG_LEADER_SERVER_LIST& MSG_BASE::msg_leader_server_list() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_SERVER_LIST)
+  return has_msg_leader_server_list()
+      ? *msg_.msg_leader_server_list_
+      : ::p1::MSG_LEADER_SERVER_LIST::default_instance();
+}
+::p1::MSG_LEADER_SERVER_LIST* MSG_BASE::mutable_msg_leader_server_list() {
+  if (!has_msg_leader_server_list()) {
+    clear_msg();
+    set_has_msg_leader_server_list();
+    msg_.msg_leader_server_list_ = new ::p1::MSG_LEADER_SERVER_LIST;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_SERVER_LIST)
+  return msg_.msg_leader_server_list_;
+}
+::p1::MSG_LEADER_SERVER_LIST* MSG_BASE::release_msg_leader_server_list() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_SERVER_LIST)
+  if (has_msg_leader_server_list()) {
+    clear_has_msg();
+    ::p1::MSG_LEADER_SERVER_LIST* temp = msg_.msg_leader_server_list_;
+    msg_.msg_leader_server_list_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+void MSG_BASE::set_allocated_msg_leader_server_list(::p1::MSG_LEADER_SERVER_LIST* msg_leader_server_list) {
+  clear_msg();
+  if (msg_leader_server_list) {
+    set_has_msg_leader_server_list();
+    msg_.msg_leader_server_list_ = msg_leader_server_list;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_SERVER_LIST)
+}
+
+// optional .p1.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 2000;
+bool MSG_BASE::has_msg_heartbeat_res() const {
+  return msg_case() == kMSGHEARTBEATRES;
+}
+void MSG_BASE::set_has_msg_heartbeat_res() {
+  _oneof_case_[0] = kMSGHEARTBEATRES;
+}
+void MSG_BASE::clear_msg_heartbeat_res() {
+  if (has_msg_heartbeat_res()) {
+    delete msg_.msg_heartbeat_res_;
+    clear_has_msg();
+  }
+}
+ const ::p1::MSG_HEARTBEAT& MSG_BASE::msg_heartbeat_res() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_HEARTBEAT_RES)
+  return has_msg_heartbeat_res()
+      ? *msg_.msg_heartbeat_res_
+      : ::p1::MSG_HEARTBEAT::default_instance();
+}
+::p1::MSG_HEARTBEAT* MSG_BASE::mutable_msg_heartbeat_res() {
+  if (!has_msg_heartbeat_res()) {
+    clear_msg();
+    set_has_msg_heartbeat_res();
+    msg_.msg_heartbeat_res_ = new ::p1::MSG_HEARTBEAT;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_HEARTBEAT_RES)
+  return msg_.msg_heartbeat_res_;
+}
+::p1::MSG_HEARTBEAT* MSG_BASE::release_msg_heartbeat_res() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_HEARTBEAT_RES)
+  if (has_msg_heartbeat_res()) {
+    clear_has_msg();
+    ::p1::MSG_HEARTBEAT* temp = msg_.msg_heartbeat_res_;
+    msg_.msg_heartbeat_res_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+void MSG_BASE::set_allocated_msg_heartbeat_res(::p1::MSG_HEARTBEAT* msg_heartbeat_res) {
+  clear_msg();
+  if (msg_heartbeat_res) {
+    set_has_msg_heartbeat_res();
+    msg_.msg_heartbeat_res_ = msg_heartbeat_res;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_HEARTBEAT_RES)
+}
+
+// optional .p1.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 2001;
+bool MSG_BASE::has_msg_leader_reg_res() const {
+  return msg_case() == kMSGLEADERREGRES;
+}
+void MSG_BASE::set_has_msg_leader_reg_res() {
+  _oneof_case_[0] = kMSGLEADERREGRES;
+}
+void MSG_BASE::clear_msg_leader_reg_res() {
+  if (has_msg_leader_reg_res()) {
+    delete msg_.msg_leader_reg_res_;
+    clear_has_msg();
+  }
+}
+ const ::p1::MSG_LEADER_REG_RES& MSG_BASE::msg_leader_reg_res() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_REG_RES)
+  return has_msg_leader_reg_res()
+      ? *msg_.msg_leader_reg_res_
+      : ::p1::MSG_LEADER_REG_RES::default_instance();
+}
+::p1::MSG_LEADER_REG_RES* MSG_BASE::mutable_msg_leader_reg_res() {
+  if (!has_msg_leader_reg_res()) {
+    clear_msg();
+    set_has_msg_leader_reg_res();
+    msg_.msg_leader_reg_res_ = new ::p1::MSG_LEADER_REG_RES;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_REG_RES)
+  return msg_.msg_leader_reg_res_;
+}
+::p1::MSG_LEADER_REG_RES* MSG_BASE::release_msg_leader_reg_res() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_REG_RES)
+  if (has_msg_leader_reg_res()) {
+    clear_has_msg();
+    ::p1::MSG_LEADER_REG_RES* temp = msg_.msg_leader_reg_res_;
+    msg_.msg_leader_reg_res_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+void MSG_BASE::set_allocated_msg_leader_reg_res(::p1::MSG_LEADER_REG_RES* msg_leader_reg_res) {
+  clear_msg();
+  if (msg_leader_reg_res) {
+    set_has_msg_leader_reg_res();
+    msg_.msg_leader_reg_res_ = msg_leader_reg_res;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_REG_RES)
+}
+
+// optional .p1.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 2002;
+bool MSG_BASE::has_msg_leader_server_list_res() const {
+  return msg_case() == kMSGLEADERSERVERLISTRES;
+}
+void MSG_BASE::set_has_msg_leader_server_list_res() {
+  _oneof_case_[0] = kMSGLEADERSERVERLISTRES;
+}
+void MSG_BASE::clear_msg_leader_server_list_res() {
+  if (has_msg_leader_server_list_res()) {
+    delete msg_.msg_leader_server_list_res_;
+    clear_has_msg();
+  }
+}
+ const ::p1::MSG_LEADER_SERVER_LIST_RES& MSG_BASE::msg_leader_server_list_res() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_SERVER_LIST_RES)
+  return has_msg_leader_server_list_res()
+      ? *msg_.msg_leader_server_list_res_
+      : ::p1::MSG_LEADER_SERVER_LIST_RES::default_instance();
+}
+::p1::MSG_LEADER_SERVER_LIST_RES* MSG_BASE::mutable_msg_leader_server_list_res() {
+  if (!has_msg_leader_server_list_res()) {
+    clear_msg();
+    set_has_msg_leader_server_list_res();
+    msg_.msg_leader_server_list_res_ = new ::p1::MSG_LEADER_SERVER_LIST_RES;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_SERVER_LIST_RES)
+  return msg_.msg_leader_server_list_res_;
+}
+::p1::MSG_LEADER_SERVER_LIST_RES* MSG_BASE::release_msg_leader_server_list_res() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_SERVER_LIST_RES)
+  if (has_msg_leader_server_list_res()) {
+    clear_has_msg();
+    ::p1::MSG_LEADER_SERVER_LIST_RES* temp = msg_.msg_leader_server_list_res_;
+    msg_.msg_leader_server_list_res_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+void MSG_BASE::set_allocated_msg_leader_server_list_res(::p1::MSG_LEADER_SERVER_LIST_RES* msg_leader_server_list_res) {
+  clear_msg();
+  if (msg_leader_server_list_res) {
+    set_has_msg_leader_server_list_res();
+    msg_.msg_leader_server_list_res_ = msg_leader_server_list_res;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_SERVER_LIST_RES)
+}
+
+// optional .p1.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 3001;
+bool MSG_BASE::has_msg_leader_broadcast_add() const {
+  return msg_case() == kMSGLEADERBROADCASTADD;
+}
+void MSG_BASE::set_has_msg_leader_broadcast_add() {
+  _oneof_case_[0] = kMSGLEADERBROADCASTADD;
+}
+void MSG_BASE::clear_msg_leader_broadcast_add() {
+  if (has_msg_leader_broadcast_add()) {
+    delete msg_.msg_leader_broadcast_add_;
+    clear_has_msg();
+  }
+}
+ const ::p1::MSG_LEADER_BROADCAST_ADD& MSG_BASE::msg_leader_broadcast_add() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_BROADCAST_ADD)
+  return has_msg_leader_broadcast_add()
+      ? *msg_.msg_leader_broadcast_add_
+      : ::p1::MSG_LEADER_BROADCAST_ADD::default_instance();
+}
+::p1::MSG_LEADER_BROADCAST_ADD* MSG_BASE::mutable_msg_leader_broadcast_add() {
+  if (!has_msg_leader_broadcast_add()) {
+    clear_msg();
+    set_has_msg_leader_broadcast_add();
+    msg_.msg_leader_broadcast_add_ = new ::p1::MSG_LEADER_BROADCAST_ADD;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_BROADCAST_ADD)
+  return msg_.msg_leader_broadcast_add_;
+}
+::p1::MSG_LEADER_BROADCAST_ADD* MSG_BASE::release_msg_leader_broadcast_add() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_BROADCAST_ADD)
+  if (has_msg_leader_broadcast_add()) {
+    clear_has_msg();
+    ::p1::MSG_LEADER_BROADCAST_ADD* temp = msg_.msg_leader_broadcast_add_;
+    msg_.msg_leader_broadcast_add_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+void MSG_BASE::set_allocated_msg_leader_broadcast_add(::p1::MSG_LEADER_BROADCAST_ADD* msg_leader_broadcast_add) {
+  clear_msg();
+  if (msg_leader_broadcast_add) {
+    set_has_msg_leader_broadcast_add();
+    msg_.msg_leader_broadcast_add_ = msg_leader_broadcast_add;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_BROADCAST_ADD)
+}
+
+// optional .p1.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 3002;
+bool MSG_BASE::has_msg_leader_broadcast_remove() const {
+  return msg_case() == kMSGLEADERBROADCASTREMOVE;
+}
+void MSG_BASE::set_has_msg_leader_broadcast_remove() {
+  _oneof_case_[0] = kMSGLEADERBROADCASTREMOVE;
+}
+void MSG_BASE::clear_msg_leader_broadcast_remove() {
+  if (has_msg_leader_broadcast_remove()) {
+    delete msg_.msg_leader_broadcast_remove_;
+    clear_has_msg();
+  }
+}
+ const ::p1::MSG_LEADER_BROADCAST_REMOVE& MSG_BASE::msg_leader_broadcast_remove() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_LEADER_BROADCAST_REMOVE)
+  return has_msg_leader_broadcast_remove()
+      ? *msg_.msg_leader_broadcast_remove_
+      : ::p1::MSG_LEADER_BROADCAST_REMOVE::default_instance();
+}
+::p1::MSG_LEADER_BROADCAST_REMOVE* MSG_BASE::mutable_msg_leader_broadcast_remove() {
+  if (!has_msg_leader_broadcast_remove()) {
+    clear_msg();
+    set_has_msg_leader_broadcast_remove();
+    msg_.msg_leader_broadcast_remove_ = new ::p1::MSG_LEADER_BROADCAST_REMOVE;
+  }
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_BROADCAST_REMOVE)
+  return msg_.msg_leader_broadcast_remove_;
+}
+::p1::MSG_LEADER_BROADCAST_REMOVE* MSG_BASE::release_msg_leader_broadcast_remove() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_LEADER_BROADCAST_REMOVE)
+  if (has_msg_leader_broadcast_remove()) {
+    clear_has_msg();
+    ::p1::MSG_LEADER_BROADCAST_REMOVE* temp = msg_.msg_leader_broadcast_remove_;
+    msg_.msg_leader_broadcast_remove_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+void MSG_BASE::set_allocated_msg_leader_broadcast_remove(::p1::MSG_LEADER_BROADCAST_REMOVE* msg_leader_broadcast_remove) {
+  clear_msg();
+  if (msg_leader_broadcast_remove) {
+    set_has_msg_leader_broadcast_remove();
+    msg_.msg_leader_broadcast_remove_ = msg_leader_broadcast_remove;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_LEADER_BROADCAST_REMOVE)
 }
 
 bool MSG_BASE::has_msg() const {

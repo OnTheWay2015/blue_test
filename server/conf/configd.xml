@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Main ServerName="monitor" ServerDesc="monitor" ServerID="1" ServiceType="1">  
+<Main ServerName="monitor" ServerDesc="monitor" ServerID="1"  >  
   <Net NetWorkThreadCount="2"> 
   </Net>
 	<Leader Port="0"> 
