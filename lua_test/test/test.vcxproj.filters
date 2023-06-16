@@ -59,5 +59,8 @@
     <None Include="scripts\test006.lua">
       <Filter>scripts</Filter>
     </None>
+    <None Include="scripts\helloworld001.lua">
+      <Filter>scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

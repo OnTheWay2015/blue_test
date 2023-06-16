@@ -44,6 +44,8 @@ public:
 	virtual CLIENT_PROXY_TYPE GetClientProxyType()=0;
 	virtual CLIENT_PROXY_MODE GetClientProxyMode()=0;
 	virtual SESSION_ID GetSessionID()=0;
+	virtual UINT GetServiceID()=0;
+	virtual UINT GetServiceType()=0;
 	virtual bool SendMsg(CSmartPtr<DOS_SIMPLE_MESSAGE> msg) = 0;
 
 }; 
@@ -68,7 +70,10 @@ public:
 
 	bool PrintConnectionDebugLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...);
 public: //CBaseNetConnectionInterface 
-	virtual void SetService(CBaseNetServiceInterface* pService ) override { m_pService =pService; };
+	virtual void SetService(CBaseNetServiceInterface* pService ) override 
+	{ 
+		m_pService =pService; 
+	};
 	virtual CNetSocket * GetSocket() override ;
 	virtual void SetRemoteAddress(const CIPAddress& IPAddress) override ;
 	virtual void SetLocalAddress(const CIPAddress& IPAddress) override ;
@@ -99,6 +104,24 @@ public: //CBaseNetConnectionInterface
         m_ClientProxyType = Type;
         m_ClientProxyMode = Mode;
     }
+
+
+	virtual UINT GetServiceID()override
+	{
+		if (!m_pService)
+		{
+			return 0;
+		}
+		return m_pService->GetServiceID();
+	}
+	virtual UINT GetServiceType()override
+	{
+		if (!m_pService)
+		{
+			return 0;
+		}
+		return m_pService->GetServiceType();
+	}
 
 	virtual CLIENT_PROXY_TYPE GetClientProxyType()
     {

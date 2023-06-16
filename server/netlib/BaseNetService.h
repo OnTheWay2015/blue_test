@@ -44,7 +44,8 @@ public:
 	virtual void OnRecvData(const CIPAddress& IPAddress, const BYTE * pData, UINT DataSize) = 0; //UDP
 	virtual void OnRecvData(CSmartPtr<CBaseNetConnectionInterface> pConnection, DOS_SIMPLE_MESSAGE_HEAD* pData ) = 0;
 //DOS_SIMPLE_MESSAGE_HEAD
-
+	virtual UINT GetServiceID()=0;
+	virtual UINT GetServiceType()=0;
 
 //Connection holder
 	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) =0;
@@ -64,6 +65,8 @@ protected:
 	NetHandlerInterface* m_NetHandler;
     CLIENT_PROXY_TYPE	m_ClientProxyType;
     CLIENT_PROXY_MODE	m_ClientProxyMode;
+    UINT ServiceID;
+    UINT ServiceType;
 
 public:
 	CBaseNetService(void);
@@ -86,6 +89,12 @@ public:
 	void SetHandler(NetHandlerInterface* h)
 	{
 		m_NetHandler = h;
+	}
+
+	void SetServiceType(UINT Type, UINT Sid)
+	{
+		ServiceID = Sid;
+		ServiceType = Type;
 	}
 
 	void SetClientProxy(CLIENT_PROXY_TYPE Type, CLIENT_PROXY_MODE Mode)

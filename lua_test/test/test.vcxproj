@@ -167,6 +167,7 @@
     <ClCompile Include="test_game.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="scripts\helloworld001.lua" />
     <None Include="scripts\test000.lua" />
     <None Include="scripts\test001.lua" />
     <None Include="scripts\test002.lua" />

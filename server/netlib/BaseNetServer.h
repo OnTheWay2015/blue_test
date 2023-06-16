@@ -17,7 +17,7 @@
 //	GAME,
 //};
 
-enum class CLIENT_PROXY_TYPE  //connection 连接服务的类型
+enum class CLIENT_PROXY_TYPE  //connection 连接服务的类型,对应配置 Services.Service.ClientProxys.ClientProxy.ProxyType 同一个 server 不可重复 
 {
 	SERVER_GAME=1,
 	SERVER_MONITOR,

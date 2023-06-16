@@ -21,6 +21,10 @@ struct CoreSessionMessage : CoreMessage
     CSmartPtr<void> Msg;
     SESSION_ID SID;
     CLIENT_PROXY_TYPE ClientProxyType;
+
+    UINT ServiceID;
+    UINT ServiceType;
+
 };
 
 

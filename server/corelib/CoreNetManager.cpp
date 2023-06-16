@@ -212,6 +212,8 @@ void CoreNetManager::AddConnection(CSmartPtr<CBaseNetConnectionInterface> c)
         m->EventType = CORE_EVENT::SESSION_ADD;
         m->SID= c->GetSessionID(); 
         m->ClientProxyType = c->GetClientProxyType();
+        m->ServiceID = c->GetServiceID();
+        m->ServiceType = c->GetServiceType();
         m->Session = c;
         PushMessage(m);
     }

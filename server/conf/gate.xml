@@ -8,7 +8,7 @@
   <Services>
 	<Service Name="gate" Desc="gate for client" ServiceID="1" ServiceType="2" >  
 	  <ClientProxys>   
-		<ClientProxy ProxyType="3" ProxyMode="1" ListenIP="0" ListenPort="64000" ConnectionGroupCount="4" 
+		<ClientProxy ProxyType="2" ProxyMode="1" ListenIP="0" ListenPort="64000" ConnectionGroupCount="4" 
                  KeepAliveTime="10000" 
                  MsgQueueSize="256"   
                  EnableGuardThread="true" GuardThreadKeepAliveTime="20000" GuardThreadKeepAliveCount="5"/> 
@@ -16,7 +16,7 @@
 	<Service>
 	<Service Name="gate_internal" Desc="gate for server" ServiceID="2" ServiceType="3" >  
 	  <ClientProxys>   
-		<ClientProxy ProxyType="4" ProxyMode="1" ListenIP="0" ListenPort="65001" ConnectionGroupCount="4" 
+		<ClientProxy ProxyType="2" ProxyMode="1" ListenIP="0" ListenPort="64000" ConnectionGroupCount="4" 
                  KeepAliveTime="10000" 
                  MsgQueueSize="256"   
                  EnableGuardThread="true" GuardThreadKeepAliveTime="20000" GuardThreadKeepAliveCount="5"/> 
