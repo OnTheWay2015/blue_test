@@ -30,23 +30,30 @@ public:
 
 
 public:
-	virtual void SetServer(CNetServer* Svr);//todo  CNetServerInterface
-	virtual CNetServer* GetServer() ;
-	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT);
-	virtual void OnRecvData(CSmartPtr<CBaseNetConnectionInterface> pConnection, DOS_SIMPLE_MESSAGE_HEAD* pData );
+	virtual void SetServer(CNetServer* Svr) override;//todo  CNetServerInterface
+	virtual CNetServer* GetServer()  override;
+	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT) override;
+	virtual void OnRecvData(CSmartPtr<CBaseNetConnectionInterface> pConnection, DOS_SIMPLE_MESSAGE_HEAD* pData ) override;
 
 	
-	virtual bool StartListen(const CIPAddress& Address) {return false;};
+	virtual bool StartListen(const CIPAddress& Address) override {return false;}
+
 	virtual void OnStartUp() {};
 	virtual void OnClose() {};
 	virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress){return nullptr;};
 	virtual bool DeleteConnection(CSmartPtr<CBaseNetConnectionInterface>  pConnection) {return false;};
 	virtual void OnRecvData(const CIPAddress& IPAddress, const BYTE * pData, UINT DataSize) {}; //UDP
 
+	virtual UINT GetServiceID() override { return 0;}
+	virtual UINT GetServiceType() override { return 0;}
 
 	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) override ;
 	virtual void OnDisconnection(CSmartPtr<CBaseNetConnectionInterface> s) override;
 	virtual void OnRecvMessage(CSmartPtr<CBaseNetConnectionInterface> s,  DOS_SIMPLE_MESSAGE_HEAD* pMsg) override; 
+
+
+
+
 
 }; 
 

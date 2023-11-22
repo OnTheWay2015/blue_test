@@ -85,6 +85,9 @@ public: //CBaseNetServiceInterface
 	virtual void OnRecvData(CSmartPtr<CBaseNetConnectionInterface> pConnection, DOS_SIMPLE_MESSAGE_HEAD* pData ) override { };
 	
 
+	virtual UINT GetServiceID() override { return 0;}
+	virtual UINT GetServiceType() override { return 0;}
+	
 	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) override { };
 	virtual void OnDisconnection(CSmartPtr<CBaseNetConnectionInterface> s) override { };
 	virtual void OnRecvMessage(CSmartPtr<CBaseNetConnectionInterface> s,  DOS_SIMPLE_MESSAGE_HEAD* pMsg) override { }; 
