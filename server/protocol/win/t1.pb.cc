@@ -21,6 +21,8 @@ extern PROTOBUF_INTERNAL_EXPORT_p1_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SC
 extern PROTOBUF_INTERNAL_EXPORT_p1_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MSG_LEADER_REG_RES_p1_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_p1_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MSG_LEADER_SERVER_LIST_p1_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_p1_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MSG_LEADER_SERVER_LIST_RES_p1_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_p1_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MSG_TEST_p1_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_p1_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MSG_TEST_RES_p1_2eproto;
 namespace t1 {
 class MSG_BASEDefaultTypeInternal {
  public:
@@ -33,6 +35,8 @@ class MSG_BASEDefaultTypeInternal {
   const ::p1::MSG_LEADER_SERVER_LIST_RES* msg_leader_server_list_res_;
   const ::p1::MSG_LEADER_BROADCAST_ADD* msg_leader_broadcast_add_;
   const ::p1::MSG_LEADER_BROADCAST_REMOVE* msg_leader_broadcast_remove_;
+  const ::p1::MSG_TEST* msg_test_;
+  const ::p1::MSG_TEST_RES* msg_test_res_;
 } _MSG_BASE_default_instance_;
 }  // namespace t1
 static void InitDefaultsscc_info_MSG_BASE_t1_2eproto() {
@@ -46,15 +50,17 @@ static void InitDefaultsscc_info_MSG_BASE_t1_2eproto() {
   ::t1::MSG_BASE::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<7> scc_info_MSG_BASE_t1_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 7, 0, InitDefaultsscc_info_MSG_BASE_t1_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<9> scc_info_MSG_BASE_t1_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 9, 0, InitDefaultsscc_info_MSG_BASE_t1_2eproto}, {
       &scc_info_MSG_HEARTBEAT_p1_2eproto.base,
       &scc_info_MSG_LEADER_REG_p1_2eproto.base,
       &scc_info_MSG_LEADER_SERVER_LIST_p1_2eproto.base,
       &scc_info_MSG_LEADER_REG_RES_p1_2eproto.base,
       &scc_info_MSG_LEADER_SERVER_LIST_RES_p1_2eproto.base,
       &scc_info_MSG_LEADER_BROADCAST_ADD_p1_2eproto.base,
-      &scc_info_MSG_LEADER_BROADCAST_REMOVE_p1_2eproto.base,}};
+      &scc_info_MSG_LEADER_BROADCAST_REMOVE_p1_2eproto.base,
+      &scc_info_MSG_TEST_p1_2eproto.base,
+      &scc_info_MSG_TEST_RES_p1_2eproto.base,}};
 
 static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_t1_2eproto[1];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_t1_2eproto = nullptr;
@@ -74,6 +80,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_t1_2eproto::offsets[] PROTOBUF
   offsetof(::t1::MSG_BASEDefaultTypeInternal, msg_leader_server_list_res_),
   offsetof(::t1::MSG_BASEDefaultTypeInternal, msg_leader_broadcast_add_),
   offsetof(::t1::MSG_BASEDefaultTypeInternal, msg_leader_broadcast_remove_),
+  offsetof(::t1::MSG_BASEDefaultTypeInternal, msg_test_),
+  offsetof(::t1::MSG_BASEDefaultTypeInternal, msg_test_res_),
   PROTOBUF_FIELD_OFFSET(::t1::MSG_BASE, msg_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -85,7 +93,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_t1_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\010t1.proto\022\002t1\032\010p1.proto\"\347\003\n\010MSG_BASE\022+\n"
+  "\n\010t1.proto\022\002t1\032\010p1.proto\"\265\004\n\010MSG_BASE\022+\n"
   "\rMSG_HEARTBEAT\030\350\007 \001(\0132\021.p1.MSG_HEARTBEAT"
   "H\000\022-\n\016MSG_LEADER_REG\030\351\007 \001(\0132\022.p1.MSG_LEA"
   "DER_REGH\000\022=\n\026MSG_LEADER_SERVER_LIST\030\352\007 \001"
@@ -97,8 +105,9 @@ const char descriptor_table_protodef_t1_2eproto[] PROTOBUF_SECTION_VARIABLE(prot
   "T_RESH\000\022A\n\030MSG_LEADER_BROADCAST_ADD\030\271\027 \001"
   "(\0132\034.p1.MSG_LEADER_BROADCAST_ADDH\000\022G\n\033MS"
   "G_LEADER_BROADCAST_REMOVE\030\272\027 \001(\0132\037.p1.MS"
-  "G_LEADER_BROADCAST_REMOVEH\000B\005\n\003msgb\006prot"
-  "o3"
+  "G_LEADER_BROADCAST_REMOVEH\000\022!\n\010MSG_TEST\030"
+  "\251F \001(\0132\014.p1.MSG_TESTH\000\022)\n\014MSG_TEST_RES\030\252"
+  "F \001(\0132\020.p1.MSG_TEST_RESH\000B\005\n\003msgb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_t1_2eproto_deps[1] = {
   &::descriptor_table_p1_2eproto,
@@ -109,7 +118,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_t1_
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_t1_2eproto_once;
 static bool descriptor_table_t1_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_t1_2eproto = {
-  &descriptor_table_t1_2eproto_initialized, descriptor_table_protodef_t1_2eproto, "t1.proto", 522,
+  &descriptor_table_t1_2eproto_initialized, descriptor_table_protodef_t1_2eproto, "t1.proto", 600,
   &descriptor_table_t1_2eproto_once, descriptor_table_t1_2eproto_sccs, descriptor_table_t1_2eproto_deps, 1, 1,
   schemas, file_default_instances, TableStruct_t1_2eproto::offsets,
   file_level_metadata_t1_2eproto, 1, file_level_enum_descriptors_t1_2eproto, file_level_service_descriptors_t1_2eproto,
@@ -138,6 +147,10 @@ void MSG_BASE::InitAsDefaultInstance() {
       ::p1::MSG_LEADER_BROADCAST_ADD::internal_default_instance());
   ::t1::_MSG_BASE_default_instance_.msg_leader_broadcast_remove_ = const_cast< ::p1::MSG_LEADER_BROADCAST_REMOVE*>(
       ::p1::MSG_LEADER_BROADCAST_REMOVE::internal_default_instance());
+  ::t1::_MSG_BASE_default_instance_.msg_test_ = const_cast< ::p1::MSG_TEST*>(
+      ::p1::MSG_TEST::internal_default_instance());
+  ::t1::_MSG_BASE_default_instance_.msg_test_res_ = const_cast< ::p1::MSG_TEST_RES*>(
+      ::p1::MSG_TEST_RES::internal_default_instance());
 }
 class MSG_BASE::_Internal {
  public:
@@ -149,6 +162,8 @@ class MSG_BASE::_Internal {
   static const ::p1::MSG_LEADER_SERVER_LIST_RES& msg_leader_server_list_res(const MSG_BASE* msg);
   static const ::p1::MSG_LEADER_BROADCAST_ADD& msg_leader_broadcast_add(const MSG_BASE* msg);
   static const ::p1::MSG_LEADER_BROADCAST_REMOVE& msg_leader_broadcast_remove(const MSG_BASE* msg);
+  static const ::p1::MSG_TEST& msg_test(const MSG_BASE* msg);
+  static const ::p1::MSG_TEST_RES& msg_test_res(const MSG_BASE* msg);
 };
 
 const ::p1::MSG_HEARTBEAT&
@@ -182,6 +197,14 @@ MSG_BASE::_Internal::msg_leader_broadcast_add(const MSG_BASE* msg) {
 const ::p1::MSG_LEADER_BROADCAST_REMOVE&
 MSG_BASE::_Internal::msg_leader_broadcast_remove(const MSG_BASE* msg) {
   return *msg->msg_.msg_leader_broadcast_remove_;
+}
+const ::p1::MSG_TEST&
+MSG_BASE::_Internal::msg_test(const MSG_BASE* msg) {
+  return *msg->msg_.msg_test_;
+}
+const ::p1::MSG_TEST_RES&
+MSG_BASE::_Internal::msg_test_res(const MSG_BASE* msg) {
+  return *msg->msg_.msg_test_res_;
 }
 void MSG_BASE::set_allocated_msg_heartbeat(::p1::MSG_HEARTBEAT* msg_heartbeat) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
@@ -343,6 +366,46 @@ void MSG_BASE::clear_msg_leader_broadcast_remove() {
     clear_has_msg();
   }
 }
+void MSG_BASE::set_allocated_msg_test(::p1::MSG_TEST* msg_test) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  clear_msg();
+  if (msg_test) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      msg_test = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, msg_test, submessage_arena);
+    }
+    set_has_msg_test();
+    msg_.msg_test_ = msg_test;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_TEST)
+}
+void MSG_BASE::clear_msg_test() {
+  if (_internal_has_msg_test()) {
+    delete msg_.msg_test_;
+    clear_has_msg();
+  }
+}
+void MSG_BASE::set_allocated_msg_test_res(::p1::MSG_TEST_RES* msg_test_res) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  clear_msg();
+  if (msg_test_res) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      msg_test_res = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, msg_test_res, submessage_arena);
+    }
+    set_has_msg_test_res();
+    msg_.msg_test_res_ = msg_test_res;
+  }
+  // @@protoc_insertion_point(field_set_allocated:t1.MSG_BASE.MSG_TEST_RES)
+}
+void MSG_BASE::clear_msg_test_res() {
+  if (_internal_has_msg_test_res()) {
+    delete msg_.msg_test_res_;
+    clear_has_msg();
+  }
+}
 MSG_BASE::MSG_BASE()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
@@ -384,6 +447,14 @@ MSG_BASE::MSG_BASE(const MSG_BASE& from)
     }
     case kMSGLEADERBROADCASTREMOVE: {
       _internal_mutable_msg_leader_broadcast_remove()->::p1::MSG_LEADER_BROADCAST_REMOVE::MergeFrom(from._internal_msg_leader_broadcast_remove());
+      break;
+    }
+    case kMSGTEST: {
+      _internal_mutable_msg_test()->::p1::MSG_TEST::MergeFrom(from._internal_msg_test());
+      break;
+    }
+    case kMSGTESTRES: {
+      _internal_mutable_msg_test_res()->::p1::MSG_TEST_RES::MergeFrom(from._internal_msg_test_res());
       break;
     }
     case MSG_NOT_SET: {
@@ -451,6 +522,14 @@ void MSG_BASE::clear_msg() {
     }
     case kMSGLEADERBROADCASTREMOVE: {
       delete msg_.msg_leader_broadcast_remove_;
+      break;
+    }
+    case kMSGTEST: {
+      delete msg_.msg_test_;
+      break;
+    }
+    case kMSGTESTRES: {
+      delete msg_.msg_test_res_;
       break;
     }
     case MSG_NOT_SET: {
@@ -531,6 +610,20 @@ const char* MSG_BASE::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
       case 3002:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 210)) {
           ptr = ctx->ParseMessage(_internal_mutable_msg_leader_broadcast_remove(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .p1.MSG_TEST MSG_TEST = 9001;
+      case 9001:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
+          ptr = ctx->ParseMessage(_internal_mutable_msg_test(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .p1.MSG_TEST_RES MSG_TEST_RES = 9002;
+      case 9002:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
+          ptr = ctx->ParseMessage(_internal_mutable_msg_test_res(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -624,6 +717,22 @@ failure:
         3002, _Internal::msg_leader_broadcast_remove(this), target, stream);
   }
 
+  // .p1.MSG_TEST MSG_TEST = 9001;
+  if (_internal_has_msg_test()) {
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        9001, _Internal::msg_test(this), target, stream);
+  }
+
+  // .p1.MSG_TEST_RES MSG_TEST_RES = 9002;
+  if (_internal_has_msg_test_res()) {
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        9002, _Internal::msg_test_res(this), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target, stream);
@@ -697,6 +806,20 @@ size_t MSG_BASE::ByteSizeLong() const {
           *msg_.msg_leader_broadcast_remove_);
       break;
     }
+    // .p1.MSG_TEST MSG_TEST = 9001;
+    case kMSGTEST: {
+      total_size += 3 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *msg_.msg_test_);
+      break;
+    }
+    // .p1.MSG_TEST_RES MSG_TEST_RES = 9002;
+    case kMSGTESTRES: {
+      total_size += 3 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *msg_.msg_test_res_);
+      break;
+    }
     case MSG_NOT_SET: {
       break;
     }
@@ -763,6 +886,14 @@ void MSG_BASE::MergeFrom(const MSG_BASE& from) {
     }
     case kMSGLEADERBROADCASTREMOVE: {
       _internal_mutable_msg_leader_broadcast_remove()->::p1::MSG_LEADER_BROADCAST_REMOVE::MergeFrom(from._internal_msg_leader_broadcast_remove());
+      break;
+    }
+    case kMSGTEST: {
+      _internal_mutable_msg_test()->::p1::MSG_TEST::MergeFrom(from._internal_msg_test());
+      break;
+    }
+    case kMSGTESTRES: {
+      _internal_mutable_msg_test_res()->::p1::MSG_TEST_RES::MergeFrom(from._internal_msg_test_res());
       break;
     }
     case MSG_NOT_SET: {

@@ -112,6 +112,8 @@ class MSG_BASE :
     kMSGLEADERSERVERLISTRES = 2002,
     kMSGLEADERBROADCASTADD = 3001,
     kMSGLEADERBROADCASTREMOVE = 3002,
+    kMSGTEST = 9001,
+    kMSGTESTRES = 9002,
     MSG_NOT_SET = 0,
   };
 
@@ -193,6 +195,8 @@ class MSG_BASE :
     kMSGLEADERSERVERLISTRESFieldNumber = 2002,
     kMSGLEADERBROADCASTADDFieldNumber = 3001,
     kMSGLEADERBROADCASTREMOVEFieldNumber = 3002,
+    kMSGTESTFieldNumber = 9001,
+    kMSGTESTRESFieldNumber = 9002,
   };
   // .p1.MSG_HEARTBEAT MSG_HEARTBEAT = 1000;
   bool has_msg_heartbeat() const;
@@ -314,6 +318,36 @@ class MSG_BASE :
   ::p1::MSG_LEADER_BROADCAST_REMOVE* _internal_mutable_msg_leader_broadcast_remove();
   public:
 
+  // .p1.MSG_TEST MSG_TEST = 9001;
+  bool has_msg_test() const;
+  private:
+  bool _internal_has_msg_test() const;
+  public:
+  void clear_msg_test();
+  const ::p1::MSG_TEST& msg_test() const;
+  ::p1::MSG_TEST* release_msg_test();
+  ::p1::MSG_TEST* mutable_msg_test();
+  void set_allocated_msg_test(::p1::MSG_TEST* msg_test);
+  private:
+  const ::p1::MSG_TEST& _internal_msg_test() const;
+  ::p1::MSG_TEST* _internal_mutable_msg_test();
+  public:
+
+  // .p1.MSG_TEST_RES MSG_TEST_RES = 9002;
+  bool has_msg_test_res() const;
+  private:
+  bool _internal_has_msg_test_res() const;
+  public:
+  void clear_msg_test_res();
+  const ::p1::MSG_TEST_RES& msg_test_res() const;
+  ::p1::MSG_TEST_RES* release_msg_test_res();
+  ::p1::MSG_TEST_RES* mutable_msg_test_res();
+  void set_allocated_msg_test_res(::p1::MSG_TEST_RES* msg_test_res);
+  private:
+  const ::p1::MSG_TEST_RES& _internal_msg_test_res() const;
+  ::p1::MSG_TEST_RES* _internal_mutable_msg_test_res();
+  public:
+
   void clear_msg();
   MsgCase msg_case() const;
   // @@protoc_insertion_point(class_scope:t1.MSG_BASE)
@@ -327,6 +361,8 @@ class MSG_BASE :
   void set_has_msg_leader_server_list_res();
   void set_has_msg_leader_broadcast_add();
   void set_has_msg_leader_broadcast_remove();
+  void set_has_msg_test();
+  void set_has_msg_test_res();
 
   inline bool has_msg() const;
   inline void clear_has_msg();
@@ -342,6 +378,8 @@ class MSG_BASE :
     ::p1::MSG_LEADER_SERVER_LIST_RES* msg_leader_server_list_res_;
     ::p1::MSG_LEADER_BROADCAST_ADD* msg_leader_broadcast_add_;
     ::p1::MSG_LEADER_BROADCAST_REMOVE* msg_leader_broadcast_remove_;
+    ::p1::MSG_TEST* msg_test_;
+    ::p1::MSG_TEST_RES* msg_test_res_;
   } msg_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 _oneof_case_[1];
@@ -709,6 +747,94 @@ inline ::p1::MSG_LEADER_BROADCAST_REMOVE* MSG_BASE::_internal_mutable_msg_leader
 inline ::p1::MSG_LEADER_BROADCAST_REMOVE* MSG_BASE::mutable_msg_leader_broadcast_remove() {
   // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_LEADER_BROADCAST_REMOVE)
   return _internal_mutable_msg_leader_broadcast_remove();
+}
+
+// .p1.MSG_TEST MSG_TEST = 9001;
+inline bool MSG_BASE::_internal_has_msg_test() const {
+  return msg_case() == kMSGTEST;
+}
+inline bool MSG_BASE::has_msg_test() const {
+  return _internal_has_msg_test();
+}
+inline void MSG_BASE::set_has_msg_test() {
+  _oneof_case_[0] = kMSGTEST;
+}
+inline ::p1::MSG_TEST* MSG_BASE::release_msg_test() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_TEST)
+  if (has_msg_test()) {
+    clear_has_msg();
+      ::p1::MSG_TEST* temp = msg_.msg_test_;
+    msg_.msg_test_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::p1::MSG_TEST& MSG_BASE::_internal_msg_test() const {
+  return _internal_has_msg_test()
+      ? *msg_.msg_test_
+      : *reinterpret_cast< ::p1::MSG_TEST*>(&::p1::_MSG_TEST_default_instance_);
+}
+inline const ::p1::MSG_TEST& MSG_BASE::msg_test() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_TEST)
+  return _internal_msg_test();
+}
+inline ::p1::MSG_TEST* MSG_BASE::_internal_mutable_msg_test() {
+  if (!_internal_has_msg_test()) {
+    clear_msg();
+    set_has_msg_test();
+    msg_.msg_test_ = CreateMaybeMessage< ::p1::MSG_TEST >(
+        GetArenaNoVirtual());
+  }
+  return msg_.msg_test_;
+}
+inline ::p1::MSG_TEST* MSG_BASE::mutable_msg_test() {
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_TEST)
+  return _internal_mutable_msg_test();
+}
+
+// .p1.MSG_TEST_RES MSG_TEST_RES = 9002;
+inline bool MSG_BASE::_internal_has_msg_test_res() const {
+  return msg_case() == kMSGTESTRES;
+}
+inline bool MSG_BASE::has_msg_test_res() const {
+  return _internal_has_msg_test_res();
+}
+inline void MSG_BASE::set_has_msg_test_res() {
+  _oneof_case_[0] = kMSGTESTRES;
+}
+inline ::p1::MSG_TEST_RES* MSG_BASE::release_msg_test_res() {
+  // @@protoc_insertion_point(field_release:t1.MSG_BASE.MSG_TEST_RES)
+  if (has_msg_test_res()) {
+    clear_has_msg();
+      ::p1::MSG_TEST_RES* temp = msg_.msg_test_res_;
+    msg_.msg_test_res_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::p1::MSG_TEST_RES& MSG_BASE::_internal_msg_test_res() const {
+  return _internal_has_msg_test_res()
+      ? *msg_.msg_test_res_
+      : *reinterpret_cast< ::p1::MSG_TEST_RES*>(&::p1::_MSG_TEST_RES_default_instance_);
+}
+inline const ::p1::MSG_TEST_RES& MSG_BASE::msg_test_res() const {
+  // @@protoc_insertion_point(field_get:t1.MSG_BASE.MSG_TEST_RES)
+  return _internal_msg_test_res();
+}
+inline ::p1::MSG_TEST_RES* MSG_BASE::_internal_mutable_msg_test_res() {
+  if (!_internal_has_msg_test_res()) {
+    clear_msg();
+    set_has_msg_test_res();
+    msg_.msg_test_res_ = CreateMaybeMessage< ::p1::MSG_TEST_RES >(
+        GetArenaNoVirtual());
+  }
+  return msg_.msg_test_res_;
+}
+inline ::p1::MSG_TEST_RES* MSG_BASE::mutable_msg_test_res() {
+  // @@protoc_insertion_point(field_mutable:t1.MSG_BASE.MSG_TEST_RES)
+  return _internal_mutable_msg_test_res();
 }
 
 inline bool MSG_BASE::has_msg() const {

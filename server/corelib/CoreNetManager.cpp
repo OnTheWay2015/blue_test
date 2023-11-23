@@ -183,6 +183,7 @@ void CoreNetManager::ProcessQueueMessageHandler(CSmartPtr<CoreSessionMessage> ms
 
 void CoreNetManager::RemoveConnection(CSmartPtr<CBaseNetConnectionInterface> c)
 {
+//todo lock ?
     auto m = std::make_shared<CoreSessionMessage>();
     m->EventType = CORE_EVENT::SESSION_REMOVE;
     m->SID= c->GetSessionID(); 
@@ -203,6 +204,7 @@ void CoreNetManager::RemoveConnection(CSmartPtr<CBaseNetConnectionInterface> c)
 
 void CoreNetManager::AddConnection(CSmartPtr<CBaseNetConnectionInterface> c)
 {
+//todo lock ?
     if (m_ConnectionGroups.size() > 0)
     {
         UINT Index = c->GetSessionID() % m_ConnectionGroups.size();

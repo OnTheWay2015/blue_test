@@ -61,7 +61,7 @@ void MonitorConnecter::OnNetMessage(CSmartPtr<CoreSessionMessage> msg)
          
        
  
-        int packet_id = MSG_BASE::MsgCase::kMsgTest;
+        int packet_id = MSG_BASE::MsgCase::kMSGTEST;
         auto b = PACKET_CREATE(MSG_TEST, packet_id );
         b->set_name("test_name");
         auto m = std::make_shared<DOS_SIMPLE_MESSAGE>();
