@@ -20,10 +20,10 @@ struct CoreSessionMessage : CoreMessage
     CSmartPtr<DOS_SIMPLE_MESSAGE_HEAD> Header;
     CSmartPtr<void> Msg;
     SESSION_ID SID;
-    CLIENT_PROXY_TYPE ClientProxyType;
-
+    //SERVICE_TYPE ServiceType;
+    CLIENT_PROXY_MODE ClientProxyMode;
     UINT ServiceID;
-    UINT ServiceType;
+    SERVICE_TYPE ServiceType;
 
 };
 
@@ -65,7 +65,7 @@ public://NetHandlerInterface
     virtual void OnMessage(CSmartPtr<CBaseNetConnectionInterface> s,  DOS_SIMPLE_MESSAGE_HEAD* pMsg)  override ;//收到消息
     virtual void SendMessageAck(/*xxx*/)  override ;//发送消息返回
 
-    virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress,CLIENT_PROXY_TYPE type,CLIENT_PROXY_MODE mode) override ;;
+    virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress,SERVICE_TYPE type,CLIENT_PROXY_MODE mode) override ;;
 public://CoreMessageQueue
     virtual void ProcessQueueMessageHandler(CSmartPtr<CoreSessionMessage> msg) override ;
 };

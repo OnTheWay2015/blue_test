@@ -52,7 +52,7 @@ CSmartPtr<CBaseNetConnectionInterface> CProxyServiceDefault::CreateConnection(CI
 
 	auto pConnection = std::make_shared<CProxyConnectionDefault>();
 	pConnection->Init();
-    pConnection->SetClientProxy(GetClientProxyType(),GetClientProxyMode());
+    pConnection->SetClientProxy(GetServiceType(),GetClientProxyMode());
 
 	pConnection->SetService(this);
 	return pConnection;

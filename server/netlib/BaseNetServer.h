@@ -17,14 +17,24 @@
 //	GAME,
 //};
 
-enum class CLIENT_PROXY_TYPE  //connection 连接服务的类型,对应配置 Services.Service.ClientProxys.ClientProxy.ProxyType 同一个 server 不可重复 
+enum class SERVICE_TYPE // 核心提供的服务分类
 {
-	SERVER_GAME=1,
-	SERVER_MONITOR,
+	NONE=0,
+	SERVER_MONITOR=1,
+	SERVER_GAME,
 	SERVER_GATE,
 	CONNECT_MONITOR,
 	CONNECT_MONITOR_LOCAL, //本地发起连接
 };
+
+//enum class  CLIENT_PROXY_TYPE//connection 连接服务的类型,对应配置 Services.Service.ClientProxys.ClientProxy.ProxyType 同一个 server 不可重复 
+//{
+//	SERVER_GAME=1,
+//	SERVER_MONITOR,
+//	SERVER_GATE,
+//	CONNECT_MONITOR,
+//	CONNECT_MONITOR_LOCAL, //本地发起连接
+//};
 
 enum class CLIENT_PROXY_MODE
 {
@@ -65,7 +75,7 @@ public:
     virtual void SendMessageAck(/*xxx*/) = 0;//发送消息返回
    
 
-    virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& remoteAddress,CLIENT_PROXY_TYPE type,CLIENT_PROXY_MODE mode)=0;
+    virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& remoteAddress,SERVICE_TYPE type,CLIENT_PROXY_MODE mode)=0;
  
 };
 

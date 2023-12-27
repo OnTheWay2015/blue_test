@@ -20,7 +20,13 @@ void MonitorCoreHandler::Update()
 }
 void MonitorCoreHandler::OnNetMessage(CSmartPtr<CoreSessionMessage> msg)
 {
-    if (msg->EventType == CORE_EVENT::SESSION_MESSAGE)
+    switch (msg->EventType)
+    {
+    case CORE_EVENT::SESSION_ADD:
+        break;
+    case CORE_EVENT::SESSION_REMOVE:
+        break;
+    case CORE_EVENT::SESSION_MESSAGE:
     {
         auto fact = PacketManager::GetInstance()->get_factroy(msg->Header->MsgID);
         if (fact)
@@ -32,4 +38,9 @@ void MonitorCoreHandler::OnNetMessage(CSmartPtr<CoreSessionMessage> msg)
             // log err
         }
     }
+    break;
+    default:
+        ;
+    }
+
 }

@@ -120,13 +120,13 @@ void CoreNetManager::Update()
 }
 
 
-
+//接受连接(服务器)
 void CoreNetManager::OnAccept(CSmartPtr<CBaseNetConnectionInterface> s)
 {
     AddConnection(s);
 }
 
-
+//主动创建连接使用(客户端)
 void CoreNetManager::OnCreateConnectACK(CSmartPtr<CBaseNetConnectionInterface> s)
 {
     AddConnection(s);
@@ -146,7 +146,8 @@ void CoreNetManager::OnMessage(CSmartPtr<CBaseNetConnectionInterface> c,  DOS_SI
     auto h = std::make_shared<DOS_SIMPLE_MESSAGE_HEAD>();
     m->EventType = CORE_EVENT::SESSION_MESSAGE;
     m->SID = c->GetSessionID();
-    m->ClientProxyType = c->GetClientProxyType();
+    m->ServiceType = c->GetServiceType();
+    m->ClientProxyMode = c->GetClientProxyMode();
     m->Session = c;
     *h = *Msg;
     m->Header= h;
@@ -160,7 +161,7 @@ void CoreNetManager::SendMessageAck(/*xxx*/)
 }
 
 
-//CSmartPtr<CBaseNetConnectionInterface> CoreNetManager::CreateConnection(CIPAddress& RemoteAddress,CLIENT_PROXY_TYPE type,CLIENT_PROXY_MODE mode)
+//CSmartPtr<CBaseNetConnectionInterface> CoreNetManager::CreateConnection(CIPAddress& RemoteAddress,ServiceType type,CLIENT_PROXY_MODE mode)
 //{
 //	auto pConnection = std::make_shared<CProxyConnectionDefault>();
 //	pConnection->Init();
@@ -170,7 +171,7 @@ void CoreNetManager::SendMessageAck(/*xxx*/)
 //	return pConnection;
 //}
 
-CSmartPtr<CBaseNetConnectionInterface> CoreNetManager::CreateConnection(CIPAddress& remoteAddress,CLIENT_PROXY_TYPE type,CLIENT_PROXY_MODE mode)
+CSmartPtr<CBaseNetConnectionInterface> CoreNetManager::CreateConnection(CIPAddress& remoteAddress,SERVICE_TYPE type,CLIENT_PROXY_MODE mode)
 {
 	return m_NetServiceActConnect->CreateConnection(remoteAddress,type,mode);
 }
@@ -183,11 +184,10 @@ void CoreNetManager::ProcessQueueMessageHandler(CSmartPtr<CoreSessionMessage> ms
 
 void CoreNetManager::RemoveConnection(CSmartPtr<CBaseNetConnectionInterface> c)
 {
-//todo lock ?
     auto m = std::make_shared<CoreSessionMessage>();
     m->EventType = CORE_EVENT::SESSION_REMOVE;
     m->SID= c->GetSessionID(); 
-    m->ClientProxyType = c->GetClientProxyType();
+    m->ServiceType = c->GetServiceType();
 
     //if (m_ConnectionGroups.size() > 0) //通过 connection 的 stop 状态,在 group里检测删除
     //{
@@ -204,7 +204,6 @@ void CoreNetManager::RemoveConnection(CSmartPtr<CBaseNetConnectionInterface> c)
 
 void CoreNetManager::AddConnection(CSmartPtr<CBaseNetConnectionInterface> c)
 {
-//todo lock ?
     if (m_ConnectionGroups.size() > 0)
     {
         UINT Index = c->GetSessionID() % m_ConnectionGroups.size();
@@ -213,7 +212,7 @@ void CoreNetManager::AddConnection(CSmartPtr<CBaseNetConnectionInterface> c)
         auto m = std::make_shared<CoreSessionMessage>();
         m->EventType = CORE_EVENT::SESSION_ADD;
         m->SID= c->GetSessionID(); 
-        m->ClientProxyType = c->GetClientProxyType();
+        m->ServiceType = c->GetServiceType();
         m->ServiceID = c->GetServiceID();
         m->ServiceType = c->GetServiceType();
         m->Session = c;

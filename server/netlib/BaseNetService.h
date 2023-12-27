@@ -45,7 +45,7 @@ public:
 	virtual void OnRecvData(CSmartPtr<CBaseNetConnectionInterface> pConnection, DOS_SIMPLE_MESSAGE_HEAD* pData ) = 0;
 //DOS_SIMPLE_MESSAGE_HEAD
 	virtual UINT GetServiceID()=0;
-	virtual UINT GetServiceType()=0;
+	virtual SERVICE_TYPE GetServiceType()=0;
 
 //Connection holder
 	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) =0;
@@ -63,7 +63,7 @@ protected:
     CNetSocket								m_Socket;
     bool m_StopFlag;
 	NetHandlerInterface* m_NetHandler;
-    CLIENT_PROXY_TYPE	m_ClientProxyType;
+    SERVICE_TYPE	m_ServiceType;
     CLIENT_PROXY_MODE	m_ClientProxyMode;
     UINT ServiceID;
     UINT ServiceType;
@@ -97,15 +97,15 @@ public:
 		ServiceType = Type;
 	}
 
-	void SetClientProxy(CLIENT_PROXY_TYPE Type, CLIENT_PROXY_MODE Mode)
+	void SetClientProxy(SERVICE_TYPE Type, CLIENT_PROXY_MODE Mode)
     {
-        m_ClientProxyType = Type;
+        m_ServiceType = Type;
         m_ClientProxyMode = Mode;
     }
 
-	CLIENT_PROXY_TYPE GetClientProxyType()
+	SERVICE_TYPE GetServiceType()
     {
-        return m_ClientProxyType; 
+        return m_ServiceType; 
     }
 
 	CLIENT_PROXY_MODE GetClientProxyMode()

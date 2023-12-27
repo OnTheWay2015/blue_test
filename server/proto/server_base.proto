@@ -1,0 +1,120 @@
+ 
+syntax = "proto3"; 	// proto3 仅仅支持 repeated 字段修饰， 不支持 required，optional
+
+
+
+
+package server_base;
+
+
+ 
+ 
+ 
+
+message MSG_TEST { 
+  string name = 1  ; 
+}
+
+
+message MSG_TEST_RES { 
+  string name_res = 1  ; 
+  int32  a1 = 3  ; 
+  int32  a2 = 4  ; 
+}
+ 
+ 
+
+
+
+message SERVER_INFO { 
+  int64 svrid = 1; 
+  int32 type = 2;  //server_type 
+  int32 mode = 3;  //一个服务下可以开多个监听端口,接入连接,每个端口定义一个对应的 mode,  (比如 websocket,socket 两种接入)
+  string  ipstr = 4;
+  int32 port = 5;  
+}
+
+
+
+// s <--> s 
+message MSG_HEARTBEAT {
+}
+message MSG_HEARTBEAT_RES {
+}
+
+
+
+
+// --> leader
+message MSG_LEADER_REG { //注册到monitor
+  SERVER_INFO info = 1; 
+   
+}
+
+message MSG_LEADER_SERVER_LIST { //请求已注册的服务例表 
+}
+
+
+message MSG_LEADER_BROADCAST_ADD { //广播新增的注册服务 
+  SERVER_INFO info = 1; 
+}
+
+
+message MSG_LEADER_BROADCAST_REMOVE {  //广播移除的注册服务 
+  SERVER_INFO info = 1; 
+}
+
+
+
+// <-- leader
+message MSG_LEADER_REG_RES {  
+  int32 result = 1;  
+}
+
+
+message MSG_LEADER_SERVER_LIST_RES {  
+	repeated SERVER_INFO  infos = 1; 
+}
+
+
+
+
+
+
+
+/*
+  int8 	FromSvrID = 1; 
+  int24 FromSessionID = 2; 
+  int8 	ToSvrID = 3; 
+  int24 ToSessionID = 4; 
+  int32 MsgID = 5;
+*/
+
+
+message MSG_SVR_BASE {
+  oneof msg {
+    MSG_HEARTBEAT MSG_HEARTBEAT =1000;
+    MSG_LEADER_REG MSG_LEADER_REG =1001;
+    MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST =1002;
+ 	
+	
+    MSG_HEARTBEAT MSG_HEARTBEAT_RES =2000; 
+    MSG_LEADER_REG_RES MSG_LEADER_REG_RES =2001;
+    MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES =2002;
+	
+	
+    MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD =3001;
+    MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE =3002;
+	
+    MSG_TEST MSG_TEST =9001;
+    MSG_TEST_RES MSG_TEST_RES =9002;
+	
+	
+	
+	
+  }
+}
+ 
+ 
+ 
+ 

@@ -265,7 +265,7 @@ bool CNetService::StartListen(const CIPAddress& Address)
 		if(m_IsUseListenThread)
 		{
 
-			PrintNetLog(_T("(%d)Service启用线程侦听模式！ port[%d] GetClientProxyType[%d] GetClientProxyMode[%d]"),GetID(),Address.GetPort(),GetClientProxyType(),GetClientProxyMode());
+			PrintNetLog(_T("(%d)Service启用线程侦听模式！ port[%d] GetServiceType[%d] GetClientProxyMode[%d]"),GetID(),Address.GetPort(),GetServiceType(),GetClientProxyMode());
 			if (m_pListenThread == NULL)
 				m_pListenThread = MONITORED_NEW(_T("CNetService"), CIOCPListenThread);
 			m_pListenThread->Init(this,m_Socket.GetSocket());
@@ -273,7 +273,7 @@ bool CNetService::StartListen(const CIPAddress& Address)
 		}
 		else
 		{		
-			PrintNetLog(_T("(%d)Service启用IOCP侦听模式！ port[%d] GetClientProxyType[%d] GetClientProxyMode[%d]"),GetID(),Address.GetPort(),GetClientProxyType(),GetClientProxyMode());
+			PrintNetLog(_T("(%d)Service启用IOCP侦听模式！ port[%d] GetServiceType[%d] GetClientProxyMode[%d]"),GetID(),Address.GetPort(),GetServiceType(),GetClientProxyMode());
 			for (UINT i = 0; i<m_ParallelAcceptCount; i++)
 			{
 				if(!QueryAccept())

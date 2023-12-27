@@ -33,7 +33,8 @@ void CoreBase::Update()
 
 
 //在初始化时完成添加
-void CoreBase::AddHandler(CoreHandlerInterface* h, CLIENT_PROXY_TYPE type)
+//void CoreBase::AddHandler(CoreHandlerInterface* h, SERVICE_TYPE type)
+void CoreBase::SetHandler(CoreHandlerInterface* h, SERVICE_TYPE type)
 {
     //CAutoLock lock(&m_EasyCriticalSection);
     if (m_CoreHandlers.find(type) != m_CoreHandlers.end())
@@ -43,7 +44,7 @@ void CoreBase::AddHandler(CoreHandlerInterface* h, CLIENT_PROXY_TYPE type)
     m_CoreHandlers[type] = h;
 }
 
-CSmartPtr<CBaseNetConnectionInterface> CoreBase::CreateConnect(CIPAddress& remoteAddress,CLIENT_PROXY_TYPE type,CLIENT_PROXY_MODE mode)
+CSmartPtr<CBaseNetConnectionInterface> CoreBase::CreateConnect(CIPAddress& remoteAddress,SERVICE_TYPE type,CLIENT_PROXY_MODE mode)
 {
 return  m_CoreNetManager->CreateConnection(remoteAddress,type,mode);
 }
@@ -59,7 +60,7 @@ void CoreBase::DisConnect(SESSION_ID SessionID)
 void CoreBase::OnNetMessage(CSmartPtr<CoreSessionMessage> msg) 
 {
     //CAutoLock lock(&m_EasyCriticalSection);
-    m_CoreHandlers[msg->ClientProxyType]->OnNetMessage(msg);
+    m_CoreHandlers[msg->ServiceType]->OnNetMessage(msg);
     //if (msg->EventType == CORE_EVENT::SESSION_ADD)
     //{
     //}

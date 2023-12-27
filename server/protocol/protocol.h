@@ -11,14 +11,14 @@
 
 
 #ifdef _WIN32 
-    #include "win/t1.pb.h"
-    #include "win/p1.pb.h"
+    //#include "win/t1.pb.h"
+    //#include "win/p1.pb.h"
+    #include "win/server_base.pb.h"
 #endif 
 
 #ifdef __linux__
-    #include "linux/t1.pb.h"
-    #include "linux/p1.pb.h"
+    //#include "linux/t1.pb.h"
+    //#include "linux/p1.pb.h"
+    #include "linux/server_base.pb.h"
 #endif 
 
-using namespace t1;
-using namespace p1;

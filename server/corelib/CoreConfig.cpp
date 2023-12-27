@@ -15,7 +15,7 @@ CoreConfig::~CoreConfig(void)
 bool CoreConfig::ReadProxyConfig(xml_node& XMLContent, CLIENT_PROXY_CONFIG& Config)
 {
 	if (XMLContent.has_attribute("ProxyType"))
-		Config.ProxyType = (CLIENT_PROXY_TYPE)(int)XMLContent.attribute("ProxyType");
+		Config.ProxyType = (SERVICE_TYPE )(int)XMLContent.attribute("ProxyType");
 
 	if (XMLContent.has_attribute("ProxyMode"))
 		Config.ProxyMode = (CLIENT_PROXY_MODE)((int)XMLContent.attribute("ProxyMode"));

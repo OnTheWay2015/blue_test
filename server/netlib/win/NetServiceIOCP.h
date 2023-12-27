@@ -86,7 +86,7 @@ public: //CBaseNetServiceInterface
 	
 
 	virtual UINT GetServiceID() override { return 0;}
-	virtual UINT GetServiceType() override { return 0;}
+	virtual SERVICE_TYPE GetServiceType() override { return SERVICE_TYPE::NONE ;}
 	
 	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) override { };
 	virtual void OnDisconnection(CSmartPtr<CBaseNetConnectionInterface> s) override { };

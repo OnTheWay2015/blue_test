@@ -19,15 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="win\p1.pb.cc" />
-    <ClCompile Include="win\p2.pb.cc" />
-    <ClCompile Include="win\t1.pb.cc" />
+    <ClCompile Include="win\server_base.pb.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="protocol.h" />
-    <ClInclude Include="win\p1.pb.h" />
-    <ClInclude Include="win\p2.pb.h" />
-    <ClInclude Include="win\t1.pb.h" />
+    <ClInclude Include="win\server_base.pb.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

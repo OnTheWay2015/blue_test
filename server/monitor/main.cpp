@@ -13,12 +13,13 @@ int main()
     proc_init();
 
     CoreBase C;
-    C.Init("./configd.xml");
+    //C.Init("./configd.xml");
+    C.Init("../../../conf/monitor.xml");
     ProtobufParseMessage::GetInstance()->Init();
 
     MonitorCoreHandler::GetInstance()->Init(); 
 
-    C.AddHandler(MonitorCoreHandler::GetInstance(),CLIENT_PROXY_TYPE::SERVER_MONITOR);
+    C.SetHandler(MonitorCoreHandler::GetInstance(),SERVICE_TYPE::SERVER_MONITOR);
     C.SetParseMessageHandler(ProtobufParseMessage::GetInstance());
 
 

@@ -12,6 +12,8 @@ MonitorConnecter::~MonitorConnecter()
 
 void MonitorConnecter::Init(CoreBase* base)
 {
+    base->SetHandler(this,SERVICE_TYPE::CONNECT_MONITOR_LOCAL);
+    
     m_pCorebase = base;
     CIPAddress  addr;
     auto& coreConf = base->GetCoreConfig();
@@ -20,8 +22,8 @@ void MonitorConnecter::Init(CoreBase* base)
 
     //addr.SetIP("192.168.100.157");
     //addr.SetPort(64000);
-    auto connect = base->CreateConnect(addr,CLIENT_PROXY_TYPE::CONNECT_MONITOR_LOCAL,CLIENT_PROXY_MODE::NORMAL);
-    base->AddHandler(this,CLIENT_PROXY_TYPE::CONNECT_MONITOR_LOCAL);
+    auto connect = base->CreateConnect(addr,SERVICE_TYPE::CONNECT_MONITOR_LOCAL,CLIENT_PROXY_MODE::NORMAL);
+    
 
 }
 

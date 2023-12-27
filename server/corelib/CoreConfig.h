@@ -30,7 +30,7 @@ public:
 
 	struct CLIENT_PROXY_CONFIG
 	{
-		CLIENT_PROXY_TYPE ProxyType;
+		SERVICE_TYPE ProxyType;
 		CLIENT_PROXY_MODE ProxyMode;
 		UINT ListenPort;
 		UINT ConnectionGroupCount;

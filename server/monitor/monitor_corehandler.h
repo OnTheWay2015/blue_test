@@ -15,6 +15,8 @@ public:
     virtual void Update() override;
     virtual void OnNetMessage(CSmartPtr<CoreSessionMessage> msg) override; 
 
+private:
+    std::vector<SERVER_INFO> m_SvrList; 
 }; 
 
 

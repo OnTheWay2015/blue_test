@@ -2,11 +2,18 @@
 <Main ServerName="gate" ServerDesc="gate" ServerID="2" >  
   <Net NetWorkThreadCount="2"> 
   </Net>
-	 <Leader Port="64000" IP="127.0.0.1"> 
-	</Leader>  
+	<Leader Port="64000" IP="127.0.0.1"> 
+	</Leader>
   
-  <Services>
-	<Service Name="gate" Desc="gate for client" ServiceID="1" ServiceType="2" >  
+ <ActConnects> 
+	<Connect ServerID="2" ServiceType="10" >  
+	</Connect>
+	<Connect ServerID="3" ServiceType="11" >  
+	</Connect> 
+</ActConnects>
+  
+  <Services  desc="auto generate Service ID" > 
+	<Service Name="gate_c2s" Desc="gate for c2s"  ServiceType="2" >  
 	  <ClientProxys>   
 		<ClientProxy ProxyType="2" ProxyMode="1" ListenIP="0" ListenPort="64000" ConnectionGroupCount="4" 
                  KeepAliveTime="10000" 
@@ -14,7 +21,7 @@
                  EnableGuardThread="true" GuardThreadKeepAliveTime="20000" GuardThreadKeepAliveCount="5"/> 
 		</ClientProxys>
 	<Service>
-	<Service Name="gate_internal" Desc="gate for server" ServiceID="2" ServiceType="3" >  
+	<Service Name="gate_s2s" Desc="gate for s2s"  ServiceType="3" >  
 	  <ClientProxys>   
 		<ClientProxy ProxyType="2" ProxyMode="1" ListenIP="0" ListenPort="64000" ConnectionGroupCount="4" 
                  KeepAliveTime="10000" 

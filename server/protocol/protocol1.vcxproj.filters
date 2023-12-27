@@ -11,28 +11,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="win\p1.pb.cc">
-      <Filter>win</Filter>
-    </ClCompile>
-    <ClCompile Include="win\p2.pb.cc">
-      <Filter>win</Filter>
-    </ClCompile>
-    <ClCompile Include="win\t1.pb.cc">
+    <ClCompile Include="win\server_base.pb.cc">
       <Filter>win</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="win\p1.pb.h">
-      <Filter>win</Filter>
-    </ClInclude>
-    <ClInclude Include="win\p2.pb.h">
-      <Filter>win</Filter>
-    </ClInclude>
-    <ClInclude Include="win\t1.pb.h">
-      <Filter>win</Filter>
-    </ClInclude>
     <ClInclude Include="protocol.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="win\server_base.pb.h">
+      <Filter>win</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

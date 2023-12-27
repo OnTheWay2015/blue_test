@@ -1,8 +1,9 @@
 #pragma once
  
 
-using namespace t1;
-using namespace p1;
+using namespace server_base;
+//using namespace t1;
+//using namespace p1;
 //DEF_PACKET_REGISTER_RECV(MSG_BASE);
 
 //all -> monitor //声明接收消息的工厂类, 再用 PACKET_FACTORY_REGISTER 把处理接收消息的回调方法注册到系统处理

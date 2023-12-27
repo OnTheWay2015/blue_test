@@ -20,7 +20,7 @@ return 0;
 }
 
 
-CSmartPtr<CBaseNetConnectionInterface> ServiceActConnect::CreateConnection(CIPAddress& remoteAddress,CLIENT_PROXY_TYPE type,CLIENT_PROXY_MODE mode)
+CSmartPtr<CBaseNetConnectionInterface> ServiceActConnect::CreateConnection(CIPAddress& remoteAddress,SERVICE_TYPE type,CLIENT_PROXY_MODE mode)
 {
 	auto pConnection = std::make_shared<CProxyConnectionDefault>();
 	pConnection->Init();

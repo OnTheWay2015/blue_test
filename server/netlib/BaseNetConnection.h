@@ -40,12 +40,11 @@ public:
 	virtual bool IsStop() =0;
 
 	virtual void SetService(CBaseNetServiceInterface* pService )=0;
-	virtual void SetClientProxy(CLIENT_PROXY_TYPE Type, CLIENT_PROXY_MODE Mode)=0;
-	virtual CLIENT_PROXY_TYPE GetClientProxyType()=0;
+	virtual void SetClientProxy(SERVICE_TYPE Type, CLIENT_PROXY_MODE Mode)=0;
+	virtual SERVICE_TYPE GetServiceType()=0;
 	virtual CLIENT_PROXY_MODE GetClientProxyMode()=0;
 	virtual SESSION_ID GetSessionID()=0;
 	virtual UINT GetServiceID()=0;
-	virtual UINT GetServiceType()=0;
 	virtual bool SendMsg(CSmartPtr<DOS_SIMPLE_MESSAGE> msg) = 0;
 
 }; 
@@ -56,7 +55,7 @@ class CBaseNetConnection :
 protected:
 	CNetSocket								m_Socket;
 	bool m_StopFlag;
-    CLIENT_PROXY_TYPE	m_ClientProxyType;
+    SERVICE_TYPE m_ServiceType;
     CLIENT_PROXY_MODE	m_ClientProxyMode;
     CBaseNetServiceInterface* m_pService;
 public:
@@ -99,9 +98,9 @@ public: //CBaseNetConnectionInterface
 	virtual int Update(int ProcessPacketLimit=DEFAULT_SERVER_PROCESS_PACKET_LIMIT){return 0;};
 
 
-	virtual void SetClientProxy(CLIENT_PROXY_TYPE Type, CLIENT_PROXY_MODE Mode)
+	virtual void SetClientProxy(SERVICE_TYPE Type, CLIENT_PROXY_MODE Mode)
     {
-        m_ClientProxyType = Type;
+        m_ServiceType = Type;
         m_ClientProxyMode = Mode;
     }
 
@@ -114,18 +113,14 @@ public: //CBaseNetConnectionInterface
 		}
 		return m_pService->GetServiceID();
 	}
-	virtual UINT GetServiceType()override
-	{
+
+	virtual SERVICE_TYPE GetServiceType() override
+    {
 		if (!m_pService)
 		{
-			return 0;
+			return SERVICE_TYPE::NONE;
 		}
 		return m_pService->GetServiceType();
-	}
-
-	virtual CLIENT_PROXY_TYPE GetClientProxyType()
-    {
-        return m_ClientProxyType; 
     }
 
 	virtual CLIENT_PROXY_MODE GetClientProxyMode()
