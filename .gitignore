@@ -8,6 +8,8 @@ out
 build
 bin
 debug
+node_modules
+s_out
 
 *.lib
 *.pdb
