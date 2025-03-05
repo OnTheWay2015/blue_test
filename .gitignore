@@ -7,7 +7,7 @@ objs
 out
 build
 bin
-
+debug
 
 *.lib
 *.pdb
