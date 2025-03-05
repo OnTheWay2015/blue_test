@@ -10,12 +10,14 @@ int main()
 {
   const char* db = 0, *server = 0, *user = 0, *password = "";
   db = "test";
-  server = "localhost";
+  //server = "localhost";
+  server = "127.0.0.1";
   user = "root";
-  password = "1234567";
+  password = "123456";
+  auto port = 3306;
      
   mysqlpp::Connection conn(false);
-  if (conn.connect(db, server, user, password)) 
+  if (conn.connect(db, server, user, password,port)) 
   {
     cout << "connect db succeed. " << endl;
     mysqlpp::Query query = conn.query("SELECT * FROM student");
@@ -43,7 +45,7 @@ int main()
   } 
   else 
   {
-      cout << "connect db fail. " << endl;
+      cout << "connect db fail: "<< conn.error() << endl;
   }
   return 0;
 }
