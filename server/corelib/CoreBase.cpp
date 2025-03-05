@@ -25,7 +25,7 @@ bool CoreBase::Init(LPCTSTR FileName)
 
 
 
-void CoreBase::Update()
+void CoreBase::Update(float tm)
 {
     m_CoreNetManager->Update();
 
@@ -59,18 +59,29 @@ void CoreBase::DisConnect(SESSION_ID SessionID)
 
 void CoreBase::OnNetMessage(CSmartPtr<CoreSessionMessage> msg) 
 {
+    auto type = msg->ServiceType;
+    if(m_CoreHandlers.find(type) == m_CoreHandlers.end())
+    {
+        PrintImportantLog(_T("m_CoreHandlers no type: %d,error"),type);
+        return;
+    }
+
     //CAutoLock lock(&m_EasyCriticalSection);
-    m_CoreHandlers[msg->ServiceType]->OnNetMessage(msg);
+    m_CoreHandlers[type]->OnNetMessage(msg);
     //if (msg->EventType == CORE_EVENT::SESSION_ADD)
     //{
     //}
     //todo
 }
-void CoreBase::SetParseMessageHandler(MessageHandlerInterface* h)
+void CoreBase::SetParseMessageHandler(MessageParseInterface* h)
 {
     m_CoreNetManager->SetParseMessageHandler(h);
 }
 
 
+UINT CoreBase::GetServerID()
+{
+    return m_CoreConfig.GetServerID();
+}
 
 

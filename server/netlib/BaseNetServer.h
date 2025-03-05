@@ -17,6 +17,9 @@
 //	GAME,
 //};
 
+
+class CoreBase;
+
 enum class SERVICE_TYPE // 核心提供的服务分类
 {
 	NONE=0,
@@ -58,6 +61,14 @@ struct DOS_SIMPLE_MESSAGE : DOS_SIMPLE_MESSAGE_HEAD
 };
 
 
+#define PACK_HEADER(m,packet_id) \
+    auto M= std::make_shared<DOS_SIMPLE_MESSAGE>();\
+    M->MsgID = packet_id;\
+    M->MsgLen = m->ByteSize() + sizeof(DOS_SIMPLE_MESSAGE_HEAD);\
+    M->MSG = m;\
+
+ 
+
 
 class CBaseNetConnectionInterface;
 class NetHandlerInterface
@@ -76,7 +87,7 @@ public:
    
 
     virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& remoteAddress,SERVICE_TYPE type,CLIENT_PROXY_MODE mode)=0;
- 
+    virtual CoreBase* GetCore()=0;
 };
 
 
@@ -158,6 +169,11 @@ public:
 	void SetHandler(CSmartPtr<NetHandlerInterface> h)
 	{
 		m_NetHandler = h;
+	}
+
+	CSmartPtr<NetHandlerInterface> GetHandler()
+	{
+		return m_NetHandler;
 	}
 protected:
 	virtual bool OnStartUp() = 0;

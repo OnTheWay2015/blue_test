@@ -22,3 +22,4 @@
     #include "linux/server_base.pb.h"
 #endif 
 
+using namespace server_base;

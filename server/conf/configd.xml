@@ -7,13 +7,13 @@
   
   <Services>
 	<Service Name="monitor" Desc="monitor" ServiceID="1" ServiceType="1" >  
-	  <ClientProxys>   
+	    
 		<ClientProxy ProxyType="2" ProxyMode="1" ListenIP="0" ListenPort="64000" ConnectionGroupCount="4" 
                  KeepAliveTime="10000" 
                  MsgQueueSize="256"   
                  EnableGuardThread="true" GuardThreadKeepAliveTime="20000" GuardThreadKeepAliveCount="5"/>
 	    
-		</ClientProxys>
+		 
 	<Service>
   </Services>  
   

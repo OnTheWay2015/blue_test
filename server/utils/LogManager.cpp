@@ -133,16 +133,16 @@ bool CLogManager::DelChannel(UINT ChannelID)
 	return false;
 }
 
-bool CLogManager::PrintLogDirect(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Msg)
+bool CLogManager::_PrintLogDirect(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Msg)
 {
 	//*m_log << Msg;
-	std::cout << Msg << std::endl;
+	STD_COUT << Msg << std::endl;
 	return false;
 }
 
 
 static TCHAR m_MsgBuff[4096];
-bool CLogManager::PrintLog(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Format, ...)
+bool CLogManager::_PrintLog(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Format, ...)
 {
 	memset(m_MsgBuff,0,4096);
     va_list	vl;
@@ -150,17 +150,17 @@ bool CLogManager::PrintLog(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Forma
     _vstprintf_s(m_MsgBuff, 4096, Format, vl);
 	va_end( vl);
 	
-	std::cout << Tag << " | " << m_MsgBuff<< std::endl;;
+	STD_COUT << Tag << " | " << m_MsgBuff<< std::endl;;
 
 	//*m_log << m_MsgBuff;
 	return false;
 }
-bool CLogManager::PrintLogVL(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Format, va_list vl)
+bool CLogManager::_PrintLogVL(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Format, va_list vl)
 {
 	memset(m_MsgBuff,0,4096);
     _vstprintf_s(m_MsgBuff, 4096, Format, vl);
 
-	std::cout << Tag << " | " << m_MsgBuff<< std::endl;;
+	STD_COUT<< Tag << " | " << m_MsgBuff<< std::endl;;
 
 	//*m_log << m_MsgBuff;
 	return false;

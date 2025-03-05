@@ -82,6 +82,8 @@ typedef unsigned __int64 SESSION_ID;
 
 
 #include "config.h"
+#include "MemoryLeakDetective.h"
+
 
 #include "EasyString.h"
 #include "EasyBuffer.h"
@@ -103,14 +105,17 @@ typedef unsigned __int64 SESSION_ID;
 #include "EasyTimer64.h"
 #include "EasyTimerEx.h"
 
+
 #include "StringFile.h"
 #include "FileInfo.h"
 #include "IFileObjectCreator.h"
 #include "IFileAccessor.h"
+#include "FileTools.h"
 
 #include "StandardFileAccessor.h"
 #include "StandardFileObjectCreator.h"
 
+#include "SettingFile.h"
 
 #ifdef _WIN32 
     #include "win/WinFileAccessorObjectCreator.h"
@@ -160,6 +165,10 @@ typedef unsigned __int64 SESSION_ID;
 
 
 #include "pugxml.h"
+#include "smart/SmartValue.h"
+#include "smart/SmartArray.h"
+#include "smart/SmartStruct.h"
+
 
 #include "blue_logskin.h"
 #include "ILogPrinter.h"

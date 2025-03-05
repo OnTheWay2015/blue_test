@@ -47,7 +47,7 @@ struct TableStruct_server_5fbase_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[12]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[15]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -82,15 +82,24 @@ extern MSG_LEADER_SERVER_LIST_RESDefaultTypeInternal _MSG_LEADER_SERVER_LIST_RES
 class MSG_SVR_BASE;
 class MSG_SVR_BASEDefaultTypeInternal;
 extern MSG_SVR_BASEDefaultTypeInternal _MSG_SVR_BASE_default_instance_;
+class MSG_SVR_REG;
+class MSG_SVR_REGDefaultTypeInternal;
+extern MSG_SVR_REGDefaultTypeInternal _MSG_SVR_REG_default_instance_;
+class MSG_SVR_REG_RES;
+class MSG_SVR_REG_RESDefaultTypeInternal;
+extern MSG_SVR_REG_RESDefaultTypeInternal _MSG_SVR_REG_RES_default_instance_;
 class MSG_TEST;
 class MSG_TESTDefaultTypeInternal;
 extern MSG_TESTDefaultTypeInternal _MSG_TEST_default_instance_;
 class MSG_TEST_RES;
 class MSG_TEST_RESDefaultTypeInternal;
 extern MSG_TEST_RESDefaultTypeInternal _MSG_TEST_RES_default_instance_;
-class SERVER_INFO;
-class SERVER_INFODefaultTypeInternal;
-extern SERVER_INFODefaultTypeInternal _SERVER_INFO_default_instance_;
+class SERVICE_INFO;
+class SERVICE_INFODefaultTypeInternal;
+extern SERVICE_INFODefaultTypeInternal _SERVICE_INFO_default_instance_;
+class SERVICE_INFO_SINGLE;
+class SERVICE_INFO_SINGLEDefaultTypeInternal;
+extern SERVICE_INFO_SINGLEDefaultTypeInternal _SERVICE_INFO_SINGLE_default_instance_;
 }  // namespace server_base
 PROTOBUF_NAMESPACE_OPEN
 template<> ::server_base::MSG_HEARTBEAT* Arena::CreateMaybeMessage<::server_base::MSG_HEARTBEAT>(Arena*);
@@ -102,9 +111,12 @@ template<> ::server_base::MSG_LEADER_REG_RES* Arena::CreateMaybeMessage<::server
 template<> ::server_base::MSG_LEADER_SERVER_LIST* Arena::CreateMaybeMessage<::server_base::MSG_LEADER_SERVER_LIST>(Arena*);
 template<> ::server_base::MSG_LEADER_SERVER_LIST_RES* Arena::CreateMaybeMessage<::server_base::MSG_LEADER_SERVER_LIST_RES>(Arena*);
 template<> ::server_base::MSG_SVR_BASE* Arena::CreateMaybeMessage<::server_base::MSG_SVR_BASE>(Arena*);
+template<> ::server_base::MSG_SVR_REG* Arena::CreateMaybeMessage<::server_base::MSG_SVR_REG>(Arena*);
+template<> ::server_base::MSG_SVR_REG_RES* Arena::CreateMaybeMessage<::server_base::MSG_SVR_REG_RES>(Arena*);
 template<> ::server_base::MSG_TEST* Arena::CreateMaybeMessage<::server_base::MSG_TEST>(Arena*);
 template<> ::server_base::MSG_TEST_RES* Arena::CreateMaybeMessage<::server_base::MSG_TEST_RES>(Arena*);
-template<> ::server_base::SERVER_INFO* Arena::CreateMaybeMessage<::server_base::SERVER_INFO>(Arena*);
+template<> ::server_base::SERVICE_INFO* Arena::CreateMaybeMessage<::server_base::SERVICE_INFO>(Arena*);
+template<> ::server_base::SERVICE_INFO_SINGLE* Arena::CreateMaybeMessage<::server_base::SERVICE_INFO_SINGLE>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace server_base {
 
@@ -402,23 +414,23 @@ class MSG_TEST_RES :
 };
 // -------------------------------------------------------------------
 
-class SERVER_INFO :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:server_base.SERVER_INFO) */ {
+class SERVICE_INFO :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:server_base.SERVICE_INFO) */ {
  public:
-  SERVER_INFO();
-  virtual ~SERVER_INFO();
+  SERVICE_INFO();
+  virtual ~SERVICE_INFO();
 
-  SERVER_INFO(const SERVER_INFO& from);
-  SERVER_INFO(SERVER_INFO&& from) noexcept
-    : SERVER_INFO() {
+  SERVICE_INFO(const SERVICE_INFO& from);
+  SERVICE_INFO(SERVICE_INFO&& from) noexcept
+    : SERVICE_INFO() {
     *this = ::std::move(from);
   }
 
-  inline SERVER_INFO& operator=(const SERVER_INFO& from) {
+  inline SERVICE_INFO& operator=(const SERVICE_INFO& from) {
     CopyFrom(from);
     return *this;
   }
-  inline SERVER_INFO& operator=(SERVER_INFO&& from) noexcept {
+  inline SERVICE_INFO& operator=(SERVICE_INFO&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -436,37 +448,37 @@ class SERVER_INFO :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const SERVER_INFO& default_instance();
+  static const SERVICE_INFO& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SERVER_INFO* internal_default_instance() {
-    return reinterpret_cast<const SERVER_INFO*>(
-               &_SERVER_INFO_default_instance_);
+  static inline const SERVICE_INFO* internal_default_instance() {
+    return reinterpret_cast<const SERVICE_INFO*>(
+               &_SERVICE_INFO_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     2;
 
-  friend void swap(SERVER_INFO& a, SERVER_INFO& b) {
+  friend void swap(SERVICE_INFO& a, SERVICE_INFO& b) {
     a.Swap(&b);
   }
-  inline void Swap(SERVER_INFO* other) {
+  inline void Swap(SERVICE_INFO* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SERVER_INFO* New() const final {
-    return CreateMaybeMessage<SERVER_INFO>(nullptr);
+  inline SERVICE_INFO* New() const final {
+    return CreateMaybeMessage<SERVICE_INFO>(nullptr);
   }
 
-  SERVER_INFO* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<SERVER_INFO>(arena);
+  SERVICE_INFO* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<SERVICE_INFO>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const SERVER_INFO& from);
-  void MergeFrom(const SERVER_INFO& from);
+  void CopyFrom(const SERVICE_INFO& from);
+  void MergeFrom(const SERVICE_INFO& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -480,10 +492,10 @@ class SERVER_INFO :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(SERVER_INFO* other);
+  void InternalSwap(SERVICE_INFO* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "server_base.SERVER_INFO";
+    return "server_base.SERVICE_INFO";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -513,6 +525,7 @@ class SERVER_INFO :
     kTypeFieldNumber = 2,
     kModeFieldNumber = 3,
     kPortFieldNumber = 5,
+    kSessionidFieldNumber = 6,
   };
   // string ipstr = 4;
   void clear_ipstr();
@@ -530,13 +543,13 @@ class SERVER_INFO :
   std::string* _internal_mutable_ipstr();
   public:
 
-  // int64 svrid = 1;
+  // int32 svrid = 1;
   void clear_svrid();
-  ::PROTOBUF_NAMESPACE_ID::int64 svrid() const;
-  void set_svrid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  ::PROTOBUF_NAMESPACE_ID::int32 svrid() const;
+  void set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::int64 _internal_svrid() const;
-  void _internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_svrid() const;
+  void _internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
   // int32 type = 2;
@@ -566,16 +579,176 @@ class SERVER_INFO :
   void _internal_set_port(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
-  // @@protoc_insertion_point(class_scope:server_base.SERVER_INFO)
+  // int64 sessionid = 6;
+  void clear_sessionid();
+  ::PROTOBUF_NAMESPACE_ID::int64 sessionid() const;
+  void set_sessionid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_sessionid() const;
+  void _internal_set_sessionid(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:server_base.SERVICE_INFO)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ipstr_;
-  ::PROTOBUF_NAMESPACE_ID::int64 svrid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 svrid_;
   ::PROTOBUF_NAMESPACE_ID::int32 type_;
   ::PROTOBUF_NAMESPACE_ID::int32 mode_;
   ::PROTOBUF_NAMESPACE_ID::int32 port_;
+  ::PROTOBUF_NAMESPACE_ID::int64 sessionid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_server_5fbase_2eproto;
+};
+// -------------------------------------------------------------------
+
+class SERVICE_INFO_SINGLE :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:server_base.SERVICE_INFO_SINGLE) */ {
+ public:
+  SERVICE_INFO_SINGLE();
+  virtual ~SERVICE_INFO_SINGLE();
+
+  SERVICE_INFO_SINGLE(const SERVICE_INFO_SINGLE& from);
+  SERVICE_INFO_SINGLE(SERVICE_INFO_SINGLE&& from) noexcept
+    : SERVICE_INFO_SINGLE() {
+    *this = ::std::move(from);
+  }
+
+  inline SERVICE_INFO_SINGLE& operator=(const SERVICE_INFO_SINGLE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SERVICE_INFO_SINGLE& operator=(SERVICE_INFO_SINGLE&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const SERVICE_INFO_SINGLE& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const SERVICE_INFO_SINGLE* internal_default_instance() {
+    return reinterpret_cast<const SERVICE_INFO_SINGLE*>(
+               &_SERVICE_INFO_SINGLE_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(SERVICE_INFO_SINGLE& a, SERVICE_INFO_SINGLE& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SERVICE_INFO_SINGLE* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SERVICE_INFO_SINGLE* New() const final {
+    return CreateMaybeMessage<SERVICE_INFO_SINGLE>(nullptr);
+  }
+
+  SERVICE_INFO_SINGLE* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<SERVICE_INFO_SINGLE>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const SERVICE_INFO_SINGLE& from);
+  void MergeFrom(const SERVICE_INFO_SINGLE& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SERVICE_INFO_SINGLE* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "server_base.SERVICE_INFO_SINGLE";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_server_5fbase_2eproto);
+    return ::descriptor_table_server_5fbase_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSvridFieldNumber = 1,
+    kTypeFieldNumber = 2,
+    kRegFlagFieldNumber = 3,
+  };
+  // int32 svrid = 1;
+  void clear_svrid();
+  ::PROTOBUF_NAMESPACE_ID::int32 svrid() const;
+  void set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_svrid() const;
+  void _internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int32 type = 2;
+  void clear_type();
+  ::PROTOBUF_NAMESPACE_ID::int32 type() const;
+  void set_type(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_type() const;
+  void _internal_set_type(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int64 reg_flag = 3;
+  void clear_reg_flag();
+  ::PROTOBUF_NAMESPACE_ID::int64 reg_flag() const;
+  void set_reg_flag(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_reg_flag() const;
+  void _internal_set_reg_flag(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:server_base.SERVICE_INFO_SINGLE)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::int32 svrid_;
+  ::PROTOBUF_NAMESPACE_ID::int32 type_;
+  ::PROTOBUF_NAMESPACE_ID::int64 reg_flag_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_server_5fbase_2eproto;
 };
@@ -623,7 +796,7 @@ class MSG_HEARTBEAT :
                &_MSG_HEARTBEAT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(MSG_HEARTBEAT& a, MSG_HEARTBEAT& b) {
     a.Swap(&b);
@@ -738,7 +911,7 @@ class MSG_HEARTBEAT_RES :
                &_MSG_HEARTBEAT_RES_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(MSG_HEARTBEAT_RES& a, MSG_HEARTBEAT_RES& b) {
     a.Swap(&b);
@@ -853,7 +1026,7 @@ class MSG_LEADER_REG :
                &_MSG_LEADER_REG_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(MSG_LEADER_REG& a, MSG_LEADER_REG& b) {
     a.Swap(&b);
@@ -917,21 +1090,34 @@ class MSG_LEADER_REG :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kInfoFieldNumber = 1,
+    kInfosFieldNumber = 1,
+    kSvridFieldNumber = 2,
   };
-  // .server_base.SERVER_INFO info = 1;
-  bool has_info() const;
+  // repeated .server_base.SERVICE_INFO infos = 1;
+  int infos_size() const;
   private:
-  bool _internal_has_info() const;
+  int _internal_infos_size() const;
   public:
-  void clear_info();
-  const ::server_base::SERVER_INFO& info() const;
-  ::server_base::SERVER_INFO* release_info();
-  ::server_base::SERVER_INFO* mutable_info();
-  void set_allocated_info(::server_base::SERVER_INFO* info);
+  void clear_infos();
+  ::server_base::SERVICE_INFO* mutable_infos(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >*
+      mutable_infos();
   private:
-  const ::server_base::SERVER_INFO& _internal_info() const;
-  ::server_base::SERVER_INFO* _internal_mutable_info();
+  const ::server_base::SERVICE_INFO& _internal_infos(int index) const;
+  ::server_base::SERVICE_INFO* _internal_add_infos();
+  public:
+  const ::server_base::SERVICE_INFO& infos(int index) const;
+  ::server_base::SERVICE_INFO* add_infos();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >&
+      infos() const;
+
+  // int32 svrid = 2;
+  void clear_svrid();
+  ::PROTOBUF_NAMESPACE_ID::int32 svrid() const;
+  void set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_svrid() const;
+  void _internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:server_base.MSG_LEADER_REG)
@@ -939,7 +1125,8 @@ class MSG_LEADER_REG :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::server_base::SERVER_INFO* info_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO > infos_;
+  ::PROTOBUF_NAMESPACE_ID::int32 svrid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_server_5fbase_2eproto;
 };
@@ -987,7 +1174,7 @@ class MSG_LEADER_SERVER_LIST :
                &_MSG_LEADER_SERVER_LIST_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(MSG_LEADER_SERVER_LIST& a, MSG_LEADER_SERVER_LIST& b) {
     a.Swap(&b);
@@ -1102,7 +1289,7 @@ class MSG_LEADER_BROADCAST_ADD :
                &_MSG_LEADER_BROADCAST_ADD_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   friend void swap(MSG_LEADER_BROADCAST_ADD& a, MSG_LEADER_BROADCAST_ADD& b) {
     a.Swap(&b);
@@ -1166,21 +1353,34 @@ class MSG_LEADER_BROADCAST_ADD :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kInfoFieldNumber = 1,
+    kInfosFieldNumber = 1,
+    kSvridFieldNumber = 2,
   };
-  // .server_base.SERVER_INFO info = 1;
-  bool has_info() const;
+  // repeated .server_base.SERVICE_INFO infos = 1;
+  int infos_size() const;
   private:
-  bool _internal_has_info() const;
+  int _internal_infos_size() const;
   public:
-  void clear_info();
-  const ::server_base::SERVER_INFO& info() const;
-  ::server_base::SERVER_INFO* release_info();
-  ::server_base::SERVER_INFO* mutable_info();
-  void set_allocated_info(::server_base::SERVER_INFO* info);
+  void clear_infos();
+  ::server_base::SERVICE_INFO* mutable_infos(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >*
+      mutable_infos();
   private:
-  const ::server_base::SERVER_INFO& _internal_info() const;
-  ::server_base::SERVER_INFO* _internal_mutable_info();
+  const ::server_base::SERVICE_INFO& _internal_infos(int index) const;
+  ::server_base::SERVICE_INFO* _internal_add_infos();
+  public:
+  const ::server_base::SERVICE_INFO& infos(int index) const;
+  ::server_base::SERVICE_INFO* add_infos();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >&
+      infos() const;
+
+  // int32 svrid = 2;
+  void clear_svrid();
+  ::PROTOBUF_NAMESPACE_ID::int32 svrid() const;
+  void set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_svrid() const;
+  void _internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:server_base.MSG_LEADER_BROADCAST_ADD)
@@ -1188,7 +1388,8 @@ class MSG_LEADER_BROADCAST_ADD :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::server_base::SERVER_INFO* info_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO > infos_;
+  ::PROTOBUF_NAMESPACE_ID::int32 svrid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_server_5fbase_2eproto;
 };
@@ -1236,7 +1437,7 @@ class MSG_LEADER_BROADCAST_REMOVE :
                &_MSG_LEADER_BROADCAST_REMOVE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   friend void swap(MSG_LEADER_BROADCAST_REMOVE& a, MSG_LEADER_BROADCAST_REMOVE& b) {
     a.Swap(&b);
@@ -1300,21 +1501,34 @@ class MSG_LEADER_BROADCAST_REMOVE :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kInfoFieldNumber = 1,
+    kInfosFieldNumber = 1,
+    kSvridFieldNumber = 2,
   };
-  // .server_base.SERVER_INFO info = 1;
-  bool has_info() const;
+  // repeated .server_base.SERVICE_INFO infos = 1;
+  int infos_size() const;
   private:
-  bool _internal_has_info() const;
+  int _internal_infos_size() const;
   public:
-  void clear_info();
-  const ::server_base::SERVER_INFO& info() const;
-  ::server_base::SERVER_INFO* release_info();
-  ::server_base::SERVER_INFO* mutable_info();
-  void set_allocated_info(::server_base::SERVER_INFO* info);
+  void clear_infos();
+  ::server_base::SERVICE_INFO* mutable_infos(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >*
+      mutable_infos();
   private:
-  const ::server_base::SERVER_INFO& _internal_info() const;
-  ::server_base::SERVER_INFO* _internal_mutable_info();
+  const ::server_base::SERVICE_INFO& _internal_infos(int index) const;
+  ::server_base::SERVICE_INFO* _internal_add_infos();
+  public:
+  const ::server_base::SERVICE_INFO& infos(int index) const;
+  ::server_base::SERVICE_INFO* add_infos();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >&
+      infos() const;
+
+  // int32 svrid = 2;
+  void clear_svrid();
+  ::PROTOBUF_NAMESPACE_ID::int32 svrid() const;
+  void set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_svrid() const;
+  void _internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:server_base.MSG_LEADER_BROADCAST_REMOVE)
@@ -1322,7 +1536,8 @@ class MSG_LEADER_BROADCAST_REMOVE :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::server_base::SERVER_INFO* info_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO > infos_;
+  ::PROTOBUF_NAMESPACE_ID::int32 svrid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_server_5fbase_2eproto;
 };
@@ -1370,7 +1585,7 @@ class MSG_LEADER_REG_RES :
                &_MSG_LEADER_REG_RES_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   friend void swap(MSG_LEADER_REG_RES& a, MSG_LEADER_REG_RES& b) {
     a.Swap(&b);
@@ -1498,7 +1713,7 @@ class MSG_LEADER_SERVER_LIST_RES :
                &_MSG_LEADER_SERVER_LIST_RES_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   friend void swap(MSG_LEADER_SERVER_LIST_RES& a, MSG_LEADER_SERVER_LIST_RES& b) {
     a.Swap(&b);
@@ -1564,22 +1779,22 @@ class MSG_LEADER_SERVER_LIST_RES :
   enum : int {
     kInfosFieldNumber = 1,
   };
-  // repeated .server_base.SERVER_INFO infos = 1;
+  // repeated .server_base.SERVICE_INFO infos = 1;
   int infos_size() const;
   private:
   int _internal_infos_size() const;
   public:
   void clear_infos();
-  ::server_base::SERVER_INFO* mutable_infos(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVER_INFO >*
+  ::server_base::SERVICE_INFO* mutable_infos(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >*
       mutable_infos();
   private:
-  const ::server_base::SERVER_INFO& _internal_infos(int index) const;
-  ::server_base::SERVER_INFO* _internal_add_infos();
+  const ::server_base::SERVICE_INFO& _internal_infos(int index) const;
+  ::server_base::SERVICE_INFO* _internal_add_infos();
   public:
-  const ::server_base::SERVER_INFO& infos(int index) const;
-  ::server_base::SERVER_INFO* add_infos();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVER_INFO >&
+  const ::server_base::SERVICE_INFO& infos(int index) const;
+  ::server_base::SERVICE_INFO* add_infos();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >&
       infos() const;
 
   // @@protoc_insertion_point(class_scope:server_base.MSG_LEADER_SERVER_LIST_RES)
@@ -1587,7 +1802,281 @@ class MSG_LEADER_SERVER_LIST_RES :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVER_INFO > infos_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO > infos_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_server_5fbase_2eproto;
+};
+// -------------------------------------------------------------------
+
+class MSG_SVR_REG :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:server_base.MSG_SVR_REG) */ {
+ public:
+  MSG_SVR_REG();
+  virtual ~MSG_SVR_REG();
+
+  MSG_SVR_REG(const MSG_SVR_REG& from);
+  MSG_SVR_REG(MSG_SVR_REG&& from) noexcept
+    : MSG_SVR_REG() {
+    *this = ::std::move(from);
+  }
+
+  inline MSG_SVR_REG& operator=(const MSG_SVR_REG& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MSG_SVR_REG& operator=(MSG_SVR_REG&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const MSG_SVR_REG& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const MSG_SVR_REG* internal_default_instance() {
+    return reinterpret_cast<const MSG_SVR_REG*>(
+               &_MSG_SVR_REG_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    12;
+
+  friend void swap(MSG_SVR_REG& a, MSG_SVR_REG& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MSG_SVR_REG* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline MSG_SVR_REG* New() const final {
+    return CreateMaybeMessage<MSG_SVR_REG>(nullptr);
+  }
+
+  MSG_SVR_REG* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<MSG_SVR_REG>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const MSG_SVR_REG& from);
+  void MergeFrom(const MSG_SVR_REG& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MSG_SVR_REG* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "server_base.MSG_SVR_REG";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_server_5fbase_2eproto);
+    return ::descriptor_table_server_5fbase_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kInfosFieldNumber = 1,
+  };
+  // repeated .server_base.SERVICE_INFO_SINGLE infos = 1;
+  int infos_size() const;
+  private:
+  int _internal_infos_size() const;
+  public:
+  void clear_infos();
+  ::server_base::SERVICE_INFO_SINGLE* mutable_infos(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO_SINGLE >*
+      mutable_infos();
+  private:
+  const ::server_base::SERVICE_INFO_SINGLE& _internal_infos(int index) const;
+  ::server_base::SERVICE_INFO_SINGLE* _internal_add_infos();
+  public:
+  const ::server_base::SERVICE_INFO_SINGLE& infos(int index) const;
+  ::server_base::SERVICE_INFO_SINGLE* add_infos();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO_SINGLE >&
+      infos() const;
+
+  // @@protoc_insertion_point(class_scope:server_base.MSG_SVR_REG)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO_SINGLE > infos_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_server_5fbase_2eproto;
+};
+// -------------------------------------------------------------------
+
+class MSG_SVR_REG_RES :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:server_base.MSG_SVR_REG_RES) */ {
+ public:
+  MSG_SVR_REG_RES();
+  virtual ~MSG_SVR_REG_RES();
+
+  MSG_SVR_REG_RES(const MSG_SVR_REG_RES& from);
+  MSG_SVR_REG_RES(MSG_SVR_REG_RES&& from) noexcept
+    : MSG_SVR_REG_RES() {
+    *this = ::std::move(from);
+  }
+
+  inline MSG_SVR_REG_RES& operator=(const MSG_SVR_REG_RES& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline MSG_SVR_REG_RES& operator=(MSG_SVR_REG_RES&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const MSG_SVR_REG_RES& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const MSG_SVR_REG_RES* internal_default_instance() {
+    return reinterpret_cast<const MSG_SVR_REG_RES*>(
+               &_MSG_SVR_REG_RES_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    13;
+
+  friend void swap(MSG_SVR_REG_RES& a, MSG_SVR_REG_RES& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(MSG_SVR_REG_RES* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline MSG_SVR_REG_RES* New() const final {
+    return CreateMaybeMessage<MSG_SVR_REG_RES>(nullptr);
+  }
+
+  MSG_SVR_REG_RES* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<MSG_SVR_REG_RES>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const MSG_SVR_REG_RES& from);
+  void MergeFrom(const MSG_SVR_REG_RES& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(MSG_SVR_REG_RES* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "server_base.MSG_SVR_REG_RES";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_server_5fbase_2eproto);
+    return ::descriptor_table_server_5fbase_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kInfosFieldNumber = 1,
+  };
+  // repeated .server_base.SERVICE_INFO_SINGLE infos = 1;
+  int infos_size() const;
+  private:
+  int _internal_infos_size() const;
+  public:
+  void clear_infos();
+  ::server_base::SERVICE_INFO_SINGLE* mutable_infos(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO_SINGLE >*
+      mutable_infos();
+  private:
+  const ::server_base::SERVICE_INFO_SINGLE& _internal_infos(int index) const;
+  ::server_base::SERVICE_INFO_SINGLE* _internal_add_infos();
+  public:
+  const ::server_base::SERVICE_INFO_SINGLE& infos(int index) const;
+  ::server_base::SERVICE_INFO_SINGLE* add_infos();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO_SINGLE >&
+      infos() const;
+
+  // @@protoc_insertion_point(class_scope:server_base.MSG_SVR_REG_RES)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO_SINGLE > infos_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_server_5fbase_2eproto;
 };
@@ -1630,14 +2119,16 @@ class MSG_SVR_BASE :
   static const MSG_SVR_BASE& default_instance();
 
   enum MsgCase {
-    kMSGHEARTBEAT = 1000,
-    kMSGLEADERREG = 1001,
-    kMSGLEADERSERVERLIST = 1002,
-    kMSGHEARTBEATRES = 2000,
-    kMSGLEADERREGRES = 2001,
-    kMSGLEADERSERVERLISTRES = 2002,
-    kMSGLEADERBROADCASTADD = 3001,
-    kMSGLEADERBROADCASTREMOVE = 3002,
+    kMSGLEADERREG = 101,
+    kMSGLEADERSERVERLIST = 102,
+    kMSGLEADERREGRES = 103,
+    kMSGLEADERSERVERLISTRES = 104,
+    kMSGLEADERBROADCASTADD = 105,
+    kMSGLEADERBROADCASTREMOVE = 106,
+    kMSGSVRREG = 500,
+    kMSGSVRREGRES = 501,
+    kMSGHEARTBEAT = 999,
+    kMSGHEARTBEATRES = 1000,
     kMSGTEST = 9001,
     kMSGTESTRES = 9002,
     MSG_NOT_SET = 0,
@@ -1649,7 +2140,7 @@ class MSG_SVR_BASE :
                &_MSG_SVR_BASE_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    14;
 
   friend void swap(MSG_SVR_BASE& a, MSG_SVR_BASE& b) {
     a.Swap(&b);
@@ -1713,33 +2204,20 @@ class MSG_SVR_BASE :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kMSGHEARTBEATFieldNumber = 1000,
-    kMSGLEADERREGFieldNumber = 1001,
-    kMSGLEADERSERVERLISTFieldNumber = 1002,
-    kMSGHEARTBEATRESFieldNumber = 2000,
-    kMSGLEADERREGRESFieldNumber = 2001,
-    kMSGLEADERSERVERLISTRESFieldNumber = 2002,
-    kMSGLEADERBROADCASTADDFieldNumber = 3001,
-    kMSGLEADERBROADCASTREMOVEFieldNumber = 3002,
+    kMSGLEADERREGFieldNumber = 101,
+    kMSGLEADERSERVERLISTFieldNumber = 102,
+    kMSGLEADERREGRESFieldNumber = 103,
+    kMSGLEADERSERVERLISTRESFieldNumber = 104,
+    kMSGLEADERBROADCASTADDFieldNumber = 105,
+    kMSGLEADERBROADCASTREMOVEFieldNumber = 106,
+    kMSGSVRREGFieldNumber = 500,
+    kMSGSVRREGRESFieldNumber = 501,
+    kMSGHEARTBEATFieldNumber = 999,
+    kMSGHEARTBEATRESFieldNumber = 1000,
     kMSGTESTFieldNumber = 9001,
     kMSGTESTRESFieldNumber = 9002,
   };
-  // .server_base.MSG_HEARTBEAT MSG_HEARTBEAT = 1000;
-  bool has_msg_heartbeat() const;
-  private:
-  bool _internal_has_msg_heartbeat() const;
-  public:
-  void clear_msg_heartbeat();
-  const ::server_base::MSG_HEARTBEAT& msg_heartbeat() const;
-  ::server_base::MSG_HEARTBEAT* release_msg_heartbeat();
-  ::server_base::MSG_HEARTBEAT* mutable_msg_heartbeat();
-  void set_allocated_msg_heartbeat(::server_base::MSG_HEARTBEAT* msg_heartbeat);
-  private:
-  const ::server_base::MSG_HEARTBEAT& _internal_msg_heartbeat() const;
-  ::server_base::MSG_HEARTBEAT* _internal_mutable_msg_heartbeat();
-  public:
-
-  // .server_base.MSG_LEADER_REG MSG_LEADER_REG = 1001;
+  // .server_base.MSG_LEADER_REG MSG_LEADER_REG = 101;
   bool has_msg_leader_reg() const;
   private:
   bool _internal_has_msg_leader_reg() const;
@@ -1754,7 +2232,7 @@ class MSG_SVR_BASE :
   ::server_base::MSG_LEADER_REG* _internal_mutable_msg_leader_reg();
   public:
 
-  // .server_base.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 1002;
+  // .server_base.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 102;
   bool has_msg_leader_server_list() const;
   private:
   bool _internal_has_msg_leader_server_list() const;
@@ -1769,22 +2247,7 @@ class MSG_SVR_BASE :
   ::server_base::MSG_LEADER_SERVER_LIST* _internal_mutable_msg_leader_server_list();
   public:
 
-  // .server_base.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 2000;
-  bool has_msg_heartbeat_res() const;
-  private:
-  bool _internal_has_msg_heartbeat_res() const;
-  public:
-  void clear_msg_heartbeat_res();
-  const ::server_base::MSG_HEARTBEAT& msg_heartbeat_res() const;
-  ::server_base::MSG_HEARTBEAT* release_msg_heartbeat_res();
-  ::server_base::MSG_HEARTBEAT* mutable_msg_heartbeat_res();
-  void set_allocated_msg_heartbeat_res(::server_base::MSG_HEARTBEAT* msg_heartbeat_res);
-  private:
-  const ::server_base::MSG_HEARTBEAT& _internal_msg_heartbeat_res() const;
-  ::server_base::MSG_HEARTBEAT* _internal_mutable_msg_heartbeat_res();
-  public:
-
-  // .server_base.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 2001;
+  // .server_base.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 103;
   bool has_msg_leader_reg_res() const;
   private:
   bool _internal_has_msg_leader_reg_res() const;
@@ -1799,7 +2262,7 @@ class MSG_SVR_BASE :
   ::server_base::MSG_LEADER_REG_RES* _internal_mutable_msg_leader_reg_res();
   public:
 
-  // .server_base.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 2002;
+  // .server_base.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 104;
   bool has_msg_leader_server_list_res() const;
   private:
   bool _internal_has_msg_leader_server_list_res() const;
@@ -1814,7 +2277,7 @@ class MSG_SVR_BASE :
   ::server_base::MSG_LEADER_SERVER_LIST_RES* _internal_mutable_msg_leader_server_list_res();
   public:
 
-  // .server_base.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 3001;
+  // .server_base.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 105;
   bool has_msg_leader_broadcast_add() const;
   private:
   bool _internal_has_msg_leader_broadcast_add() const;
@@ -1829,7 +2292,7 @@ class MSG_SVR_BASE :
   ::server_base::MSG_LEADER_BROADCAST_ADD* _internal_mutable_msg_leader_broadcast_add();
   public:
 
-  // .server_base.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 3002;
+  // .server_base.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 106;
   bool has_msg_leader_broadcast_remove() const;
   private:
   bool _internal_has_msg_leader_broadcast_remove() const;
@@ -1842,6 +2305,66 @@ class MSG_SVR_BASE :
   private:
   const ::server_base::MSG_LEADER_BROADCAST_REMOVE& _internal_msg_leader_broadcast_remove() const;
   ::server_base::MSG_LEADER_BROADCAST_REMOVE* _internal_mutable_msg_leader_broadcast_remove();
+  public:
+
+  // .server_base.MSG_SVR_REG_RES MSG_SVR_REG = 500;
+  bool has_msg_svr_reg() const;
+  private:
+  bool _internal_has_msg_svr_reg() const;
+  public:
+  void clear_msg_svr_reg();
+  const ::server_base::MSG_SVR_REG_RES& msg_svr_reg() const;
+  ::server_base::MSG_SVR_REG_RES* release_msg_svr_reg();
+  ::server_base::MSG_SVR_REG_RES* mutable_msg_svr_reg();
+  void set_allocated_msg_svr_reg(::server_base::MSG_SVR_REG_RES* msg_svr_reg);
+  private:
+  const ::server_base::MSG_SVR_REG_RES& _internal_msg_svr_reg() const;
+  ::server_base::MSG_SVR_REG_RES* _internal_mutable_msg_svr_reg();
+  public:
+
+  // .server_base.MSG_SVR_REG_RES MSG_SVR_REG_RES = 501;
+  bool has_msg_svr_reg_res() const;
+  private:
+  bool _internal_has_msg_svr_reg_res() const;
+  public:
+  void clear_msg_svr_reg_res();
+  const ::server_base::MSG_SVR_REG_RES& msg_svr_reg_res() const;
+  ::server_base::MSG_SVR_REG_RES* release_msg_svr_reg_res();
+  ::server_base::MSG_SVR_REG_RES* mutable_msg_svr_reg_res();
+  void set_allocated_msg_svr_reg_res(::server_base::MSG_SVR_REG_RES* msg_svr_reg_res);
+  private:
+  const ::server_base::MSG_SVR_REG_RES& _internal_msg_svr_reg_res() const;
+  ::server_base::MSG_SVR_REG_RES* _internal_mutable_msg_svr_reg_res();
+  public:
+
+  // .server_base.MSG_HEARTBEAT MSG_HEARTBEAT = 999;
+  bool has_msg_heartbeat() const;
+  private:
+  bool _internal_has_msg_heartbeat() const;
+  public:
+  void clear_msg_heartbeat();
+  const ::server_base::MSG_HEARTBEAT& msg_heartbeat() const;
+  ::server_base::MSG_HEARTBEAT* release_msg_heartbeat();
+  ::server_base::MSG_HEARTBEAT* mutable_msg_heartbeat();
+  void set_allocated_msg_heartbeat(::server_base::MSG_HEARTBEAT* msg_heartbeat);
+  private:
+  const ::server_base::MSG_HEARTBEAT& _internal_msg_heartbeat() const;
+  ::server_base::MSG_HEARTBEAT* _internal_mutable_msg_heartbeat();
+  public:
+
+  // .server_base.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 1000;
+  bool has_msg_heartbeat_res() const;
+  private:
+  bool _internal_has_msg_heartbeat_res() const;
+  public:
+  void clear_msg_heartbeat_res();
+  const ::server_base::MSG_HEARTBEAT& msg_heartbeat_res() const;
+  ::server_base::MSG_HEARTBEAT* release_msg_heartbeat_res();
+  ::server_base::MSG_HEARTBEAT* mutable_msg_heartbeat_res();
+  void set_allocated_msg_heartbeat_res(::server_base::MSG_HEARTBEAT* msg_heartbeat_res);
+  private:
+  const ::server_base::MSG_HEARTBEAT& _internal_msg_heartbeat_res() const;
+  ::server_base::MSG_HEARTBEAT* _internal_mutable_msg_heartbeat_res();
   public:
 
   // .server_base.MSG_TEST MSG_TEST = 9001;
@@ -1879,14 +2402,16 @@ class MSG_SVR_BASE :
   // @@protoc_insertion_point(class_scope:server_base.MSG_SVR_BASE)
  private:
   class _Internal;
-  void set_has_msg_heartbeat();
   void set_has_msg_leader_reg();
   void set_has_msg_leader_server_list();
-  void set_has_msg_heartbeat_res();
   void set_has_msg_leader_reg_res();
   void set_has_msg_leader_server_list_res();
   void set_has_msg_leader_broadcast_add();
   void set_has_msg_leader_broadcast_remove();
+  void set_has_msg_svr_reg();
+  void set_has_msg_svr_reg_res();
+  void set_has_msg_heartbeat();
+  void set_has_msg_heartbeat_res();
   void set_has_msg_test();
   void set_has_msg_test_res();
 
@@ -1896,14 +2421,16 @@ class MSG_SVR_BASE :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   union MsgUnion {
     MsgUnion() {}
-    ::server_base::MSG_HEARTBEAT* msg_heartbeat_;
     ::server_base::MSG_LEADER_REG* msg_leader_reg_;
     ::server_base::MSG_LEADER_SERVER_LIST* msg_leader_server_list_;
-    ::server_base::MSG_HEARTBEAT* msg_heartbeat_res_;
     ::server_base::MSG_LEADER_REG_RES* msg_leader_reg_res_;
     ::server_base::MSG_LEADER_SERVER_LIST_RES* msg_leader_server_list_res_;
     ::server_base::MSG_LEADER_BROADCAST_ADD* msg_leader_broadcast_add_;
     ::server_base::MSG_LEADER_BROADCAST_REMOVE* msg_leader_broadcast_remove_;
+    ::server_base::MSG_SVR_REG_RES* msg_svr_reg_;
+    ::server_base::MSG_SVR_REG_RES* msg_svr_reg_res_;
+    ::server_base::MSG_HEARTBEAT* msg_heartbeat_;
+    ::server_base::MSG_HEARTBEAT* msg_heartbeat_res_;
     ::server_base::MSG_TEST* msg_test_;
     ::server_base::MSG_TEST_RES* msg_test_res_;
   } msg_;
@@ -2089,146 +2616,230 @@ inline void MSG_TEST_RES::set_a2(::PROTOBUF_NAMESPACE_ID::int32 value) {
 
 // -------------------------------------------------------------------
 
-// SERVER_INFO
+// SERVICE_INFO
 
-// int64 svrid = 1;
-inline void SERVER_INFO::clear_svrid() {
-  svrid_ = PROTOBUF_LONGLONG(0);
+// int32 svrid = 1;
+inline void SERVICE_INFO::clear_svrid() {
+  svrid_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int64 SERVER_INFO::_internal_svrid() const {
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO::_internal_svrid() const {
   return svrid_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int64 SERVER_INFO::svrid() const {
-  // @@protoc_insertion_point(field_get:server_base.SERVER_INFO.svrid)
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO::svrid() const {
+  // @@protoc_insertion_point(field_get:server_base.SERVICE_INFO.svrid)
   return _internal_svrid();
 }
-inline void SERVER_INFO::_internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+inline void SERVICE_INFO::_internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   svrid_ = value;
 }
-inline void SERVER_INFO::set_svrid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+inline void SERVICE_INFO::set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value) {
   _internal_set_svrid(value);
-  // @@protoc_insertion_point(field_set:server_base.SERVER_INFO.svrid)
+  // @@protoc_insertion_point(field_set:server_base.SERVICE_INFO.svrid)
 }
 
 // int32 type = 2;
-inline void SERVER_INFO::clear_type() {
+inline void SERVICE_INFO::clear_type() {
   type_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 SERVER_INFO::_internal_type() const {
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO::_internal_type() const {
   return type_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 SERVER_INFO::type() const {
-  // @@protoc_insertion_point(field_get:server_base.SERVER_INFO.type)
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO::type() const {
+  // @@protoc_insertion_point(field_get:server_base.SERVICE_INFO.type)
   return _internal_type();
 }
-inline void SERVER_INFO::_internal_set_type(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void SERVICE_INFO::_internal_set_type(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   type_ = value;
 }
-inline void SERVER_INFO::set_type(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void SERVICE_INFO::set_type(::PROTOBUF_NAMESPACE_ID::int32 value) {
   _internal_set_type(value);
-  // @@protoc_insertion_point(field_set:server_base.SERVER_INFO.type)
+  // @@protoc_insertion_point(field_set:server_base.SERVICE_INFO.type)
 }
 
 // int32 mode = 3;
-inline void SERVER_INFO::clear_mode() {
+inline void SERVICE_INFO::clear_mode() {
   mode_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 SERVER_INFO::_internal_mode() const {
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO::_internal_mode() const {
   return mode_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 SERVER_INFO::mode() const {
-  // @@protoc_insertion_point(field_get:server_base.SERVER_INFO.mode)
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO::mode() const {
+  // @@protoc_insertion_point(field_get:server_base.SERVICE_INFO.mode)
   return _internal_mode();
 }
-inline void SERVER_INFO::_internal_set_mode(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void SERVICE_INFO::_internal_set_mode(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   mode_ = value;
 }
-inline void SERVER_INFO::set_mode(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void SERVICE_INFO::set_mode(::PROTOBUF_NAMESPACE_ID::int32 value) {
   _internal_set_mode(value);
-  // @@protoc_insertion_point(field_set:server_base.SERVER_INFO.mode)
+  // @@protoc_insertion_point(field_set:server_base.SERVICE_INFO.mode)
 }
 
 // string ipstr = 4;
-inline void SERVER_INFO::clear_ipstr() {
+inline void SERVICE_INFO::clear_ipstr() {
   ipstr_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline const std::string& SERVER_INFO::ipstr() const {
-  // @@protoc_insertion_point(field_get:server_base.SERVER_INFO.ipstr)
+inline const std::string& SERVICE_INFO::ipstr() const {
+  // @@protoc_insertion_point(field_get:server_base.SERVICE_INFO.ipstr)
   return _internal_ipstr();
 }
-inline void SERVER_INFO::set_ipstr(const std::string& value) {
+inline void SERVICE_INFO::set_ipstr(const std::string& value) {
   _internal_set_ipstr(value);
-  // @@protoc_insertion_point(field_set:server_base.SERVER_INFO.ipstr)
+  // @@protoc_insertion_point(field_set:server_base.SERVICE_INFO.ipstr)
 }
-inline std::string* SERVER_INFO::mutable_ipstr() {
-  // @@protoc_insertion_point(field_mutable:server_base.SERVER_INFO.ipstr)
+inline std::string* SERVICE_INFO::mutable_ipstr() {
+  // @@protoc_insertion_point(field_mutable:server_base.SERVICE_INFO.ipstr)
   return _internal_mutable_ipstr();
 }
-inline const std::string& SERVER_INFO::_internal_ipstr() const {
+inline const std::string& SERVICE_INFO::_internal_ipstr() const {
   return ipstr_.GetNoArena();
 }
-inline void SERVER_INFO::_internal_set_ipstr(const std::string& value) {
+inline void SERVICE_INFO::_internal_set_ipstr(const std::string& value) {
   
   ipstr_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
 }
-inline void SERVER_INFO::set_ipstr(std::string&& value) {
+inline void SERVICE_INFO::set_ipstr(std::string&& value) {
   
   ipstr_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:server_base.SERVER_INFO.ipstr)
+  // @@protoc_insertion_point(field_set_rvalue:server_base.SERVICE_INFO.ipstr)
 }
-inline void SERVER_INFO::set_ipstr(const char* value) {
+inline void SERVICE_INFO::set_ipstr(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   ipstr_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:server_base.SERVER_INFO.ipstr)
+  // @@protoc_insertion_point(field_set_char:server_base.SERVICE_INFO.ipstr)
 }
-inline void SERVER_INFO::set_ipstr(const char* value, size_t size) {
+inline void SERVICE_INFO::set_ipstr(const char* value, size_t size) {
   
   ipstr_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:server_base.SERVER_INFO.ipstr)
+  // @@protoc_insertion_point(field_set_pointer:server_base.SERVICE_INFO.ipstr)
 }
-inline std::string* SERVER_INFO::_internal_mutable_ipstr() {
+inline std::string* SERVICE_INFO::_internal_mutable_ipstr() {
   
   return ipstr_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline std::string* SERVER_INFO::release_ipstr() {
-  // @@protoc_insertion_point(field_release:server_base.SERVER_INFO.ipstr)
+inline std::string* SERVICE_INFO::release_ipstr() {
+  // @@protoc_insertion_point(field_release:server_base.SERVICE_INFO.ipstr)
   
   return ipstr_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline void SERVER_INFO::set_allocated_ipstr(std::string* ipstr) {
+inline void SERVICE_INFO::set_allocated_ipstr(std::string* ipstr) {
   if (ipstr != nullptr) {
     
   } else {
     
   }
   ipstr_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ipstr);
-  // @@protoc_insertion_point(field_set_allocated:server_base.SERVER_INFO.ipstr)
+  // @@protoc_insertion_point(field_set_allocated:server_base.SERVICE_INFO.ipstr)
 }
 
 // int32 port = 5;
-inline void SERVER_INFO::clear_port() {
+inline void SERVICE_INFO::clear_port() {
   port_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 SERVER_INFO::_internal_port() const {
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO::_internal_port() const {
   return port_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 SERVER_INFO::port() const {
-  // @@protoc_insertion_point(field_get:server_base.SERVER_INFO.port)
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO::port() const {
+  // @@protoc_insertion_point(field_get:server_base.SERVICE_INFO.port)
   return _internal_port();
 }
-inline void SERVER_INFO::_internal_set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void SERVICE_INFO::_internal_set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   port_ = value;
 }
-inline void SERVER_INFO::set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void SERVICE_INFO::set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
   _internal_set_port(value);
-  // @@protoc_insertion_point(field_set:server_base.SERVER_INFO.port)
+  // @@protoc_insertion_point(field_set:server_base.SERVICE_INFO.port)
+}
+
+// int64 sessionid = 6;
+inline void SERVICE_INFO::clear_sessionid() {
+  sessionid_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 SERVICE_INFO::_internal_sessionid() const {
+  return sessionid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 SERVICE_INFO::sessionid() const {
+  // @@protoc_insertion_point(field_get:server_base.SERVICE_INFO.sessionid)
+  return _internal_sessionid();
+}
+inline void SERVICE_INFO::_internal_set_sessionid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  sessionid_ = value;
+}
+inline void SERVICE_INFO::set_sessionid(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_sessionid(value);
+  // @@protoc_insertion_point(field_set:server_base.SERVICE_INFO.sessionid)
+}
+
+// -------------------------------------------------------------------
+
+// SERVICE_INFO_SINGLE
+
+// int32 svrid = 1;
+inline void SERVICE_INFO_SINGLE::clear_svrid() {
+  svrid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO_SINGLE::_internal_svrid() const {
+  return svrid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO_SINGLE::svrid() const {
+  // @@protoc_insertion_point(field_get:server_base.SERVICE_INFO_SINGLE.svrid)
+  return _internal_svrid();
+}
+inline void SERVICE_INFO_SINGLE::_internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  svrid_ = value;
+}
+inline void SERVICE_INFO_SINGLE::set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_svrid(value);
+  // @@protoc_insertion_point(field_set:server_base.SERVICE_INFO_SINGLE.svrid)
+}
+
+// int32 type = 2;
+inline void SERVICE_INFO_SINGLE::clear_type() {
+  type_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO_SINGLE::_internal_type() const {
+  return type_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 SERVICE_INFO_SINGLE::type() const {
+  // @@protoc_insertion_point(field_get:server_base.SERVICE_INFO_SINGLE.type)
+  return _internal_type();
+}
+inline void SERVICE_INFO_SINGLE::_internal_set_type(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  type_ = value;
+}
+inline void SERVICE_INFO_SINGLE::set_type(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:server_base.SERVICE_INFO_SINGLE.type)
+}
+
+// int64 reg_flag = 3;
+inline void SERVICE_INFO_SINGLE::clear_reg_flag() {
+  reg_flag_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 SERVICE_INFO_SINGLE::_internal_reg_flag() const {
+  return reg_flag_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 SERVICE_INFO_SINGLE::reg_flag() const {
+  // @@protoc_insertion_point(field_get:server_base.SERVICE_INFO_SINGLE.reg_flag)
+  return _internal_reg_flag();
+}
+inline void SERVICE_INFO_SINGLE::_internal_set_reg_flag(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  reg_flag_ = value;
+}
+inline void SERVICE_INFO_SINGLE::set_reg_flag(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_reg_flag(value);
+  // @@protoc_insertion_point(field_set:server_base.SERVICE_INFO_SINGLE.reg_flag)
 }
 
 // -------------------------------------------------------------------
@@ -2243,64 +2854,63 @@ inline void SERVER_INFO::set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
 
 // MSG_LEADER_REG
 
-// .server_base.SERVER_INFO info = 1;
-inline bool MSG_LEADER_REG::_internal_has_info() const {
-  return this != internal_default_instance() && info_ != nullptr;
+// repeated .server_base.SERVICE_INFO infos = 1;
+inline int MSG_LEADER_REG::_internal_infos_size() const {
+  return infos_.size();
 }
-inline bool MSG_LEADER_REG::has_info() const {
-  return _internal_has_info();
+inline int MSG_LEADER_REG::infos_size() const {
+  return _internal_infos_size();
 }
-inline void MSG_LEADER_REG::clear_info() {
-  if (GetArenaNoVirtual() == nullptr && info_ != nullptr) {
-    delete info_;
-  }
-  info_ = nullptr;
+inline void MSG_LEADER_REG::clear_infos() {
+  infos_.Clear();
 }
-inline const ::server_base::SERVER_INFO& MSG_LEADER_REG::_internal_info() const {
-  const ::server_base::SERVER_INFO* p = info_;
-  return p != nullptr ? *p : *reinterpret_cast<const ::server_base::SERVER_INFO*>(
-      &::server_base::_SERVER_INFO_default_instance_);
+inline ::server_base::SERVICE_INFO* MSG_LEADER_REG::mutable_infos(int index) {
+  // @@protoc_insertion_point(field_mutable:server_base.MSG_LEADER_REG.infos)
+  return infos_.Mutable(index);
 }
-inline const ::server_base::SERVER_INFO& MSG_LEADER_REG::info() const {
-  // @@protoc_insertion_point(field_get:server_base.MSG_LEADER_REG.info)
-  return _internal_info();
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >*
+MSG_LEADER_REG::mutable_infos() {
+  // @@protoc_insertion_point(field_mutable_list:server_base.MSG_LEADER_REG.infos)
+  return &infos_;
 }
-inline ::server_base::SERVER_INFO* MSG_LEADER_REG::release_info() {
-  // @@protoc_insertion_point(field_release:server_base.MSG_LEADER_REG.info)
+inline const ::server_base::SERVICE_INFO& MSG_LEADER_REG::_internal_infos(int index) const {
+  return infos_.Get(index);
+}
+inline const ::server_base::SERVICE_INFO& MSG_LEADER_REG::infos(int index) const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_LEADER_REG.infos)
+  return _internal_infos(index);
+}
+inline ::server_base::SERVICE_INFO* MSG_LEADER_REG::_internal_add_infos() {
+  return infos_.Add();
+}
+inline ::server_base::SERVICE_INFO* MSG_LEADER_REG::add_infos() {
+  // @@protoc_insertion_point(field_add:server_base.MSG_LEADER_REG.infos)
+  return _internal_add_infos();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >&
+MSG_LEADER_REG::infos() const {
+  // @@protoc_insertion_point(field_list:server_base.MSG_LEADER_REG.infos)
+  return infos_;
+}
+
+// int32 svrid = 2;
+inline void MSG_LEADER_REG::clear_svrid() {
+  svrid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 MSG_LEADER_REG::_internal_svrid() const {
+  return svrid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 MSG_LEADER_REG::svrid() const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_LEADER_REG.svrid)
+  return _internal_svrid();
+}
+inline void MSG_LEADER_REG::_internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  ::server_base::SERVER_INFO* temp = info_;
-  info_ = nullptr;
-  return temp;
+  svrid_ = value;
 }
-inline ::server_base::SERVER_INFO* MSG_LEADER_REG::_internal_mutable_info() {
-  
-  if (info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::server_base::SERVER_INFO>(GetArenaNoVirtual());
-    info_ = p;
-  }
-  return info_;
-}
-inline ::server_base::SERVER_INFO* MSG_LEADER_REG::mutable_info() {
-  // @@protoc_insertion_point(field_mutable:server_base.MSG_LEADER_REG.info)
-  return _internal_mutable_info();
-}
-inline void MSG_LEADER_REG::set_allocated_info(::server_base::SERVER_INFO* info) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == nullptr) {
-    delete info_;
-  }
-  if (info) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
-    if (message_arena != submessage_arena) {
-      info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, info, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  info_ = info;
-  // @@protoc_insertion_point(field_set_allocated:server_base.MSG_LEADER_REG.info)
+inline void MSG_LEADER_REG::set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_svrid(value);
+  // @@protoc_insertion_point(field_set:server_base.MSG_LEADER_REG.svrid)
 }
 
 // -------------------------------------------------------------------
@@ -2311,128 +2921,126 @@ inline void MSG_LEADER_REG::set_allocated_info(::server_base::SERVER_INFO* info)
 
 // MSG_LEADER_BROADCAST_ADD
 
-// .server_base.SERVER_INFO info = 1;
-inline bool MSG_LEADER_BROADCAST_ADD::_internal_has_info() const {
-  return this != internal_default_instance() && info_ != nullptr;
+// repeated .server_base.SERVICE_INFO infos = 1;
+inline int MSG_LEADER_BROADCAST_ADD::_internal_infos_size() const {
+  return infos_.size();
 }
-inline bool MSG_LEADER_BROADCAST_ADD::has_info() const {
-  return _internal_has_info();
+inline int MSG_LEADER_BROADCAST_ADD::infos_size() const {
+  return _internal_infos_size();
 }
-inline void MSG_LEADER_BROADCAST_ADD::clear_info() {
-  if (GetArenaNoVirtual() == nullptr && info_ != nullptr) {
-    delete info_;
-  }
-  info_ = nullptr;
+inline void MSG_LEADER_BROADCAST_ADD::clear_infos() {
+  infos_.Clear();
 }
-inline const ::server_base::SERVER_INFO& MSG_LEADER_BROADCAST_ADD::_internal_info() const {
-  const ::server_base::SERVER_INFO* p = info_;
-  return p != nullptr ? *p : *reinterpret_cast<const ::server_base::SERVER_INFO*>(
-      &::server_base::_SERVER_INFO_default_instance_);
+inline ::server_base::SERVICE_INFO* MSG_LEADER_BROADCAST_ADD::mutable_infos(int index) {
+  // @@protoc_insertion_point(field_mutable:server_base.MSG_LEADER_BROADCAST_ADD.infos)
+  return infos_.Mutable(index);
 }
-inline const ::server_base::SERVER_INFO& MSG_LEADER_BROADCAST_ADD::info() const {
-  // @@protoc_insertion_point(field_get:server_base.MSG_LEADER_BROADCAST_ADD.info)
-  return _internal_info();
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >*
+MSG_LEADER_BROADCAST_ADD::mutable_infos() {
+  // @@protoc_insertion_point(field_mutable_list:server_base.MSG_LEADER_BROADCAST_ADD.infos)
+  return &infos_;
 }
-inline ::server_base::SERVER_INFO* MSG_LEADER_BROADCAST_ADD::release_info() {
-  // @@protoc_insertion_point(field_release:server_base.MSG_LEADER_BROADCAST_ADD.info)
+inline const ::server_base::SERVICE_INFO& MSG_LEADER_BROADCAST_ADD::_internal_infos(int index) const {
+  return infos_.Get(index);
+}
+inline const ::server_base::SERVICE_INFO& MSG_LEADER_BROADCAST_ADD::infos(int index) const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_LEADER_BROADCAST_ADD.infos)
+  return _internal_infos(index);
+}
+inline ::server_base::SERVICE_INFO* MSG_LEADER_BROADCAST_ADD::_internal_add_infos() {
+  return infos_.Add();
+}
+inline ::server_base::SERVICE_INFO* MSG_LEADER_BROADCAST_ADD::add_infos() {
+  // @@protoc_insertion_point(field_add:server_base.MSG_LEADER_BROADCAST_ADD.infos)
+  return _internal_add_infos();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >&
+MSG_LEADER_BROADCAST_ADD::infos() const {
+  // @@protoc_insertion_point(field_list:server_base.MSG_LEADER_BROADCAST_ADD.infos)
+  return infos_;
+}
+
+// int32 svrid = 2;
+inline void MSG_LEADER_BROADCAST_ADD::clear_svrid() {
+  svrid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 MSG_LEADER_BROADCAST_ADD::_internal_svrid() const {
+  return svrid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 MSG_LEADER_BROADCAST_ADD::svrid() const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_LEADER_BROADCAST_ADD.svrid)
+  return _internal_svrid();
+}
+inline void MSG_LEADER_BROADCAST_ADD::_internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  ::server_base::SERVER_INFO* temp = info_;
-  info_ = nullptr;
-  return temp;
+  svrid_ = value;
 }
-inline ::server_base::SERVER_INFO* MSG_LEADER_BROADCAST_ADD::_internal_mutable_info() {
-  
-  if (info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::server_base::SERVER_INFO>(GetArenaNoVirtual());
-    info_ = p;
-  }
-  return info_;
-}
-inline ::server_base::SERVER_INFO* MSG_LEADER_BROADCAST_ADD::mutable_info() {
-  // @@protoc_insertion_point(field_mutable:server_base.MSG_LEADER_BROADCAST_ADD.info)
-  return _internal_mutable_info();
-}
-inline void MSG_LEADER_BROADCAST_ADD::set_allocated_info(::server_base::SERVER_INFO* info) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == nullptr) {
-    delete info_;
-  }
-  if (info) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
-    if (message_arena != submessage_arena) {
-      info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, info, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  info_ = info;
-  // @@protoc_insertion_point(field_set_allocated:server_base.MSG_LEADER_BROADCAST_ADD.info)
+inline void MSG_LEADER_BROADCAST_ADD::set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_svrid(value);
+  // @@protoc_insertion_point(field_set:server_base.MSG_LEADER_BROADCAST_ADD.svrid)
 }
 
 // -------------------------------------------------------------------
 
 // MSG_LEADER_BROADCAST_REMOVE
 
-// .server_base.SERVER_INFO info = 1;
-inline bool MSG_LEADER_BROADCAST_REMOVE::_internal_has_info() const {
-  return this != internal_default_instance() && info_ != nullptr;
+// repeated .server_base.SERVICE_INFO infos = 1;
+inline int MSG_LEADER_BROADCAST_REMOVE::_internal_infos_size() const {
+  return infos_.size();
 }
-inline bool MSG_LEADER_BROADCAST_REMOVE::has_info() const {
-  return _internal_has_info();
+inline int MSG_LEADER_BROADCAST_REMOVE::infos_size() const {
+  return _internal_infos_size();
 }
-inline void MSG_LEADER_BROADCAST_REMOVE::clear_info() {
-  if (GetArenaNoVirtual() == nullptr && info_ != nullptr) {
-    delete info_;
-  }
-  info_ = nullptr;
+inline void MSG_LEADER_BROADCAST_REMOVE::clear_infos() {
+  infos_.Clear();
 }
-inline const ::server_base::SERVER_INFO& MSG_LEADER_BROADCAST_REMOVE::_internal_info() const {
-  const ::server_base::SERVER_INFO* p = info_;
-  return p != nullptr ? *p : *reinterpret_cast<const ::server_base::SERVER_INFO*>(
-      &::server_base::_SERVER_INFO_default_instance_);
+inline ::server_base::SERVICE_INFO* MSG_LEADER_BROADCAST_REMOVE::mutable_infos(int index) {
+  // @@protoc_insertion_point(field_mutable:server_base.MSG_LEADER_BROADCAST_REMOVE.infos)
+  return infos_.Mutable(index);
 }
-inline const ::server_base::SERVER_INFO& MSG_LEADER_BROADCAST_REMOVE::info() const {
-  // @@protoc_insertion_point(field_get:server_base.MSG_LEADER_BROADCAST_REMOVE.info)
-  return _internal_info();
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >*
+MSG_LEADER_BROADCAST_REMOVE::mutable_infos() {
+  // @@protoc_insertion_point(field_mutable_list:server_base.MSG_LEADER_BROADCAST_REMOVE.infos)
+  return &infos_;
 }
-inline ::server_base::SERVER_INFO* MSG_LEADER_BROADCAST_REMOVE::release_info() {
-  // @@protoc_insertion_point(field_release:server_base.MSG_LEADER_BROADCAST_REMOVE.info)
+inline const ::server_base::SERVICE_INFO& MSG_LEADER_BROADCAST_REMOVE::_internal_infos(int index) const {
+  return infos_.Get(index);
+}
+inline const ::server_base::SERVICE_INFO& MSG_LEADER_BROADCAST_REMOVE::infos(int index) const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_LEADER_BROADCAST_REMOVE.infos)
+  return _internal_infos(index);
+}
+inline ::server_base::SERVICE_INFO* MSG_LEADER_BROADCAST_REMOVE::_internal_add_infos() {
+  return infos_.Add();
+}
+inline ::server_base::SERVICE_INFO* MSG_LEADER_BROADCAST_REMOVE::add_infos() {
+  // @@protoc_insertion_point(field_add:server_base.MSG_LEADER_BROADCAST_REMOVE.infos)
+  return _internal_add_infos();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >&
+MSG_LEADER_BROADCAST_REMOVE::infos() const {
+  // @@protoc_insertion_point(field_list:server_base.MSG_LEADER_BROADCAST_REMOVE.infos)
+  return infos_;
+}
+
+// int32 svrid = 2;
+inline void MSG_LEADER_BROADCAST_REMOVE::clear_svrid() {
+  svrid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 MSG_LEADER_BROADCAST_REMOVE::_internal_svrid() const {
+  return svrid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 MSG_LEADER_BROADCAST_REMOVE::svrid() const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_LEADER_BROADCAST_REMOVE.svrid)
+  return _internal_svrid();
+}
+inline void MSG_LEADER_BROADCAST_REMOVE::_internal_set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  ::server_base::SERVER_INFO* temp = info_;
-  info_ = nullptr;
-  return temp;
+  svrid_ = value;
 }
-inline ::server_base::SERVER_INFO* MSG_LEADER_BROADCAST_REMOVE::_internal_mutable_info() {
-  
-  if (info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::server_base::SERVER_INFO>(GetArenaNoVirtual());
-    info_ = p;
-  }
-  return info_;
-}
-inline ::server_base::SERVER_INFO* MSG_LEADER_BROADCAST_REMOVE::mutable_info() {
-  // @@protoc_insertion_point(field_mutable:server_base.MSG_LEADER_BROADCAST_REMOVE.info)
-  return _internal_mutable_info();
-}
-inline void MSG_LEADER_BROADCAST_REMOVE::set_allocated_info(::server_base::SERVER_INFO* info) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == nullptr) {
-    delete info_;
-  }
-  if (info) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
-    if (message_arena != submessage_arena) {
-      info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, info, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  info_ = info;
-  // @@protoc_insertion_point(field_set_allocated:server_base.MSG_LEADER_BROADCAST_REMOVE.info)
+inline void MSG_LEADER_BROADCAST_REMOVE::set_svrid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_svrid(value);
+  // @@protoc_insertion_point(field_set:server_base.MSG_LEADER_BROADCAST_REMOVE.svrid)
 }
 
 // -------------------------------------------------------------------
@@ -2463,7 +3071,7 @@ inline void MSG_LEADER_REG_RES::set_result(::PROTOBUF_NAMESPACE_ID::int32 value)
 
 // MSG_LEADER_SERVER_LIST_RES
 
-// repeated .server_base.SERVER_INFO infos = 1;
+// repeated .server_base.SERVICE_INFO infos = 1;
 inline int MSG_LEADER_SERVER_LIST_RES::_internal_infos_size() const {
   return infos_.size();
 }
@@ -2473,30 +3081,30 @@ inline int MSG_LEADER_SERVER_LIST_RES::infos_size() const {
 inline void MSG_LEADER_SERVER_LIST_RES::clear_infos() {
   infos_.Clear();
 }
-inline ::server_base::SERVER_INFO* MSG_LEADER_SERVER_LIST_RES::mutable_infos(int index) {
+inline ::server_base::SERVICE_INFO* MSG_LEADER_SERVER_LIST_RES::mutable_infos(int index) {
   // @@protoc_insertion_point(field_mutable:server_base.MSG_LEADER_SERVER_LIST_RES.infos)
   return infos_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVER_INFO >*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >*
 MSG_LEADER_SERVER_LIST_RES::mutable_infos() {
   // @@protoc_insertion_point(field_mutable_list:server_base.MSG_LEADER_SERVER_LIST_RES.infos)
   return &infos_;
 }
-inline const ::server_base::SERVER_INFO& MSG_LEADER_SERVER_LIST_RES::_internal_infos(int index) const {
+inline const ::server_base::SERVICE_INFO& MSG_LEADER_SERVER_LIST_RES::_internal_infos(int index) const {
   return infos_.Get(index);
 }
-inline const ::server_base::SERVER_INFO& MSG_LEADER_SERVER_LIST_RES::infos(int index) const {
+inline const ::server_base::SERVICE_INFO& MSG_LEADER_SERVER_LIST_RES::infos(int index) const {
   // @@protoc_insertion_point(field_get:server_base.MSG_LEADER_SERVER_LIST_RES.infos)
   return _internal_infos(index);
 }
-inline ::server_base::SERVER_INFO* MSG_LEADER_SERVER_LIST_RES::_internal_add_infos() {
+inline ::server_base::SERVICE_INFO* MSG_LEADER_SERVER_LIST_RES::_internal_add_infos() {
   return infos_.Add();
 }
-inline ::server_base::SERVER_INFO* MSG_LEADER_SERVER_LIST_RES::add_infos() {
+inline ::server_base::SERVICE_INFO* MSG_LEADER_SERVER_LIST_RES::add_infos() {
   // @@protoc_insertion_point(field_add:server_base.MSG_LEADER_SERVER_LIST_RES.infos)
   return _internal_add_infos();
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVER_INFO >&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO >&
 MSG_LEADER_SERVER_LIST_RES::infos() const {
   // @@protoc_insertion_point(field_list:server_base.MSG_LEADER_SERVER_LIST_RES.infos)
   return infos_;
@@ -2504,59 +3112,95 @@ MSG_LEADER_SERVER_LIST_RES::infos() const {
 
 // -------------------------------------------------------------------
 
+// MSG_SVR_REG
+
+// repeated .server_base.SERVICE_INFO_SINGLE infos = 1;
+inline int MSG_SVR_REG::_internal_infos_size() const {
+  return infos_.size();
+}
+inline int MSG_SVR_REG::infos_size() const {
+  return _internal_infos_size();
+}
+inline void MSG_SVR_REG::clear_infos() {
+  infos_.Clear();
+}
+inline ::server_base::SERVICE_INFO_SINGLE* MSG_SVR_REG::mutable_infos(int index) {
+  // @@protoc_insertion_point(field_mutable:server_base.MSG_SVR_REG.infos)
+  return infos_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO_SINGLE >*
+MSG_SVR_REG::mutable_infos() {
+  // @@protoc_insertion_point(field_mutable_list:server_base.MSG_SVR_REG.infos)
+  return &infos_;
+}
+inline const ::server_base::SERVICE_INFO_SINGLE& MSG_SVR_REG::_internal_infos(int index) const {
+  return infos_.Get(index);
+}
+inline const ::server_base::SERVICE_INFO_SINGLE& MSG_SVR_REG::infos(int index) const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_SVR_REG.infos)
+  return _internal_infos(index);
+}
+inline ::server_base::SERVICE_INFO_SINGLE* MSG_SVR_REG::_internal_add_infos() {
+  return infos_.Add();
+}
+inline ::server_base::SERVICE_INFO_SINGLE* MSG_SVR_REG::add_infos() {
+  // @@protoc_insertion_point(field_add:server_base.MSG_SVR_REG.infos)
+  return _internal_add_infos();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO_SINGLE >&
+MSG_SVR_REG::infos() const {
+  // @@protoc_insertion_point(field_list:server_base.MSG_SVR_REG.infos)
+  return infos_;
+}
+
+// -------------------------------------------------------------------
+
+// MSG_SVR_REG_RES
+
+// repeated .server_base.SERVICE_INFO_SINGLE infos = 1;
+inline int MSG_SVR_REG_RES::_internal_infos_size() const {
+  return infos_.size();
+}
+inline int MSG_SVR_REG_RES::infos_size() const {
+  return _internal_infos_size();
+}
+inline void MSG_SVR_REG_RES::clear_infos() {
+  infos_.Clear();
+}
+inline ::server_base::SERVICE_INFO_SINGLE* MSG_SVR_REG_RES::mutable_infos(int index) {
+  // @@protoc_insertion_point(field_mutable:server_base.MSG_SVR_REG_RES.infos)
+  return infos_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO_SINGLE >*
+MSG_SVR_REG_RES::mutable_infos() {
+  // @@protoc_insertion_point(field_mutable_list:server_base.MSG_SVR_REG_RES.infos)
+  return &infos_;
+}
+inline const ::server_base::SERVICE_INFO_SINGLE& MSG_SVR_REG_RES::_internal_infos(int index) const {
+  return infos_.Get(index);
+}
+inline const ::server_base::SERVICE_INFO_SINGLE& MSG_SVR_REG_RES::infos(int index) const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_SVR_REG_RES.infos)
+  return _internal_infos(index);
+}
+inline ::server_base::SERVICE_INFO_SINGLE* MSG_SVR_REG_RES::_internal_add_infos() {
+  return infos_.Add();
+}
+inline ::server_base::SERVICE_INFO_SINGLE* MSG_SVR_REG_RES::add_infos() {
+  // @@protoc_insertion_point(field_add:server_base.MSG_SVR_REG_RES.infos)
+  return _internal_add_infos();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::server_base::SERVICE_INFO_SINGLE >&
+MSG_SVR_REG_RES::infos() const {
+  // @@protoc_insertion_point(field_list:server_base.MSG_SVR_REG_RES.infos)
+  return infos_;
+}
+
+// -------------------------------------------------------------------
+
 // MSG_SVR_BASE
 
-// .server_base.MSG_HEARTBEAT MSG_HEARTBEAT = 1000;
-inline bool MSG_SVR_BASE::_internal_has_msg_heartbeat() const {
-  return msg_case() == kMSGHEARTBEAT;
-}
-inline bool MSG_SVR_BASE::has_msg_heartbeat() const {
-  return _internal_has_msg_heartbeat();
-}
-inline void MSG_SVR_BASE::set_has_msg_heartbeat() {
-  _oneof_case_[0] = kMSGHEARTBEAT;
-}
-inline void MSG_SVR_BASE::clear_msg_heartbeat() {
-  if (_internal_has_msg_heartbeat()) {
-    delete msg_.msg_heartbeat_;
-    clear_has_msg();
-  }
-}
-inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::release_msg_heartbeat() {
-  // @@protoc_insertion_point(field_release:server_base.MSG_SVR_BASE.MSG_HEARTBEAT)
-  if (has_msg_heartbeat()) {
-    clear_has_msg();
-      ::server_base::MSG_HEARTBEAT* temp = msg_.msg_heartbeat_;
-    msg_.msg_heartbeat_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::server_base::MSG_HEARTBEAT& MSG_SVR_BASE::_internal_msg_heartbeat() const {
-  return _internal_has_msg_heartbeat()
-      ? *msg_.msg_heartbeat_
-      : *reinterpret_cast< ::server_base::MSG_HEARTBEAT*>(&::server_base::_MSG_HEARTBEAT_default_instance_);
-}
-inline const ::server_base::MSG_HEARTBEAT& MSG_SVR_BASE::msg_heartbeat() const {
-  // @@protoc_insertion_point(field_get:server_base.MSG_SVR_BASE.MSG_HEARTBEAT)
-  return _internal_msg_heartbeat();
-}
-inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::_internal_mutable_msg_heartbeat() {
-  if (!_internal_has_msg_heartbeat()) {
-    clear_msg();
-    set_has_msg_heartbeat();
-    msg_.msg_heartbeat_ = CreateMaybeMessage< ::server_base::MSG_HEARTBEAT >(
-        GetArenaNoVirtual());
-  }
-  return msg_.msg_heartbeat_;
-}
-inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::mutable_msg_heartbeat() {
-  // @@protoc_insertion_point(field_mutable:server_base.MSG_SVR_BASE.MSG_HEARTBEAT)
-  return _internal_mutable_msg_heartbeat();
-}
-
-// .server_base.MSG_LEADER_REG MSG_LEADER_REG = 1001;
+// .server_base.MSG_LEADER_REG MSG_LEADER_REG = 101;
 inline bool MSG_SVR_BASE::_internal_has_msg_leader_reg() const {
   return msg_case() == kMSGLEADERREG;
 }
@@ -2606,7 +3250,7 @@ inline ::server_base::MSG_LEADER_REG* MSG_SVR_BASE::mutable_msg_leader_reg() {
   return _internal_mutable_msg_leader_reg();
 }
 
-// .server_base.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 1002;
+// .server_base.MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST = 102;
 inline bool MSG_SVR_BASE::_internal_has_msg_leader_server_list() const {
   return msg_case() == kMSGLEADERSERVERLIST;
 }
@@ -2656,57 +3300,7 @@ inline ::server_base::MSG_LEADER_SERVER_LIST* MSG_SVR_BASE::mutable_msg_leader_s
   return _internal_mutable_msg_leader_server_list();
 }
 
-// .server_base.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 2000;
-inline bool MSG_SVR_BASE::_internal_has_msg_heartbeat_res() const {
-  return msg_case() == kMSGHEARTBEATRES;
-}
-inline bool MSG_SVR_BASE::has_msg_heartbeat_res() const {
-  return _internal_has_msg_heartbeat_res();
-}
-inline void MSG_SVR_BASE::set_has_msg_heartbeat_res() {
-  _oneof_case_[0] = kMSGHEARTBEATRES;
-}
-inline void MSG_SVR_BASE::clear_msg_heartbeat_res() {
-  if (_internal_has_msg_heartbeat_res()) {
-    delete msg_.msg_heartbeat_res_;
-    clear_has_msg();
-  }
-}
-inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::release_msg_heartbeat_res() {
-  // @@protoc_insertion_point(field_release:server_base.MSG_SVR_BASE.MSG_HEARTBEAT_RES)
-  if (has_msg_heartbeat_res()) {
-    clear_has_msg();
-      ::server_base::MSG_HEARTBEAT* temp = msg_.msg_heartbeat_res_;
-    msg_.msg_heartbeat_res_ = nullptr;
-    return temp;
-  } else {
-    return nullptr;
-  }
-}
-inline const ::server_base::MSG_HEARTBEAT& MSG_SVR_BASE::_internal_msg_heartbeat_res() const {
-  return _internal_has_msg_heartbeat_res()
-      ? *msg_.msg_heartbeat_res_
-      : *reinterpret_cast< ::server_base::MSG_HEARTBEAT*>(&::server_base::_MSG_HEARTBEAT_default_instance_);
-}
-inline const ::server_base::MSG_HEARTBEAT& MSG_SVR_BASE::msg_heartbeat_res() const {
-  // @@protoc_insertion_point(field_get:server_base.MSG_SVR_BASE.MSG_HEARTBEAT_RES)
-  return _internal_msg_heartbeat_res();
-}
-inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::_internal_mutable_msg_heartbeat_res() {
-  if (!_internal_has_msg_heartbeat_res()) {
-    clear_msg();
-    set_has_msg_heartbeat_res();
-    msg_.msg_heartbeat_res_ = CreateMaybeMessage< ::server_base::MSG_HEARTBEAT >(
-        GetArenaNoVirtual());
-  }
-  return msg_.msg_heartbeat_res_;
-}
-inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::mutable_msg_heartbeat_res() {
-  // @@protoc_insertion_point(field_mutable:server_base.MSG_SVR_BASE.MSG_HEARTBEAT_RES)
-  return _internal_mutable_msg_heartbeat_res();
-}
-
-// .server_base.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 2001;
+// .server_base.MSG_LEADER_REG_RES MSG_LEADER_REG_RES = 103;
 inline bool MSG_SVR_BASE::_internal_has_msg_leader_reg_res() const {
   return msg_case() == kMSGLEADERREGRES;
 }
@@ -2756,7 +3350,7 @@ inline ::server_base::MSG_LEADER_REG_RES* MSG_SVR_BASE::mutable_msg_leader_reg_r
   return _internal_mutable_msg_leader_reg_res();
 }
 
-// .server_base.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 2002;
+// .server_base.MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES = 104;
 inline bool MSG_SVR_BASE::_internal_has_msg_leader_server_list_res() const {
   return msg_case() == kMSGLEADERSERVERLISTRES;
 }
@@ -2806,7 +3400,7 @@ inline ::server_base::MSG_LEADER_SERVER_LIST_RES* MSG_SVR_BASE::mutable_msg_lead
   return _internal_mutable_msg_leader_server_list_res();
 }
 
-// .server_base.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 3001;
+// .server_base.MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD = 105;
 inline bool MSG_SVR_BASE::_internal_has_msg_leader_broadcast_add() const {
   return msg_case() == kMSGLEADERBROADCASTADD;
 }
@@ -2856,7 +3450,7 @@ inline ::server_base::MSG_LEADER_BROADCAST_ADD* MSG_SVR_BASE::mutable_msg_leader
   return _internal_mutable_msg_leader_broadcast_add();
 }
 
-// .server_base.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 3002;
+// .server_base.MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE = 106;
 inline bool MSG_SVR_BASE::_internal_has_msg_leader_broadcast_remove() const {
   return msg_case() == kMSGLEADERBROADCASTREMOVE;
 }
@@ -2904,6 +3498,206 @@ inline ::server_base::MSG_LEADER_BROADCAST_REMOVE* MSG_SVR_BASE::_internal_mutab
 inline ::server_base::MSG_LEADER_BROADCAST_REMOVE* MSG_SVR_BASE::mutable_msg_leader_broadcast_remove() {
   // @@protoc_insertion_point(field_mutable:server_base.MSG_SVR_BASE.MSG_LEADER_BROADCAST_REMOVE)
   return _internal_mutable_msg_leader_broadcast_remove();
+}
+
+// .server_base.MSG_SVR_REG_RES MSG_SVR_REG = 500;
+inline bool MSG_SVR_BASE::_internal_has_msg_svr_reg() const {
+  return msg_case() == kMSGSVRREG;
+}
+inline bool MSG_SVR_BASE::has_msg_svr_reg() const {
+  return _internal_has_msg_svr_reg();
+}
+inline void MSG_SVR_BASE::set_has_msg_svr_reg() {
+  _oneof_case_[0] = kMSGSVRREG;
+}
+inline void MSG_SVR_BASE::clear_msg_svr_reg() {
+  if (_internal_has_msg_svr_reg()) {
+    delete msg_.msg_svr_reg_;
+    clear_has_msg();
+  }
+}
+inline ::server_base::MSG_SVR_REG_RES* MSG_SVR_BASE::release_msg_svr_reg() {
+  // @@protoc_insertion_point(field_release:server_base.MSG_SVR_BASE.MSG_SVR_REG)
+  if (has_msg_svr_reg()) {
+    clear_has_msg();
+      ::server_base::MSG_SVR_REG_RES* temp = msg_.msg_svr_reg_;
+    msg_.msg_svr_reg_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::server_base::MSG_SVR_REG_RES& MSG_SVR_BASE::_internal_msg_svr_reg() const {
+  return _internal_has_msg_svr_reg()
+      ? *msg_.msg_svr_reg_
+      : *reinterpret_cast< ::server_base::MSG_SVR_REG_RES*>(&::server_base::_MSG_SVR_REG_RES_default_instance_);
+}
+inline const ::server_base::MSG_SVR_REG_RES& MSG_SVR_BASE::msg_svr_reg() const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_SVR_BASE.MSG_SVR_REG)
+  return _internal_msg_svr_reg();
+}
+inline ::server_base::MSG_SVR_REG_RES* MSG_SVR_BASE::_internal_mutable_msg_svr_reg() {
+  if (!_internal_has_msg_svr_reg()) {
+    clear_msg();
+    set_has_msg_svr_reg();
+    msg_.msg_svr_reg_ = CreateMaybeMessage< ::server_base::MSG_SVR_REG_RES >(
+        GetArenaNoVirtual());
+  }
+  return msg_.msg_svr_reg_;
+}
+inline ::server_base::MSG_SVR_REG_RES* MSG_SVR_BASE::mutable_msg_svr_reg() {
+  // @@protoc_insertion_point(field_mutable:server_base.MSG_SVR_BASE.MSG_SVR_REG)
+  return _internal_mutable_msg_svr_reg();
+}
+
+// .server_base.MSG_SVR_REG_RES MSG_SVR_REG_RES = 501;
+inline bool MSG_SVR_BASE::_internal_has_msg_svr_reg_res() const {
+  return msg_case() == kMSGSVRREGRES;
+}
+inline bool MSG_SVR_BASE::has_msg_svr_reg_res() const {
+  return _internal_has_msg_svr_reg_res();
+}
+inline void MSG_SVR_BASE::set_has_msg_svr_reg_res() {
+  _oneof_case_[0] = kMSGSVRREGRES;
+}
+inline void MSG_SVR_BASE::clear_msg_svr_reg_res() {
+  if (_internal_has_msg_svr_reg_res()) {
+    delete msg_.msg_svr_reg_res_;
+    clear_has_msg();
+  }
+}
+inline ::server_base::MSG_SVR_REG_RES* MSG_SVR_BASE::release_msg_svr_reg_res() {
+  // @@protoc_insertion_point(field_release:server_base.MSG_SVR_BASE.MSG_SVR_REG_RES)
+  if (has_msg_svr_reg_res()) {
+    clear_has_msg();
+      ::server_base::MSG_SVR_REG_RES* temp = msg_.msg_svr_reg_res_;
+    msg_.msg_svr_reg_res_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::server_base::MSG_SVR_REG_RES& MSG_SVR_BASE::_internal_msg_svr_reg_res() const {
+  return _internal_has_msg_svr_reg_res()
+      ? *msg_.msg_svr_reg_res_
+      : *reinterpret_cast< ::server_base::MSG_SVR_REG_RES*>(&::server_base::_MSG_SVR_REG_RES_default_instance_);
+}
+inline const ::server_base::MSG_SVR_REG_RES& MSG_SVR_BASE::msg_svr_reg_res() const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_SVR_BASE.MSG_SVR_REG_RES)
+  return _internal_msg_svr_reg_res();
+}
+inline ::server_base::MSG_SVR_REG_RES* MSG_SVR_BASE::_internal_mutable_msg_svr_reg_res() {
+  if (!_internal_has_msg_svr_reg_res()) {
+    clear_msg();
+    set_has_msg_svr_reg_res();
+    msg_.msg_svr_reg_res_ = CreateMaybeMessage< ::server_base::MSG_SVR_REG_RES >(
+        GetArenaNoVirtual());
+  }
+  return msg_.msg_svr_reg_res_;
+}
+inline ::server_base::MSG_SVR_REG_RES* MSG_SVR_BASE::mutable_msg_svr_reg_res() {
+  // @@protoc_insertion_point(field_mutable:server_base.MSG_SVR_BASE.MSG_SVR_REG_RES)
+  return _internal_mutable_msg_svr_reg_res();
+}
+
+// .server_base.MSG_HEARTBEAT MSG_HEARTBEAT = 999;
+inline bool MSG_SVR_BASE::_internal_has_msg_heartbeat() const {
+  return msg_case() == kMSGHEARTBEAT;
+}
+inline bool MSG_SVR_BASE::has_msg_heartbeat() const {
+  return _internal_has_msg_heartbeat();
+}
+inline void MSG_SVR_BASE::set_has_msg_heartbeat() {
+  _oneof_case_[0] = kMSGHEARTBEAT;
+}
+inline void MSG_SVR_BASE::clear_msg_heartbeat() {
+  if (_internal_has_msg_heartbeat()) {
+    delete msg_.msg_heartbeat_;
+    clear_has_msg();
+  }
+}
+inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::release_msg_heartbeat() {
+  // @@protoc_insertion_point(field_release:server_base.MSG_SVR_BASE.MSG_HEARTBEAT)
+  if (has_msg_heartbeat()) {
+    clear_has_msg();
+      ::server_base::MSG_HEARTBEAT* temp = msg_.msg_heartbeat_;
+    msg_.msg_heartbeat_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::server_base::MSG_HEARTBEAT& MSG_SVR_BASE::_internal_msg_heartbeat() const {
+  return _internal_has_msg_heartbeat()
+      ? *msg_.msg_heartbeat_
+      : *reinterpret_cast< ::server_base::MSG_HEARTBEAT*>(&::server_base::_MSG_HEARTBEAT_default_instance_);
+}
+inline const ::server_base::MSG_HEARTBEAT& MSG_SVR_BASE::msg_heartbeat() const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_SVR_BASE.MSG_HEARTBEAT)
+  return _internal_msg_heartbeat();
+}
+inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::_internal_mutable_msg_heartbeat() {
+  if (!_internal_has_msg_heartbeat()) {
+    clear_msg();
+    set_has_msg_heartbeat();
+    msg_.msg_heartbeat_ = CreateMaybeMessage< ::server_base::MSG_HEARTBEAT >(
+        GetArenaNoVirtual());
+  }
+  return msg_.msg_heartbeat_;
+}
+inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::mutable_msg_heartbeat() {
+  // @@protoc_insertion_point(field_mutable:server_base.MSG_SVR_BASE.MSG_HEARTBEAT)
+  return _internal_mutable_msg_heartbeat();
+}
+
+// .server_base.MSG_HEARTBEAT MSG_HEARTBEAT_RES = 1000;
+inline bool MSG_SVR_BASE::_internal_has_msg_heartbeat_res() const {
+  return msg_case() == kMSGHEARTBEATRES;
+}
+inline bool MSG_SVR_BASE::has_msg_heartbeat_res() const {
+  return _internal_has_msg_heartbeat_res();
+}
+inline void MSG_SVR_BASE::set_has_msg_heartbeat_res() {
+  _oneof_case_[0] = kMSGHEARTBEATRES;
+}
+inline void MSG_SVR_BASE::clear_msg_heartbeat_res() {
+  if (_internal_has_msg_heartbeat_res()) {
+    delete msg_.msg_heartbeat_res_;
+    clear_has_msg();
+  }
+}
+inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::release_msg_heartbeat_res() {
+  // @@protoc_insertion_point(field_release:server_base.MSG_SVR_BASE.MSG_HEARTBEAT_RES)
+  if (has_msg_heartbeat_res()) {
+    clear_has_msg();
+      ::server_base::MSG_HEARTBEAT* temp = msg_.msg_heartbeat_res_;
+    msg_.msg_heartbeat_res_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::server_base::MSG_HEARTBEAT& MSG_SVR_BASE::_internal_msg_heartbeat_res() const {
+  return _internal_has_msg_heartbeat_res()
+      ? *msg_.msg_heartbeat_res_
+      : *reinterpret_cast< ::server_base::MSG_HEARTBEAT*>(&::server_base::_MSG_HEARTBEAT_default_instance_);
+}
+inline const ::server_base::MSG_HEARTBEAT& MSG_SVR_BASE::msg_heartbeat_res() const {
+  // @@protoc_insertion_point(field_get:server_base.MSG_SVR_BASE.MSG_HEARTBEAT_RES)
+  return _internal_msg_heartbeat_res();
+}
+inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::_internal_mutable_msg_heartbeat_res() {
+  if (!_internal_has_msg_heartbeat_res()) {
+    clear_msg();
+    set_has_msg_heartbeat_res();
+    msg_.msg_heartbeat_res_ = CreateMaybeMessage< ::server_base::MSG_HEARTBEAT >(
+        GetArenaNoVirtual());
+  }
+  return msg_.msg_heartbeat_res_;
+}
+inline ::server_base::MSG_HEARTBEAT* MSG_SVR_BASE::mutable_msg_heartbeat_res() {
+  // @@protoc_insertion_point(field_mutable:server_base.MSG_SVR_BASE.MSG_HEARTBEAT_RES)
+  return _internal_mutable_msg_heartbeat_res();
 }
 
 // .server_base.MSG_TEST MSG_TEST = 9001;
@@ -3018,6 +3812,12 @@ inline MSG_SVR_BASE::MsgCase MSG_SVR_BASE::msg_case() const {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

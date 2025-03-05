@@ -1,69 +1,9 @@
 #include "stdafx.h"
 
-#ifdef _WIN32
-const TCHAR DIR_SLASH = '\\';
-#else
-const char DIR_SLASH = '/';
-#endif
-
-
-
-#ifdef _WIN32
-	inline static CEasyString GetModuleFilePath(HMODULE hModule)
-	{
-		CEasyString ModulePath;
-		ModulePath.Resize(MAX_PATH);
-		GetModuleFileName(hModule, ModulePath, MAX_PATH);
-		ModulePath.TrimBuffer();
-		return ModulePath;
-	}
-#else
-	inline static CEasyString GetModuleFilePath(HMODULE hModule)
-	{
-		CEasyString ModulePath;
-
-		if (hModule == NULL)
-		{
-			char   exePath[NAME_MAX + 1];
-			char   fullPath[MAX_PATH + 1];
-			sprintf(exePath, _T("/proc/%d/exe"), getpid());
-			int Len = readlink(exePath, fullPath, MAX_PATH);
-			if (Len > 0)
-			{
-				fullPath[Len] = 0;
-				ModulePath = fullPath;
-				ModulePath.TrimBuffer();
-			}
-		}
-		else
-		{
-			Dl_info DLInfo;
-			if (dladdr(hModule, &DLInfo))
-			{
-				ModulePath = DLInfo.dli_fname;
-			}
-		}
-		return ModulePath;
-	}
-#endif
-
-static CEasyString GetModulePath(HMODULE hModule)
-{
-    CEasyString ModulePath = GetModuleFilePath(hModule);
-    int Pos = ModulePath.ReverseFind(DIR_SLASH);
-    if (Pos >= 0)
-    {
-        ModulePath.Resize(Pos + 1);
-    }
-    return ModulePath;
-}
-
-
-
 blue_logskin::blue_logskin(std::string filename)
 {
 	//todo linux
-	auto xx = GetModulePath(NULL);
+	auto xx = CFileTools::GetModulePath(NULL);
 	//std::string xxx(xx.GetBuffer());
 	//xxx = xxx+ filename;
 	//	m_hfile= CreateFile(

@@ -14,40 +14,44 @@ public:
 	struct LEADER_CONFIG
 	{
 		UINT					Port;
-		std::string IP;
+		STD_STR IP;
 		LEADER_CONFIG()
 		{
 			Port= 0;
-			IP= "";
+			IP= _T("");
 		}
 	};
 
 	struct PLUGIN_INFO
 	{
 		UINT PluginType;
-		std::string Name;
+		STD_STR Name;
 	};
 
 	struct CLIENT_PROXY_CONFIG
 	{
-		SERVICE_TYPE ProxyType;
 		CLIENT_PROXY_MODE ProxyMode;
 		UINT ListenPort;
 		UINT ConnectionGroupCount;
 		UINT KeepAliveTime;
 		UINT MsgQueueSize;
-		std::string ListenIP;
+		STD_STR ListenIP;
 		CLIENT_PROXY_CONFIG()
 		{
 		}
 	};
-
+	
+	struct CONNECT_CONFIG
+	{
+		UINT ServerID;
+		UINT ServiceType;
+	};
 	struct SERVICE_CONFIG
 	{
 		UINT ServiceType;
 		UINT ServiceID;
-		std::string Desc;
-		std::string Name;
+		STD_STR Desc;
+		STD_STR Name;
 		CEasyArray<CLIENT_PROXY_CONFIG> m_ClientProxys;
 		SERVICE_CONFIG()
 		{
@@ -57,15 +61,17 @@ public:
 
 	
 protected:
-	CEasyString m_ServerName;
-	CEasyString m_ServerDesc;
-	UINT m_ServerID;
-	//UINT m_ServiceID;
+	//CEasyString m_ServerName;
+	//CEasyString m_ServerDesc;
+	//UINT m_ServerID;
 	//UINT m_ServiceType; // 服务分类 monitor/gate/game...
+	COMMON_CONFIG					m_CommonConfig;
 
 	NET_CONFIG								m_NetConfig;
 	LEADER_CONFIG							m_LeaderConfig;
 	CEasyArray<SERVICE_CONFIG> m_Services;
+	CEasyArray<CONNECT_CONFIG> m_ActConnects;
+
 
 	//DOS_CONFIG								m_DOSConfig;
 	//MONO_CONFIG								m_MonoConfig;
@@ -80,27 +86,27 @@ public:
 	~CoreConfig(void);
 
 	bool LoadConfig(LPCTSTR FileName);
+	bool LoadCommonConfig( pug::xml_node& root, LPCTSTR ConfigFileName);
+	bool ReadDBConfig(pug::xml_node& XMLContent, DB_CONNECT_CONFIG& Config, LPCTSTR SearchDir);
 
-	LPCTSTR GetServiceName()
-	{
-		return m_ServerName;
-	}
-	//UINT GetServiceType()
+	//LPCTSTR GetServiceName()
 	//{
-	//	return m_ServiceType;
+	//	return m_ServerName;
 	//}
-	//UINT GetServiceID()
+	
+	UINT GetServerID()
+	{
+		//return m_ServerID;
+		return m_CommonConfig.ServerConfig.ServerID;
+	}
+	//LPCTSTR GetServerDesc()
 	//{
-	//	return m_ServiceID;
+	//	return m_ServerDesc;
 	//}
-	LPCTSTR GetServerDesc()
-	{
-		return m_ServerDesc;
-	}
-	bool HaveServerName()
-	{
-		return !(m_ServerName.IsEmpty()||m_ServerDesc.IsEmpty());
-	}
+	//bool HaveServerName()
+	//{
+	//	return !(m_ServerName.IsEmpty()||m_ServerDesc.IsEmpty());
+	//}
 
 	const LEADER_CONFIG& GetLeaderConfig()
 	{
@@ -116,6 +122,14 @@ public:
 	{
 		return m_Services;
 	}
+
+	const CEasyArray<CONNECT_CONFIG>& GetActConnects()
+	{
+		return m_ActConnects;
+	}
+
+
+
 	//const CEasyArray<CLIENT_PROXY_CONFIG>& GetClientProxyList()
 	//{
 	//	return m_ClientProxys;
@@ -128,7 +142,14 @@ public:
 	{
 		return m_ExistWhenNoPlugin;
 	}
+	COMMON_CONFIG& GetCommonConfig()
+	{
+		return m_CommonConfig;
+	}
 
+protected:
+	virtual bool OnLoaded(pug::xml_node& root); 
+	
 private:
 	bool ReadProxyConfig(pug::xml_node &XMLContent, CLIENT_PROXY_CONFIG &Config);
 	bool LoadPluginInfo(pug::xml_node& XMLContent);

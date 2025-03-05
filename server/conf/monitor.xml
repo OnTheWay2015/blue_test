@@ -2,19 +2,18 @@
 <Main ServerName="monitor" ServerDesc="monitor" ServerID="1"  >  
   <Net NetWorkThreadCount="2"> 
   </Net>
-	<Leader Port="0"> 
-	</Leader>  
+ 
   
   <Services>
 	<Service Name="monitor" Desc="monitor" ServiceID="1" ServiceType="1" >  
-	  <ClientProxys>   
-		<ClientProxy ProxyType="2" ProxyMode="1" ListenIP="0" ListenPort="64000" ConnectionGroupCount="4" 
+	    
+		<ClientProxy ProxyType="2" ProxyMode="1" ListenIP="127.0.0.1" ListenPort="64000" ConnectionGroupCount="4" 
                  KeepAliveTime="10000" 
                  MsgQueueSize="256"   
                  EnableGuardThread="true" GuardThreadKeepAliveTime="20000" GuardThreadKeepAliveCount="5"/>
 	    
-		</ClientProxys>
-	<Service>
+		 
+	</Service>
   </Services>  
   
   

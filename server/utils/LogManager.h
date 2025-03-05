@@ -23,6 +23,7 @@
 #define LOG_DOS_MEM_STATE_CHANNEL		1304
 #define LOG_MONO_CHANNEL				1401
 #define LOG_CORE_CHANNEL				1501
+#define LOG_INFO_CHANNEL				1601
 
 #define IMPORTANT_LOG_FILE_NAME	_T("ImportantError")
 #define DEFAULT_ASYNC_LOG_WORK_THREAD_COUNT	2
@@ -45,9 +46,9 @@ public:
 	//ILogPrinter * GetChannel(UINT ChannelID);
 	bool DelChannel(UINT ChannelID);
 
-	bool PrintLogDirect(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Msg);
-	bool PrintLog(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Format, ...);
-	bool PrintLogVL(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Format, va_list vl);
+	bool _PrintLogDirect(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Msg);
+	bool _PrintLog(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Format, ...);
+	bool _PrintLogVL(UINT ChannelID, int Level, LPCTSTR Tag, LPCTSTR Format, va_list vl);
 
 private :
 	//test
@@ -60,7 +61,7 @@ inline bool PrintSystemLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...)
 {
 	va_list vl;
 	va_start(vl, Format);
-	bool ret = CLogManager::GetInstance()->PrintLogVL(LOG_SYSTEM_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
+	bool ret = CLogManager::GetInstance()->_PrintLogVL(LOG_SYSTEM_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
 	va_end(vl);
 	return ret;
 }
@@ -70,7 +71,7 @@ inline bool PrintImportantLogWithTag(LPCTSTR Tag, LPCTSTR Format, ...)
 {
 	va_list vl;
 	va_start(vl,Format);
-	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_IMPORTANT_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
+	BOOL ret = CLogManager::GetInstance()->_PrintLogVL(LOG_IMPORTANT_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
 	va_end(vl);
 	return ret;
 }
@@ -84,7 +85,7 @@ inline BOOL PrintLogWithTag(int LOG_CHANNEL, LPCTSTR Tag, LPCTSTR Format, ...)
 {
 	va_list vl;
 	va_start(vl,Format);
-	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
+	BOOL ret = CLogManager::GetInstance()->_PrintLogVL(LOG_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, Tag, Format, vl);
 	va_end(vl);
 	return ret;
 }
@@ -93,7 +94,7 @@ inline BOOL PrintDebugLogWithTag(int LOG_CHANNEL,LPCTSTR Tag, LPCTSTR Format, ..
 {
 	va_list vl;
 	va_start(vl,Format);
-	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_CHANNEL, ILogPrinter::LOG_LEVEL_DEBUG, Tag, Format, vl);
+	BOOL ret = CLogManager::GetInstance()->_PrintLogVL(LOG_CHANNEL, ILogPrinter::LOG_LEVEL_DEBUG, Tag, Format, vl);
 	va_end(vl);
 	return ret;
 }
@@ -106,3 +107,7 @@ inline BOOL PrintDebugLogWithTag(int LOG_CHANNEL,LPCTSTR Tag, LPCTSTR Format, ..
 
 #define PrintNetLog(_Format, ...)	PrintLogWithTag(LOG_NET_CHANNEL,_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
 #define PrintNetDebugLog(_Format, ...)	PrintDebugLogWithTag(LOG_NET_CHANNEL,_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
+
+
+#define PrintLog(_Format, ...)	PrintDebugLogWithTag(LOG_INFO_CHANNEL,_T(__PRETTY_FUNCTION__), _Format, ##__VA_ARGS__)
+

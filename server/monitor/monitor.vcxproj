@@ -132,7 +132,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)3rds/libs/win;$(outdir)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobufd.lib;utils.lib;corelib.lib;netlib.lib;protocol.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libprotobufd.lib;utils.lib;corelib.lib;netlib.lib;protocol.lib;framework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -153,14 +153,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="monitor_corehandler.cpp" />
+    <ClCompile Include="monitor.cpp" />
     <ClCompile Include="proc_monitor_packet.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="monitor_corehandler.h" />
+    <ClInclude Include="monitor.h" />
     <ClInclude Include="proc_monitor_packet.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

@@ -178,8 +178,6 @@
     <ClInclude Include="NetAdapterInfos.h" />
     <ClInclude Include="NetLib.h" />
     <ClInclude Include="NetSocket.h" />
-    <ClInclude Include="PacketFactoryBase.h" />
-    <ClInclude Include="PacketManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="win\IIOCPEventHandler.h" />
     <ClInclude Include="win\IOCPEventRouter.h" />

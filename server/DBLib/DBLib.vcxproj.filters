@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="接口">
+      <UniqueIdentifier>{80c7d07b-03fb-47b1-8186-3a5e17916710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ODBC实现">
+      <UniqueIdentifier>{04430ea7-2fb8-401a-b993-ab9bea08a0ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{73513397-d716-4e23-aa3b-da11ca8775ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="预编译">
+      <UniqueIdentifier>{310dcdf8-e489-4e64-859f-970464dc1153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MySQL实现">
+      <UniqueIdentifier>{d54b72de-195c-430c-b163-25c437a05d68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="事务管理">
+      <UniqueIdentifier>{0ef2d0ab-3432-48cb-8c27-901a33487b24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="事务管理\管理器">
+      <UniqueIdentifier>{49e7d4f9-9de2-4855-8977-8c69a68744f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="事务管理\工作线程">
+      <UniqueIdentifier>{92bf3a22-26d9-4aeb-8906-72f8a486b75d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="事务管理\事务对象">
+      <UniqueIdentifier>{b79c9b7e-3ef5-4e1d-b34c-a28854fc901e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="通用实现">
+      <UniqueIdentifier>{68b96f6a-d872-4c6f-bdeb-67be093b9d6c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DBInterfaces.cpp">
+      <Filter>接口</Filter>
+    </ClCompile>
+    <ClCompile Include="ODBCConnection.cpp">
+      <Filter>ODBC实现</Filter>
+    </ClCompile>
+    <ClCompile Include="ODBCDatabase.cpp">
+      <Filter>ODBC实现</Filter>
+    </ClCompile>
+    <ClCompile Include="ODBCRecordSet.cpp">
+      <Filter>ODBC实现</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>预编译</Filter>
+    </ClCompile>
+    <ClCompile Include="MySQLConnection.cpp">
+      <Filter>MySQL实现</Filter>
+    </ClCompile>
+    <ClCompile Include="MySQLDatabase.cpp">
+      <Filter>MySQL实现</Filter>
+    </ClCompile>
+    <ClCompile Include="MySQLDynamicRecordSet.cpp">
+      <Filter>MySQL实现</Filter>
+    </ClCompile>
+    <ClCompile Include="MySQLRecordSet.cpp">
+      <Filter>MySQL实现</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransationManager.cpp">
+      <Filter>事务管理\管理器</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransationWorkThread.cpp">
+      <Filter>事务管理\工作线程</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransaction.cpp">
+      <Filter>事务管理\事务对象</Filter>
+    </ClCompile>
+    <ClCompile Include="DBFakeRecordSet.cpp">
+      <Filter>通用实现</Filter>
+    </ClCompile>
+    <ClCompile Include="DBParameterSet.cpp">
+      <Filter>通用实现</Filter>
+    </ClCompile>
+    <ClCompile Include="DBStaticRecordSet.cpp">
+      <Filter>通用实现</Filter>
+    </ClCompile>
+    <ClCompile Include="DBValue.cpp">
+      <Filter>通用实现</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DBInterfaces.h">
+      <Filter>接口</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTypes.h">
+      <Filter>接口</Filter>
+    </ClInclude>
+    <ClInclude Include="ODBCConnection.h">
+      <Filter>ODBC实现</Filter>
+    </ClInclude>
+    <ClInclude Include="ODBCDatabase.h">
+      <Filter>ODBC实现</Filter>
+    </ClInclude>
+    <ClInclude Include="ODBCRecordSet.h">
+      <Filter>ODBC实现</Filter>
+    </ClInclude>
+    <ClInclude Include="DBLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>预编译</Filter>
+    </ClInclude>
+    <ClInclude Include="MySQLConnection.h">
+      <Filter>MySQL实现</Filter>
+    </ClInclude>
+    <ClInclude Include="MySQLDatabase.h">
+      <Filter>MySQL实现</Filter>
+    </ClInclude>
+    <ClInclude Include="MySQLDynamicRecordSet.h">
+      <Filter>MySQL实现</Filter>
+    </ClInclude>
+    <ClInclude Include="MySQLRecordSet.h">
+      <Filter>MySQL实现</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransationManager.h">
+      <Filter>事务管理\管理器</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransationWorkThread.h">
+      <Filter>事务管理\工作线程</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransaction.h">
+      <Filter>事务管理\事务对象</Filter>
+    </ClInclude>
+    <ClInclude Include="DBFakeRecordSet.h">
+      <Filter>通用实现</Filter>
+    </ClInclude>
+    <ClInclude Include="DBParameterSet.h">
+      <Filter>通用实现</Filter>
+    </ClInclude>
+    <ClInclude Include="DBStaticRecordSet.h">
+      <Filter>通用实现</Filter>
+    </ClInclude>
+    <ClInclude Include="DBValue.h">
+      <Filter>通用实现</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBLib.cbp" />
+    <None Include="makefile" />
+  </ItemGroup>
+</Project>

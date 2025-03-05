@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="配置">
+      <UniqueIdentifier>{37fc8217-a000-4798-a0b5-14688ddfdf82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="预编译">
+      <UniqueIdentifier>{e7526492-5d2c-4eb0-af8a-a7b8af16b42f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="主程序">
+      <UniqueIdentifier>{517af24b-68ef-4ffa-b8f4-243b14b6f39f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器">
+      <UniqueIdentifier>{7ed6d531-ae67-4c10-8d15-64bb94063b51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务">
+      <UniqueIdentifier>{1380aeb9-82c1-47b4-855c-caf9fa2896d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\保存玩家信息">
+      <UniqueIdentifier>{35b41463-687d-4bd2-9414-f40079197806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\创建玩家信息">
+      <UniqueIdentifier>{3b3b3552-e785-45b8-a377-59e246d189af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\获取玩家信息">
+      <UniqueIdentifier>{239b145a-6eeb-4f3d-893d-e50fc2187886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\删除玩家信息">
+      <UniqueIdentifier>{f9f32114-baf2-41f4-91a7-fcb91a3b8633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\查询玩家信息">
+      <UniqueIdentifier>{fc48a75d-6de4-45fb-b9ac-afc4206d2680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\查询角色数">
+      <UniqueIdentifier>{c5d074a2-a1be-4f69-95ee-3a0d7f3d7e03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\按ID查询玩家信息">
+      <UniqueIdentifier>{2357233e-6a25-4683-9e50-fa27286af3e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\通过第三方平台ID查询玩家ID">
+      <UniqueIdentifier>{4e45cd24-0a71-4b58-93a2-698e76011c8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\数据库检查">
+      <UniqueIdentifier>{6094503b-b859-41b4-b40a-0c129117c6fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\修改角色名">
+      <UniqueIdentifier>{46fc4055-b23c-4eaa-9dfa-1b1c70af5e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\获取角色列表">
+      <UniqueIdentifier>{b54a1709-f9f8-4625-bdd9-8aaed46eb857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\创建角色">
+      <UniqueIdentifier>{bebd4c79-1bbc-4cc2-88b7-d6137c5ade3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\删除角色">
+      <UniqueIdentifier>{2c04c11a-a0a2-4f28-922c-ceb0d6d9c493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\保存角色">
+      <UniqueIdentifier>{f76de46c-f081-48ef-add3-427f90a69317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="玩家数据库适配器\数据库事务\获取角色IDSeed">
+      <UniqueIdentifier>{91a9aa25-a86a-428c-8d17-e99f1b800afc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainConfig.cpp">
+      <Filter>配置</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>预编译</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDBAdapterPlugin.cpp">
+      <Filter>主程序</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDBAdapter.cpp">
+      <Filter>玩家数据库适配器</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransCreatePlayer.cpp">
+      <Filter>玩家数据库适配器\数据库事务\创建玩家信息</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransGetPlayerInfo.cpp">
+      <Filter>玩家数据库适配器\数据库事务\获取玩家信息</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransDeletePlayer.cpp">
+      <Filter>玩家数据库适配器\数据库事务\删除玩家信息</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransSavePlayer.cpp">
+      <Filter>玩家数据库适配器\数据库事务\保存玩家信息</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransPlayerSearch.cpp">
+      <Filter>玩家数据库适配器\数据库事务\查询玩家信息</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDBAdapterGroup.cpp">
+      <Filter>玩家数据库适配器</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransGetPlayerCount.cpp">
+      <Filter>玩家数据库适配器\数据库事务\查询角色数</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransSearchPlayerByTID.cpp">
+      <Filter>玩家数据库适配器\数据库事务\按ID查询玩家信息</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransGetIDByTID.cpp">
+      <Filter>玩家数据库适配器\数据库事务\通过第三方平台ID查询玩家ID</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransCheckDB.cpp">
+      <Filter>玩家数据库适配器\数据库事务\数据库检查</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransChangeRoleName.cpp">
+      <Filter>玩家数据库适配器\数据库事务\修改角色名</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransLoadRoleList.cpp">
+      <Filter>玩家数据库适配器\数据库事务\获取角色列表</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransCreateRole.cpp">
+      <Filter>玩家数据库适配器\数据库事务\创建角色</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransRemoveRole.cpp">
+      <Filter>玩家数据库适配器\数据库事务\删除角色</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransSaveRole.cpp">
+      <Filter>玩家数据库适配器\数据库事务\保存角色</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTransGetRoleIDSeed.cpp">
+      <Filter>玩家数据库适配器\数据库事务\获取角色IDSeed</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainConfig.h">
+      <Filter>配置</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>预编译</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>预编译</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDBAdapter.h">
+      <Filter>玩家数据库适配器</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransCreatePlayer.h">
+      <Filter>玩家数据库适配器\数据库事务\创建玩家信息</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransGetPlayerInfo.h">
+      <Filter>玩家数据库适配器\数据库事务\获取玩家信息</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransDeletePlayer.h">
+      <Filter>玩家数据库适配器\数据库事务\删除玩家信息</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransSavePlayer.h">
+      <Filter>玩家数据库适配器\数据库事务\保存玩家信息</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransPlayerSearch.h">
+      <Filter>玩家数据库适配器\数据库事务\查询玩家信息</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDBAdapterGroup.h">
+      <Filter>玩家数据库适配器</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransGetPlayerCount.h">
+      <Filter>玩家数据库适配器\数据库事务\查询角色数</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransSearchPlayerByTID.h">
+      <Filter>玩家数据库适配器\数据库事务\按ID查询玩家信息</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransGetIDByTID.h">
+      <Filter>玩家数据库适配器\数据库事务\通过第三方平台ID查询玩家ID</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransCheckDB.h">
+      <Filter>玩家数据库适配器\数据库事务\数据库检查</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransChangeRoleName.h">
+      <Filter>玩家数据库适配器\数据库事务\修改角色名</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransLoadRoleList.h">
+      <Filter>玩家数据库适配器\数据库事务\获取角色列表</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransCreateRole.h">
+      <Filter>玩家数据库适配器\数据库事务\创建角色</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransRemoveRole.h">
+      <Filter>玩家数据库适配器\数据库事务\删除角色</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransSaveRole.h">
+      <Filter>玩家数据库适配器\数据库事务\保存角色</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransGetRoleIDSeed.h">
+      <Filter>玩家数据库适配器\数据库事务\获取角色IDSeed</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PlayerDBAdapter.cbp" />
+  </ItemGroup>
+</Project>

@@ -43,9 +43,6 @@ public:
 
 	virtual void OnRecvData(const CIPAddress& IPAddress, const BYTE * pData, UINT DataSize) = 0; //UDP
 	virtual void OnRecvData(CSmartPtr<CBaseNetConnectionInterface> pConnection, DOS_SIMPLE_MESSAGE_HEAD* pData ) = 0;
-//DOS_SIMPLE_MESSAGE_HEAD
-	virtual UINT GetServiceID()=0;
-	virtual SERVICE_TYPE GetServiceType()=0;
 
 //Connection holder
 	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) =0;
@@ -63,10 +60,9 @@ protected:
     CNetSocket								m_Socket;
     bool m_StopFlag;
 	NetHandlerInterface* m_NetHandler;
-    SERVICE_TYPE	m_ServiceType;
     CLIENT_PROXY_MODE	m_ClientProxyMode;
-    UINT ServiceID;
-    UINT ServiceType;
+    UINT m_ServiceID;
+    SERVICE_TYPE m_ServiceType;
 
 public:
 	CBaseNetService(void);
@@ -90,23 +86,27 @@ public:
 	{
 		m_NetHandler = h;
 	}
+    UINT GetServiceID()
+    {
+        return m_ServiceID;
+    }
+    SERVICE_TYPE GetServiceType()
+    {
+        return m_ServiceType;
+    }
 
-	void SetServiceType(UINT Type, UINT Sid)
+	void SetService(SERVICE_TYPE Type, UINT Sid)
 	{
-		ServiceID = Sid;
-		ServiceType = Type;
+		m_ServiceType = Type;
+		m_ServiceID = Sid;
 	}
 
-	void SetClientProxy(SERVICE_TYPE Type, CLIENT_PROXY_MODE Mode)
+	void SetClientProxy(CLIENT_PROXY_MODE Mode)
     {
-        m_ServiceType = Type;
+        //m_ServiceType = Type;
         m_ClientProxyMode = Mode;
     }
 
-	SERVICE_TYPE GetServiceType()
-    {
-        return m_ServiceType; 
-    }
 
 	CLIENT_PROXY_MODE GetClientProxyMode()
     {

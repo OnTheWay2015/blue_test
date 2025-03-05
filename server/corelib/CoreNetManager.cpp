@@ -40,14 +40,15 @@ bool CoreNetManager::Init(CoreBase* base, CoreConfig& config)
 
 
     auto& servicesConfig = config.GetServiceList();
-    for (auto& conf : servicesConfig )
+    for (auto& sconf: servicesConfig )
 	{
-		auto& clientProxys = conf.m_ClientProxys;
+		auto& clientProxys = sconf.m_ClientProxys;
 		for (auto& conf : clientProxys)
 		{
 			auto ss = std::make_shared<CProxyServiceDefault >();
 			ss->SetServer(m_NetServer.get());
-			ss->SetClientProxy(conf.ProxyType, conf.ProxyMode);
+			ss->SetClientProxy(conf.ProxyMode);
+            ss->SetService((SERVICE_TYPE)sconf.ServiceType,sconf.ServiceID);
 
 			if (!ss->Create(
 				IPPROTO_TCP,
@@ -186,8 +187,14 @@ void CoreNetManager::RemoveConnection(CSmartPtr<CBaseNetConnectionInterface> c)
 {
     auto m = std::make_shared<CoreSessionMessage>();
     m->EventType = CORE_EVENT::SESSION_REMOVE;
-    m->SID= c->GetSessionID(); 
+    //m->SID= c->GetSessionID(); 
+    m->Session = c;
     m->ServiceType = c->GetServiceType();
+
+
+    UINT Index = c->GetSessionID() % m_ConnectionGroups.size();
+    m_ConnectionGroups[Index]->RemoveConnection(c);
+
 
     //if (m_ConnectionGroups.size() > 0) //通过 connection 的 stop 状态,在 group里检测删除
     //{
@@ -214,7 +221,6 @@ void CoreNetManager::AddConnection(CSmartPtr<CBaseNetConnectionInterface> c)
         m->SID= c->GetSessionID(); 
         m->ServiceType = c->GetServiceType();
         m->ServiceID = c->GetServiceID();
-        m->ServiceType = c->GetServiceType();
         m->Session = c;
         PushMessage(m);
     }
@@ -225,11 +231,15 @@ void CoreNetManager::AddConnection(CSmartPtr<CBaseNetConnectionInterface> c)
     }
 }
 
-void CoreNetManager::SetParseMessageHandler(MessageHandlerInterface* h)
+void CoreNetManager::SetParseMessageHandler(MessageParseInterface* h)
 {
     m_pMessageHandler = h;
 }
 
+MessageParseInterface* CoreNetManager::GetParseMessageHandler() 
+{
+    return m_pMessageHandler ;
+}
 
 void CoreNetManager::SendSessionMessage(CSmartPtr<CoreSessionMessage> msg)
 {
@@ -243,6 +253,13 @@ void CoreNetManager::SendSessionMessage(CSmartPtr<CoreSessionMessage> msg)
 
 
 }
+
+CoreBase* CoreNetManager::GetCore()
+{
+    return m_CoreBase;
+}
+
+
 
 
 

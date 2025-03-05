@@ -44,15 +44,10 @@ public:
 	virtual bool DeleteConnection(CSmartPtr<CBaseNetConnectionInterface>  pConnection) {return false;};
 	virtual void OnRecvData(const CIPAddress& IPAddress, const BYTE * pData, UINT DataSize) {}; //UDP
 
-	virtual UINT GetServiceID() override { return 0;}
-	virtual SERVICE_TYPE GetServiceType() override { return SERVICE_TYPE::NONE ;}
 
 	virtual void OnConnection(CSmartPtr<CBaseNetConnectionInterface> s, bool IsSucceed) override ;
 	virtual void OnDisconnection(CSmartPtr<CBaseNetConnectionInterface> s) override;
 	virtual void OnRecvMessage(CSmartPtr<CBaseNetConnectionInterface> s,  DOS_SIMPLE_MESSAGE_HEAD* pMsg) override; 
-
-
-
 
 
 }; 

@@ -120,12 +120,13 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)netlib;D:\git_work\protobuf\src</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)3rds/libs/win;$(outdir)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libprotobufd.lib;utils.lib;corelib.lib;netlib.lib;protocol.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libprotobufd.lib;utils.lib;corelib.lib;netlib.lib;protocol.lib;framework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,14 +146,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\framework\proc_framework_packet.cpp" />
+    <ClCompile Include="gate.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="monitor_connecter.cpp" />
-    <ClCompile Include="proc_vvv_packet.cpp" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="proc_gate_packet.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="monitor_connecter.h" />
-    <ClInclude Include="proc_vvv_packet.h" />
+    <ClInclude Include="..\framework\proc_framework_packet.h" />
+    <ClInclude Include="gate.h" />
+    <ClInclude Include="proc_gate_packet.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

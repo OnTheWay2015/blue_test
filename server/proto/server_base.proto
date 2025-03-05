@@ -26,14 +26,23 @@ message MSG_TEST_RES {
 
 
 
-message SERVER_INFO { 
-  int64 svrid = 1; 
-  int32 type = 2;  //server_type 
+ 
+
+message SERVICE_INFO { 
+  int32 svrid = 1; 
+  int32 type = 2;  //service_type 
   int32 mode = 3;  //一个服务下可以开多个监听端口,接入连接,每个端口定义一个对应的 mode,  (比如 websocket,socket 两种接入)
   string  ipstr = 4;
   int32 port = 5;  
+  int64 sessionid = 6; 
 }
 
+//服务器之间的注册
+message SERVICE_INFO_SINGLE { 
+  int32 svrid = 1; 
+  int32 type = 2;  //service_type  
+  int64 reg_flag = 3; 
+}
 
 
 // s <--> s 
@@ -47,7 +56,8 @@ message MSG_HEARTBEAT_RES {
 
 // --> leader
 message MSG_LEADER_REG { //注册到monitor
-  SERVER_INFO info = 1; 
+  repeated SERVICE_INFO infos = 1; 
+  int32 svrid = 2;
    
 }
 
@@ -56,31 +66,54 @@ message MSG_LEADER_SERVER_LIST { //请求已注册的服务例表
 
 
 message MSG_LEADER_BROADCAST_ADD { //广播新增的注册服务 
-  SERVER_INFO info = 1; 
+	repeated SERVICE_INFO infos = 1;
+	int32 svrid = 2;  
 }
 
 
 message MSG_LEADER_BROADCAST_REMOVE {  //广播移除的注册服务 
-  SERVER_INFO info = 1; 
+	repeated SERVICE_INFO infos = 1;
+	int32 svrid = 2; 
 }
 
 
 
 // <-- leader
 message MSG_LEADER_REG_RES {  
-  int32 result = 1;  
+	int32 result = 1;  
 }
 
 
 message MSG_LEADER_SERVER_LIST_RES {  
-	repeated SERVER_INFO  infos = 1; 
+	repeated SERVICE_INFO infos = 1; 
 }
 
 
 
 
+//保存最后注册的数据,前面的连接则关闭
+// s --> s
+message MSG_SVR_REG { //连接成功后,注册到连接上的服务器
+  repeated SERVICE_INFO_SINGLE infos = 1;
+}
+ 
+message MSG_SVR_REG_RES {  
+  repeated SERVICE_INFO_SINGLE infos = 1;
+}
 
 
+message MSG_PACKET {
+
+	int8  FromSvrID = 1;   //对应 MessageHandler::SendMsg 参数
+	int8  FromSvrType = 2; //对应 MessageHandler::SendMsg 参数
+	 
+	
+	int64 MarkID = 3;  //sessionid(GATE) / playerid(GAME) ..
+	int32 MsgID = 4;
+	bytes MsgData = 5;
+	
+	
+}
 
 /*
   int8 	FromSvrID = 1; 
@@ -93,18 +126,30 @@ message MSG_LEADER_SERVER_LIST_RES {
 
 message MSG_SVR_BASE {
   oneof msg {
-    MSG_HEARTBEAT MSG_HEARTBEAT =1000;
-    MSG_LEADER_REG MSG_LEADER_REG =1001;
-    MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST =1002;
+
+    MSG_LEADER_REG MSG_LEADER_REG =101;
+    MSG_LEADER_SERVER_LIST MSG_LEADER_SERVER_LIST =102;
  	
+    MSG_LEADER_REG_RES MSG_LEADER_REG_RES =103;
+    MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES =104;
+    MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD =105;
+    MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE =106;
 	
-    MSG_HEARTBEAT MSG_HEARTBEAT_RES =2000; 
-    MSG_LEADER_REG_RES MSG_LEADER_REG_RES =2001;
-    MSG_LEADER_SERVER_LIST_RES MSG_LEADER_SERVER_LIST_RES =2002;
+	MSG_SVR_REG MSG_SVR_REG =500;
+	MSG_SVR_REG_RES MSG_SVR_REG_RES =501;
 	
 	
-    MSG_LEADER_BROADCAST_ADD MSG_LEADER_BROADCAST_ADD =3001;
-    MSG_LEADER_BROADCAST_REMOVE MSG_LEADER_BROADCAST_REMOVE =3002;
+	MSG_HEARTBEAT MSG_HEARTBEAT =999;
+    MSG_HEARTBEAT_RES MSG_HEARTBEAT_RES =1000; 
+	
+	
+	
+	
+    
+	
+	
+	
+	
 	
     MSG_TEST MSG_TEST =9001;
     MSG_TEST_RES MSG_TEST_RES =9002;

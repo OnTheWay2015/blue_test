@@ -13,6 +13,7 @@
 
 CBaseNetConnection::CBaseNetConnection(void)
     :m_StopFlag(false)
+    ,m_pService(nullptr)
 {
 }
 

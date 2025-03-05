@@ -9,30 +9,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\framework">
+      <UniqueIdentifier>{55ac82be-7411-41a8-8d84-147af4455f69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="monitor_connecter.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="proc_vvv_packet.cpp">
+    <ClCompile Include="proc_gate_packet.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="gate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\framework\proc_framework_packet.cpp">
+      <Filter>源文件\framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="monitor_connecter.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="proc_vvv_packet.h">
+    <ClInclude Include="proc_gate_packet.h">
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gate.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\framework\proc_framework_packet.h">
+      <Filter>源文件\framework</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

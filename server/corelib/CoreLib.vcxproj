@@ -157,7 +157,6 @@
     <ClCompile Include="CoreMessageQueue.cpp" />
     <ClCompile Include="CoreNetManager.cpp" />
     <ClCompile Include="CorePlugin.cpp" />
-    <ClCompile Include="ProtobufParseMessage.cpp" />
     <ClCompile Include="ProxyConnectionDefault.cpp" />
     <ClCompile Include="ProxyConnectionGroup.cpp" />
     <ClCompile Include="ProxyServiceDefault.cpp" />
@@ -173,7 +172,6 @@
     <ClInclude Include="CoreMessageQueue.h" />
     <ClInclude Include="CoreNetManager.h" />
     <ClInclude Include="CorePlugin.h" />
-    <ClInclude Include="ProtobufParseMessage.h" />
     <ClInclude Include="ProxyConnectionDefault.h" />
     <ClInclude Include="ProxyConnectionGroup.h" />
     <ClInclude Include="ProxyServiceDefault.h" />

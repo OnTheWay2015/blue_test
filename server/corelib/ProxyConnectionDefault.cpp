@@ -134,14 +134,22 @@ void CProxyConnectionDefault::RecvMsg(DOS_SIMPLE_MESSAGE_HEAD* m)
 }
 bool CProxyConnectionDefault::SendMsg(CSmartPtr<DOS_SIMPLE_MESSAGE> msg) 
 {
-	//Send(pMsg,pMsg->MsgLen);
-		
-	Send(msg.get(),sizeof(DOS_SIMPLE_MESSAGE_HEAD));
-	
-	auto buf = ProtobufParseMessage::GetInstance()->SerializeToArray(msg->MSG);		
-	Send(&(*buf)[0],buf->size());
-	
-	return true;
+    //Send(pMsg,pMsg->MsgLen);
+
+    Send(msg.get(), sizeof(DOS_SIMPLE_MESSAGE_HEAD));
+
+	auto pCoreNet = CONVERT_POINT( CoreNetManager  ,this->GetServer()->GetHandler());
+	auto h = pCoreNet->GetParseMessageHandler();
+    auto buf = h->SerializeToArray(msg->MSG);
+    if (buf->size() <= 0)
+    {
+        PrintCoreLog("SendMsg failed");
+        return false;
+    }
+    Send(&(*buf)[0], buf->size());
+    return true;
+
+
 
 }
 

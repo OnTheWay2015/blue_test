@@ -2,30 +2,21 @@
 
 
 
-extern void proc_init();
 
-
-
-
+BridgeInterface* g_pWorker;
+extern void proc_monitor_init();
 int main()
 {
+    auto pWorker = MONITORED_NEW("Monitor",Monitor);
+    g_pWorker = (BridgeInterface*)pWorker;
+    pWorker->Init(_T("../../../conf/Monitor.xml"));
 
-    proc_init();
-
-    CoreBase C;
-    //C.Init("./configd.xml");
-    C.Init("../../../conf/monitor.xml");
-    ProtobufParseMessage::GetInstance()->Init();
-
-    MonitorCoreHandler::GetInstance()->Init(); 
-
-    C.SetHandler(MonitorCoreHandler::GetInstance(),SERVICE_TYPE::SERVER_MONITOR);
-    C.SetParseMessageHandler(ProtobufParseMessage::GetInstance());
-
+    proc_monitor_init();
 
     while(1)
     {
-        C.Update();
+        auto tm = 1.0;
+        pWorker->Update(tm);
         DoSleep(10);
     }
     return 0;

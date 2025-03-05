@@ -1,0 +1,26 @@
+注册到 monitor 返回
+相互注册好时标识,不要重复注册
+断开时去除注册
+
+
+
+未配置 ListenIP 时,取本机IP注册
+
+
+
+
+packet_process 处理消息时需要 serverID 参数?
+ 
+
+
+ 
+ 
+ bool CProxyConnectionDefault::SendMsg(CSmartPtr<DOS_SIMPLE_MESSAGE> msg) 
+{
+    //Send(pMsg,pMsg->MsgLen);
+
+    Send(msg.get(), sizeof(DOS_SIMPLE_MESSAGE_HEAD));
+
+    auto buf = ProtobufParseMessage::GetInstance()->SerializeToArray(msg->MSG);
+	
+	

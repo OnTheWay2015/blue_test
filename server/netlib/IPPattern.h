@@ -66,8 +66,8 @@ public:
 		{
 			if (_tcschr(Pattern,'.'))
             {
-                std::vector<std::string> Split;
-                Stringsplit( std::string(Pattern), _T('.'), Split);
+                std::vector<STD_STR> Split;
+                Stringsplit( STD_STR(Pattern), _T('.'), Split);
                 //CStringSplitter Split(Pattern, '.');
 
 				if (Split.size() >= 4)
@@ -89,8 +89,8 @@ public:
 			else if (_tcschr(Pattern, ':'))
 			{
 				//CStringSplitter Split(Pattern, ':');
-                std::vector<std::string> Split;
-                Stringsplit(std::string(Pattern), _T(':'), Split);
+                std::vector<STD_STR> Split;
+                Stringsplit(STD_STR(Pattern), _T(':'), Split);
 				if (Split.size() >= 2 && Split.size()<=8)
 				{
 					int p = 0;

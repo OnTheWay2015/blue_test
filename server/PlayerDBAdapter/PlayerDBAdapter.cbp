@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="PlayerDBAdapter" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="玩家数据库适配器/;配置/;预编译/;主程序/;玩家数据库适配器/数据库事务/保存玩家信息/;玩家数据库适配器/数据库事务/创建玩家信息/;玩家数据库适配器/数据库事务/删除玩家信息/;玩家数据库适配器/数据库事务/获取玩家信息/;玩家数据库适配器/数据库事务/;" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../Work/PlayerDBAdapterD" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="0" extension_auto="1" />
+				<Option object_output="debug" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-O0" />
+					<Add option="-D_DEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="../../Work/ProtocolD.a" />
+					<Add library="../../Libs/Bin/DBLibD.a" />
+					<Add library="../../Libs/Bin/NetLibD.a" />
+					<Add library="../../Libs/Bin/UtilsD.a" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="../../Work/PlayerDBAdapter" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="0" extension_auto="1" />
+				<Option object_output="release" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="2" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="../../Work/Protocol.a" />
+					<Add library="../../Libs/Bin/DBLib.a" />
+					<Add library="../../Libs/Bin/NetLib.a" />
+					<Add library="../../Libs/Bin/Utils.a" />
+				</Linker>
+			</Target>
+			<Target title="MemMonitoredRelease">
+				<Option output="../../Work/PlayerDBAdapter" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="0" extension_auto="1" />
+				<Option object_output="release" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="2" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DUSE_MONITORED_NEW" />
+				</Compiler>
+				<Linker>
+					<Add library="../../Work/Protocol.a" />
+					<Add library="../../Libs/Bin/DBLib.a" />
+					<Add library="../../Libs/Bin/NetLib.a" />
+					<Add library="../../Libs/Bin/Utils.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-W" />
+			<Add option="-fPIC" />
+			<Add option="-fvisibility=hidden" />
+			<Add directory="../../Libs/OtherInclude/protobuf" />
+			<Add directory="../../Libs/OtherInclude/MySQL/x64/linux" />
+		</Compiler>
+		<Linker>
+			<Add option="-static-libgcc" />
+			<Add option="-static-libstdc++" />
+			<Add option="-rdynamic" />
+			<Add library="../../Libs/zlib/lib/linux/release/libz.a" />
+			<Add library="../../Libs/OtherLib/MySQL/x64/libmysqlclient.a" />
+			<Add library="pthread" />
+			<Add library="rt" />
+		</Linker>
+		<Unit filename="DBTransCreatePlayer.cpp">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/创建玩家信息/" />
+		</Unit>
+		<Unit filename="DBTransCreatePlayer.h">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/创建玩家信息/" />
+		</Unit>
+		<Unit filename="DBTransDeletePlayer.cpp">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/删除玩家信息/" />
+		</Unit>
+		<Unit filename="DBTransDeletePlayer.h">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/删除玩家信息/" />
+		</Unit>
+		<Unit filename="DBTransGetIDByTID.cpp">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/" />
+		</Unit>
+		<Unit filename="DBTransGetIDByTID.h">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/" />
+		</Unit>
+		<Unit filename="DBTransGetPlayerCount.cpp">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/" />
+		</Unit>
+		<Unit filename="DBTransGetPlayerCount.h">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/" />
+		</Unit>
+		<Unit filename="DBTransGetPlayerInfo.cpp">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/获取玩家信息/" />
+		</Unit>
+		<Unit filename="DBTransGetPlayerInfo.h">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/获取玩家信息/" />
+		</Unit>
+		<Unit filename="DBTransPlayerSearch.cpp">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/" />
+		</Unit>
+		<Unit filename="DBTransPlayerSearch.h">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/" />
+		</Unit>
+		<Unit filename="DBTransSavePlayer.cpp">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/保存玩家信息/" />
+		</Unit>
+		<Unit filename="DBTransSavePlayer.h">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/保存玩家信息/" />
+		</Unit>
+		<Unit filename="DBTransSearchPlayerByTID.cpp">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/" />
+		</Unit>
+		<Unit filename="DBTransSearchPlayerByTID.h">
+			<Option virtualFolder="玩家数据库适配器/数据库事务/" />
+		</Unit>
+		<Unit filename="MainConfig.cpp">
+			<Option virtualFolder="配置/" />
+		</Unit>
+		<Unit filename="MainConfig.h">
+			<Option virtualFolder="配置/" />
+		</Unit>
+		<Unit filename="PlayerDBAdapter.cpp">
+			<Option virtualFolder="玩家数据库适配器/" />
+		</Unit>
+		<Unit filename="PlayerDBAdapter.h">
+			<Option virtualFolder="玩家数据库适配器/" />
+		</Unit>
+		<Unit filename="PlayerDBAdapterGroup.cpp">
+			<Option virtualFolder="玩家数据库适配器/" />
+		</Unit>
+		<Unit filename="PlayerDBAdapterGroup.h">
+			<Option virtualFolder="玩家数据库适配器/" />
+		</Unit>
+		<Unit filename="PlayerDBAdapterPlugin.cpp">
+			<Option virtualFolder="主程序/" />
+		</Unit>
+		<Unit filename="stdafx.cpp">
+			<Option virtualFolder="预编译/" />
+		</Unit>
+		<Unit filename="stdafx.h">
+			<Option compile="1" />
+			<Option weight="0" />
+			<Option virtualFolder="预编译/" />
+		</Unit>
+		<Unit filename="targetver.h">
+			<Option virtualFolder="预编译/" />
+		</Unit>
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

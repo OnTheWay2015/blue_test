@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="blue_logskin.cpp" />
+    <ClCompile Include="config.cpp" />
+    <ClCompile Include="CycleBuffer.cpp" />
+    <ClCompile Include="EasyBuffer.cpp" />
+    <ClCompile Include="EasyTimerEx.cpp" />
+    <ClCompile Include="FileSystemManager.cpp" />
+    <ClCompile Include="GuardThread.cpp" />
+    <ClCompile Include="IFileAccessor.cpp" />
+    <ClCompile Include="IFileObjectCreator.cpp" />
+    <ClCompile Include="LogManager.cpp" />
+    <ClCompile Include="pugxml.cpp" />
+    <ClCompile Include="StandardFileAccessor.cpp" />
+    <ClCompile Include="StandardFileObjectCreator.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="StringFile.cpp" />
+    <ClCompile Include="tmp.cpp" />
+    <ClCompile Include="ToolsAll.cpp" />
+    <ClCompile Include="win\EasyThreadWin.cpp" />
+    <ClCompile Include="win\ToolsWin.cpp" />
+    <ClCompile Include="win\WinFileAccessor.cpp" />
+    <ClCompile Include="win\WinFileAccessorObjectCreator.cpp" />
+    <ClCompile Include="smart\SmartArray.cpp">
+      <Filter>smart</Filter>
+    </ClCompile>
+    <ClCompile Include="smart\SmartStruct.cpp">
+      <Filter>smart</Filter>
+    </ClCompile>
+    <ClCompile Include="smart\SmartValue.cpp">
+      <Filter>smart</Filter>
+    </ClCompile>
+    <ClCompile Include="FileTools.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AutoLock.h" />
+    <ClInclude Include="AutoReadLock.h" />
+    <ClInclude Include="AutoWriteLock.h" />
+    <ClInclude Include="blue_logskin.h" />
+    <ClInclude Include="ClassifiedID.h" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="CycleBuffer.h" />
+    <ClInclude Include="CycleQueue.h" />
+    <ClInclude Include="EasyBuffer.h" />
+    <ClInclude Include="EasyString.h" />
+    <ClInclude Include="EasyTime.h" />
+    <ClInclude Include="EasyTimer.h" />
+    <ClInclude Include="EasyTimer64.h" />
+    <ClInclude Include="EasyTimerEx.h" />
+    <ClInclude Include="FactoryBase.h" />
+    <ClInclude Include="FileInfo.h" />
+    <ClInclude Include="FileSystemManager.h" />
+    <ClInclude Include="GuardThread.h" />
+    <ClInclude Include="IFileAccessor.h" />
+    <ClInclude Include="IFileObjectCreator.h" />
+    <ClInclude Include="ILogPrinter.h" />
+    <ClInclude Include="LogManager.h" />
+    <ClInclude Include="MemoryLeakDetective.h" />
+    <ClInclude Include="pugxml.h" />
+    <ClInclude Include="SettingFile.h" />
+    <ClInclude Include="StandardFileAccessor.h" />
+    <ClInclude Include="StandardFileObjectCreator.h" />
+    <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StringFile.h" />
+    <ClInclude Include="ThreadSafeCycleQueue.h" />
+    <ClInclude Include="tmp.h" />
+    <ClInclude Include="ToolsAll.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="win\EasyCriticalSectionWin.h" />
+    <ClInclude Include="win\EasyReadWriteLockWin.h" />
+    <ClInclude Include="win\EasyThreadWin.h" />
+    <ClInclude Include="win\ToolsWin.h" />
+    <ClInclude Include="win\Win32AddOn.h" />
+    <ClInclude Include="win\WinFileAccessor.h" />
+    <ClInclude Include="win\WinFileAccessorObjectCreator.h" />
+    <ClInclude Include="smart\SmartArray.h">
+      <Filter>smart</Filter>
+    </ClInclude>
+    <ClInclude Include="smart\SmartStruct.h">
+      <Filter>smart</Filter>
+    </ClInclude>
+    <ClInclude Include="smart\SmartValue.h">
+      <Filter>smart</Filter>
+    </ClInclude>
+    <ClInclude Include="FileTools.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xmake.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="smart">
+      <UniqueIdentifier>{dae45774-12b2-4c40-add0-b33779013e90}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Main>  
+<Server ServerName="world" ServerDesc="world" ServerID="100" ServerAreaList="1|2"/>  
+  <Net NetWorkThreadCount="2"> 
+  </Net>
+	<Leader Port="64000" IP="127.0.0.1"> 
+	</Leader>
+   <DBConfig> 
+      <DB DBType="MYSQL" DBConnectString="UID=root;Server=127.0.0.1;Port=3306;;pwd=123456;;CharSet=utf8;DB=test" ThreadCount="2" DBName="test" > 
+		<TableDefine Name="student" Define="/aaa/aa.sql"/>
+		<TableDefine Name="student111" Define="aa111.sql"/>
+		</DB>
+   </DBConfig> 
+ <ActConnects> 
+	<Connect ServerID="2" ServiceType="3" >  
+	</Connect>
+	 
+</ActConnects>
+  
+  <Services  desc="auto generate Service ID" > 
+ 
+	<Service Name="db_player_s2s" Desc="db_player for s2s"  ServiceType="5" >  
+	   
+		<ClientProxy ProxyType="2" ProxyMode="1" ListenIP="127.0.0.1" ListenPort="62100" ConnectionGroupCount="4" 
+                 KeepAliveTime="10000" 
+                 MsgQueueSize="256"   
+                 EnableGuardThread="true" GuardThreadKeepAliveTime="20000" GuardThreadKeepAliveCount="5"/> 
+		 
+	</Service>
+	
+  </Services> 
+  
+</Main>

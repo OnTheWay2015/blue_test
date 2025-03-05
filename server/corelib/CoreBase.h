@@ -1,6 +1,6 @@
 #pragma once
 
-class MessageHandlerInterface 
+class MessageParseInterface 
 {
 public:
     virtual CSmartPtr<void> ParseMessage(DOS_SIMPLE_MESSAGE_HEAD* h)=0;
@@ -11,8 +11,10 @@ public:
 class CoreHandlerInterface 
 {
 public:
-    //virtual bool Init()=0;
-    virtual void Update()=0;
+    virtual bool Init()=0;
+    virtual bool Start()=0;
+    
+    virtual void Update(float tm)=0;
     virtual void OnNetMessage(CSmartPtr<CoreSessionMessage> msg)=0; 
 };
 
@@ -32,9 +34,10 @@ public://NetHandlerInterface
 //-------------
 public:
     virtual bool Init(LPCTSTR FileName)=0;
-    virtual void Update()=0;
+    virtual void Update(float tm)=0;
     virtual const CoreConfig& GetCoreConfig()=0; 
     virtual void SetHandler(CoreHandlerInterface* h, SERVICE_TYPE type) = 0;//注册模块(消息处理模块)
+    virtual UINT GetServerID()=0;
 };
 
 class CoreBaseNetInterface 
@@ -62,12 +65,13 @@ private:
    CSmartPtr<CoreNetManager> m_CoreNetManager;
    CHashMap<SERVICE_TYPE ,CoreHandlerInterface* > m_CoreHandlers; 
 public:
-   void SetParseMessageHandler(MessageHandlerInterface* h); 
+   void SetParseMessageHandler(MessageParseInterface* h); 
 public://CoreBaseInterface 
     virtual bool Init(LPCTSTR FileName) override;
-    virtual void Update() override;
+    virtual void Update(float tm) override;
     virtual CoreConfig& GetCoreConfig()override { return m_CoreConfig;} 
     virtual void SetHandler(CoreHandlerInterface* h, SERVICE_TYPE type)  override;//注册模块(消息处理模块)
+    virtual UINT GetServerID();
 public://CoreBaseNetInterface 
     virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnect(CIPAddress& remoteAddress,SERVICE_TYPE type,CLIENT_PROXY_MODE mode) override ;//发起连接
     virtual void DisConnect(SESSION_ID SessionID)  override;//发起断开连接

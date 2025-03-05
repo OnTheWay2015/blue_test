@@ -1,31 +1,22 @@
 #include "stdafx.h"
  
 
-void proc_init()
+extern BridgeInterface* g_pWorker; 
+void proc_monitor_init()
 {
-	//PACKET_FACTORY_REGISTER(MSG_TEST,666);
-	//PACKET_FACTORY_REGISTER(MSG_TEST_RES,667);
-	//PACKET_FACTORY_REGISTER(MSG_TEST, PACKET_IDS::MSG_TEST);
-	//PACKET_FACTORY_REGISTER(MSG_TEST_RES,PACKET_IDS::MSG_TEST_RES);
+    auto pm = g_pWorker->GetPacketManager(); 
+//send
+    pm->regedit_object(server_base::MSG_SVR_BASE::MsgCase::kMSGLEADERREGRES,PACKET_FACTORY(MSG_LEADER_REG_RES));
+    pm->regedit_object(server_base::MSG_SVR_BASE::MsgCase::kMSGLEADERSERVERLISTRES,PACKET_FACTORY(MSG_LEADER_SERVER_LIST_RES));
+
+    pm->regedit_object(server_base::MSG_SVR_BASE::MsgCase::kMSGLEADERBROADCASTREMOVE,PACKET_FACTORY(MSG_LEADER_BROADCAST_REMOVE));
+    pm->regedit_object(server_base::MSG_SVR_BASE::MsgCase::kMSGLEADERBROADCASTADD,PACKET_FACTORY(MSG_LEADER_BROADCAST_ADD));
 
 
-	//PACKET_FACTORY_REGISTER(MSG_TEST, MSG_BASE::MsgCase::kMSGTEST);
-	//PACKET_FACTORY_REGISTER(MSG_TEST_RES,MSG_BASE::MsgCase::kMSGTESTRES);
-	
-    //PACKET_FACTORY_REGISTER(MSG_BASE,0);
-
-    //server_base::MSG_SVR_BASE::MsgCase::kMSGHEARTBEAT 
-    PACKET_FACTORY_REGISTER(MSG_HEARTBEAT,server_base::MSG_SVR_BASE::MsgCase::kMSGHEARTBEAT);
-
-
-    PACKET_FACTORY_REGISTER(MSG_LEADER_REG,server_base::MSG_SVR_BASE::MsgCase::kMSGLEADERREG);
-
-    PACKET_FACTORY_REGISTER(MSG_LEADER_SERVER_LIST,server_base::MSG_SVR_BASE::MsgCase::kMSGLEADERSERVERLIST);
-
-
-
-    //PACKET_FACTORY_REGISTER(MSG_TEST_RES,MSG_BASE::MsgCase::kMSGLEADERBROADCASTADD);
-    //PACKET_FACTORY_REGISTER(MSG_TEST_RES,MSG_BASE::MsgCase::kMSGLEADERBROADCASTREMOVE);
+//recv
+    pm->regedit_object(server_base::MSG_SVR_BASE::MsgCase::kMSGHEARTBEAT,PACKET_FACTORY(MSG_HEARTBEAT));
+    pm->regedit_object(server_base::MSG_SVR_BASE::MsgCase::kMSGLEADERREG,PACKET_FACTORY(MSG_LEADER_REG));
+    pm->regedit_object(server_base::MSG_SVR_BASE::MsgCase::kMSGLEADERSERVERLIST,PACKET_FACTORY(MSG_LEADER_SERVER_LIST));
 
 
 }
@@ -54,13 +45,15 @@ bool MSG_HEARTBEAT_factory::packet_process(CSmartPtr<CBaseNetConnectionInterface
 
 bool MSG_LEADER_REG_factory::packet_process(CSmartPtr<CBaseNetConnectionInterface> session, CSmartPtr<MSG_LEADER_REG> msg)
 {	
-    return false;
+    g_pWorker->GetMonitorCoreHandler()->AddServiceInfo(session,msg);
+    return true;
 }
 
 
 bool  MSG_LEADER_SERVER_LIST_factory::packet_process(CSmartPtr<CBaseNetConnectionInterface> session, CSmartPtr<MSG_LEADER_SERVER_LIST> msg)
 {	
-    return false;
+    g_pWorker->GetMonitorCoreHandler()->GetSerivceInfos(session,msg);
+    return true;
 }
 
 

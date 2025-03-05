@@ -111,17 +111,13 @@ public: //CBaseNetConnectionInterface
 		{
 			return 0;
 		}
-		return m_pService->GetServiceID();
+		return ((CBaseNetService*)m_pService)->GetServiceID();
 	}
 
 	virtual SERVICE_TYPE GetServiceType() override
     {
-		if (!m_pService)
-		{
-			return SERVICE_TYPE::NONE;
-		}
-		return m_pService->GetServiceType();
-    }
+		return m_ServiceType ;
+	}
 
 	virtual CLIENT_PROXY_MODE GetClientProxyMode()
     {
@@ -200,7 +196,7 @@ inline bool CBaseNetConnection::PrintConnectionLogWithTag(LPCTSTR szFunction, LP
 
 	va_list vl;
 	va_start(vl,Format);
-	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, szFunction, Format, vl);
+	BOOL ret = CLogManager::GetInstance()->_PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, szFunction, Format, vl);
 	va_end(vl);
 	return true;
 }
@@ -217,7 +213,7 @@ inline bool CBaseNetConnection::PrintConnectionDebugLogWithTag(LPCTSTR szFunctio
 	//return ret;
 	va_list vl;
 	va_start(vl,Format);
-	BOOL ret = CLogManager::GetInstance()->PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, szFunction, Format, vl);
+	BOOL ret = CLogManager::GetInstance()->_PrintLogVL(LOG_NET_CHANNEL, ILogPrinter::LOG_LEVEL_NORMAL, szFunction, Format, vl);
 	va_end(vl);
 
     return false;

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <windows.h>
 
 
 
@@ -33,7 +34,10 @@ int main()
         n--;
     }
 
-
+    while(true)
+    {
+        Sleep(1);
+    }
 
     //async_test();
     //test_class_main();

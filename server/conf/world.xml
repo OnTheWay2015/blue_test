@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Main ServerName="world" ServerDesc="world" ServerID="3" >  
+  <Net NetWorkThreadCount="2"> 
+  </Net>
+	<Leader Port="64000" IP="127.0.0.1"> 
+	</Leader>
+  
+ <ActConnects> 
+	<Connect ServerID="2" ServiceType="3" >  
+	</Connect>
+	 
+</ActConnects>
+  
+  <Services  desc="auto generate Service ID" > 
+ 
+	<Service Name="world_s2s" Desc="world for s2s"  ServiceType="5" >  
+	   
+		<ClientProxy ProxyType="2" ProxyMode="1" ListenIP="127.0.0.1" ListenPort="62001" ConnectionGroupCount="4" 
+                 KeepAliveTime="10000" 
+                 MsgQueueSize="256"   
+                 EnableGuardThread="true" GuardThreadKeepAliveTime="20000" GuardThreadKeepAliveCount="5"/> 
+		 
+	<Service>
+	
+  </Services> 
+  
+</Main>

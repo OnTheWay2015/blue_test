@@ -26,6 +26,7 @@ protected:
 	TCHAR	m_LineDelimiter;
 	int		m_LocalCodePage;
 	int		m_SaveCodePage;
+	CEasyArray<int> aa;
 public:
 	CStringFile( LPCTSTR pszTextFile ,bool bSplitLine=true,int FileChannel=0);
 	CStringFile(int FileChannel=0);

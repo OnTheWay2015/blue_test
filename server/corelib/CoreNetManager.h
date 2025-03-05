@@ -2,6 +2,8 @@
 
 class CoreBase;
 class MessageHandlerInterface; 
+class MessageParseInterface ;
+
 enum class CORE_EVENT
 {
     SESSION_ADD=1,
@@ -43,7 +45,7 @@ private:
     CSmartPtr<ServiceActConnect> m_NetServiceActConnect;
     std::vector<CSmartPtr<CBaseNetServiceInterface>> m_NetServices; //CNetService
 	CEasyArray<CSmartPtr<CProxyConnectionGroup>> m_ConnectionGroups;
-    MessageHandlerInterface* m_pMessageHandler;
+    MessageParseInterface* m_pMessageHandler;
 public:
     void SendSessionMessage(CSmartPtr<CoreSessionMessage> msg);
 
@@ -51,10 +53,13 @@ public:
     //bool InitClientProxy(CoreConfig::CLIENT_PROXY_CONFIG& Config);
     bool Init(CoreBase* base, CoreConfig& config) ;
     void Update() ;
+    
+
 
     void AddConnection(CSmartPtr<CBaseNetConnectionInterface> c);
     void RemoveConnection(CSmartPtr<CBaseNetConnectionInterface> c);
-   void SetParseMessageHandler(MessageHandlerInterface* h); 
+   void SetParseMessageHandler(MessageParseInterface* h); 
+   MessageParseInterface* GetParseMessageHandler(); 
 public://NetHandlerInterface
     virtual void OnAccept(CSmartPtr<CBaseNetConnectionInterface> s) override;
     virtual void OnCreateConnectACK(CSmartPtr<CBaseNetConnectionInterface> s)  override ;//发起连接返回
@@ -66,6 +71,7 @@ public://NetHandlerInterface
     virtual void SendMessageAck(/*xxx*/)  override ;//发送消息返回
 
     virtual CSmartPtr<CBaseNetConnectionInterface> CreateConnection(CIPAddress& RemoteAddress,SERVICE_TYPE type,CLIENT_PROXY_MODE mode) override ;;
+    virtual CoreBase* GetCore();
 public://CoreMessageQueue
     virtual void ProcessQueueMessageHandler(CSmartPtr<CoreSessionMessage> msg) override ;
 };

@@ -1,5 +1,8 @@
 #pragma once
 //----------------------------------------------------------
+
+#include <codecvt>
+
 #if !defined(__PRETTY_FUNCTION__)
 	#ifdef _WIN32
 		#define __PRETTY_FUNCTION__ __FUNCSIG__
@@ -7,6 +10,51 @@
 		#define __PRETTY_FUNCTION__ __FUNCTION__
 	#endif
 #endif
+
+
+#ifdef UNICODE 
+	#define STD_STR std::wstring
+	#define STD_CMP(a,b) _wcscmp(a,b)
+	#define STD_ICMP(a,b) _wcsicmp(a,b) //不区分大小写
+
+	//#define STD_COUT std::wcout
+	#define STD_COUT std::cout
+	
+#else
+	#define STD_STR std::string
+	#define STD_CMP(a,b) _strcmp(a,b)
+	#define STD_ICMP(a,b) _stricmp(a,b) //不区分大小写
+	#define STD_COUT std::cout
+#endif
+
+// 将 string 转为 wstring
+inline std::wstring s2wstring(const std::string& input)
+{
+    std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+    return converter.from_bytes(input);
+}
+// 将 wstring 转为 string 
+inline std::string w2string(const std::wstring& input)
+{
+    std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+    return converter.to_bytes(input);
+}
+
+
+//inline wchar_t* char2wchar(const char* ch)
+//{
+//	std::string input(ch);
+//	auto ws = s2wstring(input);
+//	return ws.c_str();
+//}
+
+
+
+
+//_tcscmp()
+//_tcsicmp()
+
+
 
 //这个 __PRETTY_FUNCTION__ 定义属于 Gcc的 不属于MSVC
 
@@ -67,6 +115,12 @@ inline UINT CNameObject::GetUseRef()
 {
 	return m_UseRef;
 }
+
+
+#ifndef CONVERT_POINT
+#define CONVERT_POINT(dectype, srcptr) std::static_pointer_cast<dectype>(srcptr)
+#endif
+
 
 
 //----------------------------------------------------------

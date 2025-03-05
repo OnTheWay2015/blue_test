@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="CoreBase.cpp" />
+    <ClCompile Include="CoreConfig.cpp" />
+    <ClCompile Include="CoreMessageQueue.cpp" />
+    <ClCompile Include="CoreNetManager.cpp" />
+    <ClCompile Include="CorePlugin.cpp" />
+    <ClCompile Include="ProxyConnectionDefault.cpp" />
+    <ClCompile Include="ProxyConnectionGroup.cpp" />
+    <ClCompile Include="ProxyServiceDefault.cpp" />
+    <ClCompile Include="ServiceActConnect.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CoreBase.h" />
+    <ClInclude Include="CoreConfig.h" />
+    <ClInclude Include="Corelib.h" />
+    <ClInclude Include="CoreMessageQueue.h" />
+    <ClInclude Include="CoreNetManager.h" />
+    <ClInclude Include="CorePlugin.h" />
+    <ClInclude Include="ProxyConnectionDefault.h" />
+    <ClInclude Include="ProxyConnectionGroup.h" />
+    <ClInclude Include="ProxyServiceDefault.h" />
+    <ClInclude Include="ServiceActConnect.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xmake.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="normal">
+      <UniqueIdentifier>{eaddd47b-ba7c-4980-b20d-3f0f1bc92609}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
