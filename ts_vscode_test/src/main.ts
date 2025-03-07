@@ -8,8 +8,8 @@ import * as PATH from 'path';
 
 const zlib = require('zlib');
 //let url="http://www.aixiashu.info/109/109533/41816930.html"//招黑体质开局修行在废土 
-let url="http://www.xbiqugu.la/75/75965/29824346.html"//招黑体质开局修行在废土 // todo 客户端会把 http 自动转成 https, 服务器没有支持会报错 
-//let url="https://www.baidu.com"
+//let url="http://www.xbiqugu.la/75/75965/29824346.html"//招黑体质开局修行在废土 // todo 客户端会把 http 自动转成 https, 服务器没有支持会报错 
+let url="https://www.baidu.com"
 
 const hello : string = "Hello World!"
 console.log(hello)
@@ -76,8 +76,19 @@ let testZlib = () => {
     //await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36 Edg/85.0.564.41');
       
     await page.setViewport({width:1080,height:720});
-      //page.on('request', request => console.log('Request:', request.url()));
-      //page.on('response', response => console.log('Response:', response.status()));
+      page.on('request', request =>{
+          console.log('Request:', request.url())
+          console.log('Request Headers:', request.headers()) // 获取所有响应头信息
+
+      });
+      
+      page.on('response', response =>{
+          console.log('Response:', response.status())
+          console.log('Response url:', response.url())
+          console.log('Response Headers:', response.headers()); // 获取所有响应头信息
+      } );
+
+
       page.on('requestfailed', request => console.log('Request failed:', request.url()));
 
       // 设置额外的 HTTP 头部
@@ -96,6 +107,7 @@ let testZlib = () => {
       await page.goto(url,{
         timeout:130000
       });
+
 
 
       //await page.waitForSelector('ul.gl-warp>li'); //等待选择器要选的元素,复杂选择器
@@ -142,7 +154,20 @@ let testZlib = () => {
       };
 
       await testinput();
-      
+     
+      // 获取页面上的所有 cookies
+      const cookies = await page.cookies();
+      console.log(cookies);     
+
+      //获得 headers
+      //const ctype = await page.evaluate(async () => {
+      //  const response = await fetch('https://example.com');
+      //  return response.headers.get('content-type'); // 获取Content-Type头部的值作为示例
+      //})
+
+
+
+
       await page.close();
       await brower.close();
 
