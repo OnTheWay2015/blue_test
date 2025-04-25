@@ -3,6 +3,7 @@
 .out
 .vs
 
+java_test/**/target
 objs
 out
 build
