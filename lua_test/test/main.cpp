@@ -1036,23 +1036,10 @@ extern void testMapPath();
 extern void testAVL();
 extern int main_bind();
 extern int main_bind01();
-int main1(int argc, char* argv[])
+
+
+int test000()
 {
-	//test001(); // 有打印 Proto
-	//test002(); //c++/lua 数据相互使用
-	//test003();
-    
-	//testMapPath();
-	//testAVL();
-
-
-	//main_bind();
-	//main_bind01();
-	//tttt();
-	//return 0;
-
-
-
     lua_State* L= lua_open();
 
 	if (nullptr == L)
@@ -1075,8 +1062,7 @@ int main1(int argc, char* argv[])
     //testGameLua(L);
 
     ///< 加载lua文件
-    std::string sf = dir_scripts + "/test004.lua";
-	//std::string sf = dir_scripts + "/test001.lua";
+    std::string sf = dir_scripts + "/test000.lua";
 	if (luaL_loadfile(L, sf.c_str()))
 	{
 		cout << "Lua 文件加载失败" << endl;
@@ -1130,6 +1116,26 @@ int main1(int argc, char* argv[])
 		//cout << lua_tostring(L,-1) << endl;  //没有设置 errfunc 时,栈项的错误结果要在这里处理
         return -3;
     }
+
+	system("pause");
+	return 0;
+}
+int main1(int argc, char* argv[])
+{
+	test000(); // 元表测试
+	//test001(); // 有打印 Proto
+	//test002(); //c++/lua 数据相互使用
+	//test003();
+    
+	//testMapPath();
+	//testAVL();
+
+
+	//main_bind();
+	//main_bind01();
+	//tttt();
+
+
 
 	system("pause");
 	return 0;
@@ -1189,8 +1195,8 @@ int main_helloworld(int argc, char* argv[])
 }
 int main(int argc, char* argv[])
 {
-	//main1(argc,argv);
-	main_helloworld(argc,argv);
+	main1(argc,argv);
+	//main_helloworld(argc,argv);
 	return 0;
 }
 
