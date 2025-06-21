@@ -6,9 +6,9 @@ public class test_class {
     比如 test() {}
     * */
 
-    int v1;
+    int v1=100;
     int v2;
-    String v3;
+    String v3="ok";
     test_class(int a,int b)
     {
         this.v1 = a;

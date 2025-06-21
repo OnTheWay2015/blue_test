@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--指定POM模型的版本，通常为4.0.0 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 项目的组ID，通常为公司或组织的域名反写 -->
+    <groupId>com.allen</groupId>
+
+    <!--项目的唯一标识符，通常为项目的名称 -->
+    <artifactId>SocketTest</artifactId>
+
+    <!--项目的版本号 -->
+    <version>1.0.0</version>
+
+    <!--项目的打包方式，如jar(exe)、war(dll)、pom(lib?)  -->
+    <packaging>jar</packaging>
+
+
+    <!-- 项目属性 这些属性可以在pom.xml的其他部分引用-->
+    <properties>
+        <java.version>21</java.version> <!--通过 ${java.version} 的引用 -->
+        <!-- 强制指定项目构建的编码为 UTF-8 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- 项目依赖 -->
+    <dependencies>
+    </dependencies>
+
+    <!-- 构建配置 -->
+    <build>
+        <defaultGoal>compile</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version> <!-- 确保版本要一致 -->
+                <configuration>
+                    <source> ${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <!-- 构建配置 -->
+    <profiles>
+    </profiles>
+</project>
