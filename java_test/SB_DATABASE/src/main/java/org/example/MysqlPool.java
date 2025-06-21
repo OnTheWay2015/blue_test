@@ -33,7 +33,7 @@ public class MysqlPool {
                 System.out.println("数据库已存在:"+DB);
             }
         } catch (SQLException e) {
-
+            e.printStackTrace();
         }
 
 
