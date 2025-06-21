@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="db-test">
+    <select id="selectDemo" resultType="org.example.User">
+        select  * from user where id  = 1
+    </select>
+    <select id="selectDemo1" resultType="HashMap">
+        select  * from user where id  = 1
+    </select>
+
+    <select id="selectVersion" resultType="string">
+        SELECT version()
+    </select>
+
+    <select id="showTables" resultType="string">
+        SHOW TABLES
+    </select>
+
+    <select id="showAllTables" resultType="java.lang.String">
+        SHOW TABLES
+    </select>
+</mapper>
