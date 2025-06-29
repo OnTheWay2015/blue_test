@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.232.123:3306/ttttDB?useSSL=false&serverTimezone=UTC
+    username: mysql
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.yourpackage.model
+  global-config:
+    db-config:
+      id-type: auto # 主键类型 AUTO | NONE | INPUT | ASSIGN_ID | ASSIGN_UUID
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
