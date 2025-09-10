@@ -1,10 +1,10 @@
+debug: true
 spring:
   application:
-    name: springboot_redis
+    name: springboot_proj
 
   profiles:
     active: local
-
   main:
     allow-circular-references: true # 允许循环依赖，因为项目是三层架构，无法避免这个情况。
 
@@ -39,12 +39,6 @@ server:
 # 确保多环境配置间用 --- 分隔,且缩进一致,否则会报错误  Key 'spring' is duplicated 
 --- 
 
-# Spring Data Redis 配置
-spring:
-  data:
-    redis:
-      repositories:
-        enabled: false # 项目未使用到 Spring Data Redis 的 Repository，所以直接禁用，保证启动速度
 
 # VO 转换（数据翻译）相关
 easy-trans:
@@ -54,6 +48,9 @@ easy-trans:
 
 --- #################### 自定义相关配置 ####################
 springboot_proj:
+  flag: true
   info:
     base-package: com.fqwz.springbootproj
+
+
 
