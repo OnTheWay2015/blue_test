@@ -24,7 +24,8 @@ public class FirstController{
     public String hello(){
         svr.register(Long.valueOf(123));
 
-        producer.sendMessage("msg");
+        producer.sendMessage1("msg1");
+        producer.sendMessage2("msg2");
         System.out.println("hello com.allen.entry_m.FirstController!");
         return "hello com.allen.entry_m.FirstController!";
     }

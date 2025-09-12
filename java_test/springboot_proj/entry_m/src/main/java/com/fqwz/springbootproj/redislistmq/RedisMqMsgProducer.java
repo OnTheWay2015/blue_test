@@ -9,8 +9,11 @@ import org.springframework.stereotype.Component;
 public class RedisMqMsgProducer {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
-    public void sendMessage( String message) {
+    public void sendMessage1( String message) {
         redisTemplate.convertAndSend(MessageChannel.MSG_C1.getName(), message);
+    }
+    public void sendMessage2( String message) {
+        redisTemplate.convertAndSend(MessageChannel.MSG_C2.getName(), message);
     }
 }
 

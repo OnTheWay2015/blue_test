@@ -8,10 +8,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RedisMqMsgConsumer implements MessageListener {
+public class RedisMqMsgConsumer2 implements MessageListener {
     @Override
     public void onMessage(Message message, byte[] pattern) {
-        System.out.println("Received message: " + message.toString());
+        System.out.println("Received message2: " + message.toString());
     }
 }
 
