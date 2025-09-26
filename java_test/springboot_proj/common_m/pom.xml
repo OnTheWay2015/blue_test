@@ -15,11 +15,20 @@
 	
 	<modelVersion>4.0.0</modelVersion>
     <artifactId>common_m</artifactId>  
-    <packaging>pom</packaging> 
- 
-	<!-- 依赖 -->
+    <packaging>pom</packaging>
+
+    <properties>
+        <redisson.version>3.41.0</redisson.version>
+    </properties>
+
+    <!-- 统一依赖管理 -->
+    <!-- 设置所有的依赖项目及版本,子工程使用时,只要引用对应项，不用填版本 -->
 	<dependencies>
-		 
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-data-27</artifactId>
+            <version>${redisson.version}</version>
+        </dependency>
 	</dependencies>
 
 	<!-- 插件 -->
