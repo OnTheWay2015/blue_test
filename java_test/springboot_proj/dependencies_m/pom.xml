@@ -3,34 +3,37 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
- 
+    <!-- 原本想让这个模块做统一依赖管理，但迁移报错了，现在就只是占个位 不做事 -->
+
+    <modelVersion>4.0.0</modelVersion>
     <!-- 父工程 -->
     <parent>
         <groupId>com.fqwz.springbootproj</groupId>
         <artifactId>proj</artifactId>
         <version>${revision}</version>
     </parent>
-	
-	
-	
-	<modelVersion>4.0.0</modelVersion>
-    <artifactId>common_m</artifactId>  
+
+
+
+    <artifactId>dependencies_m</artifactId>
+
+
     <packaging>pom</packaging>
 
     <properties>
-        <redisson.version>3.41.0</redisson.version>
+        <!--  <spring_boot.version>2.7.18</spring_boot.version>-->
+
+
     </properties>
 
     <!-- 统一依赖管理 -->
     <!-- 设置所有的依赖项目及版本,子工程使用时,只要引用对应项，不用填版本 -->
-	<dependencies>
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson-spring-data-27</artifactId>
-            <version>${redisson.version}</version>
-        </dependency>
-	</dependencies>
+    <dependencyManagement>
 
+
+
+
+    </dependencyManagement>
 	<!-- 插件 -->
 	<build>
 	</build>

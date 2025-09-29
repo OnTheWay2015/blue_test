@@ -2,35 +2,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion> <!-- 需要指定正确版本 Declares to which version of project descriptor this POM conforms -->
+
+    <!-- 需要指定正确版本 Declares to which version of project descriptor this POM conforms -->
+    <!-- ( POM 模型的版本 当前固定是4.0.0) -->
+    <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.fqwz.springbootproj</groupId>
     <artifactId>proj</artifactId>
      
 
     <version>${revision}</version>
+
+    <!--
+    只有打包方式为 pom 的 Maven 工程能够管理其他 Maven 工程。
+    打包方式为 pom 的 Maven 工程中不写业务代码，它是专门管理其他 Maven 工程的工程，
+    -->
     <packaging>pom</packaging> 
  
  <!-- 模块 -->
     <modules>
 		<!-- 公用模块 -->
-        <module>common_m</module>
+        <module>dependencies_m</module>
 		
         <!-- 入口模块 -->
         <module>entry_m</module>
 		
         <!-- 拓展模块 -->
-		<module>normal_m</module>
+        <!-- <module>normal_m</module>-->
+     <module>normal_ai</module>
+</modules>
 
-        
-	</modules>
 
+<name>${project.artifactId}</name>
+<description> 多模块测试项目 </description>
+<url>https://helloworld.com</url>
 
-	<name>${project.artifactId}</name>
-    <description> 多模块测试项目 </description>
-    <url>https://helloworld.com</url>
-	
-	<!-- 构建属性 -->
+<!-- 构建属性 -->
     <properties>
+
+         <!-- 定义统一版本属性 -->
+        <pom.model.version>4.0.0</pom.model.version>
+
         <revision>100-SNAPSHOT</revision>
         <!-- Maven 相关 -->
         <java.version>19</java.version>
@@ -45,31 +57,48 @@
 		
 		<!-- 开发插件，通过注解方式自动生成样板代码（如 getter、setter、equals 等方法）‌ -->
         <lombok.version>1.18.38</lombok.version>		
-        <spring.boot.version>2.7.18</spring.boot.version>
-		
+
 		<!-- 通过编译时生成类型安全的转换代码，简化不同 Java Bean（如 DTO、VO、PO 等）之间的属性拷贝 -->
         <mapstruct.version>1.6.3</mapstruct.version>
-		
+
+
+        <!-- 第三方库版本号  -->
+        <sprin-boot.version>3.5.5</sprin-boot.version>
+        <spring-ai.version>1.0.1</spring-ai.version>
+
+        <redisson.version>3.51.0</redisson.version>
     </properties>
 	
  
-	<!-- 起步依赖 -->
-	<dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-			<version>2.7.18</version>
-        </dependency>
+	<!-- 公共依赖  。  todo  放到 dependencies_m 模块就不行 是为什么？-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${sprin-boot.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>2.7.18</version>
-
-        </dependency>
-	</dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${sprin-boot.version}</version>
 
 
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-starter-model-deepseek</artifactId>
+                <version>${spring-ai.version}</version>
+            </dependency>
+
+
+
+
+        </dependencies>
+    </dependencyManagement>
 	<!-- 插件 -->
 	<build>
 	
@@ -93,7 +122,7 @@
                              <path>
                                 <groupId>org.springframework.boot</groupId>
                                 <artifactId>spring-boot-configuration-processor</artifactId>
-                                <version>${spring.boot.version}</version>
+                                <version>2.7.18</version>
                             </path>
                             <path>
                                 <groupId>org.projectlombok</groupId>
@@ -148,7 +177,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>${spring_boot.version}</version>
                 <executions>
                     <execution>
                         <goals>

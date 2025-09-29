@@ -53,4 +53,10 @@ springboot_proj:
     base-package: com.fqwz.springbootproj
 
 
+#初始化 ai 模块时必须要填默认值
+spring:
+  ai:
+    deepseek:
+      api-key: sk-your-api-key
+      base-url: https://api.deepseek.com
 

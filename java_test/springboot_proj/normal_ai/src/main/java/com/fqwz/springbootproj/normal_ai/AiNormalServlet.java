@@ -1,4 +1,4 @@
-package com.fqwz.springbootproj.entry_m;
+package com.fqwz.springbootproj.normal_ai;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,10 +9,10 @@ import java.io.PrintWriter;
 import java.io.IOException;
 
 
-@WebServlet("/first")
-public class FirstServlet extends HttpServlet {
+@WebServlet("/ai/first")
+public class AiNormalServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("First Servlet........");
+        System.out.println("ai Servlet........");
 
         // 设置响应内容类型为HTML
         response.setContentType("text/html;charset=UTF-8");
@@ -20,7 +20,7 @@ public class FirstServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         out.println("<html><body>");
-        out.println("<h1> com.allen.entry_m.FirstServlet </h1>");
+        out.println("<h1>  ai Servlet </h1>");
         out.println("</body></html>");
     }
 }
