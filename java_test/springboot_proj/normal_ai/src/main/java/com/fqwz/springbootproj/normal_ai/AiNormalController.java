@@ -4,6 +4,7 @@ import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.deepseek.DeepSeekChatModel;
 import org.springframework.ai.deepseek.DeepSeekChatOptions;
@@ -53,15 +54,18 @@ chatMessageService.sendChatMessageStream(sendReqVO, getLoginUserId())
 
     //openAiChatModel.call 阻碍式调用
     private Flux<AiChatMessageSendRespVO>  tttt(){
+        String model = "Qwen/Qwen3-8B";
+        Double temperature = Double.valueOf(0.7f);
+        Integer maxTokens = Integer.valueOf(512);
         DeepSeekChatModel openAiChatModel = DeepSeekChatModel.builder()
                 .deepSeekApi(DeepSeekApi.builder()
                         .baseUrl("https://api.siliconflow.cn")
                         .apiKey("sk-wqbrhkcpzfpkddnsxvylxbrifwpfqshmwxpnmwqoaiobaxfe") // apiKey
                         .build())
                 .defaultOptions(DeepSeekChatOptions.builder()
-                        .model("Qwen/Qwen3-8B") // 模型
+                        .model(model) // 模型
 //                    .model("deepseek-ai/DeepSeek-R1") // 模型（deepseek-ai/DeepSeek-R1）可用赠费
-                        .temperature(0.7)
+                        .temperature(temperature)
                         .build())
                 .build();
 
@@ -77,6 +81,19 @@ chatMessageService.sendChatMessageStream(sendReqVO, getLoginUserId())
         );
 
 
+        ChatOptions ops = DeepSeekChatOptions.builder()
+                .model(model)
+                .temperature(temperature)
+                .maxTokens(maxTokens)
+                //.toolCallbacks(toolCallbacks)
+                //.toolContext(toolContext)
+                .build();
+
+/*
+.toolCallbacks(toolCallbacks) 用于定义AI模型调用外部工具时的回调处理逻辑,
+                                比如当AI模型决定调用外部工具（如API、数据库等）时触发 
+
+* */
         // 构造用户输入
         Prompt prompt = new Prompt(messages);
 
