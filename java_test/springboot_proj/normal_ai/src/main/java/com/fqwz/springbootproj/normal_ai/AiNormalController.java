@@ -20,8 +20,9 @@ import javax.validation.constraints.Null;
 import java.util.*;
 @RestController //要返回json时使用（它组合了@Controller和 @ResponseBody）
 //@Controller
+@RequestMapping("/ai")
 public class AiNormalController {
-    @RequestMapping("/ai/hello")
+    @RequestMapping("/hello")
     @ResponseBody
     public String hello(){
         System.out.println("ai  Controller!");
@@ -32,10 +33,10 @@ public class AiNormalController {
 
     //这里是返回 flux 异步处理结果，注意要添加 produces 设定
      @RequestMapping(value = "/send-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<AiChatMessageSendRespVO> sendChatMessageStream() {
+    public Flux<AiChatMessageSendRespVO> sendChatMessageStream(@RequestParam String sysmessage,@RequestParam String usermessage) {
         //return chatMessageService.sendChatMessageStream(sendReqVO, getLoginUserId());
 
-         return tttt();
+         return tttt(sysmessage,usermessage);
 
         //return null;
     }
@@ -53,7 +54,7 @@ chatMessageService.sendChatMessageStream(sendReqVO, getLoginUserId())
 
 
     //openAiChatModel.call 阻碍式调用
-    private Flux<AiChatMessageSendRespVO>  tttt(){
+    private Flux<AiChatMessageSendRespVO>  tttt( String sysmessage,String usermessage){
         String model = "Qwen/Qwen3-8B";
         Double temperature = Double.valueOf(0.7f);
         Integer maxTokens = Integer.valueOf(512);
@@ -70,11 +71,15 @@ chatMessageService.sendChatMessageStream(sendReqVO, getLoginUserId())
                 .build();
 
         UserMessage message_user = UserMessage.builder()
-                .text("你好")
+                //.text("你好")
+                .text(usermessage)
                 .build();
+
         SystemMessage message_sys = SystemMessage.builder()
-                .text("请用中文回答")
+                //.text("请用中文回答")
+                .text(sysmessage)
                 .build();
+
         List<Message> messages = Arrays.asList(
                 message_sys,
                 message_user

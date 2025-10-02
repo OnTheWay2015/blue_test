@@ -6,13 +6,13 @@
     <!-- 原本想让这个模块做统一依赖管理，但迁移报错了，现在就只是占个位 不做事 -->
 
     <modelVersion>4.0.0</modelVersion>
-    <!-- 父工程 -->
+    <!-- 父工程
     <parent>
         <groupId>com.fqwz.springbootproj</groupId>
         <artifactId>proj</artifactId>
         <version>${revision}</version>
     </parent>
-
+ -->
 
 
     <artifactId>dependencies_m</artifactId>

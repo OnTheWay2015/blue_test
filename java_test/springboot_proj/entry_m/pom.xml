@@ -32,18 +32,18 @@
         </dependency>
 
 
-        <!--
+
               <dependency>
                   <groupId>com.fqwz.springbootproj</groupId>
                   <artifactId>normal_m</artifactId>
                   <version>${revision}</version>
               </dependency>
- -->
-                      <dependency>
-                          <groupId>com.fqwz.springbootproj</groupId>
-                          <artifactId>normal_ai</artifactId>
-                          <version>${revision}</version>
-                      </dependency>
+
+              <dependency>
+                  <groupId>com.fqwz.springbootproj</groupId>
+                  <artifactId>normal_ai</artifactId>
+                  <version>${revision}</version>
+              </dependency>
 
 
 
@@ -52,18 +52,13 @@
 
 	<!-- 插件 -->
 	<build>
-	
-	 <!-- 设置构建的 jar 包名 -->
-        <finalName>${project.artifactId}</finalName> 
-		
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- <version>3.5.5</version> -->
-                <version>${sprin-boot.version}</version>
 
-            </plugin>
+	 <!-- 设置构建的 jar 包名 -->
+        <finalName>${project.artifactId}</finalName>
+
+		<plugins>
+
+
         </plugins>
 	</build>
 
