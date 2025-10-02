@@ -2,6 +2,9 @@
 .objs
 .out
 .vs
+.idea
+
+\.flattened*-pom.xml
 
 java_test/**/target
 objs

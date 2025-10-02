@@ -1,5 +1,6 @@
 package com.fqwz.springbootproj.redis;
 
+import com.fqwz.springbootproj.redislistmq.RedisMqMsgProducer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.TimeUnit;
@@ -8,10 +9,18 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/redis")
 public class RedisController {
 
-     private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisMqMsgProducer mmp;
 
-    public RedisController(RedisTemplate<String, Object> redisTemplate) {
+    public RedisController(RedisTemplate<String, Object> redisTemplate, RedisMqMsgProducer MMP) {
         this.redisTemplate = redisTemplate;
+        this.mmp =MMP;
+    }
+    @RequestMapping("/messagequeue")
+    public String messagequeue() {
+        this.mmp.sendMessage1("messagequeue1 act!");
+        this.mmp.sendMessage2("messagequeue2 act!");
+        return "OK";
     }
 
     @PostMapping("/set")
