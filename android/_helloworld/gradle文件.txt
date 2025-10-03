@@ -1,0 +1,26 @@
+1.build.gradle:			可以理解为一个Project脚本，Project脚本中有自己的任务，最外层的Project为rootProject
+2.settings.gradle：		主要用来配置我们项目中需要用到的模块。用include关键字给包裹进
+3.gradle.properties：	这个文件主要是设置一些全局变量，包括jvm运行以及自定义的一些全局参数
+4.local.properties：		这个文件主要配置一些本地的sdk和ndk版本信息以及路径   (android sdk 目录)
+5.gradle-wrapper.jar：	负责自动下载Gradle脚本运行环境
+6.gradle-wrapper.properties：用来配置当前使用的Gradle的版本以及存储的路径
+
+
+
+
+
+//工程结构
+├── moduleA
+│   └── build.gradle
+├── moduleB
+│   └── build.gradle
+├── build.gradle
+├── settings.gradle
+├── gradle.properties
+├── local.properties
+├── gradle
+│   └── wrapper //默认下载使用 gradle 版本
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew
+└── gradlew.bat		//windows下执行脚本
