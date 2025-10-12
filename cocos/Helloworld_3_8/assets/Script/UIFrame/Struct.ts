@@ -5,21 +5,16 @@
 
 import { _decorator } from 'cc';
 import { FormType, ModalOpacity } from "./config/SysDefine";
+import { UIConfigManager } from '../UIConfig';
 export interface IFormConfig {
     uiname:string;
     prefabUrl: string;
     type: string;
 }
-export function GetForm(form: IFormConfig | string, type = FormType.Screen,name:string=""): IFormConfig {
+export function GetForm(form: IFormConfig | string, type = FormType.Screen):IFormConfig {
     if(typeof form === "string") {
-        if (name == ""){
-            return null;
-        }
-        return {
-            uiname:name,
-            prefabUrl: form,
-            type: type
-        }
+        let f = UIConfigManager.getInstance().getFormConfig(form);
+        return f? (f.type == type ? f : null) : null; 
     }
     return form; 
 }

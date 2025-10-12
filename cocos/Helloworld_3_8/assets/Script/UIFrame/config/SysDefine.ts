@@ -19,7 +19,7 @@ import { IFormConfig } from "../Struct";
 export enum FormType {
     Screen = "UIScreen",/** 屏幕 */
     Fixed = "UIFixed",/** 固定窗口 */
-    Window = "UIWindow",//弹出窗口
+    Window = "UIWindow",//弹出窗口 小窗
     Toast = "UIToast",
     Tips = "UITips",/** 独立窗口 */
 }

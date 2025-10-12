@@ -10,8 +10,8 @@ import UIManager from "../UIFrame/UIManager";
 export default class UIHome extends UIScreen {
     //public view: UIHome_Auto;
     async load() {
-        // await UIManager.getInstance().openForm(UIConfig.UISound);;
-        return null;
+        //await UIManager.getInstance().openForm("UISound");;
+        return await  FormMgr.openByName("UISound");
     }
     model = 5;
     refreshView() {

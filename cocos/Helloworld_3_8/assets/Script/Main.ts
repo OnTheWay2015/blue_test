@@ -3,6 +3,7 @@ import FormMgr from './UIFrame/FormMgr';
 import UIManager from './UIFrame/UIManager';
 import { IFormConfig } from './UIFrame/Struct';
 import { UIConfigManager } from './UIConfig';
+import CocosHelper from './Common/Utils/CocosHelper';
 const {ccclass, property} = _decorator;
 
 
@@ -13,9 +14,10 @@ export default class Main extends Component {
         //this.node.active = true; // 强制激活
     }
     
-    start () {
+    async start () {
         //this.test();
-        FormMgr.openByName("UINavigator");
+        let com:any = await  FormMgr.openByName("UINavigator");
+        //CocosHelper.TestTransProps(com.node);
         //UINavigator.open();
         //console.log("hello")
     }

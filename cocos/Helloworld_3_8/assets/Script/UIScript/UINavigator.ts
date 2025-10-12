@@ -16,8 +16,9 @@ export default class UINavigator extends UIScreen {
         }
     }
     onClickButton(e: EventTouch) {
-         let node = e.getCurrentTarget();
-         ToastMgr.open(node.name);
+        let node = e.getCurrentTarget();
+        FormMgr.openByName(node.name);
+         //ToastMgr.open(node.name);
          //switch(node.name) {
          //case "project":
          //FormMgr.open(UIConfig.UIHome);

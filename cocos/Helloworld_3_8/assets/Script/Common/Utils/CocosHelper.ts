@@ -11,8 +11,25 @@ export class LoadProgress {
 }
 
 export default class CocosHelper {
+    public static TestTransProps(n:Node,lv:number=0) {
+        const t = n.getComponent(UITransform);
+        
+        console.log(`${lv}=>name[${n.name}] active[${n.active}] x[${n.x}] y[${n.y}] `);
+        if (t) {
+            console.log(`priority[${t.priority}] width[${t.width}] height[${t.height}] anchorX[${t.anchorX}] anchorY[${t.anchorY}] `);
+        }else{
+            console.log("UITransform is null");
+        }
+        if (n.parent){
+            this.TestTransProps(n.parent,lv+1);
+        }
+    }
+    
     public static NodeCreate(name:string):Node {
             let n =  new Node();
+            const t = n.addComponent(UITransform);
+            t.anchorX = 0.5;
+            t.anchorY = 0.5;
             n.name = name;
             return n;
     }

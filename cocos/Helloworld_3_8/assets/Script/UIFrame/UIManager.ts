@@ -10,12 +10,13 @@ import ModalMgr from "./ModalMgr";
 import AdapterMgr, { AdapterType } from "./AdapterMgr";
 import Scene from "../Scene/Scene";
 import type { UIWindow } from "./UIForm";
-import { ECloseType, IFormConfig, IFormData } from "./Struct";
+import { ECloseType, GetForm, IFormConfig, IFormData } from "./Struct";
 import { EventCenter } from "./EventCenter";
 import { EventType } from "./EventType";
 import { LRUCache } from "../Common/Utils/LRUCache";
 import { IUIBase } from './IUIHandler';
 import CocosHelper from '../Common/Utils/CocosHelper';
+import ToastMgr from './ToastMgr';
 const TAG = "UIManager";
 /*
 if(CC_DEBUG) {

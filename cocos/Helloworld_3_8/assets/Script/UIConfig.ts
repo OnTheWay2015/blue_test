@@ -8,12 +8,12 @@ import { IFormConfig } from './UIFrame/Struct';
 export class UIConfigManager {
     private UIConfigs: any = [
         {
-            uiname: "xxxxx",
+            uiname: "UIFixed",
             prefabUrl: "Forms/Fixed/UIFunction",
             type: "UIFixed"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "UISound",
             prefabUrl: "Forms/Fixed/UISound",
             type: "UIFixed"
         }
@@ -23,42 +23,42 @@ export class UIConfigManager {
             type: "UIScreen"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "capture",
             prefabUrl: "Forms/Screen/UICapture",
             type: "UIScreen"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "dungeon",
             prefabUrl: "Forms/Screen/UIDungeon",
             type: "UIScreen"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "UIECSView",
             prefabUrl: "Forms/Screen/UIECSView",
             type: "UIScreen"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "UIGame",
             prefabUrl: "Forms/Screen/UIGame",
             type: "UIScreen"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "project",
             prefabUrl: "Forms/Screen/UIHome",
             type: "UIScreen"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "light",
             prefabUrl: "Forms/Screen/UILight",
             type: "UIScreen"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "UIMap",
             prefabUrl: "Forms/Screen/UIMap",
             type: "UIScreen"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "meshTexture",
             prefabUrl: "Forms/Screen/UIMeshTexture",
             type: "UIScreen"
         }
@@ -68,12 +68,12 @@ export class UIConfigManager {
             type: "UIScreen"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "scrollTexture",
             prefabUrl: "Forms/Screen/UIScrollTexture",
             type: "UIScreen"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "splitTexture",
             prefabUrl: "Forms/Screen/UISplitTexture",
             type: "UIScreen"
         }
@@ -83,37 +83,37 @@ export class UIConfigManager {
             type: "UITips"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "toast",
             prefabUrl: "Forms/Toast/UIToast1",
             type: "UIToast"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "mobx",
             prefabUrl: "Forms/Windows/UIMobx",
             type: "UIWindow"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "UIPop",
             prefabUrl: "Forms/Windows/UIPop",
             type: "UIWindow"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "UIScrollPlus",
             prefabUrl: "Forms/Windows/UIScrollPlus",
             type: "UIWindow"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "UISetting",
             prefabUrl: "Forms/Windows/UISetting",
             type: "UIWindow"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "UISkills",
             prefabUrl: "Forms/Windows/UISkills",
             type: "UIWindow"
         }
         , {
-            uiname: "xxxxx",
+            uiname: "UITips",
             prefabUrl: "Forms/Windows/UITips",
             type: "UIWindow"
         }
@@ -142,8 +142,8 @@ export class UIConfigManager {
                 if (!constourt) {
                     return;
                 }
-                key = name;
-                info.uiname = name;
+                //key = name;
+                //info.uiname = name;
             }
 
             constourt["UIConfig"] = info;

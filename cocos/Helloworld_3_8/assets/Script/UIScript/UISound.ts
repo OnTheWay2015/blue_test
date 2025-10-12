@@ -9,8 +9,7 @@ export default class UISound extends UIFixed {
 //    // LIFE-CYCLE CALLBACKS:
 //    // onLoad () {}
     start () {
-
-        // AdapterMgr.inst.adapteByType(AdapterType.Right | AdapterType.Top, this.node);
+        AdapterMgr.inst.adapteByType(AdapterType.Right | AdapterType.Top, this.node);
     }
 //    // update (dt) {}
 }
