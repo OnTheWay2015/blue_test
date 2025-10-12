@@ -1,0 +1,279 @@
+// /**
+//  * @author honmono
+//  * @description 为UIManager写的 lru cache控制.
+//  */
+// // let lruCache = new LRUCache(4);
+// // lruCache.put("222222");
+// // lruCache.put("333333");
+// // lruCache.put("123");
+// // lruCache.remove("123");
+// // lruCache.put("123");
+// // lruCache.remove("123");
+// // lruCache.put("123");
+// // lruCache.put("123");
+// // lruCache.remove("123");
+// // window.lruCache = lruCache;
+
+import { _decorator } from 'cc';
+import { IPool, Pool } from "./Pool";
+class LRUNode implements IPool {
+    value: string;
+    prev: LRUNode;          // 前面的
+    next: LRUNode;          // 后面的
+    constructor(value: string, next: LRUNode) {
+        this.value = value;
+        this.next = next;
+    }
+    use(value: string, next: LRUNode) {
+        this.value = value;
+        this.next = next;
+    }
+    free() {
+        this.value = '';
+        this.next = null;
+    }
+}
+
+export class LRUCache {
+    public maxSize: number;
+    private head: LRUNode;
+    private last: LRUNode;
+    private size: number;
+    private nodePool: Pool<LRUNode> = new Pool<LRUNode>(() => {
+         return new LRUNode('', null);
+         }, 3);
+         constructor(maxSize: number) {
+         this.maxSize = maxSize;
+         this.head = new LRUNode('head', null);
+         this.size = 0;
+    }
+    public remove(value: string) {
+        let node:any = this.has(value);
+        node && this.removeNode(node);
+    }
+        
+    public put(value: string) {
+         if(this.size <= 0) {
+         this.last = this.nodePool.alloc(value, null);
+         this.last.prev = this.head;
+         this.head.next = this.last;
+         this.size = 1;
+         return ;
+         }
+         let node:any = this.has(value);
+         if(!node) {     // 不存在, 直接加到最前面
+         node = this.nodePool.alloc(value, null);
+         this.addHead(node);
+         return ;
+         }
+         if(node == this.head.next) return;
+
+         this.removeNode(node);
+         this.addHead(node);
+    }
+    public needDelete() {
+        return this.size > this.maxSize;
+    }
+    public deleteLastNode() {
+         let value = this.last.value;
+         this.removeNode(this.last);
+         return value;
+    }
+    private removeNode(node: LRUNode) {
+         node.prev.next = node.next;
+         if(node.next) {
+         node.next.prev = node.prev;
+         }else {
+         this.last = node.prev;
+         }
+
+         node.prev = null;
+         node.next = null;
+         this.nodePool.free(node);
+         this.size --;
+    }
+//    /** 向头部插入一个node */
+    private addHead(node: LRUNode) {
+         node.next = this.head.next;
+         if(node.next) {
+         node.next.prev = node;
+         }
+         this.head.next = node;
+         node.prev = this.head;
+
+         this.size ++;
+    }
+    public has(value: string) {
+         let next = this.head.next;
+         let count = 0;
+         while(next) {
+         if(next.value == value) {
+         return next;
+         }
+         next = next.next;
+         count ++;
+         if(count > this.maxSize) break;
+         }
+         return null;
+    }
+    public toString() {
+        let str = '';
+        let next = this.head.next;
+       while(next) {
+           str += next.value + " ";
+           next = next.next;
+       }
+         return str;
+    }
+}
+
+
+/**
+ * 注意：已把原脚本注释，由于脚本变动过大，转换的时候可能有遗落，需要自行手动转换
+ */
+// import { IPool, Pool } from "./Pool";
+// 
+// class LRUNode implements IPool {
+//     value: string;
+//     prev: LRUNode;          // 前面的
+//     next: LRUNode;          // 后面的
+//     constructor(value: string, next: LRUNode) {
+//         this.value = value;
+//         this.next = next;
+//     }
+// 
+//     use(value: string, next: LRUNode) {
+//         this.value = value;
+//         this.next = next;
+//     }
+// 
+//     free() {
+//         this.value = '';
+//         this.next = null;
+//     }
+// }
+// 
+// 
+// /**
+//  * @author honmono
+//  * @description 为UIManager写的 lru cache控制.
+//  */
+// export class LRUCache {
+//     public maxSize: number;
+// 
+//     private head: LRUNode;
+//     private last: LRUNode;
+//     private size: number;
+// 
+//     private nodePool: Pool<LRUNode> = new Pool<LRUNode>(() => {
+//         return new LRUNode('', null);
+//     }, 3);
+//     constructor(maxSize: number) {
+//         this.maxSize = maxSize;
+//         this.head = new LRUNode('head', null);
+//         this.size = 0;
+//     }
+// 
+//     public remove(value: string) {
+//         let node = this.has(value);
+//         node && this.removeNode(node);
+//     }
+//         
+//     public put(value: string) {
+//         if(this.size <= 0) {
+//             this.last = this.nodePool.alloc(value, null);
+//             this.last.prev = this.head;
+//             this.head.next = this.last;
+//             this.size = 1;
+//             return ;
+//         }
+//         let node = this.has(value);
+//         if(!node) {     // 不存在, 直接加到最前面
+//             node = this.nodePool.alloc(value, null);
+//             this.addHead(node);
+//             return ;
+//         }
+//         if(node == this.head.next) return;
+// 
+//         this.removeNode(node);
+//         this.addHead(node);
+//     }
+// 
+//     public needDelete() {
+//         return this.size > this.maxSize;
+//     }
+// 
+//     public deleteLastNode() {
+//         let value = this.last.value;
+//         this.removeNode(this.last);
+//         return value;
+//     }
+// 
+//     private removeNode(node: LRUNode) {
+//         node.prev.next = node.next;
+//         if(node.next) {
+//             node.next.prev = node.prev;
+//         }else {
+//             this.last = node.prev;
+//         }
+// 
+//         node.prev = null;
+//         node.next = null;
+//         this.nodePool.free(node);
+//         this.size --;
+//     }
+// 
+//     /** 向头部插入一个node */
+//     private addHead(node: LRUNode) {
+//         node.next = this.head.next;
+//         if(node.next) {
+//             node.next.prev = node;
+//         }
+//         this.head.next = node;
+//         node.prev = this.head;
+// 
+//         this.size ++;
+//     }
+// 
+//     public has(value: string) {
+//         let next = this.head.next;
+//         let count = 0;
+//         while(next) {
+//             if(next.value == value) {
+//                 return next;
+//             }
+//             next = next.next;
+//             count ++;
+//             if(count > this.maxSize) break;
+//         }
+//         return null;
+//     }
+// 
+//     public toString() {
+//         let str = '';
+//         let next = this.head.next;
+//         // while(next) {
+//         //     str += next.value + " ";
+//         //     next = next.next;
+//         // }
+//         return str;
+//     }
+// }
+// 
+// // let lruCache = new LRUCache(4);
+// // lruCache.put("222222");
+// // lruCache.put("333333");
+// 
+// // lruCache.put("123");
+// // lruCache.remove("123");
+// // lruCache.put("123");
+// 
+// 
+// // lruCache.remove("123");
+// // lruCache.put("123");
+// 
+// // lruCache.put("123");
+// // lruCache.remove("123");
+// 
+// 
+// // window.lruCache = lruCache;
