@@ -5,13 +5,15 @@ const {ccclass, property} = _decorator;
 import FormMgr from "../UIFrame/FormMgr";
 import { UIFixed, UIScreen } from "../UIFrame/UIForm";
 import UIManager from "../UIFrame/UIManager";
+import CocosHelper from '../Common/Utils/CocosHelper';
 
 @ccclass('UIHome')
 export default class UIHome extends UIScreen {
     //public view: UIHome_Auto;
     async load() {
-        //await UIManager.getInstance().openForm("UISound");;
-        return await  FormMgr.openByName("UISound");
+        let com = await FormMgr.openByName("UISound");;
+        //await  FormMgr.loadByname("UISound");
+        return "";
     }
     model = 5;
     refreshView() {

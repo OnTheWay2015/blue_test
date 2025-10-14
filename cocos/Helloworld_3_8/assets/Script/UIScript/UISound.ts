@@ -3,6 +3,7 @@ const {ccclass, property} = _decorator;
 
 import AdapterMgr, { AdapterType } from "../UIFrame/AdapterMgr";
 import { UIFixed } from "../UIFrame/UIForm";
+import CocosHelper from '../Common/Utils/CocosHelper';
 
 @ccclass('UISound')
 export default class UISound extends UIFixed {
@@ -10,6 +11,7 @@ export default class UISound extends UIFixed {
 //    // onLoad () {}
     start () {
         AdapterMgr.inst.adapteByType(AdapterType.Right | AdapterType.Top, this.node);
+        CocosHelper.TestTransProps(this.node);
     }
 //    // update (dt) {}
 }

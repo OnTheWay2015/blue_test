@@ -6,7 +6,7 @@ import { IFormConfig } from './UIFrame/Struct';
 
  
 export class UIConfigManager {
-    private UIConfigs: any = [
+    private UIConfigs: any[] = [
         {
             uiname: "UIFixed",
             prefabUrl: "Forms/Fixed/UIFunction",
@@ -132,8 +132,12 @@ export class UIConfigManager {
     public init() {
         let self = this;
         self.UIConfigs.forEach(info => {
-            let key = info.uiname;
-            let constourt:any = js.getClassByName(key);
+            let uiname= info.uiname;
+            let clname= info.classname;
+            let constourt:any =null;
+            if (clname){
+                constourt= js.getClassByName(clname);
+            }
             if (!constourt) {
                 let urls = info.prefabUrl.split('/') as string[];
                 if (!urls || urls.length <= 0) return;
@@ -142,13 +146,12 @@ export class UIConfigManager {
                 if (!constourt) {
                     return;
                 }
-                //key = name;
-                //info.uiname = name;
+                info.classname = name;
             }
 
-            constourt["UIConfig"] = info;
-            self.configs[key] = info;
-            if (key == "UILoading") {
+            //constourt["UIConfig"] = info;
+            self.configs[uiname] = info;
+            if (uiname == "UILoading") {
                 SysDefine.defaultLoadingForm = info as IFormConfig;
             }
         });

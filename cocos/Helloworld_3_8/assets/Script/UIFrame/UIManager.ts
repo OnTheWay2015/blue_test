@@ -230,7 +230,7 @@ export default class UIManager {
     }
     public addNode(node: Node,finfo: IFormConfig) {
 //        //@ts-ignore
-         let com:any = node.getComponent(finfo.uiname); 
+         let com:any = node.getComponent(finfo.classname); 
          if(!com) {
          warn(`${node.name} 结点没有绑定IUIBase`);
          return null;
@@ -259,11 +259,14 @@ export default class UIManager {
 //    /** 添加到screen中 */
     private async enterToScreen(fid: string, params: any) {
 //        // 关闭其他显示的窗口 
-         let arr: Array<Promise<boolean>> = [];
-         for(let key in this._showingForms) {
-         arr.push(this._showingForms[key].closeSelf());
-         }
-         await Promise.all(arr);
+        let arr: Array<Promise<boolean>> = [];
+        for (let key in this._showingForms) {
+        
+            //closeSelf() 方法在循环中会立即被调用（同步执行），
+            //但它的异步结果（Promise）会被收集到数组中
+            arr.push(this._showingForms[key].closeSelf());
+        }
+        await Promise.all(arr);
 
          let com:any = this._allForms[fid];
          if(!com) return ;

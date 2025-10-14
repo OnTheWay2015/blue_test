@@ -40,11 +40,11 @@ export default class UIBase extends Component {
          this.view = this.getComponent(`${this.node.name}_Auto`);
 //      // 加载这个UI依赖的其他资源
          let errorMsg = await this.load(params);
-         if(errorMsg) {
-         error(errorMsg);
-         this.closeSelf();
-         return ;
-         }
+        if (errorMsg) {
+            error(errorMsg);
+            this.closeSelf();
+            return;
+        }
          this.onInit(params);
     }
     model: any = null; 
@@ -65,6 +65,10 @@ export default class UIBase extends Component {
 //    // 关闭自己
     public async closeSelf(params?: any): Promise<boolean> {
          //return await FormMgr.close(GetForm(this.fid, this.formType), params);
+         if (!this.formData){
+            error(`ui[${this.name}] formData is null!!`);
+            return;
+         }
          return await FormMgr.close(this.formData.loadingForm, params);
     }
 //    /**

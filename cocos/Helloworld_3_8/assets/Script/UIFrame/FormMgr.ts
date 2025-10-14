@@ -8,6 +8,7 @@ import ToastMgr from "./ToastMgr";
 import UIManager from "./UIManager";
 import WindowMgr from "./WindowMgr";
 import { UIConfigManager } from "../UIConfig";
+import { IUIBase } from "./IUIHandler";
 
 class FormMgr {
     /**
@@ -16,7 +17,7 @@ class FormMgr {
      * @param param 自定义参数
      * @param formData 窗体处理时的一些数据
      */
-    async open(form: IFormConfig, param?: any, formData?: IFormData):Promise<any> {
+    async open(form: IFormConfig, param?: any, formData?: IFormData):Promise<IUIBase> {
         switch(form.type) {
             case FormType.Screen:
                 return await SceneMgr.open(form, param, formData);
@@ -33,7 +34,7 @@ class FormMgr {
                 return null;
         }
     }
-    async openByName(uiname:string, param?: any, formData?: IFormData):Promise<any> {
+    async openByName(uiname:string, param?: any, formData?: IFormData):Promise<IUIBase> {
         let form: IFormConfig = UIConfigManager.getInstance().getFormConfig(uiname);
         
         return this.open(form,param,formData);
@@ -70,6 +71,13 @@ class FormMgr {
         await UIManager.getInstance().loadUIForm(form);
     }
 
+    async loadByname(name:string):Promise<IUIBase> {
+        let form: IFormConfig = UIConfigManager.getInstance().getFormConfig(name);
+        if (form){
+            await UIManager.getInstance().loadUIForm(form);
+        }
+        return null;
+    }
 }
 
 export default new FormMgr();

@@ -7,7 +7,8 @@ import { _decorator } from 'cc';
 import { FormType, ModalOpacity } from "./config/SysDefine";
 import { UIConfigManager } from '../UIConfig';
 export interface IFormConfig {
-    uiname:string;
+    classname:string; //prefab 名字要和 classname 一样
+    uiname:string; 
     prefabUrl: string;
     type: string;
 }

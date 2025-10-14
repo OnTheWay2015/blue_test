@@ -14,6 +14,9 @@ const _Left = 1 << flagOffset ++;            // 左对齐
 const _Right = 1 << flagOffset ++;           // 右对齐
 const _Top = 1 << flagOffset ++;             // 上对齐
 const _Bottom = 1 << flagOffset ++;          // 下对齐
+const _VerticalCenter= 1 << flagOffset ++;      //垂直居中  
+const _HorizontalCenter= 1 << flagOffset ++;      // 水平居中
+
 const _StretchWidth = _Left | _Right;          // 拉伸宽
 const _StretchHeight = _Top | _Bottom;         // 拉伸高
 const _FullWidth = 1 << flagOffset ++;       // 等比充满宽
@@ -24,6 +27,9 @@ export enum AdapterType {
     Bottom = _Bottom,
     Left = _Left,
     Right = _Right,
+    VerticalCenter = _VerticalCenter,
+    HorizontalCenter = _HorizontalCenter,
+    
     StretchWidth = _StretchWidth,
     StretchHeight = _StretchHeight,
     FullWidth = _FullWidth,
@@ -97,6 +103,20 @@ export default class AdapterMgr {
                 widget.isAbsoluteBottom = true;
                 widget.bottom = distance ? distance : 0;
                 break;
+
+            case _VerticalCenter:
+                widget.isAlignVerticalCenter= true;
+                widget.isAbsoluteVerticalCenter = true;
+                widget.verticalCenter = distance ? distance : 0;
+                break;
+
+            case _HorizontalCenter:
+                widget.isAlignHorizontalCenter= true;
+                widget.isAbsoluteHorizontalCenter= true;
+                widget.horizontalCenter= distance ? distance : 0;
+                break;
+
+
             case _FullWidth:
                 let height=  nodeTns.height/(nodeTns.width / this.visibleSize.width); 
                 nodeTns.setContentSize(this.visibleSize.width, height);

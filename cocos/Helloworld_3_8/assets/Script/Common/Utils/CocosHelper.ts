@@ -1,7 +1,7 @@
 // /** 一些cocos api 的封装, promise函数统一加上sync后缀 */
 
 //import { _decorator, Tween, Node, FiniteTimeAction, Asset, AssetManager, Camera, Rect } from 'cc';
-import { _decorator, Tween,tween, Node, Asset, AssetManager,Animation,AnimationClip,resources, error,assetManager,Camera, Rect, UITransform, UIOpacity, Color, Sprite } from 'cc';
+import { _decorator, Tween,tween, Node, Asset, AssetManager,Animation,AnimationClip,resources, error,assetManager,Camera, Rect, UITransform, UIOpacity, Color, Sprite, Widget } from 'cc';
 export class LoadProgress {
     public url: string;
     public completedCount: number;
@@ -11,15 +11,70 @@ export class LoadProgress {
 }
 
 export default class CocosHelper {
+    public static LogDebug(ss: string) {
+        ss = ss.trim();
+        ss = ss.replace(/\n/g, "");
+        ss = ss.replace(/    /g, "");
+        ss = ss.replace(/\t/g, " ");
+        console.log(ss);
+    }
     public static TestTransProps(n:Node,lv:number=0) {
         const t = n.getComponent(UITransform);
+        const widg = n.getComponent(Widget);
         
         console.log(`${lv}=>name[${n.name}] active[${n.active}] x[${n.x}] y[${n.y}] `);
         if (t) {
-            console.log(`priority[${t.priority}] width[${t.width}] height[${t.height}] anchorX[${t.anchorX}] anchorY[${t.anchorY}] `);
+            //priority[${t.priority}] 
+            this.LogDebug(`UITransform  width[${t.width}] height[${t.height}] anchorX[${t.anchorX}] anchorY[${t.anchorY}] `);
         }else{
-            console.log("UITransform is null");
+            this.LogDebug("UITransform is null");
         }
+        if (widg) {
+            let ss = `Widget alignMode[${widg.alignMode}](0=once,1=always,2=ON_WINDOW_RESIZE )
+                alignFlags[${widg.alignFlags}] 
+            `
+            this.LogDebug(ss);
+
+            ss = `  isAlignTop[${widg.isAlignTop}] 
+                isAbsoluteTop[${widg.isAbsoluteTop}]  
+                top[${widg.top}]
+            `
+            this.LogDebug(ss);
+            
+            ss = `  isAlignBottom[${widg.isAlignBottom}] 
+                isAbsoluteBottom[${widg.isAbsoluteBottom}]  
+                bottom[${widg.bottom}]
+            `
+            this.LogDebug(ss);
+           
+            ss = `  isAlignLeft[${widg.isAlignLeft}] 
+                isAbsoluteLeft[${widg.isAbsoluteLeft}]  
+                left[${widg.left}]
+            `
+            this.LogDebug(ss);
+           
+            ss = `  isAlignRight[${widg.isAlignRight}] 
+                isAbsoluteRight[${widg.isAbsoluteRight}]  
+                right[${widg.right}]
+            `
+            this.LogDebug(ss);
+            
+            this.LogDebug(ss);
+            
+            ss = `  isAlignVerticalCenter[${widg.isAlignVerticalCenter}]  
+                isAbsoluteVerticalCenter[${widg.isAbsoluteVerticalCenter}]  
+                verticalCenter[${widg.verticalCenter}]`
+           this.LogDebug(ss);
+           
+           ss = `  isAlignHorizontalCenter[${widg.isAlignHorizontalCenter}]  
+                isAbsoluteHorizontalCenter[${widg.isAbsoluteHorizontalCenter}]  
+                horizontalCenter[${widg.horizontalCenter}]` 
+           this.LogDebug(ss);
+        
+        }else{
+            this.LogDebug("Widget is null");
+        }
+
         if (n.parent){
             this.TestTransProps(n.parent,lv+1);
         }
