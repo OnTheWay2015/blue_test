@@ -31,23 +31,73 @@ TS通过静态类型检查增强代码可靠性，变量声明后类型不可变
 */
 
 
+/*
+在TypeScript中，undefined 和 null 是两种特殊的基本类型，用于表示不同的“空值”状态：
+基础概念
+    undefined‌：表示变量已声明但未赋值，或对象属性不存在。例如：
+        let x: number; // 默认值为undefined
+    它是所有未初始化变量的默认值
+
+    null‌：表示显式赋值的空值，通常用于主动清空对象引用。例如：
+        let obj: object = null; // 显式设置为空
+    需通过代码手动赋值
+
+类型系统行为
+    默认子类型‌：未启用 strictNullChecks 时，两者可赋值给任意类型（如let s: string = null合法）
+    严格模式‌：启用 strictNullChecks 后，它们只能赋值给自身、void或联合类型（如string | null）
+        if (x === null) {  } //x为null 
+        else if (x === undefined) {  } // x为undefined 
+    这种检查在严格模式下尤为重要
+
+非空断言‌：使用!跳过检查（需确保值非空）：
+function getLength(s?: string | null) {
+  return s!.length; // 断言s非空
+}
+需谨慎使用以避免运行时错误
+
+最佳实践
+    联合类型‌：明确变量可能为空的场景，如string | undefined
+    可选链‌：安全访问深层属性（obj?.prop）
+    避免混用‌：undefined多用于未初始化状态，null用于显式清空
+*/
 
 
+import {testIncome} from "./testInCome"
 
 class helloworld{
-    private key:string = "hello"
+    private key1!:string   // 添加!表示确定会被赋值 
+    private key2?:string   // 添加?表示可能会被赋值, 也可能为 undefined
+    private key:string = "hello" // 声明时初始化
+    constructor(){
+    }
     public run():void{
         let self = this;
+        let v:any = this.getvalue(1); 
+        if (!v){
+            return;
+        }
         console.log(self.key);
+    }
+
+    public getvalue(id:number):any|undefined{
+        if (id > 0 ){
+            return new Object();
+        }
+        return null;
     }
 }
 
 
+
 function go() {
-    let t = new helloworld()
-    t.run();
+    //let t = new helloworld()
+    //t.run();
+    let t = new testIncome();
+    t.start();
 }
 
+
+go();
 
 
 
