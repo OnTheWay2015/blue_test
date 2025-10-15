@@ -7,5 +7,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9"
+  }
 }

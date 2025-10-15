@@ -1,5 +1,6 @@
 //import incomeconfig  from "./testInCome.json"
 import incomeconfig  from "./testInCome_stop.json"
+import * as FS from 'fs';
 
 //let STATIC_INCOME = 9.8 * 10000;
 let STATIC_INCOME = 10000;
@@ -12,6 +13,17 @@ let VIP_RATE = [
     25,
     30
 ];
+
+let VIP_MEMber= [
+    0,
+    1,
+    5,
+    15,
+    50,
+    100,
+    150
+];
+
 
 class player {
     public ID!:number; //编号
@@ -55,7 +67,8 @@ export class testIncome {
     private outstr: string = "";
     start() {
         this.calc(incomeconfig, this.outstr)
-        console.log(this.outstr);
+        //console.log(this.outstr);
+        FS.writeFileSync("www.txt",this.outstr);
     }
     //start() {
     //    let cav = this.node.getComponent(Canvas);
@@ -153,6 +166,26 @@ export class testIncome {
             }
             pp.sub_IDs.push(ply.ID);
         }
+
+        //check vip
+        let addplys:player[]= []; 
+        for (const [id,ply] of plys){
+            let memcnt:number = VIP_MEMber[ply.vip];
+            let n:number =memcnt - ply.sub_IDs.length;
+            if (n<=0){
+                continue;
+            }
+            for (let i = 0; i < n; i++) {
+                let p = new player();
+                p.vip = 0;
+                p.ID = ply.ID * 1000000 + i +1;
+                p.parentID = ply.ID
+                addplys.push(p);
+            }
+        }
+        addplys.forEach(p=>{
+            plys.set(p.ID,p);
+        });
 
         return plys;
     }
