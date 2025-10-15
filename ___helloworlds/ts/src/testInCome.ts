@@ -1,6 +1,8 @@
-import incomeconfig  from "./testInCome.json"
+//import incomeconfig  from "./testInCome.json"
+import incomeconfig  from "./testInCome_stop.json"
 
-let STATIC_INCOME = 9.8;
+//let STATIC_INCOME = 9.8 * 10000;
+let STATIC_INCOME = 10000;
 let VIP_RATE = [
     0,
     5,
@@ -107,14 +109,14 @@ export class testIncome {
         let outvalue = 0;
         ply.incomeExFrom.forEach(element => {
             invalue += element.value; 
-            this.addlog(outstr,`   valueExFrom ID[${element.ID_form}] BaseID[${element.ID_base}] value[${element.value}] valuetp[${element.valuetp}] rate[${element.rate}] vipdis[${element.vip_distance}] `);
+            this.addlog(outstr,`   valueExFrom ID[${element.ID_form}] BaseID[${element.ID_base}] value[${element.value}] value_base[${element.value_base}]  valuetp[${element.valuetp}] rate[${element.rate}] vipdis[${element.vip_distance}] `);
         });
 
         ply.outExFrom.forEach(element => {
             outvalue += element.value; 
-            this.addlog(outstr,`   outExTo ID[${element.ID_to}] BaseID[${element.ID_base}] value[${element.value}] valuetp[${element.valuetp}] rate[${element.rate}]  vipdis[${element.vip_distance}] `);
+            this.addlog(outstr,`   outExTo ID[${element.ID_to}] BaseID[${element.ID_base}] value[${element.value}] value_base[${element.value_base}]  valuetp[${element.valuetp}] rate[${element.rate}]}]  vipdis[${element.vip_distance}] `);
         });
-        this.addlog(outstr,`**ply[${ply.ID}] total incomeEx[${invalue}] outEx[${outvalue}]`);
+        this.addlog(outstr,`**ply[${ply.ID}] vip[${ply.vip}] total incomeEx[${invalue}] outEx[${outvalue}]`);
 
         this.addlog(outstr,"------------------");
 
@@ -124,6 +126,7 @@ export class testIncome {
             if (!p) {
                 console.error("id error!");
                 return;
+
             }
             this.logOutPly(p,plys,outstr);
         });
@@ -174,11 +177,13 @@ export class testIncome {
         this.calcInCome(ply);
         if (ply.parentID > 0 ) {
             let next:player|undefined = plys.get(ply.parentID);
+            let lmvip = this.calcLineMaxVip(ply,plys);
             this.calcLineInCome(
                 ply,
                 ply,
                 next,
-                ply.vip,
+                0,//ply.vip,
+                lmvip,
                 null,
                 plys,
             outstr);
@@ -191,9 +196,22 @@ export class testIncome {
         ply.incomeEx =ply.income *(VIP_RATE[ply.vip])/100; //vip 增加收益
     }
 
+    private calcLineMaxVip(ply:player,plys:Map<number,player>):number{
+        //let vip = ply.vip; 
+        let vip = 0; //不从自己算起 
+        while (ply.parentID > 0 ){
+            ply = plys.get(ply.parentID)!;
+            if (vip < ply.vip){
+                vip = ply.vip;
+            }
+        }
+
+        return vip;
+    }
+
     //每推广一个用户，就应该多一条该用户影响的太阳线
     //推广线收益
-    private calcLineInCome(baseply:player,prePly:player,ply:player|undefined,maxvip:number, preInCome:CalcSt|null, plys:Map<number,player>,outstr:string){
+    private calcLineInCome(baseply:player,prePly:player,ply:player|undefined,maxvip:number, lineMaxVip:number, preInCome:CalcSt|null, plys:Map<number,player>,outstr:string,stop:boolean=false){
         if (!ply){
             console.error("ply error!");
             return;
@@ -202,8 +220,8 @@ export class testIncome {
         let plyVip = ply.vip;
         let inSt = this.makeCalcSt(baseply.ID,prePly.ID); 
         inSt.ID_base = baseply.ID;
-        inSt.vip_distance = plyVip - maxvip;
         if (plyVip > maxvip){
+            inSt.vip_distance = plyVip - maxvip;
             let rate = (VIP_RATE[plyVip] - VIP_RATE[maxvip]);
             inSt.rate = rate;
             inSt.value_base = base;
@@ -222,7 +240,7 @@ export class testIncome {
                 outSt.value = inSt.value;
                 outSt.value_base = preInCome.value;
                 outSt.valuetp = inSt.valuetp;
-                outSt.vip_distance = inSt.vip_distance;
+                //outSt.vip_distance = inSt.vip_distance;
                 prePly.outExFrom.push(outSt);
 
             }else{
@@ -232,9 +250,9 @@ export class testIncome {
         
         }
         ply.incomeExFrom.push(inSt);
-
-        if (ply.parentID > 0 ){
-            this.calcLineInCome(baseply,ply,plys.get(ply.parentID),maxvip,inSt, plys,outstr);
+        
+        if (ply.parentID > 0 && !stop ){
+            this.calcLineInCome(baseply,ply,plys.get(ply.parentID),maxvip,lineMaxVip, inSt, plys,outstr, maxvip >= lineMaxVip );
         }
     }
 
