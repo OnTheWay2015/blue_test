@@ -176,9 +176,10 @@ export class testIncome {
                 vip级差[${element.vip_distance}]
             `);
         });
-        
+       
+        let v = this.formNumber(invalue-outvalue);
         //this.addlog(outstr,`**ply[${ply.ID}], vip[${ply.vip}], total incomeEx[${invalue-outvalue}], outEx[${outvalue}],`);
-        this.addlog(outstr,`**用户[${ply.ID}], vip[${ply.vip}], 总额外奖励[${invalue-outvalue}], 上级扣除[${outvalue}]`);
+        this.addlog(outstr,`**用户[${ply.ID}], vip[${ply.vip}], 总额外奖励[${v}], 上级扣除[${outvalue}]`);
 
         this.addlog(outstr,"------------------");
 
