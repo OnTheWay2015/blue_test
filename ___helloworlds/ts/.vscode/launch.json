@@ -9,6 +9,7 @@
             "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceFolder}\\s_out\\helloworld.js", //启动文件
+            //默认工作路径为  ${workspaceFolder}  为 ___helloworlds/ts
             "skipFiles": [ //此处不配置内容时，可调试默认包 比如 https
             ],
             "args": [] ,// 设置启动参数

@@ -1,9 +1,10 @@
 //import incomeconfig  from "./testInCome.json"
-import incomeconfig  from "./testInCome_stop.json"
+//import incomeconfig  from "./testInCome_stop.json"
 import * as FS from 'fs';
 
-//let STATIC_INCOME = 9.8 * 10000;
-let STATIC_INCOME = 10000;
+let STATIC_INCOME = 9.8;
+let AUTO_ADD_MEMBER= false;
+//let STATIC_INCOME = 10000;
 let VIP_RATE = [
     0,
     5,
@@ -66,6 +67,10 @@ export class testIncome {
     ]`;
     private outstr: string = "";
     start() {
+        let incomeconfig = this.loadConfig();
+        STATIC_INCOME = incomeconfig.static_income ? incomeconfig.static_income : 9.8;
+        AUTO_ADD_MEMBER= incomeconfig.auto_add_member? incomeconfig.auto_add_member:false; 
+
         this.calc(incomeconfig, this.outstr)
         //console.log(this.outstr);
         FS.writeFileSync("www.txt",this.outstr);
@@ -83,6 +88,12 @@ export class testIncome {
     //    }, btn);
     //}
 
+    loadConfig() {
+        const rawData = FS.readFileSync('./configs/testInCome.json', 'utf8');
+        const config = JSON.parse(rawData);
+        return config;
+    }
+
     update(deltaTime: number) {
         
     }
@@ -90,7 +101,7 @@ export class testIncome {
     private calc(config: any, outstr: string) {
         //let i:any = JSON.parse(inputStr);
         //this.addlog(outstr,JSON.stringify(i));
-        let plys: Map<number, player> = this.formPlys(config, outstr);
+        let plys: Map<number, player> = this.formPlys(config.players, outstr);
         this.calcPlys(plys, outstr);
         //this.logOutPlysLeveL(plys);
         this.logOutPlys(plys, outstr);
@@ -103,6 +114,7 @@ export class testIncome {
     //}
 
     private addlog(_:string,addstr:string){
+        addstr = this.formstr(addstr);
         this.outstr += this.outstr=="" ? "" :  "\n";
         this.outstr += addstr;
     }
@@ -114,22 +126,59 @@ export class testIncome {
             this.addlog(outstr,`TOP ID[${ply.ID}]=========================================`);
             this.logOutPly(ply,plys,outstr);
             this.addlog(outstr,"=========================================");
+            this.addlog(outstr,"\n")
+            this.addlog(outstr,"\n")
         }
     }
 
+    public formstr(ss: string):string {
+        ss = ss.trim();
+        ss = ss.replace(/\n/g, "");
+        ss = ss.replace(/    /g, "");
+        ss = ss.replace(/\t/g, " ");
+        return ss;
+    }
     private logOutPly(ply:player,plys: Map<number,player>,outstr:string){
         let invalue  = 0;
         let outvalue = 0;
-        ply.incomeExFrom.forEach(element => {
-            invalue += element.value; 
-            this.addlog(outstr,`   valueExFrom ID[${element.ID_form}] BaseID[${element.ID_base}] value[${element.value}] value_base[${element.value_base}]  valuetp[${element.valuetp}] rate[${element.rate}] vipdis[${element.vip_distance}] `);
-        });
 
         ply.outExFrom.forEach(element => {
             outvalue += element.value; 
-            this.addlog(outstr,`   outExTo ID[${element.ID_to}] BaseID[${element.ID_base}] value[${element.value}] value_base[${element.value_base}]  valuetp[${element.valuetp}] rate[${element.rate}]}]  vipdis[${element.vip_distance}] `);
+            
+//            let ss = `被谁扣了奖励[${element.ID_to}]
+//                奖励的基数来源[${element.ID_base}]
+//                额外奖励[${element.value}]
+//                计算额外奖励的基数[${element.value_base}]
+//                是否有级差[${element.valuetp}]
+//                vip额外奖励系数[${element.rate}]
+//                vip级差[${element.vip_distance}]`
+//
+            this.addlog(outstr,`   
+                  被谁扣了奖励[${element.ID_to}],
+                奖励的基数来源[${element.ID_base}],
+                额外奖励[${element.value}],
+                计算额外奖励的基数[${element.value_base}],
+                是否有级差[${element.valuetp}],
+                vip额外奖励系数[${element.rate}],
+                vip级差[${element.vip_distance}]
+            `);
         });
-        this.addlog(outstr,`**ply[${ply.ID}] vip[${ply.vip}] total incomeEx[${invalue}] outEx[${outvalue}]`);
+
+        ply.incomeExFrom.forEach(element => {
+            invalue += element.value; 
+            this.addlog(outstr,`   
+                  奖励的来源[${element.ID_form}], 
+                奖励的基数来源[${element.ID_base}],
+                额外奖励[${element.value}],
+                计算额外奖励的基数[${element.value_base}],
+                是否有级差[${element.valuetp}],
+                vip额外奖励系数[${element.rate}],
+                vip级差[${element.vip_distance}]
+            `);
+        });
+        
+        //this.addlog(outstr,`**ply[${ply.ID}], vip[${ply.vip}], total incomeEx[${invalue-outvalue}], outEx[${outvalue}],`);
+        this.addlog(outstr,`**用户[${ply.ID}], vip[${ply.vip}], 总额外奖励[${invalue-outvalue}], 上级扣除[${outvalue}]`);
 
         this.addlog(outstr,"------------------");
 
@@ -167,6 +216,9 @@ export class testIncome {
             pp.sub_IDs.push(ply.ID);
         }
 
+        if (!AUTO_ADD_MEMBER){
+            return plys;
+        }
         //check vip
         let addplys:player[]= []; 
         for (const [id,ply] of plys){
@@ -242,6 +294,10 @@ export class testIncome {
         return vip;
     }
 
+    private formNumber(v:number):number{
+        return Math.floor(v*1000000)/1000000;
+    }
+
     //每推广一个用户，就应该多一条该用户影响的太阳线
     //推广线收益
     private calcLineInCome(baseply:player,prePly:player,ply:player|undefined,maxvip:number, lineMaxVip:number, preInCome:CalcSt|null, plys:Map<number,player>,outstr:string,stop:boolean=false){
@@ -257,8 +313,9 @@ export class testIncome {
             inSt.vip_distance = plyVip - maxvip;
             let rate = (VIP_RATE[plyVip] - VIP_RATE[maxvip]);
             inSt.rate = rate;
-            inSt.value_base = base;
-            inSt.value= base * inSt.rate/100; //vip 增加收益
+            inSt.value_base = this.formNumber( base );
+            inSt.value= this.formNumber( base * inSt.rate/100); //vip 增加收益
+
             maxvip = plyVip;
             inSt.valuetp = "正常";
         }else{
@@ -266,7 +323,8 @@ export class testIncome {
             inSt.rate = 10;
             inSt.valuetp = "级差";
             if (preInCome){
-                inSt.value=  preInCome.value* 10/100 ;
+                //inSt.value=  preInCome.value* 10/100 ;
+                inSt.value=this.formNumber( preInCome.value* 10/100 );
                 
                 let outSt = this.makeCalcSt(baseply.ID,ply.ID,true);
                 outSt.rate = inSt.rate;
@@ -278,7 +336,7 @@ export class testIncome {
 
             }else{
                 //进入计算时，太阳线最底的玩家vip等级要高于他的父级vip等级时 会触发
-                inSt.value=  base * 10/100 ; 
+                inSt.value=this.formNumber( base * 10/100 ); 
             }
         
         }
