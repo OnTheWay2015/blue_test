@@ -1,0 +1,116 @@
+//使用 pnpm 代替 npm
+	建议使用 pnpm 代替 npm，pnpm 速度更快，基本上可以满足所有小型项目的需求。
+
+	pnpm 的用法和 npm 一致，唯一的区别是 npm 是 node 自带的包管理工具，所以在安装好 node 之后就可以使用 npm。但是 pnpm 在首次使用之前需要用 npm 全局安装。（重点1: 要全局安装哦！）
+
+	npm i pnpm -g
+
+	安装成功后，打开命令行，在任意目录下，执行 pnpm -v 如果可以显示版本号，就没有问题了
+
+//创建一个名称为  learn-vite 的项目
+	D:\git_work\blue_test\ts_vscode_web> pnpm create vite learn-vite --template vue-ts
+
+//进入项目目录,初始化项目工程 pnpm install, vscode文件刷新有延时,初始化后可关闭重开
+	D:\git_work\blue_test\ts_vscode_web> cd .\learn-vite\
+	D:\git_work\blue_test\ts_vscode_web\learn-vite> pnpm install 
+
+
+
+//vscode 开发先安装插件 Vue (Official)  可能需要翻墙. 安装后重新 vscode
+
+// 在 vite.config.ts 中配置生成 sourcemap
+build: {
+  sourcemap: true
+}
+
+
+
+//查看 learn-vite\package.json 里 scripts,有编译脚本 执行编译
+	D:\git_work\blue_test\ts_vscode_web\learn-vite> pnpm run build
+
+
+//web服务器 可用 vite 自带的,也可以用 nginx 之类服务器. 最好是用 vite 自带的，可以不用手动编译代码，直接按 f5 调试到最新的 ts 代码
+	运行 pnpm dev ，默认会启动本地服务（通常为http://localhost:5173），支持热重载和源码映射。
+	若需自动打开浏览器，可在 package.json 中修改 scripts 为 "dev": "vite --open"
+
+
+//nginx 里 location 设置好对应的目录
+    server {
+        listen       8082;
+        server_name  localhost;
+ 
+		# 服务器再用location块中的正则uri和请求字符串匹配，如果第一个正则uri匹配成功，结束搜索，并使用该location块处理请求。
+		# 如果所有正则匹配全部失败，则用标准uri匹配到的匹配度最高的location块进行处理。  
+		# location ~   区分大小写正则匹配
+		# location ~*  不区分大小写正则匹配
+		location ~* ^/learn-vite/(.+) {
+			#直接返回字符串, 可调试用.   $1 是正则字符串 括号里匹配到的部分
+			#return 200 "catch:$1";  
+            alias D:/git_work/blue_test/ts_vscode_web/learn-vite/$1;
+            #index  index.h tml index.htm;
+        }
+		
+		
+		...
+	}
+	
+	
+	
+	
+	
+//vscode 新建 chrome 的调试配置.  launch.json 里的 url 配置成对应的. F5 可开始调试了
+	{
+		// Use IntelliSense to learn about possible attributes.
+		// Hover to view descriptions of existing attributes.
+		// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "chrome",
+				"request": "launch",
+				"name": "Launch Chrome against localhost",
+				"url": "http://localhost:8082/learn-vite/dist/index.html",
+				"webRoot": "${workspaceFolder}"
+			}
+		]
+	}
+
+
+	{
+		"version": "0.2.0",
+		"configurations": [
+		  {
+			"type": "chrome",
+			"request": "launch",
+			"name": "Debug Vue App",
+			"url": "http://localhost:5173",
+			"webRoot": "${workspaceFolder}/src",
+			"sourceMapPathOverrides": {
+			  "webpack:///./src/*": "${webRoot}/*"
+			}
+		  }
+		]
+	  }
+	  
+  
+  
+  
+//注意事项 
+1.vscode 开发先安装插件 Vue (Official)  可能需要翻墙. 安装后重新 vscode
+
+
+2. 新增 .vue 模板文件，在引用该文件vscode会报错，实际却可通知.
+	需要让 TS 识别 .vue 模板文件
+	由于 TypeScript 默认并不支持 *.vue 后缀的文件，
+	所以在 vue 项目中引入的时候需要创建一个 vue-shim.d.ts(名字随意) 文件，
+	放在项目项目对应使用目录下(该目录要在 tsconfig.json  include 范围内的)，例如 src/vue-shim.d.ts
+
+declare module "*.vue" {
+  import { DefineComponent } from "vue"
+  const component: DefineComponent<{}, {}, any>
+  export default component
+}
+
+
+3.出现重命名或变量找不到的错误，先改个别的变量名看看,可能是别的地方已经在使用的变量.
+  

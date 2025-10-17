@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
-import testinput from './components/testinput.vue'
+import testinput from './views/testinput.vue'
+import t_input from './components/t_input.vue'
 </script>
 
 <template>
   <testinput  />
+  <t_input />
 </template>
 
 <style scoped>
