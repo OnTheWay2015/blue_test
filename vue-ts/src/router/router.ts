@@ -6,6 +6,7 @@ import About from '../views/about.vue'
 import UserProfile from '../views/user.vue'
 import TestComponents from '../views/TestComponents.vue'
 import t_input from '../components/t_input.vue'
+import calcInCome  from '../views/testinput.vue'
 
 const routes = [
   {
@@ -17,6 +18,10 @@ const routes = [
         component: t_input 
       }
     ]
+  },
+  {
+    path: '/calcIncome',
+    component:calcInCome  
   },
   {
     path: '/t_input',

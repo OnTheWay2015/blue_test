@@ -2,6 +2,7 @@
 <template>
     <div>
       <nav>
+        <router-link to="/calcInCome"> calcInCome </router-link>
         <router-link to="/t_input"> t_input </router-link>
         <router-link to="/test_components"> test_components </router-link>
         <router-link to="/about"> about </router-link>
