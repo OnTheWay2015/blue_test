@@ -261,7 +261,8 @@ export class testIncome {
         }
         ply.visit = true;
         this.calcInCome(ply);
-        if (ply.parentID > 0 ) {
+        //if (ply.parentID > 0 ) {
+        if (ply.sub_IDs.length <= 0 ) {
             let next:player|undefined = plys.get(ply.parentID);
             let lmvip = this.calcLineMaxVip(ply,plys);
             this.calcLineInCome(
@@ -269,6 +270,7 @@ export class testIncome {
                 ply,
                 next,
                 0,//ply.vip,
+                false,
                 lmvip,
                 null,
                 plys,
@@ -301,7 +303,7 @@ export class testIncome {
 
     //每推广一个用户，就应该多一条该用户影响的太阳线
     //推广线收益
-    private calcLineInCome(baseply:player,prePly:player,ply:player|undefined,maxvip:number, lineMaxVip:number, preInCome:CalcSt|null, plys:Map<number,player>,outstr:string,stop:boolean=false){
+    private calcLineInCome(baseply:player,prePly:player,ply:player|undefined,maxvip:number, preExtracted:boolean, lineMaxVip:number, preInCome:CalcSt|null, plys:Map<number,player>,outstr:string,stop:boolean=false){
         if (!ply){
             console.error("ply error!");
             return;
@@ -311,6 +313,7 @@ export class testIncome {
         let inSt = this.makeCalcSt(baseply.ID,prePly.ID); 
         inSt.ID_base = baseply.ID;
         if (plyVip > maxvip){
+            preExtracted = false;
             inSt.vip_distance = plyVip - maxvip;
             let rate = (VIP_RATE[plyVip] - VIP_RATE[maxvip]);
             inSt.rate = rate;
@@ -319,32 +322,35 @@ export class testIncome {
 
             maxvip = plyVip;
             inSt.valuetp = "正常";
-        }else{
+            ply.incomeExFrom.push(inSt);
+        } else {
             //vip 平级或级差增加收益, 要从子级里扣
-            inSt.rate = 10;
-            inSt.valuetp = "级差";
-            if (preInCome){
-                //inSt.value=  preInCome.value* 10/100 ;
-                inSt.value=this.formNumber( preInCome.value* 10/100 );
-                
-                let outSt = this.makeCalcSt(baseply.ID,ply.ID,true);
-                outSt.rate = inSt.rate;
-                outSt.value = inSt.value;
-                outSt.value_base = preInCome.value;
-                outSt.valuetp = inSt.valuetp;
-                //outSt.vip_distance = inSt.vip_distance;
-                prePly.outExFrom.push(outSt);
+            if (!preExtracted) { //扣过的，就不要无限扣
+                inSt.rate = 10;
+                inSt.valuetp = "级差";
+                if (preInCome) {
+                    //inSt.value=  preInCome.value* 10/100 ;
+                    inSt.value = this.formNumber(preInCome.value * 10 / 100);
 
-            }else{
-                //进入计算时，太阳线最底的玩家vip等级要高于他的父级vip等级时 会触发
-                inSt.value=this.formNumber( base * 10/100 ); 
+                    let outSt = this.makeCalcSt(baseply.ID, ply.ID, true);
+                    outSt.rate = inSt.rate;
+                    outSt.value = inSt.value;
+                    outSt.value_base = preInCome.value;
+                    outSt.valuetp = inSt.valuetp;
+                    //outSt.vip_distance = inSt.vip_distance;
+                    prePly.outExFrom.push(outSt);
+
+                } else {
+                    //进入计算时，太阳线最底的玩家vip等级要高于他的父级vip等级时 会触发
+                    inSt.value = this.formNumber(base * 10 / 100);
+                }
+                ply.incomeExFrom.push(inSt);
             }
-        
+            preExtracted = true;
         }
-        ply.incomeExFrom.push(inSt);
         
         if (ply.parentID > 0 && !stop ){
-            this.calcLineInCome(baseply,ply,plys.get(ply.parentID),maxvip,lineMaxVip, inSt, plys,outstr, maxvip >= lineMaxVip );
+            this.calcLineInCome(baseply,ply,plys.get(ply.parentID),maxvip,preExtracted,lineMaxVip, inSt, plys,outstr, maxvip >= lineMaxVip );
         }
     }
 
