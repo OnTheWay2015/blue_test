@@ -1,6 +1,10 @@
+<script setup lang="ts">
+import TestParentAndSub_P from "./TestParentAndSub_P.vue"
+</script>
 
 <template>
     <div>
+      <TestParentAndSub_P />
       <h2>首页</h2>
       <router-link :to="{ name: 'UserProfile', params: { userId: 123 } }">
         用户资料

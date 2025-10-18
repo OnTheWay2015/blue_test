@@ -7,8 +7,20 @@ import UserProfile from '../views/user.vue'
 import TestComponents from '../views/TestComponents.vue'
 import t_input from '../components/t_input.vue'
 import calcInCome  from '../views/testinput.vue'
+import TestRouter from '../views/TestRouter.vue'
+import TestAll from '../views/TestAll.vue'
 
 const routes = [
+  {
+    name: 'TestAll',
+    path: '/TestAll/:userId/:userName?/:postCount?', // : 表示取路由传递数据里 或访问 url 里的对应字段值; 后面的 ? 表示可选; 比如访问 /TestAll/123/name/100  会分别对应到各字段 
+    component:TestAll,
+    props: true
+  },
+  {
+    path: '/TestRouter',
+    component:TestRouter
+  },
   {
     path: '/test_components',
     component: TestComponents,
