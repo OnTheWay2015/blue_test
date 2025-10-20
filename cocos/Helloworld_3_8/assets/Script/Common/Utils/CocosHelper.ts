@@ -79,7 +79,30 @@ export default class CocosHelper {
             this.TestTransProps(n.parent,lv+1);
         }
     }
-    
+
+    public static TestNodesTree(n: Node) {
+        let root = n;
+        while (root.parent) {
+            root = root.parent
+        }
+        this._TestNodesTree(n, 0);
+    }
+    public static _TestNodesTree(n:Node,lvl:number=0){
+        if (!n){
+            return;
+        }
+        let tag = "";
+        let printl = lvl;
+        while (printl > 0){
+            tag += "*"
+            printl --;
+        }
+        let subcount = n.children.length;
+        this.LogDebug( `${tag} name[${n.name}] subcount[${subcount }]` );
+        n.children.forEach((subn:Node)=>{
+            this._TestNodesTree(subn,lvl+1);
+        }); 
+    } 
     public static NodeCreate(name:string):Node {
             let n =  new Node();
             const t = n.addComponent(UITransform);
