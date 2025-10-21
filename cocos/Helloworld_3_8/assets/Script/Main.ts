@@ -16,7 +16,7 @@ export default class Main extends Component {
     
     async start () {
         //this.test();
-        let com:any = await  FormMgr.openByName("UINavigator");
+        //let com:any = await  FormMgr.openByName("UINavigator");
         //CocosHelper.TestTransProps(com.node);
         //UINavigator.open();
         //console.log("hello")
