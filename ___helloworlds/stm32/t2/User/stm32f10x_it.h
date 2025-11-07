@@ -1,3 +1,10 @@
+/*
+主要用于声明STM32工程中的中断服务函数
+涵盖了各种外设中断，例如定时器中断、串口中断以及系统异常中断（如SysTick、PendSV等）
+
+*/
+
+
 /**
   ******************************************************************************
   * @file    Project/STM32F10x_StdPeriph_Template/stm32f10x_it.h 
@@ -18,6 +25,7 @@
   * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
   ******************************************************************************
   */ 
+
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F10x_IT_H
