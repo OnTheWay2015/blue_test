@@ -2,6 +2,7 @@
 
 
 extern void test_set();
+extern void test_new_memory();
 
 
 void testAddress() 
@@ -31,7 +32,7 @@ void testAddress()
     auto xxxx = (xst*)ary + 1;
     xxxx->str[0] = 666;
 
-
+    //地址值 和指针，引用 是同一个东西，只是语法糖包装不一样
 
     unsigned long long aryP1 = (unsigned long)(&ary[0]); //取数组第一个元素的地址, 转为地址数值
     //aryP1 和  aryP  值是一样的
@@ -49,7 +50,8 @@ void testAddress()
 
 int main()
 {
-    testAddress();
+    test_new_memory();
+    //testAddress();
     //test_set();
     return 0;
 }

@@ -132,6 +132,7 @@
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="test_new_delete.cpp" />
     <ClCompile Include="test_operator_func.cpp" />
     <ClCompile Include="test_set.cpp" />
   </ItemGroup>
