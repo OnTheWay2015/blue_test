@@ -239,7 +239,7 @@ void processfiles(std::vector< std::vector<std::wstring>> files )
     }
 }
 
-int main() {
+int main1() {
     std::vector< std::vector<std::wstring>>files;
     //std::wstring directory = L"C:\\Test"; // 修改为要遍历的目录
 
@@ -254,3 +254,73 @@ int main() {
     std::wcout << L"\n共找到 " << files.size() << L" 个文件" << std::endl;
     return 0;
 }
+
+void test()
+{
+    WIN32_FIND_DATAW findData;
+    HANDLE hFind = INVALID_HANDLE_VALUE;
+
+    // 构造搜索路径
+    std::wstring searchPath = L"d:\\*.xxx";
+
+    hFind = FindFirstFileW(searchPath.c_str(), &findData);
+    if (hFind == INVALID_HANDLE_VALUE) {
+        std::wcerr << L"没有找到 " << std::endl;
+        return;
+    }
+
+    std::wstring content = L"";
+    do {
+        // 忽略当前目录和上级目录
+        if (wcscmp(findData.cFileName, L".") == 0 ||
+            wcscmp(findData.cFileName, L"..") == 0) {
+            continue;
+        }
+
+        content =  findData.cFileName;
+
+        break;
+    } while (FindNextFileW(hFind, &findData) != 0);
+
+    FindClose(hFind);
+
+
+    HANDLE hFile = CreateFileW(
+        L"d:\\aa.txt",
+        GENERIC_READ| GENERIC_WRITE, //读或写
+        FILE_SHARE_READ,
+        NULL,
+        OPEN_ALWAYS ,
+        FILE_ATTRIBUTE_NORMAL,
+        NULL
+    );
+  
+
+
+    DWORD bytesWritten; //使用 
+    WORD bom = 0xFEFF;
+    //向文件写入一个UTF-16 Little Endian编码的字节顺序标记（BOM）  windows 下面防止乱码
+    WriteFile(hFile, &bom, 2, &bytesWritten, NULL);
+    
+    BOOL result = WriteFile(
+        hFile,
+        content.c_str(),
+        static_cast<DWORD>(content.size()),
+        &bytesWritten,
+        NULL
+    );
+
+    CloseHandle(hFile);
+
+
+}
+
+
+int main() 
+{
+    test();
+    return 0;
+}
+
+
+

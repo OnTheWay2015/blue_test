@@ -30,8 +30,8 @@ public:
 //## ×Ö·û´® Á¬½ÓÔËËã
 #include <utility>
 #define xNEW(tp, ...) \
-[&]() -> tp* { \
-    printf("xNEW %s  act \n",#tp###tp##"gogogo");\
+[&](const char* func, const char* file,long line) -> tp* { \
+    printf("xNEW %s  act.  function[%s] file[%s] line[%ld]\n",#tp###tp##"gogogo", func, file,line);\
     void* ptr = malloc(sizeof(tp)); \
     if (ptr == nullptr) { \
         std::cerr << "Memory allocation failed for type: " #tp << std::endl; \
@@ -44,7 +44,7 @@ public:
         std::cerr << "Constructor failed for type: " #tp << std::endl; \
         return nullptr; \
     } \
-}()
+}(__FUNCTION__, __FILE__,__LINE__)
 
 
 
