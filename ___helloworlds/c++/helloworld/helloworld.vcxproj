@@ -135,6 +135,7 @@
     <ClCompile Include="test_new_delete.cpp" />
     <ClCompile Include="test_operator_func.cpp" />
     <ClCompile Include="test_set.cpp" />
+    <ClCompile Include="test_std_sort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />

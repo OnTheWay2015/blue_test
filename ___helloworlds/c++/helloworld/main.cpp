@@ -3,6 +3,7 @@
 
 extern void test_set();
 extern void test_new_memory();
+extern void test_sort();
 
 
 void testAddress() 
@@ -50,7 +51,8 @@ void testAddress()
 
 int main()
 {
-    test_new_memory();
+    test_sort();
+    //test_new_memory();
     //testAddress();
     //test_set();
     return 0;
