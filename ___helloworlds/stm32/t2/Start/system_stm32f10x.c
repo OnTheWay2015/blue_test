@@ -209,7 +209,7 @@ static void SetSysClock(void);
   * @param  None
   * @retval None
   */
-void SystemInit (void)
+void SystemInit_def (void)
 {
   /* Reset the RCC clock configuration to the default reset state(for debug purpose) */
   /* Set HSION bit */
@@ -267,6 +267,70 @@ void SystemInit (void)
   SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH. */
 #endif 
 }
+
+
+void SystemInit (void)
+{
+  /* 将RCC时钟配置复位到默认状态（用于调试目的） */
+  /* 设置HSION位 - 开启内部高速时钟 */
+  RCC->CR |= (uint32_t)0x00000001;
+
+  /* 复位SW、HPRE、PPRE1、PPRE2、ADCPRE和MCO位 */
+  /* SW: 系统时钟切换, HPRE: AHB预分频, PPRE1/2: APB预分频, ADCPRE: ADC预分频, MCO: 时钟输出 */
+#ifndef STM32F10X_CL
+  RCC->CFGR &= (uint32_t)0xF8FF0000;
+#else
+  RCC->CFGR &= (uint32_t)0xF0FF0000;
+#endif /* STM32F10X_CL */   
+  
+  /* 复位HSEON、CSSON和PLLON位 */
+  /* HSEON: 外部高速时钟使能, CSSON: 时钟安全系统, PLLON: 锁相环使能 */
+  RCC->CR &= (uint32_t)0xFEF6FFFF;
+
+  /* 复位HSEBYP位 - 外部高速时钟旁路 */
+  RCC->CR &= (uint32_t)0xFFFBFFFF;
+
+  /* 复位PLLSRC、PLLXTPRE、PLLMUL和USBPRE/OTGFSPRE位 */
+  /* PLLSRC: PLL时钟源选择, PLLXTPRE: HSE分频 for PLL, PLLMUL: PLL倍频系数 */
+  RCC->CFGR &= (uint32_t)0xFF80FFFF;
+
+#ifdef STM32F10X_CL
+  /* 复位PLL2ON和PLL3ON位 */
+  RCC->CR &= (uint32_t)0xEBFFFFFF;
+
+  /* 禁用所有中断并清除挂起位 */
+  RCC->CIR = 0x00FF0000;
+
+  /* 复位CFGR2寄存器 */
+  RCC->CFGR2 = 0x00000000;
+#elif defined (STM32F10X_LD_VL) || defined (STM32F10X_MD_VL) || (defined STM32F10X_HD_VL)
+  /* 禁用所有中断并清除挂起位 */
+  RCC->CIR = 0x009F0000;
+
+  /* 复位CFGR2寄存器 */
+  RCC->CFGR2 = 0x00000000;      
+#else
+  /* 禁用所有中断并清除挂起位 */
+  RCC->CIR = 0x009F0000;
+#endif /* STM32F10X_CL */
+    
+#if defined (STM32F10X_HD) || (defined STM32F10X_XL) || (defined STM32F10X_HD_VL)
+  #ifdef DATA_IN_ExtSRAM
+    SystemInit_ExtMemCtl(); 
+  #endif /* DATA_IN_ExtSRAM */
+#endif 
+
+  /* 配置系统时钟频率、HCLK、PCLK2和PCLK1预分频器 */
+  /* 配置Flash延迟周期并启用预取缓冲区 */
+  SetSysClock();
+
+#ifdef VECT_TAB_SRAM
+  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* 中断向量表重定位到内部SRAM */
+#else
+  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* 中断向量表重定位到内部FLASH */
+#endif 
+}
+
 
 /**
   * @brief  Update SystemCoreClock variable according to Clock Register Values.

@@ -485,6 +485,16 @@
               <FileType>5</FileType>
               <FilePath>.\Library\stm32f10x_rcc.h</FilePath>
             </File>
+            <File>
+              <FileName>stm32f10x_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\stm32f10x_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_tim.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Library\stm32f10x_tim.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

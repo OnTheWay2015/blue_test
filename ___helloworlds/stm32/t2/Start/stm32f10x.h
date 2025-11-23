@@ -1,4 +1,8 @@
 /*
+====> ÒýÈëÆäËûÍ·ÎÄ¼þ£ºÍ¨³£»á Í¨¹ý USE_STDPERIPH_DRIVER ºê¿ªÍ·,ÒýÈëÆäËûÓë¾ßÌåÎ¢¿ØÖÆÆ÷ÐÍºÅÏà¹ØµÄÍ·ÎÄ¼þ
+			Èç stm32f10x_conf.h£¬ÔöÇ¿´úÂëµÄ¿ÉÒÆÖ²ÐÔ
+
+
 stm32f10x.h ÊÇ STM32F10x ÏµÁÐÎ¢¿ØÖÆÆ÷¿ª·¢ÖÐµÄºËÐÄÍ·ÎÄ¼þ£¬Æä×÷ÓÃÏàµ±ÓÚ51µ¥Æ¬»ú¿ª·¢ÖÐµÄ reg52.h¡£
 ¸ÃÎÄ¼þÌá¹©ÁËÍêÕûµÄ¼Ä´æÆ÷Ó³ÉäºÍ·â×°£¬ÊÇSTM32±ê×¼ÍâÉè¿âµÄ»ù´¡¡£
 
@@ -13,10 +17,7 @@ stm32f10x.h ÊÇ STM32F10x ÏµÁÐÎ¢¿ØÖÆÆ÷¿ª·¢ÖÐµÄºËÐÄÍ·ÎÄ¼þ£¬Æä×÷ÓÃÏàµ±ÓÚ51µ¥Æ¬»ú¿ª·
 ÍâÉè¼Ä´æÆ÷·ÃÎÊºê£ºÎªÃ¿¸öÍâÉè¶¨ÒåÁË·ÃÎÊºê£¬ÀýÈç#define RCC ((RCC_TypeDef *) RCC_BASE)£¬Ê¹µÃ¿ª·¢Õß¿ÉÒÔÖ±½ÓÍ¨¹ýRCC->CRÕâÑùµÄÐÎÊ½²Ù×÷¼Ä´æÆ÷
 
 ³£Á¿ºÍºê¶¨Òå£º°üº¬ÓëSTM32F10xÏµÁÐÎ¢¿ØÖÆÆ÷Ïà¹ØµÄ¸÷ÖÖ³£Á¿ºÍºê¶¨Òå£¬ÓÃÓÚÉèÖÃºÍ²Ù×÷ÍâÉè¼Ä´æÆ÷
-
-
-ÒýÈëÆäËûÍ·ÎÄ¼þ£ºÍ¨³£»á Í¨¹ý USE_STDPERIPH_DRIVER ºê¿ªÍ·,ÒýÈëÆäËûÓë¾ßÌåÎ¢¿ØÖÆÆ÷ÐÍºÅÏà¹ØµÄÍ·ÎÄ¼þ£¬Èçstm32f10x_conf.h£¬ÔöÇ¿´úÂëµÄ¿ÉÒÆÖ²ÐÔ
-
+ 
 
 ¸ÃÎÄ¼þÊµÏÖÁË´Ó¼Ä´æÆ÷µØÖ·µ½½á¹¹Ìå±äÁ¿µÄÓ³Éä£¬ÎÞÂÛÊÇ¼Ä´æÆ÷¿ª·¢»¹ÊÇ¿âº¯Êý¿ª·¢¶¼±Ø²»¿ÉÉÙ
 Í¨¹ýÕâÖÖ·â×°£¬¿ª·¢ÕßÎÞÐèÖ±½Ó²Ù×÷¸´ÔÓµÄ¼Ä´æÆ÷µØÖ·£¬´ó´ó¼ò»¯ÁËSTM32µÄ¿ª·¢Á÷³Ì

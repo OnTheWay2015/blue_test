@@ -54,7 +54,7 @@ stm32f10x_gpio.h  虽然RCC函数不直接需要它，但 rcc 通常和 GPIO配置会一起使用
 //#include "stm32f10x_rtc.h"
 //#include "stm32f10x_sdio.h"
 //#include "stm32f10x_spi.h"
-//#include "stm32f10x_tim.h"
+#include "stm32f10x_tim.h"
 //#include "stm32f10x_usart.h"
 //#include "stm32f10x_wwdg.h"
 #include "misc.h" /* High level functions for NVIC and SysTick (add-on to CMSIS functions) */
