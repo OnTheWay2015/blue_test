@@ -61,7 +61,7 @@ void LED_Init(void)
 
 硬件工作流程：
 	时钟源选择->HSE/HSI作为原始时钟输入
-	时钟树传递->HSE/HSI → PLL → SYSCLK → AHB → APB2总线
+	时钟树传递->HSE/HSI -> PLL -> SYSCLK -> AHB -> APB2总线
 	时钟门控使能->设置RCC_APB2ENR寄存器的bit4(IOPCEN位)为 1
 	时钟信号分发->时钟信号通过APB2总线送达GPIOC端口的所有寄存器
 	寄存器可操作->此时才能正常配置GPIOC的引脚模式、读写数据寄存器

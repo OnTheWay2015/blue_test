@@ -412,6 +412,26 @@
               <FileType>1</FileType>
               <FilePath>.\User\led.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_usart_debug.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\bsp_usart_debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_usart_debug.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\User\bsp_usart_debug.h</FilePath>
+            </File>
+            <File>
+              <FileName>usart_com.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\usart_com.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart_com.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\User\usart_com.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -494,6 +514,16 @@
               <FileName>stm32f10x_tim.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Library\stm32f10x_tim.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Library\stm32f10x_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_usart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Library\stm32f10x_usart.h</FilePath>
             </File>
           </Files>
         </Group>
