@@ -34,7 +34,8 @@ void DEBUG_USART_PinConfig(void)
     /*选择要控制的GPIO引脚、设置GPIO模式为 推挽复用、设置GPIO速率为50MHz*/
     gpio_initstruct.GPIO_Pin    = DEBUG_TX_GPIO_PIN;
     gpio_initstruct.GPIO_Mode   = GPIO_Mode_AF_PP;
-    gpio_initstruct.GPIO_Speed  = GPIO_Speed_50MHz;
+    gpio_initstruct.GPIO_Speed  = GPIO_Speed_10MHz;
+    //gpio_initstruct.GPIO_Speed  = GPIO_Speed_50MHz;
     GPIO_Init(DEBUG_TX_GPIO_PORT,&gpio_initstruct);
    
 }

@@ -432,6 +432,16 @@
               <FileType>5</FileType>
               <FilePath>.\User\usart_com.h</FilePath>
             </File>
+            <File>
+              <FileName>bsp_gpio_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\bsp_gpio_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_gpio_key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\User\bsp_gpio_key.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

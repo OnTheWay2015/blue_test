@@ -1,6 +1,7 @@
 #include "stm32f10x.h"                  // Device header
 #include "led.h"
 #include "bsp_usart_debug.h"
+#include "bsp_gpio_key.h"
 #include "usart_com.h"
  
 
@@ -77,18 +78,36 @@ void TIM3_IRQHandler(void) {
         // 将取反后的值写入GPIOC Pin13，实现LED状态翻转
         GPIO_WriteBit(GPIOC, GPIO_Pin_13, (BitAction)(res));
 			
-				test_usart_send();
+				
     }
 }
 
-
+void test_key()
+{
+	
+			if(KEY_Scan(KEY1_GPIO_PORT,KEY1_GPIO_PIN,KEY_HIGH_TRIGGER) == KEY_DOWN)
+			{
+					LED_TOGGLE(R_LED_GPIO_PORT,R_LED_GPIO_PIN);
+					test_usart_send();
+			}
+			if(KEY_Scan(KEY2_GPIO_PORT,KEY2_GPIO_PIN,KEY_HIGH_TRIGGER) == KEY_DOWN)
+			{
+					LED_TOGGLE(G_LED_GPIO_PORT,G_LED_GPIO_PIN);
+			}
+			if(KEY_Scan(KEY3_GPIO_PORT,KEY3_GPIO_PIN,KEY_HIGH_TRIGGER) == KEY_DOWN)
+			{
+					LED_TOGGLE(B_LED_GPIO_PORT,B_LED_GPIO_PIN);
+			}
+	
+	
+}
 
 int main(void)
 {
 	//系统时钟初始化
 	//SystemInit(); // ==> SetSysClock 设置频率,当前为 SYSCLK_FREQ_72MHz
 	
-	LED_Init(); //LED初始化
+	LED_GPIO_Config(); //LED初始化
 	GPIO_WriteBit(GPIOC,GPIO_Pin_13, Bit_SET);  
 	
 	
@@ -120,13 +139,16 @@ STM32定时器从0开始计数，当计数器达到自动重装载值时触发中断
 		// 预分频系数 7199，自动重装载值 4999
 		// 定时器3初始化
     //TIM3_Init(4999, 7199); //0.5s
-    TIM3_Init(10000-1, 7199); //1s
+    //TIM3_Init(10000-1, 7199); //1s
 	
-		DEBUG_USART_Init();
-	
+		//DEBUG_USART_Init();
+		
+		KEY_GPIO_Config();
+		
+//保持程序不结束,程序结束后,中断收不到	
 	while(1)
 	{
-		//保持程序不结束,程序结束后,中断收不到
+		test_key();
 	}
 	return 0;
 	 

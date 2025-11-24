@@ -2,9 +2,9 @@
 
 #include "led.h"
 
+ 
 
-
-void LED_Init(void)
+void LED_GPIO_Config(void)
 
 {	
 
@@ -81,18 +81,78 @@ void LED_Init(void)
 
 	//2.配置结构体，向对应的外设模块寄存器写入数据
 
-	GPIO_InitTypeDef led_init;
+    
+	GPIO_InitTypeDef gpio_initstruct = {0}; //定义一个 GPIO 结构体 
+ 
+	gpio_initstruct.GPIO_Pin   = GPIO_Pin_13;      //GPIOC13引脚
 
-	led_init.GPIO_Pin   = GPIO_Pin_13;      //GPIOC13引脚
+	gpio_initstruct.GPIO_Mode  = GPIO_Mode_Out_PP; //推挽输出	
 
-	led_init.GPIO_Mode  = GPIO_Mode_Out_PP; //推挽输出	
-
-	led_init.GPIO_Speed = GPIO_Speed_10MHz; //10MHz
-
-	
-
+	gpio_initstruct.GPIO_Speed = GPIO_Speed_10MHz; //10MHz
+ 
 	//3.对成员进行初始化  系统接口 "stm32f10x_gpio.h"
-	GPIO_Init(GPIOC, &led_init);
+	GPIO_Init(GPIOC, &gpio_initstruct);
+
+
+/**************************** 核心板载LED灯 *****************************/   
+   
+    
+    /* 开启 LED 相关的GPIO外设/端口时钟 */
+    RCC_APB2PeriphClockCmd(R_LED_GPIO_CLK_PORT,ENABLE);
+    
+    /* IO输出状态初始化控制 */
+    GPIO_SetBits(R_LED_GPIO_PORT,R_LED_GPIO_PIN);
+    
+    /*选择要控制的GPIO引脚、设置GPIO模式为 推挽模式、设置GPIO速率为50MHz*/
+    gpio_initstruct.GPIO_Pin    = R_LED_GPIO_PIN;
+    gpio_initstruct.GPIO_Mode   = GPIO_Mode_Out_PP;
+    gpio_initstruct.GPIO_Speed  = GPIO_Speed_10MHz;
+    GPIO_Init(R_LED_GPIO_PORT,&gpio_initstruct);
+   
+ 
+   
+    
+    /* 开启 LED 相关的GPIO外设/端口时钟 */
+    RCC_APB2PeriphClockCmd(G_LED_GPIO_CLK_PORT,ENABLE);
+    
+    /* IO输出状态初始化控制 */
+    GPIO_SetBits(G_LED_GPIO_PORT,G_LED_GPIO_PIN);
+    
+    /*选择要控制的GPIO引脚、设置GPIO模式为 推挽模式、设置GPIO速率为50MHz*/
+    gpio_initstruct.GPIO_Pin    = G_LED_GPIO_PIN;
+    gpio_initstruct.GPIO_Mode   = GPIO_Mode_Out_PP;
+    gpio_initstruct.GPIO_Speed  = GPIO_Speed_10MHz;
+    GPIO_Init(G_LED_GPIO_PORT,&gpio_initstruct);
+   
+ 
+
+  
+    
+    /* 开启 LED 相关的GPIO外设/端口时钟 */
+    RCC_APB2PeriphClockCmd(B_LED_GPIO_CLK_PORT,ENABLE);
+    
+    /* IO输出状态初始化控制 */
+    GPIO_SetBits(B_LED_GPIO_PORT,B_LED_GPIO_PIN);
+    
+    /*选择要控制的GPIO引脚、设置GPIO模式为 推挽模式、设置GPIO速率为50MHz*/
+    gpio_initstruct.GPIO_Pin    = B_LED_GPIO_PIN;
+    gpio_initstruct.GPIO_Mode   = GPIO_Mode_Out_PP;
+    gpio_initstruct.GPIO_Speed  = GPIO_Speed_10MHz;
+    GPIO_Init(B_LED_GPIO_PORT,&gpio_initstruct);
+   
+ 
+
 
 }
 
+/**
+  * @brief  翻转对应 LED 灯
+  * @param  GPIOx：x 可以是 A，B，C等
+  * @param  GPIO_Pin：待操作的pin脚号
+  * @retval 无
+  */
+void LED_TOGGLE(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+    GPIOx->ODR ^= GPIO_Pin;
+
+}
