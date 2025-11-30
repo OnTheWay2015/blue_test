@@ -1,0 +1,232 @@
+<div class="blog-content-box">
+  <div class="article-header-box" id="article-header-box">
+    <div class="article-header">
+      <div class="article-title-box">
+        <h1 class="title-article" id="articleContentId">STM32 gcc编译环境搭建</h1>
+      </div>
+      <div class="article-info-box">
+              <div class="up-time">最新推荐文章于&nbsp;2025-11-10 19:02:10&nbsp;发布</div>
+          <div class="article-bar-top">
+              <div class="bar-content active">
+              <span class="article-type-text original">原创</span>
+                    <span class="time blog-postTime" data-time="2017-11-07 23:49:23">于 2017-11-07 23:49:23 发布</span>
+                <span class="border-dian">·</span>
+                <span class="read-count">1.1w 阅读</span>
+                <div class="read-count-box is-like like-ab-new" data-type="top">
+                  <span class="border-dian">·</span>
+                  <img class="article-read-img article-heard-img active" style="display:none" id="is-like-imgactive-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Active.png" alt="">
+                  <img class="article-read-img article-heard-img" style="display:block" id="is-like-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Black.png" alt="">
+                  <span class="read-count" id="blog-digg-num" style="color:;">
+                      6
+                  </span>
+                </div>
+                <span class="border-dian">·</span>
+                <a id="blog_detail_zk_collection" class="un-collection" data-report-click="{&quot;mod&quot;:&quot;popu_823&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4232&quot;,&quot;ab&quot;:&quot;new&quot;}">
+                  <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:inline-block" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollect2.png" alt="">
+                  <img class="article-collect-img article-heard-img collect-status isactive" style="display:none" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive2.png" alt="">
+                  <span class="get-collection">
+                      59
+                  </span>
+                </a>
+
+                  <span class="border-dian">·</span>
+                  <div class="href-article-edit-new">
+                    <span class="href-article-edit-click">CC 4.0 BY-SA版权</span>
+                    <div class="slide-content-box-new">
+                                版权声明：本文为博主原创文章，遵循<a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener"> CC 4.0 BY-SA </a>版权协议，转载请附上原文出处链接和本声明。
+                    </div>
+                  </div>
+              </div>
+              <div class="operating active">
+              </div>
+          </div>
+          <div class="blog-tags-box">
+             
+              <div class="tags-box artic-tag-box">
+                     <div class="article-tag">
+                       <span class="label">文章标签：</span>
+                      <p>
+                          <a rel="nofollow" data-report-query="spm=1001.2101.3001.4223" data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;stm32&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;stm32\&quot;}&quot;}" class="tag-link-new" href="https://so.csdn.net/so/search/s.do?q=stm32&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" target="_blank">#stm32</a>
+                          <a rel="nofollow" data-report-query="spm=1001.2101.3001.4223" data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;gcc&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;gcc\&quot;}&quot;}" class="tag-link-new" href="https://so.csdn.net/so/search/s.do?q=gcc&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" target="_blank">#gcc</a>
+                          <a rel="nofollow" data-report-query="spm=1001.2101.3001.4223" data-report-click="{&quot;mod&quot;:&quot;popu_626&quot;,&quot;spm&quot;:&quot;1001.2101.3001.4223&quot;,&quot;strategy&quot;:&quot;makefile&quot;,&quot;ab&quot;:&quot;new&quot;,&quot;extra&quot;:&quot;{\&quot;searchword\&quot;:\&quot;makefile\&quot;}&quot;}" class="tag-link-new" href="https://so.csdn.net/so/search/s.do?q=makefile&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" target="_blank">#makefile</a>
+                      </p>
+                     </div>
+                  <p class="community-name" id="community-name"></p>
+              </div>
+          </div>
+       
+          
+       
+      </div>
+    </div>
+  </div>
+    
+        <div id="blogColumnPayAdvert" class="">
+              <div class="column-group">
+                <div class="column-group-item column-group0 column-group-item-one">
+                    <div class="item-l">
+                        <a class="item-target" href="https://blog.csdn.net/chuancey_cc/category_7275848.html" target="_blank" title="开发环境" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.6332&quot;}">
+                            <img class="item-target" src="https://i-blog.csdnimg.cn/columns/default/20201014180756919.png?x-oss-process=image/resize,m_fixed,h_224,w_224" alt="">
+                            <span class="title item-target">
+                                <span>
+                                <span class="tit">开发环境</span>
+                                    <span class="dec">专栏收录该内容</span>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="item-m">
+                        <span>3 篇文章</span>
+                    </div>
+                    <div class="item-r">
+                            <a class="item-target article-column-bt articleColumnFreeBt" data-id="7275848">订阅专栏</a>
+                    </div>
+                </div>
+              </div>
+
+        </div>
+      <div class="ai-abstract-box">
+         <div class="ai-abstract">
+          <div class="abstract-content">
+            <img class="lock-img" src="https://i-operation.csdnimg.cn/images/a7311a21245d4888a669ca3155f1f4e5.png" alt="">本文介绍如何在Linux环境下使用gcc为STM32搭建编译环境，包括安装armgcc、openocd、jlink驱动，修改内核文件，替换启动文件，添加链接脚本及编写Makefile等内容。
+          </div>
+        </div>
+      </div>
+    <article class="baidu_pl">
+        <div id="article_content" class="article_content clearfix">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-10bf609291.css">
+                <div id="content_views" class="markdown_views prism-atom-one-dark">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                    </svg>
+                    <h2 id="stm32-gcc编译环境搭建"><a name="t0"></a>STM32 gcc编译环境搭建</h2> 
+<p>标签（空格分隔）： stm32 gcc <span class="words-blog hl-git-1" data-tit="Makefile" data-pretit="makefile">Makefile</span></p> 
+<hr> 
+<h3 id="说在前面的话"><a name="t1"></a>说在前面的话</h3> 
+<blockquote> 
+ <p>gcc编译器兼容Windows、Linux和MAC，可自行去官网下载，此处提供参考链接：<a href="https://launchpad.net/gcc-arm-embedded/" target="_blank" rel="nofollow noopener noreferrer">https://launchpad.net/gcc-arm-embedded/</a>，Linux可直接在命令行输入命令：<code>sudo apt-get install arm-none-eabi-gcc</code>,自动下载安装。gcc在三大平台操作命令完全一样，下面以Linux的Ubuntu发行版为例，说明下如何为stm32搭建gcc编译环境，从此摆脱IDE～～～</p> 
+</blockquote> 
+<p><strong><em>本文只提供开发流程，具体技术细节不懂的欢迎在评论下留言，互相学习，或者可以自行百度~</em></strong></p> 
+<h3 id="一安装arm-gcc"><a name="t2"></a>一、安装arm gcc</h3> 
+<ol><li>打开命令行，输入<code>sudo apt-get install arm-none-eabi-gcc</code></li><li>等待安装完成，在命令行输入<code>arm-none-eabi-gcc -v</code>，出现下图所示的输出，说明安装成功<img src="https://i-blog.csdnimg.cn/blog_migrate/079c9ccfee114b553fa4b1c03ebc2bba.png" alt="Screenshot from 2017-11-07 22-36-04.png-94.3kB" title=""></li></ol> 
+<h3 id="二安装openocd"><a name="t3"></a>二、安装openocd</h3> 
+<p>openocd用来给目标板下载程序</p> 
+<ol><li>在命令行输入<code>sudo apt-get install openocd</code></li><li>等待安装完成，在命令行输入<code>openocd -v</code>，出现下图所示的输出，说明安装成功<img src="https://i-blog.csdnimg.cn/blog_migrate/2b1c3cf6bac0129351ce93e455243bfd.png" alt="Screenshot from 2017-11-07 22-49-31.png-18.4kB" title=""></li></ol> 
+<h3 id="三安装jlink驱动"><a name="t4"></a>三、安装jlink驱动</h3> 
+<p>此处提供参考链接<a href="http://blog.csdn.net/justloong/article/details/73467875" target="_blank" rel="noopener noreferrer">http://blog.csdn.net/justloong/article/details/73467875</a></p> 
+<h3 id="四修改st的内核文件"><a name="t5"></a>四、修改ST的内核文件</h3> 
+<p>此处以stm32f103ze为例，打开ST官方提供的内核文件<code>STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/CoreSupport/core_cm3.c</code>，将下面两段代码中的第5行（源文件的736行）和第5行（源文件的753行）的<code>"=r"</code>改为<code>"=&amp;r"</code>，变成<code>__ASM volatile ("strexb %0, %2, [%1]" : "=&amp;r" (result) : "r" (addr), "r" (value) );</code>和<code>__ASM volatile ("strexh %0, %2, [%1]" : "=&amp;r" (result) : "r" (addr), "r" (value) );</code></p> 
+<ol><li><p>第一个代码段</p> <pre data-index="0" class="new-version set-code-show prettyprint" name="code"><code class="has-numbering" onclick="mdcp.signin(event)" style="position: unset;">uint32_t __STREXB(uint8_t value, uint8_t *addr)
+{
+   uint32_t result=0;
+
+   __ASM volatile ("strexb %0, %2, [%1]" : "=r" (result) : "r" (addr), "r" (value) );
+   return(result);
+}
+</code><div class="opt-box"><button class="btn-code-notes mdeditor" style="background-image:url(https://i-operation.csdnimg.cn/images/bf18ebff2c3748d59ea0f95954bb4b4a.png);" data-report-click="{&quot;spm&quot;:&quot;3001.10436&quot;,&quot;dest&quot;:&quot;https://t.csdnimg.cn/9I17&quot;,&quot;extra&quot;:{&quot;index&quot;:0,&quot;ab&quot;:&quot;exp3&quot;}}">AI构建项目</button><div class="hljs-button signin active" data-title="登录复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}" onclick="mdcp.signin(event)"></div></div><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li></ul></pre></li><li><p>第二个代码段</p> <pre data-index="1" class="new-version set-code-show prettyprint" name="code"><code class="has-numbering" onclick="mdcp.signin(event)" style="position: unset;">uint32_t __STREXH(uint16_t value, uint16_t *addr)
+{
+   uint32_t result=0;
+
+   __ASM volatile ("strexh %0, %2, [%1]" : "=r" (result) : "r" (addr), "r" (value) );
+   return(result);
+}
+</code><div class="opt-box"><button class="btn-code-notes mdeditor" style="background-image:url(https://i-operation.csdnimg.cn/images/bf18ebff2c3748d59ea0f95954bb4b4a.png);" data-report-click="{&quot;spm&quot;:&quot;3001.10436&quot;,&quot;dest&quot;:&quot;https://t.csdnimg.cn/9I17&quot;,&quot;extra&quot;:{&quot;index&quot;:1,&quot;ab&quot;:&quot;exp3&quot;}}">AI构建项目</button><div class="hljs-button signin active" data-title="登录复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}" onclick="mdcp.signin(event)"></div></div><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li></ul></pre></li></ol> 
+<h3 id="五替换启动文件"><a name="t6"></a>五、替换启动文件</h3> 
+<p>stm32开发的同学都熟悉它的汇编启动文件，但是在MDk中使用的启动文件和gcc环境使用的启动文件并不相同，因为前者是arm汇编的语法，后者是gcc汇编的语法，在gcc环境下，只能使用后者，否则无法编译，而gcc下的启动文件在<code>TM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/startup/gcc_ride7</code>下，同时跟它同级目录下还有一个文件夹，叫<code>TrueSTUDIO</code>，里面的启动文件是ST官方为了适配他们自己的开发环境而做的，同样可以在gcc环境中使用。</p> 
+<h3 id="六添加链接脚本"><a name="t7"></a>六、添加链接脚本</h3> 
+<p>gcc编译需要后缀为.ld的链接脚本，里面说明了FLASH、RAM、烧录地址等信息，直接使用ST固件库里的即可，在<code>STM32F10x_StdPeriph_Lib_V3.5.0/Project/STM32F10x_StdPeriph_Template/TrueSTUDIO</code>下，如下图所示：<img src="https://i-blog.csdnimg.cn/blog_migrate/86bbc0e96b3fa14d6018e1d3fbfe1ee7.png" alt="Screenshot from 2017-11-07 23-22-07.png-26kB" title=""> <br> 我用的是f103ze，属于大容量，选择<code>STM3210E-EVAL</code>下的<code>stm32_flash.ld</code>文件，将其拷贝到自己工程根目录。TrueSTUDIO下的其他文件夹里的启动文件，都是根据不同芯片容量密度分类的，里面有readme，请阅读后，选择适合自己平台的脚本文件。</p> 
+<h3 id="七编写makefile"><a name="t8"></a>七、编写Makefile</h3> 
+<p>Makefile是一种自动化的脚本，一般用来执行gcc的自动编译（当然，除此之外，它最重要的目的就是为了工程管理），关于如何编写Makefile，此处提供参考链接<a href="http://seisman.info/how-to-write-makefile.html" target="_blank" rel="nofollow noopener noreferrer">http://seisman.info/how-to-write-makefile.html</a>，文档是一名叫做陈皓的工程师编写的，比较系统全面，下面粘贴出我自己工程的Makefile作为参考，实现了代码编译（<code>make</code>）、目标文件清除（<code>make clean</code>）和程序下载（<code>make download</code>）功能，只要在工程根目录下打开命令行，输入括号中的命令即可。</p> 
+<pre data-index="2" class="new-version set-code-height set-code-hide prettyprint" name="code"><code class="has-numbering" onclick="mdcp.signin(event)" style="position: unset;">#工程的名称及最后生成文件的名字
+TARGET = LED
+
+#设定临时性环境变量
+export CC             = arm-none-eabi-gcc           
+export AS             = arm-none-eabi-as
+export LD             = arm-none-eabi-ld
+export OBJCOPY        = arm-none-eabi-objcopy
+
+#读取当前工作目录
+TOP=$(shell pwd)
+
+#设定包含文件目录
+INC_FLAGS= -I $(TOP)/CORE \
+           -I $(TOP)/HARDWARE/LED \
+           -I $(TOP)/STM32F10x_FWLib/inc \
+           -I $(TOP)/SYSTEM/delay \
+           -I $(TOP)/SYSTEM/sys \
+           -I $(TOP)/SYSTEM/usart \
+           -I $(TOP)/USER
+
+CFLAGS =  -W -Wall -g -mcpu=cortex-m3 -mthumb -D STM32F10X_HD -D USE_STDPERIPH_DRIVER $(INC_FLAGS) -O3 -std=gnu11
+ASFLAGS = -W -Wall -g -Wall -mcpu=cortex-m3 -mthumb
+
+C_SRC=$(shell find ./ -name '*.c')  
+C_OBJ=$(C_SRC:%.c=%.o)          
+
+ASM_SRC=$(shell find ./ -name '*.s')
+ASM_OBJ=$(ASM_SRC:%.s=%.o)
+
+.PHONY: all clean update      
+
+all:$(C_OBJ) $(ASM_OBJ)
+    $(CC) $(C_OBJ) $(ASM_OBJ) -T stm32_flash.ld -o $(TARGET).elf  -mthumb -mcpu=cortex-m3 -Wl,--start-group -lc -lm -Wl,--end-group -specs=nano.specs -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Project.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+    $(OBJCOPY) $(TARGET).elf  $(TARGET).bin -Obinary 
+    $(OBJCOPY) $(TARGET).elf  $(TARGET).hex -Oihex
+
+$(C_OBJ):%.o:%.c
+    @$(CC) -c $(CFLAGS) -o $@ $&lt;
+
+$(ASM_OBJ):%.o:%.s
+    $(CC) -c $(ASFLAGS) -o $@ $&lt;
+
+clean:
+    rm -f $(shell find ./ -name '*.o')
+    rm -f $(shell find ./ -name '*.d')
+    rm -f $(shell find ./ -name '*.map')
+    rm -f $(shell find ./ -name '*.elf')
+    rm -f $(shell find ./ -name '*.bin')
+    rm -f $(shell find ./ -name '*.hex')
+
+download:
+    openocd -f /usr/share/openocd/scripts/interface/jlink.cfg  -f /usr/share/openocd/scripts/target/stm32f1x.cfg -c init -c halt -c "flash write_image erase $(TOP)/$(TARGET).hex" -c reset -c shutdown
+</code><div class="opt-box"><button class="btn-code-notes mdeditor" style="background-image:url(https://i-operation.csdnimg.cn/images/bf18ebff2c3748d59ea0f95954bb4b4a.png);" data-report-view="{&quot;spm&quot;:&quot;3001.10436&quot;,&quot;dest&quot;:&quot;https://t.csdnimg.cn/9I17&quot;,&quot;extra&quot;:{&quot;index&quot;:2,&quot;ab&quot;:&quot;exp3&quot;}}" data-report-click="{&quot;spm&quot;:&quot;3001.10436&quot;,&quot;dest&quot;:&quot;https://t.csdnimg.cn/9I17&quot;,&quot;extra&quot;:{&quot;index&quot;:2,&quot;ab&quot;:&quot;exp3&quot;}}">AI构建项目</button><div class="hljs-button signin active" data-title="登录复制" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.4334&quot;}" onclick="mdcp.signin(event)"></div></div><div class="hide-preCode-box"><span class="hide-preCode-bt" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.7365&quot;}"><img class="look-more-preCode contentImg-no-view" src="https://csdnimg.cn/release/blogv2/dist/pc/img/runCode/icon-arrowwhite.png" alt="" title=""></span></div><ul class="pre-numbering" style=""><li style="color: rgb(153, 153, 153);">1</li><li style="color: rgb(153, 153, 153);">2</li><li style="color: rgb(153, 153, 153);">3</li><li style="color: rgb(153, 153, 153);">4</li><li style="color: rgb(153, 153, 153);">5</li><li style="color: rgb(153, 153, 153);">6</li><li style="color: rgb(153, 153, 153);">7</li><li style="color: rgb(153, 153, 153);">8</li><li style="color: rgb(153, 153, 153);">9</li><li style="color: rgb(153, 153, 153);">10</li><li style="color: rgb(153, 153, 153);">11</li><li style="color: rgb(153, 153, 153);">12</li><li style="color: rgb(153, 153, 153);">13</li><li style="color: rgb(153, 153, 153);">14</li><li style="color: rgb(153, 153, 153);">15</li><li style="color: rgb(153, 153, 153);">16</li><li style="color: rgb(153, 153, 153);">17</li><li style="color: rgb(153, 153, 153);">18</li><li style="color: rgb(153, 153, 153);">19</li><li style="color: rgb(153, 153, 153);">20</li><li style="color: rgb(153, 153, 153);">21</li><li style="color: rgb(153, 153, 153);">22</li><li style="color: rgb(153, 153, 153);">23</li><li style="color: rgb(153, 153, 153);">24</li><li style="color: rgb(153, 153, 153);">25</li><li style="color: rgb(153, 153, 153);">26</li><li style="color: rgb(153, 153, 153);">27</li><li style="color: rgb(153, 153, 153);">28</li><li style="color: rgb(153, 153, 153);">29</li><li style="color: rgb(153, 153, 153);">30</li><li style="color: rgb(153, 153, 153);">31</li><li style="color: rgb(153, 153, 153);">32</li><li style="color: rgb(153, 153, 153);">33</li><li style="color: rgb(153, 153, 153);">34</li><li style="color: rgb(153, 153, 153);">35</li><li style="color: rgb(153, 153, 153);">36</li><li style="color: rgb(153, 153, 153);">37</li><li style="color: rgb(153, 153, 153);">38</li><li style="color: rgb(153, 153, 153);">39</li><li style="color: rgb(153, 153, 153);">40</li><li style="color: rgb(153, 153, 153);">41</li><li style="color: rgb(153, 153, 153);">42</li><li style="color: rgb(153, 153, 153);">43</li><li style="color: rgb(153, 153, 153);">44</li><li style="color: rgb(153, 153, 153);">45</li><li style="color: rgb(153, 153, 153);">46</li><li style="color: rgb(153, 153, 153);">47</li><li style="color: rgb(153, 153, 153);">48</li><li style="color: rgb(153, 153, 153);">49</li><li style="color: rgb(153, 153, 153);">50</li><li style="color: rgb(153, 153, 153);">51</li><li style="color: rgb(153, 153, 153);">52</li><li style="color: rgb(153, 153, 153);">53</li></ul></pre>
+                </div><div data-report-view="{&quot;mod&quot;:&quot;1585297308_001&quot;,&quot;spm&quot;:&quot;1001.2101.3001.6548&quot;,&quot;dest&quot;:&quot;https://blog.csdn.net/Chuancey_CC/article/details/78474001&quot;,&quot;extend1&quot;:&quot;pc&quot;,&quot;ab&quot;:&quot;new&quot;}"><div></div></div>
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-375c595788.css" rel="stylesheet">
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-e504d6a974.css" rel="stylesheet">
+        </div>
+    </article>
+
+  <script>
+    $(function() {
+      setTimeout(function () {
+        var mathcodeList = document.querySelectorAll('.htmledit_views img.mathcode');
+        if (mathcodeList.length > 0) {
+          for (let i = 0; i < mathcodeList.length; i++) {
+            if (mathcodeList[i].complete) {
+              if (mathcodeList[i].naturalWidth === 0 || mathcodeList[i].naturalHeight === 0) {
+                var alt = mathcodeList[i].alt;
+                alt = '\\(' + alt + '\\)';
+                var curSpan = $('<span class="img-codecogs"></span>');
+                curSpan.text(alt);
+                $(mathcodeList[i]).before(curSpan);
+                $(mathcodeList[i]).remove();
+              }
+            } else {
+              mathcodeList[i].onerror = function() {
+                var alt = mathcodeList[i].alt;
+                alt = '\\(' + alt + '\\)';
+                var curSpan = $('<span class="img-codecogs"></span>');
+                curSpan.text(alt);
+                $(mathcodeList[i]).before(curSpan);
+                $(mathcodeList[i]).remove();
+              };
+            }
+          }
+          MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        }
+      }, 500)
+    });
+  </script>
+</div>
