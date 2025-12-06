@@ -48,10 +48,17 @@ void testAddress()
 
 
 
+extern void test_union();
+extern void stl_vector();
+extern void test_functional();
 
 int main()
 {
-    test_sort();
+    test_functional();
+   //stl_vector();
+
+    //test_union();
+    //test_sort();
     //test_new_memory();
     //testAddress();
     //test_set();

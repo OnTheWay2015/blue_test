@@ -33,6 +33,15 @@
     <ClCompile Include="test_std_sort.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="test_union.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stl_vector.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stl_function.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

@@ -129,13 +129,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stl_function.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="stl_vector.cpp" />
     <ClCompile Include="test_new_delete.cpp" />
     <ClCompile Include="test_operator_func.cpp" />
     <ClCompile Include="test_set.cpp" />
     <ClCompile Include="test_std_sort.cpp" />
+    <ClCompile Include="test_union.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
