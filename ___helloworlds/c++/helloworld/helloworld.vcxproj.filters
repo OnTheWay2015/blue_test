@@ -42,6 +42,12 @@
     <ClCompile Include="stl_function.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="test_templatefactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="test_templatecalc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

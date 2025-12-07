@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 // 联合体与位域结合使用
 #pragma pack(1) // 编译器默认字节对齐方式大多是4字节,这里指定 1 
 union StatusUnion {

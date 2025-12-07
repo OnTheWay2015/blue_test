@@ -11,8 +11,14 @@ class Ptr {
 
   // This constructor shall not be explicit.
   // lint does not like this but this is how it works.
+/*
+Ptr(T* pT) 构造函数中执行 *this = pT → 尝试调用 operator=(T*)；
+由于未自定义 operator=(T*)，编译器会将 T* 隐式转换为 Ptr<T>（因为 Ptr(T*) 不是 explicit）；
+转换过程会再次调用 Ptr(T*) 构造函数，新构造的临时 Ptr 对象又会执行 *this = pT，形成无限递归；
+递归无终止条件，最终触发堆栈溢出警告（运行时会直接崩溃）。
+*/
   Ptr(T* pT) : p_(NULL) {
-    *this = pT;
+    *this = pT; // -->  Ptr(const Ptr<T>& p) 
   }
 
   Ptr(const Ptr<T>& p) : p_(NULL) {
@@ -21,6 +27,28 @@ class Ptr {
 
   ~Ptr() {
   }
+  // ========== 核心修复：显式定义赋值运算符 ==========
+  // 1. 裸指针赋值运算符（避免隐式转换为Ptr<T>）
+  Ptr<T>& operator=(T* pT) {
+      if (p_ != pT) { // 避免自赋值
+          // 示例：若Ptr负责内存释放，先释放旧指针
+          // delete p_;
+          p_ = pT; // 直接赋值裸指针，无递归
+      }
+      return *this; // 返回自身，支持链式赋值
+  }
+
+  // 2. Ptr<T>拷贝赋值运算符
+  Ptr<T>& operator=(const Ptr<T>& p) {
+      if (this != &p) { // 避免自赋值
+          // 示例：若Ptr负责内存释放，先释放旧指针
+          // delete p_;
+          p_ = p.p_; // 拷贝指针（浅拷贝，若需深拷贝需自定义）
+      }
+      return *this;
+  }
+
+
   mutable T* p_;
 };
 

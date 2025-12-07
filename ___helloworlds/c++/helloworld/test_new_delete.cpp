@@ -1,9 +1,9 @@
 #include "stdafx.h"
 
-// 重写全局operator new
+//高优先级. 会重写全局 new, operator new.  编译器会先找有没有 operator new,没有再用默认的 new
 void* operator new(std::size_t size) {
     void* ptr = malloc(size);
-    printf("Memory allocated at {%p}: size={%d}\n", ptr, size);
+    printf("Memory allocated at {%p}: size={%ul}\n", ptr, (unsigned long)size);
     return ptr;
 }
 
