@@ -1,0 +1,12 @@
+//You must always use a #version directive. If you do not, then the compiler will assume you mean GLSL version 1.10. Which means that out is not a valid keyword.
+ 
+#version 330 core  
+in vec3 ourColor; 
+in vec2 ourTexCoord; 
+out vec4 color; 
+uniform sampler2D ourTexture; 
+uniform sampler2D ourTexture1; 
+void main() 
+{ 
+	color = mix(texture(ourTexture, ourTexCoord), texture(ourTexture1, ourTexCoord), 0.2); 
+}
