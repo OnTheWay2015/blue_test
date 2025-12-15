@@ -239,10 +239,23 @@ int glfwtest()
 
 
 
+int basetest(void)
+{
+	glfwtest();
+	return 0;
+}
+
+extern 
+int test_mask() ;
+
+extern
+int glfwtest_more();
 
 int main(void)
 {
-	glfwtest();
+	//basetest();
+	glfwtest_more();
+	
 	system( "pause" );
 	return 0;
 }

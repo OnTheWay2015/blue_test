@@ -1,24 +1,10 @@
 #include "windows.h"
 #include <iostream>
 
+#include "../../3rd/glew-2.2.0/include/GL/glew.h"
+#include "../../3rd/glfw/include/GLFW/glfw3.h"
 
-
-//GLEW
-//#define GLEW_STATIC
-#include <GL/glew.h>
-
-//GLFW
-#include <GLFW/glfw3.h>
-
-#pragma comment(lib,"glew32.lib")
-
-//using namespace std;
-
-// Window dimensions
- 
-// Other Libs
-#include "..\SimpleOpenGLImageLibrary\src\SOIL.h"
-
+#include "../../3rd/Simple OpenGL Image Library/src/SOIL.h"
 
 #include "glm/glm.hpp"
  
@@ -73,8 +59,9 @@ glDisableVertexAttribArray(colorSlot);
 
 
 //char *_test_img = "E:\\source_accumulation_vs\\ogltest\\test\\Debug\\test.jpg";
-char *_test_img1 = "E:\\source_accumulation_vs\\ogltest\\test\\Debug\\_test_rect.png";
-char *_test_img = "E:\\source_accumulation_vs\\ogltest\\test\\Debug\\test.png";
+const char *_test_img1 = "D:\\git_work\\blue_test\\3d\\opengl_win\\3rd\\Simple OpenGL Image Library\\test_rect.png";
+const char *_test_img = "D:\\git_work\\blue_test\\3d\\opengl_win\\3rd\\Simple OpenGL Image Library\\img_test.png";
+//const char *_test_img = "E:\\source_accumulation_vs\\ogltest\\test\\Debug\\test.png";
 //char *_test_img = "E:\\source_accumulation_vs\\ogltest\\test\\Debug\\_test_rect.png";
 //char *_test_img = "E:\\source_accumulation_vs\\ogltest\\test\\Debug\\_img_test.png";
 void draww1()
@@ -87,7 +74,7 @@ void draww1()
 
 	//vertexShader
 	GLuint vertexShader;
-	char *vertexShaderSource = 
+	const char *vertexShaderSource = 
 		"\
 		layout (location = 0) in vec3 position; \
 		layout (location = 1) in vec3 color; \
@@ -125,7 +112,7 @@ void draww1()
 
 	//fragmentShader
 	GLuint fragmentShader;
-	char *fragmentShaderSource = 
+	const char *fragmentShaderSource = 
 		"\
 		in vec3 ourColor; \
 		in vec2 ourTexCoord; \
@@ -504,9 +491,4 @@ int glfwtest_more()
 
 
 
-int main(void)
-{	 
-	glfwtest_more();
-	system("pause");
-	return 0;
-}
+
