@@ -26,6 +26,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 
+
 }
 
 /*
@@ -63,12 +64,13 @@ void draww()
 
 	//vertexShader
 	GLuint vertexShader;
-	const char *vertexShaderSource = "\
-								layout (location = 0) in vec3 position; \
-								void main() \
-								{ \
-									gl_Position = vec4(position.x, position.y, position.z, 1.0); \
-								}";
+	const char *vertexShaderSource =R"(
+								#version 330 core
+								layout (location = 0) in vec3 position; 
+								void main() 
+								{ 
+									gl_Position = vec4(position.x, position.y, position.z, 1.0); 
+								})";
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);	
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
@@ -86,12 +88,13 @@ void draww()
 
 	//fragmentShader
 	GLuint fragmentShader;
-	const char *fragmentShaderSource = "\
-									out vec4 color; \
-									void main() \
-									{ \
-										color = vec4(1.0f, 0.5f, 0.2f, 1.0f); \
-									}";
+	const char *fragmentShaderSource = R"(
+									#version 330 core
+									out vec4 color; 
+									void main() 
+									{ 
+										color = vec4(1.0f, 0.5f, 0.2f, 1.0f); 
+									})";
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
 	glCompileShader(fragmentShader);

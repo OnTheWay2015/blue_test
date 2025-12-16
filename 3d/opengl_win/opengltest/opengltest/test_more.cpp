@@ -72,24 +72,26 @@ void draww1()
 
 	//postion color 之类的可理解为显卡寄存器,顶点数据是读入到这些地方
 
+			//gl_Position =   transprojection * transview * transform * vec4(position, 1.0f); \
+	
 	//vertexShader
 	GLuint vertexShader;
-	const char *vertexShaderSource = 
-		"\
-		layout (location = 0) in vec3 position; \
-		layout (location = 1) in vec3 color; \
-		layout (location = 2) in vec2 texCoord; \
-		out vec3 ourColor;\
-		out vec2 ourTexCoord;\
-		uniform mat4 transform; \
-		uniform mat4 transview; \
-		uniform mat4 transprojection; \
-		void main() \
-		{ \
-			gl_Position =   transprojection * transview * transform * vec4(position, 1.0f); \
-			ourColor = color; \
-			ourTexCoord = vec2(texCoord.x, 1.0 - texCoord.y); \
-		}";
+	const char *vertexShaderSource = R"(#version 330 core
+		layout (location = 0) in vec3 position; 
+		layout (location = 1) in vec3 color; 
+		layout (location = 2) in vec2 texCoord; 
+		out vec3 ourColor;
+		out vec2 ourTexCoord;
+		uniform mat4 transform; 
+		uniform mat4 transview; 
+		uniform mat4 transprojection; 
+		void main() 
+		{ 
+			gl_Position = vec4(position, 1.0f); 
+			ourColor = color; 
+			ourTexCoord = vec2(texCoord.x, 1.0 - texCoord.y); 
+		})";
+
 	//ourTexCoord = texCoord;\
 	//gl_Position =  vec4(position.x, position.y, position.z, 1.0); \
 	//gl_Position = transform * vec4(position.x, position.y, position.z, 1.0); \
@@ -112,17 +114,20 @@ void draww1()
 
 	//fragmentShader
 	GLuint fragmentShader;
-	const char *fragmentShaderSource = 
-		"\
-		in vec3 ourColor; \
-		in vec2 ourTexCoord; \
-		out vec4 color; \
-		uniform sampler2D ourTexture; \
-		uniform sampler2D ourTexture1; \
-		void main() \
-		{ \
-			 color = mix(texture(ourTexture, ourTexCoord), texture(ourTexture1, ourTexCoord), 0.2); \
-		}";
+	const char *fragmentShaderSource = R"(#version 330 core
+		in vec3 ourColor; 
+		in vec2 ourTexCoord; 
+		out vec4 color; 
+		uniform sampler2D ourTexture; 
+		uniform sampler2D ourTexture1; 
+		void main() 
+		{ 
+			//color = vec4(ourColor.r, ourColor.g, ourColor.b, 1.0);
+			color = texture(ourTexture, ourTexCoord);
+		})";
+
+
+			 //color = mix(texture(ourTexture, ourTexCoord), texture(ourTexture1, ourTexCoord), 0.2); \
 
 		//color = vec4(ourColor.r, ourColor.g, ourColor.b, 1.0);
 	// color = texture(ourTexture, ourTexCoord);
