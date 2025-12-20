@@ -74,38 +74,69 @@ void test_memberPtr()
 
 
 template<class T>
-void fff(T a)
+void test_template_args(T a)
 {
-	printf(" fff(T) act \n");
+	printf(" test_template_args(T) act \n");
 }
 
 template<>
-void fff(int a) //特例化
+void test_template_args(int a) //特例化
 {
-	printf(" fff(int) act \n");
+	printf(" test_template_args(int) act \n");
 }
 
 template<>
-void fff(int* a) //特例化
+void test_template_args(int* a) //特例化
 {
-	printf(" fff(int*) act \n");
+	printf(" test_template_args(int*) act \n");
 }
 
+void test_template_args() //特例化
+{
+	printf(" test_template_args()  END!! \n");
+}
 
-
+//模板可变参数
 template<typename First, typename ...Others> // 拆分首参数+剩余参数包
-void fff(First first, Others... rest) {
-	fff(first);          // 处理第一个参数（调用单参数版本）
+void test_template_args(First first, Others... rest) {
+	test_template_args(first);          // 处理第一个参数（调用单参数版本）
 	//if constexpr (sizeof...(rest) > 0) { // C++17 constexpr if（C++11可省略，直接递归）
-		fff(rest...);    // 递归处理剩余参数（直到只剩一个参数）
+		test_template_args(rest...);    // 递归处理剩余参数（直到只剩一个参数）
 	//}
+}
+
+#include <stdarg.h>
+//可变参数
+int test_args(int argscnt, ...)
+{
+	int i, result = 0;
+	va_list vl;     //va_list指针，参数起始地址, 用于va_start取可变参数，为char*
+	
+	// 初始化可变参数列表 vl. argscnt 也可指定具体数值(一般不这样用,此时参数个数是固定的)
+	// 计算函数第一个参数在栈里相对起始参数的偏移量
+	va_start(vl, argscnt);       
+	printf("argscnt:%d, vl:%d\n", argscnt, *vl); //v1此时指向第一个参数, argscnt 后面第一个 
+	
+	//当前第一个参数为 有效参数的数量
+	for (i = 0; i < argscnt; i++)//这里 argscnt 表示可变参数列表中有多少个参数  
+	{
+		//取当前 v1 地值的值，返回为 result.	
+		result = va_arg(vl, int);//这里把vl往后跳过4个字节（sizeof(int)大小）指向下一个参数，返回的是当前参数（而非下一个参数）  
+		printf("in for  result:%d,  *vl:%d\n", result, *vl);//这里打印下，可以看出，vl总是指向result后面的那个参数  
+	}
+	va_end(vl);//结束标志  
+
+	return result;
+
 }
 
 
 void test_functional()
 {
 	int arr[]{1,3,4};
-	fff("1", "2", 3, 4, 5, 6,arr);
+	
+	test_args(5,1,2,3,4,5);
+	test_template_args("1", "2", 3, 4, 5, 6,arr);
 	test_lambda();
 	test_function();
 	test_memberPtr();

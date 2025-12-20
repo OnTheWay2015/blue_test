@@ -56,9 +56,9 @@ extern int test_templatecalc() ;
 
 int main()
 {
-    test_templatecalc() ;
+    //test_templatecalc() ;
     //test_templatefactory() ;
-    //test_functional();
+    test_functional();
    //stl_vector();
 
     //test_union();

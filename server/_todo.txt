@@ -24,3 +24,7 @@ packet_process 处理消息时需要 serverID 参数?
     auto buf = ProtobufParseMessage::GetInstance()->SerializeToArray(msg->MSG);
 	
 	
+	#@$(CXX) -MM $(CXXFLAGS) $< > $@.tmp
+	##@sed 's,$$*$\.o[ :]*,\1.o $@ : ,g' < $@.tmp > $@
+	#@sed 's,($*)\.o[ :]*,\1.o $@ : ,g' < $@.tmp > $@
+	#@rm -f $@.tmp

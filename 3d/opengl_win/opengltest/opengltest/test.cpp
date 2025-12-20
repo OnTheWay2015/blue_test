@@ -55,23 +55,25 @@ glDisableVertexAttribArray(positionSlot);
 glDisableVertexAttribArray(colorSlot);
 
 */
-void draww()
+
+GLuint g_shaderProgram;
+GLuint g_VAO;
+GLuint g_VBO; 
+
+void drawInit()
 {
-
-	
-
-
+	GLuint vertexShader;
+	GLuint fragmentShader;
 
 	//vertexShader
-	GLuint vertexShader;
-	const char *vertexShaderSource =R"(
+	const char* vertexShaderSource = R"(
 								#version 330 core
 								layout (location = 0) in vec3 position; 
 								void main() 
 								{ 
 									gl_Position = vec4(position.x, position.y, position.z, 1.0); 
 								})";
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);	
+	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
 
@@ -86,9 +88,19 @@ void draww()
 	}
 
 
-	//fragmentShader
-	GLuint fragmentShader;
-	const char *fragmentShaderSource = R"(
+	//fragmentShader 
+	// #version 330 core  , 这里的 core 表示该着色器代码仅使用 OpenGL 核心模式（Core Profile） 的功能，
+	// 明确排除了 OpenGL 中已被废弃（deprecated）或移除的兼容性特性
+	/*
+		OpenGL 为了兼顾兼容性和现代化，将功能分为两种「配置文件」：
+			核心模式（Core Profile）：只包含 OpenGL 规范中「现代、推荐、未被废弃」的功能，
+				移除了旧版的冗余 / 低效特性（比如固定功能管线、旧版纹理函数、矩阵堆栈等）。
+				要求开发者使用现代 OpenGL 范式（如 VAO/VBO、着色器可编程管线、Uniform Buffer 等）。
+			兼容性模式（Compatibility Profile）：保留了核心模式的所有功能，
+				同时兼容 OpenGL 旧版本的废弃特性（比如 glBegin()/glEnd() 立即模式、固定功能管线的 glColor() 等）
+				主要用于兼容老旧代码，不推荐新项目使用
+	*/
+	const char* fragmentShaderSource = R"(
 									#version 330 core
 									out vec4 color; 
 									void main() 
@@ -113,11 +125,23 @@ void draww()
 
 
 
-	GLuint shaderProgram;
-	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram); 
+	g_shaderProgram = glCreateProgram();
+	glAttachShader(g_shaderProgram, vertexShader);
+	glAttachShader(g_shaderProgram, fragmentShader);
+	glLinkProgram(g_shaderProgram);
+
+	glDeleteShader(vertexShader);   //对了，在把着色器对象链接到程序对象以后，记得删除着色器对象，我们不再需要它们了：
+	glDeleteShader(fragmentShader);
+
+	//测试log
+	glGetProgramiv(g_shaderProgram, GL_LINK_STATUS, &success);
+	if (!success) {
+		glGetProgramInfoLog(g_shaderProgram, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::shaderProgram::Link_FAILED\n" << infoLog << std::endl;
+	}
+
+
+
 
 
 	GLfloat vertices[] = {
@@ -128,26 +152,58 @@ void draww()
 
 
 
-	GLuint VBO;
-	glGenBuffers(1, &VBO); //缓冲有一个独一无二的ID，所以我们可以使用glGenBuffers函数和一个缓冲ID生成一个VBO对象
-	
-	glBindBuffer(GL_ARRAY_BUFFER, VBO); //OpenGL有很多缓冲对象类型，顶点缓冲对象的缓冲类型是GL_ARRAY_BUFFER。OpenGL允许我们同时绑定多个缓冲，只要它们是不同的缓冲类型。我们可以使用glBindBuffer函数把新创建的缓冲绑定到GL_ARRAY_BUFFER目标上
-	
-	//把之前定义的顶点数据复制到缓冲的内存中
+
 	/*
-	它的第一个参数是目标缓冲的类型：顶点缓冲对象当前绑定到GL_ARRAY_BUFFER目标上。第二个参数指定传输数据的大小(以字节为单位)；
-	用一个简单的sizeof计算出顶点数据大小就行。第三个参数是我们希望发送的实际数据。第四个参数指定了我们希望显卡如何管理给定的数据
+		VBO (Vertex Buffer Object，顶点缓冲对象)
+			本质：GPU 显存中的一块内存区域，专门用于存储顶点数据（如顶点坐标、颜色、纹理坐标、法向量等）
+			核心作用：避免顶点数据每次渲染都从 CPU 拷贝到 GPU（CPU→GPU 通信是性能瓶颈）,
+						将数据 “常驻” 在 GPU 显存中，提升渲染效率。
+			类比：把画笔 / 颜料（顶点数据）从桌面（CPU 内存）搬到画板旁的抽屉（GPU 显存）, 画画时直接拿，不用反复跑桌面
 	*/
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); 
+	glGenBuffers(1, &g_VBO);	//缓冲有一个独一无二的ID，所以我们可以使用glGenBuffers函数和一个缓冲ID生成一个VBO对象
+	//第一个参数为 生成对象数量
+
+// OpenGL有很多缓冲对象类型，顶点缓冲对象的缓冲类型是 GL_ARRAY_BUFFER。
+// OpenGL允许我们同时绑定多个缓冲，只要它们是不同的缓冲类型。
+// 我们可以使用 glBindBuffer 函数把新创建的缓冲绑定到 GL_ARRAY_BUFFER 目标上
+	glBindBuffer(GL_ARRAY_BUFFER, g_VBO);
+
+	//把之前定义的顶点数据复制到缓冲的内存中
+
+	/*
+		第一个参数 是目标缓冲的类型：顶点缓冲对象当前绑定到GL_ARRAY_BUFFER目标上。
+		第二个参数 指定传输数据的大小(以字节为单位),用一个简单的sizeof计算出顶点数据大小就行。
+		第三个参数 是我们希望发送的实际数据。
+		第四个参数 指定了我们希望显卡如何管理给定的数据
+						GL_STATIC_DRAW	数据创建后不再修改（如静态模型）
+						GL_DYNAMIC_DRAW	数据频繁修改（如动画顶点）
+						GL_STREAM_DRAW	数据每次渲染都修改（如实时计算）
+	*/
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	
 
 
-	GLuint VAO;
 
-	glGenVertexArrays(1, &VAO); 
+	/*
+		VA0 (Vertex Array Object，顶点数组对象)
+			本质：封装了 “VBO 绑定状态” 和 “顶点属性解析规则” 的配置容器（OpenGL 状态机的一部分）。
+			核心作用：
+				无需每次渲染都重复配置顶点属性（比如 “顶点坐标占 3 个 float，步长是多少”）；
+				切换不同顶点数据 / 配置时，只需绑定对应的 VAO，无需重新调用一堆配置函数。
+			关键规则：OpenGL 核心模式下必须绑定 VAO，否则渲染会失败（兼容性模式可省略，但不推荐）。
+			类比：把 “抽屉位置（VBO）+ 画笔使用规则（顶点属性）” 记在一张卡片（VAO）上，换画风时直接换卡片，
+					不用重新说一遍规则。
 
-	// 1. 绑定VAO
-	glBindVertexArray(VAO);
+
+		VBO 是 “数据容器”（存顶点数据）；
+		VAO 是 “配置容器”（存如何解析 VBO 数据的规则）；
+		渲染时，绑定 VAO = 自动恢复所有顶点数据的配置，直接绘制即可。
+	*/
+	glGenVertexArrays(1, &g_VAO);	// 生成1个 VAO，ID存入VAO变量 
+	//第一个参数为 生成对象数量
+
+// 1. 绑定VAO,必须在绑定的VBO之后
+	glBindVertexArray(g_VAO);
 
 	//// 2. 把顶点数组复制到缓冲中供OpenGL使用
 	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -155,30 +211,21 @@ void draww()
 
 	// 3. 设置顶点属性指针
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+
+
 	glEnableVertexAttribArray(0);
-	// 4. 解绑VAO
 
 
 
 
-	//glBindVertexArray(0);
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::shaderProgram::Link_FAILED\n" << infoLog << std::endl;
-	}
 
-	glUseProgram(shaderProgram);//在glUseProgram函数调用之后，每个着色器调用和渲染调用都会使用这个程序对象（也就是之前写的着色器)了。
-	
-	// 3. 绘制物体
-	//glBindVertexArray(VAO);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-	glBindVertexArray(0);
 
-	glDeleteShader(vertexShader);   //对了，在把着色器对象链接到程序对象以后，记得删除着色器对象，我们不再需要它们了：
-	glDeleteShader(fragmentShader);
+	// 6. 解绑 VBO 和 VAO（可选，避免后续误操作）
+	glBindBuffer(GL_ARRAY_BUFFER, 0); // 解绑VBO
+	glBindVertexArray(0);             // 解绑VAO
 
 }
+
 
 int glfwtest()
 {
@@ -222,19 +269,42 @@ int glfwtest()
 
 	glfwSetKeyCallback(window, key_callback);
 
+	drawInit();
 	while (!glfwWindowShouldClose(window))
 	{
-		////glfwWindowShouldClose函数从开始便检验每一次循环迭代中gLFW是否已经得到关闭指示，如果得到这样的指示，函数就会返回true,并且游戏循环停止运行，之后我们就可以关闭应用了。  
+		//glfwWindowShouldClose 函数从开始便检验每一次循环迭代中gLFW是否已经得到关闭指示，如果得到这样的指示，函数就会返回true,并且游戏循环停止运行，之后我们就可以关闭应用了。  
+
+		// 清屏
 		glClearColor(0.2f, 0.3f, 0.3f, 0.1f); //调用了glClearColor来设置清空屏幕所用的颜色。当调用glClear函数，清除颜色缓冲之后，整个颜色缓冲都会被填充为glClearColor里所设置的颜色。
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		draww();
-	
-		glfwPollEvents();//检验是否有任务被触发了，（比如鼠标移动和键盘的输入事件），接着调用相应的函数（我们可以通过回调方法设置他们）。我们经常在循环迭代事件中处理函数  
-		glfwSwapBuffers(window);//函数会交换颜色缓冲（颜色缓冲是一个GLFW窗口为每一个像素存储的颜色数值的最大缓冲） 它是这迭代中绘制的，也作为输出到显示在屏幕上   
+		// 1. 使用着色器程序
+		glUseProgram(g_shaderProgram);//在glUseProgram函数调用之后，每个着色器调用和渲染调用都会使用这个程序对象（也就是之前写的着色器)了。
 
+		// 2. 绑定VAO（自动恢复所有顶点配置，核心！）
+		glBindVertexArray(g_VAO);
+
+		// 3. 绘制三角形（GL_TRIANGLES=三角形，起始索引0，绘制3个顶点）
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		// 4. 解绑VAO（可选）
+		glBindVertexArray(0);
+
+		// 交换缓冲区
+		glfwSwapBuffers(window);//函数会交换颜色缓冲（颜色缓冲是一个GLFW窗口为每一个像素存储的颜色数值的最大缓冲） 它是这迭代中绘制的，也作为输出到显示在屏幕上   
+	
+		//处理事件
+		glfwPollEvents();//检验是否有任务被触发了，（比如鼠标移动和键盘的输入事件），接着调用相应的函数（我们可以通过回调方法设置他们）。我们经常在循环迭代事件中处理函数  
 	}
+
+	// 删除VAO/VBO/着色器程序，释放GPU资源
+	glDeleteBuffers(1, &g_VBO);
+	glDeleteVertexArrays(1, &g_VAO);
+	glDeleteProgram(g_shaderProgram);
+
+	// 销毁窗口/上下文
 	glfwTerminate();//释放所有的资源  
+	
 	return 0;
 } 
  
@@ -254,10 +324,30 @@ int test_mask() ;
 extern
 int glfwtest_more();
 
+
+
+/*
+ VAO 的核心规则
+	绑定 VAO 后，所有 glBindBuffer(GL_ARRAY_BUFFER) 和 glVertexAttribPointer/glEnableVertexAttribArray 都会被 VAO 记录；
+	解绑 VAO 后，后续的顶点配置不会影响已记录的 VAO；
+	渲染时只需绑定 VAO，无需重复配置 VBO 和顶点属性。
+常见问题与注意事项
+	核心模式必须绑定 VAO：如果省略 glBindVertexArray(VAO)，直接绘制会黑屏 / 报错；
+	顶点属性必须启用：glEnableVertexAttribArray(位置) 必须调用，否则着色器无法接收顶点数据；
+	数据类型匹配：着色器中的 in vec3 aPos 要和 glVertexAttribPointer 的分量数 / 类型一致；
+	步长 / 偏移量计算错误：最常见 bug，建议用 sizeof(float) 计算，避免硬编码；
+	VBO 解绑不影响 VAO：VAO 记录的是 “VBO 的 ID”，而非 “当前绑定状态”，解绑 VBO 后 VAO 仍保留配置。
+总结
+	VBO：存顶点数据（GPU 显存），解决 CPU→GPU 数据传输效率问题；
+	VAO：存顶点配置（解析规则），避免重复配置，简化渲染流程；
+	使用口诀：初始化时「创 VAO→绑 VAO→创 VBO→绑 VBO→传数据→配属性→解绑」，渲染时「绑 VAO→绘制→解绑」。
+	掌握 VAO/VBO 是现代 OpenGL 的基础，后续的 EBO（索引缓冲对象，优化重复顶点）、纹理坐标、法向量等扩展，都是基于这个核心流程。
+*/
+
 int main(void)
 {
-	//basetest();
-	glfwtest_more();
+	basetest();
+	//glfwtest_more();
 	
 	system( "pause" );
 	return 0;
