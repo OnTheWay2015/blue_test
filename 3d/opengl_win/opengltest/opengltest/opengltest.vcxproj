@@ -130,10 +130,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="test_base.cpp" />
+    <ClCompile Include="test_line_corner.cpp" />
     <ClCompile Include="test_mask.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="test_more.cpp" />
+    <ClCompile Include="test_stencil_test.cpp" />
+    <ClCompile Include="_faq_shader.cpp" />
+    <ClCompile Include="_faq_stencil_test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

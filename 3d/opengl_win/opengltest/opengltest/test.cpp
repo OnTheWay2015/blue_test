@@ -72,6 +72,9 @@ void drawInit()
 								void main() 
 								{ 
 									gl_Position = vec4(position.x, position.y, position.z, 1.0); 
+									//可选,在顶点着色器中动态设置点大小,优先级高于 glPointSize() 
+									// gl_PointSize = 8.0f;
+
 								})";
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
@@ -145,9 +148,10 @@ void drawInit()
 
 
 	GLfloat vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f, 0.5f, 0.0f
+		-0.5f, -0.5f, 0.0f, //左下点
+		0.5f, -0.5f, 0.0f,	//右下点
+		0.5f, 0.5f, 0.0f,	// 右上点
+		-0.5f, 0.5f, 0.0f   //左上点
 	};
 
 
@@ -247,7 +251,10 @@ int glfwtest()
 	}
 	 
 
-	glewExperimental = GL_TRUE; //请注意，我们在初始化GLEW之前设置glewExperimental变量的值为GL_TRUE，这样做能让GLEW在管理OpenGL的函数指针时更多地使用现代化的技术，如果把它设置为GL_FALSE的话可能会在使用OpenGL的核心模式时出现一些问题
+	glewExperimental = GL_TRUE; 
+	// 请注意，我们在初始化 GLEW 之前设置 glewExperimental 变量的值为 GL_TRUE
+	// 这样做能让 GLEW 在管理 OpenGL 的函数指针时更多地使用现代化的技术，
+	// 如果把它设置为 GL_FALSE 的话可能会在使用OpenGL的核心模式时出现一些问题
 	if (glewInit() != GLEW_OK)
 	{
 		std::cout << "Failed to initialize GLEW" << std::endl;
@@ -285,7 +292,28 @@ int glfwtest()
 		glBindVertexArray(g_VAO);
 
 		// 3. 绘制三角形（GL_TRIANGLES=三角形，起始索引0，绘制3个顶点）
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+//#define GL_TRIANGLE_FAN 0x0006
+
+									
+		//设置画笔大小
+		//glPointSize(10); // 在顶点着色器中动态设置点大小 gl_PointSize ,优先级高于 glPointSize 
+		glLineWidth(10);
+		//3.1 绘线
+		/*
+				图元类型	顶点数量	连线逻辑						适合场景
+			GL_LINE_LOOP	3			1→2、2→3、3→1（自动闭合）	闭合轮廓（三角形、矩形）
+			GL_LINES		6			1-2、3-4、5-6（手动指定每段线）	非闭合 / 自定义线段组合
+			GL_LINE_STRIP	3			1→2、2→3（不闭合，仅 2 条线）	开放折线	
+		*/
+		//glDrawArrays(GL_LINES, 0, 3); // 要两点才画一线,这里三个点 只能画一个线.
+		glDrawArrays(GL_LINE_LOOP, 0, 3); //最后要闭合，此时画三线
+		//glDrawArrays(GL_LINE_STRIP, 0, 3);//最后不会闭合,此时画两线
+
+
+		//3.2 error
+		//glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 
 		// 4. 解绑VAO（可选）
 		glBindVertexArray(0);
@@ -310,8 +338,12 @@ int glfwtest()
  
 
 
-
-
+/*
+void  glDrawArrays (GLenum mode, GLint first, GLsizei count);
+void  glDrawBuffer (GLenum mode);
+void  glDrawElements (GLenum mode, GLsizei count, GLenum type, const void *indices);
+void  glDrawPixels (GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels);
+*/
 int basetest(void)
 {
 	glfwtest();
@@ -324,7 +356,17 @@ int test_mask() ;
 extern
 int glfwtest_more();
 
+extern 
+int test_corner() ;
 
+
+namespace STENCIL_TEST {
+	void test();
+}
+
+namespace TEST_BASE{
+	void test();
+}
 
 /*
  VAO 的核心规则
@@ -346,9 +388,11 @@ int glfwtest_more();
 
 int main(void)
 {
-	basetest();
+	STENCIL_TEST::test();
+	//basetest();
 	//glfwtest_more();
-	
+	//test_corner();
+	//TEST_BASE::test();
 	system( "pause" );
 	return 0;
 }
