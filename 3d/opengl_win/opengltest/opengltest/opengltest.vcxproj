@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="test.cpp" />
     <ClCompile Include="test_base.cpp" />
+    <ClCompile Include="test_base_ex.cpp" />
     <ClCompile Include="test_line_corner.cpp" />
     <ClCompile Include="test_mask.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

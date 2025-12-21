@@ -364,6 +364,11 @@ namespace STENCIL_TEST {
 	void test();
 }
 
+namespace TEST_BASE_EX{
+	void test();
+}
+
+
 namespace TEST_BASE{
 	void test();
 }
@@ -388,10 +393,11 @@ namespace TEST_BASE{
 
 int main(void)
 {
-	STENCIL_TEST::test();
+	//STENCIL_TEST::test();
 	//basetest();
 	//glfwtest_more();
 	//test_corner();
+	TEST_BASE_EX::test();
 	//TEST_BASE::test();
 	system( "pause" );
 	return 0;

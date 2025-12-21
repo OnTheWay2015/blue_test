@@ -216,6 +216,7 @@ int glfwtest()
 		//glStencilFunc(GL_ALWAYS, 0, 0xFF); // 总是通过测试
 		glStencilFunc(GL_EQUAL, 0, 0xFF); //不在 模型2 的地方才显示
 		glDrawArrays(GL_TRIANGLES, 0, 3);
+
 		glDisable(GL_STENCIL_TEST); // 禁用模板测试
 
         //glStencilFunc(GL_EQUAL, 1, 0xFF); // 比较模板值是否等于1 
