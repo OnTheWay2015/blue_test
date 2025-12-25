@@ -242,10 +242,20 @@ typedef struct Proto {
   CommonHeader;
   TValue *k;  /* constants used by the function */
   // 存放函数体的opcode  // Instruction 为 unsigned int
-  Instruction *code;
+  Instruction *code; // 存储函数编译后的字节码指令数组，是函数执行的核心逻辑载体
+
   // 在这个函数中定义的函数
   struct Proto **p;  /* functions defined inside the function */
-  int *lineinfo;  /* map from opcodes to source lines */
+
+  /*
+ map from opcodes to source lines  用于错误定位、调试、栈回溯，关联字节码和源码行号
+ lineinfo 数组的下标对应 code 数组的指令下标：
+lineinfo[i] = N → 表示 code[i] 这条字节码指令对应源码的第 N 行 
+  */
+  int *lineinfo;  
+
+
+
   // 存放局部变量的数组
   struct LocVar *locvars;  /* information about local variables */
   TString **upvalues;  /* upvalue names */
@@ -253,7 +263,9 @@ typedef struct Proto {
   int sizeupvalues;
   int sizek;  /* size of `k' 定义的常量数量 */
   int sizecode; //代码结构数量, 对应 Instruction *code;
-  int sizelineinfo;
+
+  int sizelineinfo; // 记录 lineinfo 数组的长度,sizelineinfo/lineinfo 是指令到源码的 “映射”
+
   int sizep;  /* size of `p' 当前方法中定义的其他方法数量  */
   int sizelocvars; //local 变量数量  
   int linedefined; //"function" 在文件的开始行 ,当 linedefined==0 时,为入口文件
@@ -261,8 +273,11 @@ typedef struct Proto {
   GCObject *gclist;
   lu_byte nups;  /* number of upvalues */
   lu_byte numparams; //固定参数个数
-  lu_byte is_vararg; //是否变参?
-  lu_byte maxstacksize;
+  lu_byte is_vararg; //  标记函数是否为可变参数函数( ... 语法)
+ 
+// 最大栈大小，它表示这个 Lua 函数在执行时，需要占用的虚拟机栈（Lua Stack）的最大深度。
+// 简单来说，它是 Lua 解释器为这个函数预分配栈空间的依据，也是函数执行期间栈使用的上限。
+  lu_byte maxstacksize; 
 } Proto;
 
 

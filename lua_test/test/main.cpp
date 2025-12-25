@@ -1122,8 +1122,8 @@ int test000()
 }
 int main1(int argc, char* argv[])
 {
-	test000(); // 元表测试
-	//test001(); // 有打印 Proto
+	//test000(); // 元表测试
+	test001(); // 有打印 Proto
 	//test002(); //c++/lua 数据相互使用
 	//test003();
     
