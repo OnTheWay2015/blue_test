@@ -78,7 +78,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\git_work\assimp\build\include;D:\git_work\assimp\build;D:\git_work\assimp\include;D:\git_work\assimp\code;D:\git_work\assimp\.;D:\git_work\assimp\contrib\zlib;D:\git_work\assimp\build\contrib\zlib;D:\git_work\assimp\code\..\contrib\pugixml\src;D:\git_work\assimp\code\..\contrib\utf8cpp\source;D:\git_work\assimp\code\..\contrib\rapidjson\include;D:\git_work\assimp\code\..\contrib;D:\git_work\assimp\code\..\contrib\unzip;D:\git_work\assimp\code\..\contrib\openddlparser\include;D:\git_work\assimp\code\..\include;D:\git_work\assimp\build\code\..\include;D:\git_work\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\git_work\blue_test\3d\opengl_win\3rd\assimp\include\;D:\git_work\assimp\code;D:\git_work\assimp\.;D:\git_work\assimp\contrib\zlib;D:\git_work\assimp\build\contrib\zlib;D:\git_work\assimp\code\..\contrib\pugixml\src;D:\git_work\assimp\code\..\contrib\utf8cpp\source;D:\git_work\assimp\code\..\contrib\rapidjson\include;D:\git_work\assimp\code\..\contrib;D:\git_work\assimp\code\..\contrib\unzip;D:\git_work\assimp\code\..\contrib\openddlparser\include;D:\git_work\assimp\code\..\include;D:\git_work\assimp\build\code\..\include;D:\git_work\assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj /source-charset:utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
