@@ -314,14 +314,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\git_work\blue_test\3d\opengl_win\3rd\glfw\src\wgl_context.c" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="D:\git_work\blue_test\3d\opengl_win\3rd\glfw\bbb\ZERO_CHECK.vcxproj">
-      <Project>{6A28863D-8854-3A3C-8B81-0109562090D6}</Project>
-      <Name>ZERO_CHECK</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </ProjectReference>
-  </ItemGroup>
+  
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
