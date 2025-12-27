@@ -4,13 +4,14 @@
 #include "../../3rd/glew-2.2.0/include/GL/glew.h"
 #include "../../3rd/glfw/include/GLFW/glfw3.h"
 
-#include "../../3rd/Simple OpenGL Image Library/src/SOIL.h"
+//#include "../../3rd/Simple OpenGL Image Library/src/SOIL.h"
 
 #include "glm/glm.hpp"
  
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
  
+#include "../../3rd/assimp/contrib/stb/stb_image.h"
 
 void key_callback1(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -242,12 +243,13 @@ void draww1()
 
 
 	// Load image, create texture and generate mipmaps
-	int width, height;
-	unsigned char* image = SOIL_load_image(_test_img, &width, &height, 0, SOIL_LOAD_RGB);
+	int width, height,nrComponents;
+	//unsigned char* image = SOIL_load_image(_test_img, &width, &height, 0, SOIL_LOAD_RGB);
+	unsigned char* image = stbi_load(_test_img, &width, &height, &nrComponents, 0);
 
 
-	int width1, height1;
-	unsigned char* image1 = SOIL_load_image(_test_img1, &width1, &height1, 0, SOIL_LOAD_RGB);
+	int width1, height1,nrComponents1;
+	unsigned char* image1 = stbi_load(_test_img1, &width1, &height1, &nrComponents1, 0);
 
 
 	// Load and create a texture 
@@ -314,7 +316,7 @@ void draww1()
 
 
 	//生成了纹理和相应的多级渐远纹理后，释放图像的内存并解绑纹理对象是一个很好的习惯。
-	SOIL_free_image_data(image); 
+	stbi_image_free(image);
 	glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture when done, so we won't accidentily mess up our texture.
 
 
@@ -335,7 +337,7 @@ void draww1()
 	glGenerateMipmap(GL_TEXTURE_2D); 
 
 
-	SOIL_free_image_data(image1);
+	stbi_image_free(image1);
 	glBindTexture(GL_TEXTURE_2D, 0); 
 
 	//------------------------ texture 2 end ---------------	
@@ -435,8 +437,8 @@ int glfwtest_more()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 
-	//GLFWwindow * window = glfwCreateWindow(256, 256, "LearnOpenGL", nullptr, nullptr);
-	GLFWwindow * window = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
+	//GLFWwindow * window = glfwCreateWindow(256, 256, "xxxxxx", nullptr, nullptr);
+	GLFWwindow * window = glfwCreateWindow(800, 600, "xxxxxx", nullptr, nullptr);
 
 	glfwMakeContextCurrent(window);
 	if (window == NULL)

@@ -152,7 +152,7 @@ int glfwtest()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 
-	GLFWwindow * window = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
+	GLFWwindow * window = glfwCreateWindow(800, 600, "xxxxxx", nullptr, nullptr);
 
 	glfwMakeContextCurrent(window);
 	if (window == NULL)

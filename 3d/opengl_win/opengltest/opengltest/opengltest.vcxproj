@@ -104,13 +104,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\git_work\blue_test\3d\opengl_win\3rd\assimp\include\;D:\git_work\blue_test\3d\opengl_win\3rd\assimp\bbb\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32sd.lib;SOIL.lib;glfw3.lib;opengl32.lib;User32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glew32sd.lib;zlibstaticd.lib;assimp-vc143-mtd.lib;glfw3.lib;opengl32.lib;User32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(outdir)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -136,10 +137,16 @@
     <ClCompile Include="test_mask.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="test_model_loading.cpp" />
     <ClCompile Include="test_more.cpp" />
     <ClCompile Include="test_stencil_test.cpp" />
+    <ClCompile Include="_faq.cpp" />
+    <ClCompile Include="_faq_ASSIMP.cpp" />
     <ClCompile Include="_faq_shader.cpp" />
     <ClCompile Include="_faq_stencil_test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="test_model_loading.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

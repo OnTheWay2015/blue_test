@@ -42,5 +42,19 @@
     <ClCompile Include="test_base_ex.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="_faq.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="_faq_ASSIMP.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="test_model_loading.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="test_model_loading.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

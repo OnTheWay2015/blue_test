@@ -240,7 +240,7 @@ int glfwtest()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 
-	GLFWwindow * window = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
+	GLFWwindow * window = glfwCreateWindow(800, 600, "xxxxxx", nullptr, nullptr);
 
 	glfwMakeContextCurrent(window);
 	if (window == NULL)
@@ -360,6 +360,9 @@ extern
 int test_corner() ;
 
 
+namespace MODEL_TEST {
+	void test();
+}
 namespace STENCIL_TEST {
 	void test();
 }
@@ -393,11 +396,12 @@ namespace TEST_BASE{
 
 int main(void)
 {
+	MODEL_TEST::test();
 	//STENCIL_TEST::test();
 	//basetest();
 	//glfwtest_more();
 	//test_corner();
-	TEST_BASE_EX::test();
+	//TEST_BASE_EX::test();
 	//TEST_BASE::test();
 	system( "pause" );
 	return 0;
