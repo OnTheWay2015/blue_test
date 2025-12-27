@@ -870,14 +870,39 @@ public:
 
     Animation(const std::string& animationPath, Model* model)
     {
+        // Assimp 导入器对象，用于读取模型/动画文件并解析为 Assimp 数据结构
         Assimp::Importer importer;
+
+        // 读取动画文件，第二个参数指定 Assimp 处理标志：aiProcess_Triangulate 表示将所有网格的面三角化
+        // （默认使用三角形图元渲染，该标志确保导入的动画关联网格数据符合渲染要求）
         const aiScene* scene = importer.ReadFile(animationPath, aiProcess_Triangulate);
+
+        // 断言检查：确保场景读取成功，且场景存在根节点（根节点是 Assimp 场景数据的入口，动画数据依赖场景节点结构）
+        // 若断言失败，说明文件读取失败（路径错误/文件损坏）或场景数据异常
         assert(scene && scene->mRootNode);
+
+        // 获取场景中的第一个动画数据（示例中默认加载单个动画，多动画场景可遍历 mAnimations 数组）
+        // aiScene::mAnimations 是动画数据数组，存储了文件中包含的所有骨骼动画
         auto animation = scene->mAnimations[0];
+
+        // 记录动画的总时长（单位：动画Ticks，非秒，需结合 TicksPerSecond 转换为实际时间）
+        // aiAnimation::mDuration 表示动画从开始到结束的总帧数（Ticks数）
         m_Duration = animation->mDuration;
+
+        // 记录动画每秒的 Tick 数，用于将 Tick 单位转换为秒级时间（实际播放时间 = Tick数 / mTicksPerSecond）
+        // 若该值为 0，通常会使用默认值（如 25.0f）来进行时间转换
         m_TicksPerSecond = animation->mTicksPerSecond;
+
+        // 获取场景根节点的全局变换矩阵（根节点变换定义了整个动画/模型的初始空间姿态）
+        // aiNode::mTransformation 是该节点相对于父节点的局部变换，根节点无父节点，因此直接是全局变换
         aiMatrix4x4 globalTransformation = scene->mRootNode->mTransformation;
-        globalTransformation = globalTransformation.Inverse();
+
+        // 对根节点全局变换矩阵求逆
+        // 作用：将动画骨骼的变换从 Assimp 的局部空间转换到 LearnOpenGL 的世界/模型空间，抵消根节点的初始变换
+        // （确保动画播放时，骨骼变换基于模型的初始姿态，避免根节点初始位移/旋转导致动画偏移）
+        //当前这个 逆矩阵 没有任何作用  .faq
+        globalTransformation = globalTransformation.Inverse(); 
+
         ReadHierarchyData(m_RootNode, scene->mRootNode);
         ReadMissingBones(animation, *model);
     }
@@ -984,7 +1009,7 @@ public:
     void PlayAnimation(Animation* pAnimation)
     {
         m_CurrentAnimation = pAnimation;
-        m_CurrentTime = 0.0f;
+        m_CurrentTime = 0.0f;//这里记录的其实是 tick 数, bone 通过 tick 计算对应的数值
     }
 
     void CalculateBoneTransform(const AssimpNodeData* node, glm::mat4 parentTransform)

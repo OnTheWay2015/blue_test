@@ -148,6 +148,12 @@
   <ItemGroup>
     <ClInclude Include="test_model_loading.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\resources\shaders\1.model_loading.fs" />
+    <None Include="..\resources\shaders\1.model_loading.vs" />
+    <None Include="..\resources\shaders\anim_model.fs" />
+    <None Include="..\resources\shaders\anim_model.vs" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

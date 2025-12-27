@@ -57,4 +57,18 @@
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\resources\shaders\1.model_loading.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\resources\shaders\1.model_loading.vs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\resources\shaders\anim_model.fs">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\resources\shaders\anim_model.vs">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
 </Project>

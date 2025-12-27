@@ -136,15 +136,55 @@ namespace MODEL_TEST
 			// don't forget to enable shader before setting uniforms
 			ourShader.use();
 
-			//float camera_ZOOM = 45.0f;
-			float camera_ZOOM = 65.0f;
-			// view/projection transformations
+			float camera_ZOOM = 45.0f;
+			//float camera_ZOOM = 60.0f;
+			
+			// 投影矩阵一个重要的目地是把 顶点 裁减并映射到 [-1,1] 的区间里
+			// view/projection transformations 创建透视投影矩阵
 			glm::mat4 projection = glm::perspective(
-				glm::radians(camera_ZOOM),
+				// 参数1：垂直视场角（Vertical Field of View, FOV）,控制相机 “视野的开阔程度”，
+				// 是垂直方向上（屏幕上下方向）的视野角度，角度越大，视野越开阔（能看到更多场景），画面中的物体看起来越小；
+				// 角度越小，视野越狭窄，类似望远镜效果，物体看起来越大。
+				// 水平视场角可由计算得出. 水平视场半角 和 垂直视场半角的比值  与 传感器的半宽和半高比值相等
+				glm::radians(camera_ZOOM),         
+
+				//参数 2：屏幕宽高比（Aspect Ratio）
+				// 当前渲染窗口 / 屏幕的 “宽度 ÷ 高度” 的比值，
+				// 用于保证 3D 场景在屏幕上显示时不会出现拉伸变形（比如避免圆形变成椭圆、方形变成矩形）。
 				(float)SCR_WIDTH / (float)SCR_HEIGHT,
-				0.1f, 500.0f);
+				
+				// 参数3：近裁剪面（Near Clipping Plane）
+				// 相机视锥体内（可见区域）的最近距离阈值，
+				// 距离相机比该值更近的物体 / 场景会被裁剪掉（不渲染、不可见）
+				0.1f,
+
+				// 参数4：远裁剪面（Far Clipping Plane）
+				//相机视锥体内（可见区域）的最远距离阈值，
+				// 距离相机比该值更远的物体 / 场景会被裁剪掉（不渲染、不可见）	
+				500.0f                              
+			);
+		
+			// 创建一个平行矩阵,这个是不行的，需要 正交投影
+			//glm::mat4 parallelMatrix = glm::mat4(1.0f);
+			//parallelMatrix[0][0] = 1.0f; // X轴缩放
+			//parallelMatrix[1][1] = 1.0f; // Y轴缩放
+			//parallelMatrix[2][2] = 1.0f; // Z轴缩放
+			//parallelMatrix[3][3] = 1.0f;
+
+			// 投影矩阵一个重要的目地是把 顶点 裁减并映射到 [-1,1] 的区间里
+			// 创建正交投影矩阵（正交投影无"近大远小"效果，物体大小不随距离变化，适用于2D渲染/2.5D游戏/UI绘制等场景）
+			glm::mat4 orthoMatrix = glm::ortho(
+				-2/2.0f,  // 参数1：左裁剪平面（Left Clipping Plane）：视口左侧的x坐标边界，小于该值的内容会被裁剪（不渲染）
+				2/2.0f,   // 参数2：右裁剪平面（Right Clipping Plane）：视口右侧的x坐标边界，大于该值的内容会被裁剪（不渲染）
+				-2/2.0f,  // 参数3：下裁剪平面（Bottom Clipping Plane）：视口底部的y坐标边界，小于该值的内容会被裁剪（不渲染）
+				2/2.0f,   // 参数4：上裁剪平面（Top Clipping Plane）：视口顶部的y坐标边界，大于该值的内容会被裁剪（不渲染）
+				0.1f,    // 参数5：近裁剪平面（Near Clipping Plane）：视口前方的z坐标边界（距离相机最近，必须大于0），小于该值的内容会被裁剪（不渲染）
+				100.0f   // 参数6：远裁剪平面（Far Clipping Plane）：视口后方的z坐标边界（距离相机最远），大于该值的内容会被裁剪（不渲染）
+			);
+
 			glm::mat4 view = GetViewMatrix();// camera.GetViewMatrix;
-			ourShader.setMat4("projection", projection);
+			//ourShader.setMat4("projection", projection); //透视
+			ourShader.setMat4("projection", orthoMatrix ); //正交
 			ourShader.setMat4("view", view);
 
 			auto transforms = animator.GetFinalBoneMatrices();
@@ -152,12 +192,38 @@ namespace MODEL_TEST
 				ourShader.setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
 
 
-			// render the loaded model
+			// render the loaded model, 当前模型顶点取值范围应该是 [-1,1]
 			glm::mat4 model = glm::mat4(1.0f);
 			model = glm::translate(model, glm::vec3(0.0f, -0.4f, 0.0f)); // translate it down so it's at the center of the scene
+			model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));  //模型 z 轴有小于0的,前移
 			model = glm::scale(model, glm::vec3(.3f, .3f, .3f));	// it's a bit too big for our scene, so scale it down
 			ourShader.setMat4("model", model);
+
+			/*
+	设置顶点裁剪空间坐标（gl_Position是顶点着色器的内置输出变量，必须赋值）
+	变换流程：局部空间（蒙皮后）→ 世界空间 → 观察空间 → 裁剪空间
+	mat4 viewModel = view * model; // 视图矩阵(将世界空间顶点转换为观察空间) * 模型矩阵(局部空间顶点转换为世界空间坐标)
+	gl_Position =  projection *  viewModel * totalPosition; //投影矩阵（用于将视锥体中的顶点转换为裁剪空间坐标） * 模型顶点坐标 * 蒙皮骨格权重变换  
+		注意：矩阵乘法顺序不可颠倒（GLSL中矩阵为列主序，变换顺序从右往左）
+			projection * (view * (model * totalPosition))，遵循「矩阵在左，列向量在右」
+
+			同时,在顶点片断里,totalPosition 是 列向量(vec4),所以在最右边
+
+        // 骨骼蒙皮核心计算：
+        // 1. 将原始顶点位置转换为齐次坐标，乘以当前骨骼的最终变换矩阵，得到该骨骼影响下的顶点局部位置
+        vec4 localPosition = finalBonesMatrices[boneIds[i]] * vec4(pos, 1.0f);
+		
+        // 2. 将该骨骼影响的顶点位置乘以对应权重，累加到总位置中（权重控制骨骼影响程度）
+        totalPosition += localPosition * weights[i];
+
+
+*/
+
 			ourModel.Draw(ourShader);
+
+
+
+
 
 
 			// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -244,6 +310,7 @@ namespace MODEL_TEST
 				glm::radians(camera_ZOOM),
 				(float)SCR_WIDTH / (float)SCR_HEIGHT,
 				0.1f, 500.0f);
+
 			glm::mat4 view = GetViewMatrix();// camera.GetViewMatrix;
 			ourShader.setMat4("projection", projection);
 			ourShader.setMat4("view", view);
