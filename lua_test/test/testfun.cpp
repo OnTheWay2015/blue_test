@@ -61,6 +61,7 @@ void baseitem::ToluaRegfuncs(lua_State* L)
 
 
 	_ToluaRegfuncs(L,"tttt",&t12345);
+	//_ToluaRegfuncs(L,"gggg",&baseitem::getInt); error todo
 }
 
 void baseitem::ToluaRegfuncsEnd(lua_State* L)

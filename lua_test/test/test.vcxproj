@@ -178,6 +178,7 @@
     <None Include="scripts\test004.lua" />
     <None Include="scripts\test005.lua" />
     <None Include="scripts\test006.lua" />
+    <None Include="scripts\testfun.lua" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="testfun.h" />

@@ -68,6 +68,9 @@
     <None Include="scripts\helloworld001.lua">
       <Filter>scripts</Filter>
     </None>
+    <None Include="scripts\testfun.lua">
+      <Filter>scripts</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="testfun.h">

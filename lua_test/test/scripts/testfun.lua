@@ -2,8 +2,9 @@
 function run_main()
 	local v = testGetInfo()
 	
-	v.tttt()
-    
+	v.tttt(123)
+	local x= v.gggg()
+	print(x) 
 end
  
  
