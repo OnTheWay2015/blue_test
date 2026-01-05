@@ -20,6 +20,11 @@ bool DumpTable(lua_State* L, int idx);
 int LuaPrintIdx(lua_State* L, int idx);
 int LuaPrint(lua_State* L);
 
+const string& Gdir()
+{
+	return dir_scripts;
+}
+
 int n_act01(lua_State* L)
 {
 
@@ -1193,10 +1198,16 @@ int main_helloworld(int argc, char* argv[])
 	system("pause");
 	return 0;
 }
+
+extern void test_table();
+extern void test_matetable();
 int main(int argc, char* argv[])
 {
-	main1(argc,argv);
+	//main1(argc,argv);
 	//main_helloworld(argc,argv);
+	//test_table();//to test
+
+	test_matetable();
 	return 0;
 }
 

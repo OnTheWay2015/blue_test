@@ -162,9 +162,11 @@
     <ClCompile Include="default.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="testfun.cpp" />
     <ClCompile Include="test_bind.cpp" />
     <ClCompile Include="test_bind01.cpp" />
     <ClCompile Include="test_game.cpp" />
+    <ClCompile Include="test_table.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="scripts\helloworld001.lua" />
@@ -175,6 +177,9 @@
     <None Include="scripts\test004.lua" />
     <None Include="scripts\test005.lua" />
     <None Include="scripts\test006.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="testfun.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

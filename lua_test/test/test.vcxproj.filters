@@ -36,6 +36,12 @@
     <ClCompile Include="test_bind01.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="test_table.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="testfun.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="scripts\test001.lua">
@@ -62,5 +68,10 @@
     <None Include="scripts\helloworld001.lua">
       <Filter>scripts</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="testfun.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
