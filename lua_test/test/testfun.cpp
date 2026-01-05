@@ -9,12 +9,14 @@
 using namespace std;
 
 
-void t12345()
+void t12345(int b)
 {
-	int a = 1;
+	int a = 1 +b;
 }
 
-void baseitem::ToluaMergefunc(lua_State* L)
+
+
+void baseitem::ToluaRegfuncsStart(lua_State* L)
 {
 	lua_newtable(L); //OriTable
 	ToluaRegfuncs(L);
@@ -30,6 +32,33 @@ void baseitem::ToluaRegfuncs(lua_State* L)
 {
 	lua_newtable(L); //meta table
 	lua_newtable(L); //__index table
+
+        // 1. 无参数无返回值
+        void (*func0)() = []() {
+            printf("无参数函数调用\n");
+            };
+        _ToluaRegfuncs(L, "func0", func0);
+
+        // 2. 单int参数，返回int
+        int (*func1)(int) = [](int a) {
+            return a * 2;
+            };
+        _ToluaRegfuncs(L, "func1", func1);
+
+        // 3. 多参数（int + string + bool），返回string
+        const char* (*func2)(int, const char*, bool) = [](int a, const char* s, bool b)->const char* {
+            static char buf[128];
+            snprintf(buf, sizeof(buf), "a=%d, s=%s, b=%s", a, s, b ? "true" : "false");
+            return buf;
+            };
+        _ToluaRegfuncs(L, "func2", func2);
+
+        // 4. 浮点数参数，返回浮点数
+        double (*func3)(float, double) = [](float a, double b) {
+            return a + b;
+            };
+        _ToluaRegfuncs(L, "func3", func3);
+
 
 	_ToluaRegfuncs(L,"tttt",&t12345);
 }
@@ -48,7 +77,8 @@ int testGetInfo(lua_State* L)
 	{
 		_itm = new baseitem(); //todo free
 	}
-	_itm->ToluaMergefunc(L);
+
+	_itm->ToluaRegfuncsStart(L);
 	_itm->ToluaRegfuncsEnd(L);
 
 	if (!lua_istable(L,-1))
