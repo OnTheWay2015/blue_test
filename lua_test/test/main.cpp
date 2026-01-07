@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sstream>
-
+#include <thread>
 extern "C" { // lua.dll　是c库，使用时要用 extern "C",  如果 lua库按 c++　编译的就用  __declspec(dllimport)/dllexport 这套
 
 #include "../lua-5_1_4/lua.h"
@@ -13,8 +13,16 @@ extern "C" { // lua.dll　是c库，使用时要用 extern "C",  如果 lua库按 c++　编译的
 using namespace std;
 
 
+/*
+使用 labelua插件时,注意 设置 目录要对应上
+lua scripts folder
+lua host exe path
+working path  !!这个是重点
 
+
+*/
 static string dir_scripts = "../../../test/scripts";
+//static string dir_scripts = "F:/work/blue_test/lua_test/test/scripts";
 bool DumpTable(lua_State* L, int idx);
 
 int LuaPrintIdx(lua_State* L, int idx);
@@ -1148,7 +1156,11 @@ int main1(int argc, char* argv[])
 
 int main_helloworld(int argc, char* argv[])
 {
-    lua_State* L= lua_open();
+    
+	//std::cout << "程序启动，5秒后初始化Lua VM...请尽快附加Babelua！" << std::endl;
+	//std::this_thread::sleep_for(std::chrono::seconds(5));
+	
+	lua_State* L= lua_open();
 
 	if (nullptr == L)
 	{
@@ -1158,7 +1170,17 @@ int main_helloworld(int argc, char* argv[])
 
 	///< 加载相关库文件
 	luaL_openlibs(L);
-    
+   
+	// 设置调试钩子，掩码包含行执行/调用/返回事件，Babelua靠这个捕获断点
+	//lua_sethook(
+	//	L,
+	//	nullptr, // 钩子函数留空，Babelua会替换为自己的
+	//	LUA_MASKLINE | LUA_MASKCALL | LUA_MASKRET, // 监听行执行、函数调用、返回
+	//	0
+	//);
+
+
+
 	///< 加载lua文件
     std::string sf = dir_scripts + "/helloworld001.lua";
 	if (luaL_loadfile(L, sf.c_str()))
@@ -1169,6 +1191,8 @@ int main_helloworld(int argc, char* argv[])
     }
 
 
+	//std::cout << "程序启动，5秒后初始化Lua VM...请尽快附加Babelua！" << std::endl;
+	//std::this_thread::sleep_for(std::chrono::seconds(5));
 
 	cout << "Lua 文件加载["<< sf <<"] 成功" << endl;
 
@@ -1204,10 +1228,10 @@ extern void test_matetable();
 int main(int argc, char* argv[])
 {
 	//main1(argc,argv);
-	//main_helloworld(argc,argv);
+	main_helloworld(argc,argv);
 	//test_table();//to test
 
-	test_matetable();
+	//test_matetable();
 	return 0;
 }
 
