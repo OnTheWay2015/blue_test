@@ -161,57 +161,145 @@ void luaE_freethread (lua_State *L, lua_State *L1) {
 }
 
 
-LUA_API lua_State *lua_newstate (lua_Alloc f, void *ud) {
-  int i;
-  lua_State *L;
-  global_State *g;
-  void *l = (*f)(ud, NULL, 0, state_size(LG));
-  if (l == NULL) return NULL;
-  L = tostate(l);
-  g = &((LG *)L)->g;
-  L->next = NULL;
-  L->tt = LUA_TTHREAD;
-  g->currentwhite = bit2mask(WHITE0BIT, FIXEDBIT);
-  L->marked = luaC_white(g);
-  set2bits(L->marked, FIXEDBIT, SFIXEDBIT);
-  
-  preinit_state(L, g);
-  
-  g->frealloc = f;
-  g->ud = ud;
-  g->mainthread = L;
-  g->uvhead.u.l.prev = &g->uvhead;
-  g->uvhead.u.l.next = &g->uvhead;
-  g->GCthreshold = 0;  /* mark it as unfinished state */
-  g->strt.size = 0;
-  g->strt.nuse = 0;
-  g->strt.hash = NULL;
-  setnilvalue(registry(L));
-  luaZ_initbuffer(L, &g->buff);
-  g->panic = NULL;
-  g->gcstate = GCSpause;
-  g->rootgc = obj2gco(L);
-  g->sweepstrgc = 0;
-  g->sweepgc = &g->rootgc;
-  g->gray = NULL;
-  g->grayagain = NULL;
-  g->weak = NULL;
-  g->tmudata = NULL;
-  g->totalbytes = sizeof(LG);
-  g->gcpause = LUAI_GCPAUSE;
-  g->gcstepmul = LUAI_GCMUL;
-  g->gcdept = 0;
-  for (i=0; i<NUM_TAGS; i++) g->mt[i] = NULL;
-  
-  //f_luaopen 初始化
-  if (luaD_rawrunprotected(L, f_luaopen, NULL) != 0) {
-    /* memory allocation error: free partial state */
-    close_state(L);
-    L = NULL;
-  }
-  else
-    luai_userstateopen(L);
-  return L;
+//LUA_API lua_State *lua_newstate (lua_Alloc f, void *ud) {
+//  int i;
+//  lua_State *L;
+//  global_State *g;
+//  void *l = (*f)(ud, NULL, 0, state_size(LG));
+//  if (l == NULL) return NULL;
+//  L = tostate(l);
+//  g = &((LG *)L)->g;
+//  L->next = NULL;
+//  L->tt = LUA_TTHREAD;
+//  g->currentwhite = bit2mask(WHITE0BIT, FIXEDBIT);
+//  L->marked = luaC_white(g);
+//  set2bits(L->marked, FIXEDBIT, SFIXEDBIT);
+//  
+//  preinit_state(L, g);
+//  
+//  g->frealloc = f;
+//  g->ud = ud;
+//  g->mainthread = L;
+//  g->uvhead.u.l.prev = &g->uvhead;
+//  g->uvhead.u.l.next = &g->uvhead;
+//  g->GCthreshold = 0;  /* mark it as unfinished state */
+//  g->strt.size = 0;
+//  g->strt.nuse = 0;
+//  g->strt.hash = NULL;
+//  setnilvalue(registry(L));
+//  luaZ_initbuffer(L, &g->buff);
+//  g->panic = NULL;
+//  g->gcstate = GCSpause;
+//  g->rootgc = obj2gco(L);
+//  g->sweepstrgc = 0;
+//  g->sweepgc = &g->rootgc;
+//  g->gray = NULL;
+//  g->grayagain = NULL;
+//  g->weak = NULL;
+//  g->tmudata = NULL;
+//  g->totalbytes = sizeof(LG);
+//  g->gcpause = LUAI_GCPAUSE;
+//  g->gcstepmul = LUAI_GCMUL;
+//  g->gcdept = 0;
+//  for (i=0; i<NUM_TAGS; i++) g->mt[i] = NULL;
+//  
+//  //f_luaopen 初始化
+//  if (luaD_rawrunprotected(L, f_luaopen, NULL) != 0) {
+//    /* memory allocation error: free partial state */
+//    close_state(L);
+//    L = NULL;
+//  }
+//  else
+//    luai_userstateopen(L);
+//  return L;
+//}
+
+/**
+ * @brief  创建一个新的 Lua 虚拟机状态（创建新的 Lua 线程/环境）
+ * @param  f  内存分配/重分配/释放的回调函数，供 Lua 虚拟机管理内存
+ * @param  ud  传递给内存回调函数 `f` 的辅助用户数据
+ * @return  成功返回新创建的 lua_State 指针，失败返回 NULL
+ */
+LUA_API lua_State* lua_newstate(lua_Alloc f, void* ud) {
+    int i;
+    lua_State* L;          // 指向新创建的 Lua 线程状态
+    global_State* g;       // 指向全局虚拟机状态（关联在 Lua 线程中）
+    // 1. 调用内存分配函数，申请足够的内存存放 lua_State 和 global_State（合为 LG 结构体）
+    // state_size(LG) 计算 LG 结构体的总内存大小，参数 NULL/0 表示新分配内存
+    void* l = (*f)(ud, NULL, 0, state_size(LG));
+    // 内存分配失败，直接返回 NULL
+    if (l == NULL) return NULL;
+
+    // 2. 将分配到的内存转换为 lua_State 类型指针（LG 结构体首地址即为 lua_State 地址）
+    L = tostate(l);
+    // 3. 获取 LG 结构体中的 global_State 成员（全局状态机）
+    g = &((LG*)L)->g;
+
+    // 4. 初始化 Lua 线程（lua_State）的基础属性
+    L->next = NULL;                // 线程链表下一个节点置空（当前线程暂未加入链表）
+    L->tt = LUA_TTHREAD;           // 标记当前对象类型为 Lua 线程（LUA_TTHREAD）
+    // 初始化全局状态机的当前白标记（结合 WHITE0BIT 和 FIXEDBIT，用于 GC 标记）
+    g->currentwhite = bit2mask(WHITE0BIT, FIXEDBIT);
+    // 为当前线程设置 GC 白色标记（标记为未被回收的活跃对象）
+    L->marked = luaC_white(g);
+    // 设置当前线程的 FIXEDBIT 和 SFIXEDBIT 标记（标记为固定对象，不参与 GC 清扫）
+    set2bits(L->marked, FIXEDBIT, SFIXEDBIT);
+
+    // 5. 预初始化 Lua 线程和全局状态机的核心字段（栈、调用信息等基础结构）
+    preinit_state(L, g);
+
+    // 6. 初始化全局状态机（global_State）的内存管理相关字段
+    g->frealloc = f;               // 保存内存回调函数，供后续虚拟机内存操作使用
+    g->ud = ud;                    // 保存内存回调函数的辅助用户数据
+    g->mainthread = L;             // 记录虚拟机的主线程（当前创建的线程即为主线程）
+
+    // 7. 初始化全局开放上值（upvalue）的双向链表头节点（形成闭环空链表）
+    g->uvhead.u.l.prev = &g->uvhead;
+    g->uvhead.u.l.next = &g->uvhead;
+
+    // 8. 初始化垃圾回收（GC）相关的核心参数
+    g->GCthreshold = 0;            // 设置 GC 触发阈值为 0（标记当前状态机尚未初始化完成）
+    g->strt.size = 0;              // 字符串哈希表大小初始化为 0
+    g->strt.nuse = 0;              // 字符串哈希表中已使用的槽位初始化为 0
+    g->strt.hash = NULL;           // 字符串哈希表的哈希数组指针置空（后续动态分配）
+    setnilvalue(registry(L));      // 将 Lua 注册表初始化为 nil（后续会初始化为表结构）
+
+    // 9. 初始化字符串拼接的临时缓冲区
+    luaZ_initbuffer(L, &g->buff);
+
+    // 10. 初始化 GC 相关的状态和链表（初始处于暂停状态）
+    g->panic = NULL;               // 恐慌处理函数置空（后续可由用户设置）
+    g->gcstate = GCSpause;         // GC 状态设置为暂停（GCSpause）
+    g->rootgc = obj2gco(L);        // 将主线程加入 GC 根对象链表（作为第一个可回收对象）
+    g->sweepstrgc = 0;             // 字符串表清扫位置初始化为 0（GC 清扫阶段的起始位置）
+    g->sweepgc = &g->rootgc;       // GC 根链表清扫指针初始化为根对象链表首地址
+    g->gray = NULL;                // 灰色对象链表置空（暂无待标记对象）
+    g->grayagain = NULL;           // 需再次标记的灰色对象链表置空
+    g->weak = NULL;                // 弱引用表链表置空（暂无待清理的弱表）
+    g->tmudata = NULL;             // 待 GC 的用户数据链表置空
+
+    // 11. 初始化内存统计相关参数
+    g->totalbytes = sizeof(LG);    // 当前已分配总内存初始化为 LG 结构体的大小
+    g->gcpause = LUAI_GCPAUSE;     // 设置 GC 暂停间隔（默认值，控制两次 GC 的间隔）
+    g->gcstepmul = LUAI_GCMUL;     // 设置 GC 步长乘数（默认值，控制 GC 回收粒度）
+    g->gcdept = 0;                 // GC 滞后进度初始化为 0（暂无待回收的滞后内存）
+
+    // 12. 初始化所有基本数据类型的元表（全部置空，后续按需创建和赋值）
+    for (i = 0; i < NUM_TAGS; i++) g->mt[i] = NULL;
+
+    // 13. 以受保护模式运行 Lua 核心初始化函数（f_luaopen），避免初始化过程中出错崩溃
+    // f_luaopen 负责初始化 Lua 标准库、注册表、全局环境等核心结构
+    if (luaD_rawrunprotected(L, f_luaopen, NULL) != 0) {
+        /* 内存分配错误：释放已部分分配的状态机内存 */
+        close_state(L);  // 清理已初始化的资源并释放内存
+        L = NULL;        // 线程指针置空，标识创建失败
+    }
+    else
+        // 14. 初始化用户自定义状态（留给用户扩展的初始化接口，默认空实现）
+        luai_userstateopen(L);
+
+    // 15. 返回创建成功的 Lua 线程状态指针（失败则返回 NULL）
+    return L;
 }
 
 

@@ -121,7 +121,16 @@ int luaD_rawrunprotected (lua_State *L, Pfunc f, void *ud) {
   L->errorJmp = lj.previous;  /* restore old error handler */
   return lj.status; // .faq status 是在哪里修改的?  f()?   ==> luaD_throw() ?
 }
-
+/*
+void luaD_throw (lua_State *L, int errcode) {
+  if (L->errorJmp) {  // 存在有效的错误跳转上下文（即处于受保护执行中）
+    L->errorJmp->status = errcode;  // 修改 lj.status 为错误码（非 0）
+    longjmp(L->errorJmp->b, 1);  // 触发长跳转，跳回 LUAI_TRY 对应的 setjmp 处
+  }
+  // 无有效错误上下文，直接终止程序（虚拟机崩溃）
+  lua_fatal(L, "unprotected error in call to Lua API (%s)", lua_tostring(L, -1));
+}
+*/
 
 
 //struct lua_longjmp {

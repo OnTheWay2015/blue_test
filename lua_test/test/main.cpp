@@ -19,8 +19,16 @@ lua scripts folder
 lua host exe path
 working path  !!这个是重点
 
+创建工程后，选中工程右键，同步目录，把已创建的文件同步
 
 */
+
+
+/*
+
+
+*/
+
 static string dir_scripts = "../../../test/scripts";
 //static string dir_scripts = "F:/work/blue_test/lua_test/test/scripts";
 bool DumpTable(lua_State* L, int idx);
@@ -1207,7 +1215,7 @@ int main_helloworld(int argc, char* argv[])
 
 	lua_pushcfunction(L,PcallErrorFunc);
 	int errfunc = lua_gettop(L);
-	
+
 	///指定 lua 入口函数 run 
     lua_getglobal(L, "run_main");
     //执行

@@ -950,27 +950,78 @@ static void f_call (lua_State *L, void *ud) {
 }
 
 
+// Lua C API 声明，表明这是一个对外暴露的 Lua API 函数
+/**
+ * @brief  安全调用 Lua 函数（受保护的函数调用），捕获调用过程中的错误而不导致程序崩溃
+ * @param  L        Lua 虚拟机状态指针，指向当前的 Lua 运行环境
+ * @param  nargs    传入被调用函数的参数个数，这些参数需预先按顺序压入 Lua 栈
+ * @param  nresults 期望从被调用函数获取的返回值个数，调用后返回值会被压入 Lua 栈
+ * @param  errfunc  错误处理函数的栈索引（伪索引/普通栈索引）：
+ *                  1. 为 0 时，表示不使用自定义错误处理函数，使用 Lua 默认错误提示
+ *                  2. 非 0 时，指向一个预先压入栈的 Lua 函数，用于处理调用过程中产生的错误
+ * @return          调用状态码：成功返回 0；失败返回非 0 错误码（如 LUA_ERRRUN、LUA_ERRMEM 等）
+ */
+LUA_API int lua_pcall(lua_State* L, int nargs, int nresults, int errfunc) {
+    // 定义 CallS 结构体实例 c，用于封装安全调用所需的相关信息
+    // 该结构体为安全调用方法提供数据支撑，最终会在 f_call 函数中被使用
+    struct CallS c;
+    // 用于存储函数调用的最终状态（成功/失败，失败时会返回对应的错误码）
+    int status;
+    // 用于保存错误处理函数的栈位置（偏移量），方便后续恢复访问
+    ptrdiff_t func;
 
-LUA_API int lua_pcall (lua_State *L, int nargs, int nresults, int errfunc) {
-  struct CallS c;//为了安全调用方法，加了个封装，走安全调用, 在f_call使用
-  int status;
-  ptrdiff_t func;
-  lua_lock(L);
-  api_checknelems(L, nargs+1); //方法压栈+1, 参数压栈nargs
-  checkresults(L, nargs, nresults);
-  if (errfunc == 0)
-    func = 0;
-  else {
-    StkId o = index2adr(L, errfunc); // 获得全局位置 StkId o 
-    api_checkvalidindex(L, o);
-    func = savestack(L, o);
-  }
-  c.func = L->top - (nargs+1);  /* function to be called */
-  c.nresults = nresults;
-  status = luaD_pcall(L, f_call, &c, savestack(L, c.func), func);
-  adjustresults(L, nresults);
-  lua_unlock(L);
-  return status;
+    // 锁定 Lua 虚拟机（VM），保证线程安全，防止多线程同时操作 Lua 栈和内部数据
+    lua_lock(L);
+
+    // 检查 Lua 栈中的元素数量是否满足要求：至少需要 (nargs+1) 个元素
+    // 其中 1 是要被调用的函数本身，nargs 是该函数所需的传入参数数量
+    api_checknelems(L, nargs + 1);  ///方法压栈+1, 参数压栈nargs
+
+    // 检查函数调用的参数数量和期望返回值数量是否合法，做参数合法性校验
+    checkresults(L, nargs, nresults);
+
+    // 处理错误处理函数：如果 errfunc 为 0，表示不设置自定义错误处理函数
+    if (errfunc == 0)
+        func = 0;  // 赋值为 0，标记无自定义错误处理函数
+    else {
+        // 若 errfunc 不为 0，将传入的错误处理函数索引转换为 Lua 栈内部的实际地址（StkId 类型）
+        // 这里的 errfunc 是栈索引，index2adr 用于解析索引并获取对应的栈元素地址
+        StkId o = index2adr(L, errfunc); ; // 获得全局位置 StkId o 
+
+        // 检查转换后的错误处理函数地址是否为合法的栈索引，防止无效索引导致崩溃
+        api_checkvalidindex(L, o);
+
+        // 将错误处理函数的栈地址转换为相对栈底的偏移量并保存
+        // savestack 用于在栈操作可能改变栈结构的情况下，保留元素的有效引用
+        func = savestack(L, o);
+    }
+
+    // 确定要被调用的函数在 Lua 栈中的位置：栈顶向前偏移 (nargs+1) 个位置
+    // 因为栈顶是最后一个参数，函数本身位于所有参数的前面，即 L->top - (nargs+1)
+    c.func = L->top - (nargs + 1);  /* function to be called */
+
+    // 给 CallS 结构体赋值，保存函数调用期望的返回值数量
+    c.nresults = nresults;
+
+    // 调用 Lua 底层的安全调用核心函数 luaD_pcall
+    // 参数说明：
+    // 1. L：Lua 虚拟机状态指针
+    // 2. f_call：实际执行函数调用的回调函数
+    // 3. &c：封装了调用信息的 CallS 结构体指针
+    // 4. savestack(L, c.func)：保存被调用函数的栈偏移量，用于后续恢复
+    // 5. func：保存的错误处理函数栈偏移量
+    // 返回值：调用状态（成功返回 0，失败返回非 0 错误码）
+    status = luaD_pcall(L, f_call, &c, savestack(L, c.func), func);
+
+    // 调整函数调用后的返回值，将栈中的返回值数量规整为 nresults 个
+    // 处理返回值数量不足或过多的情况，保证栈状态符合调用者预期
+    adjustresults(L, nresults);
+
+    // 解锁 Lua 虚拟机，释放线程安全锁，允许其他线程操作 Lua VM
+    lua_unlock(L);
+
+    // 返回函数调用的状态码，供调用者判断调用是否成功
+    return status;
 }
 
 

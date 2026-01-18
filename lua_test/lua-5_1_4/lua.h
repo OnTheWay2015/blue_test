@@ -33,8 +33,13 @@
 /*
 ** pseudo-indices
 */
+//伪索引 LUA_REGISTRYINDEX	全局共享注册表	C 扩展间、跨线程共享数据
 #define LUA_REGISTRYINDEX	(-10000)
+
+//伪索引 LUA_ENVIRONINDEX	 闭包 / 代码块环境表	隔离作用域、实现模块化、沙箱
 #define LUA_ENVIRONINDEX	(-10001)
+
+//伪索引 LUA_GLOBALSINDEX	全局表 _G	Lua 脚本与 C 扩展交互全局变量
 #define LUA_GLOBALSINDEX	(-10002)
 #define lua_upvalueindex(i)	(LUA_GLOBALSINDEX-(i))
 
