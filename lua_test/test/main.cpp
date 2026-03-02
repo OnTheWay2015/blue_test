@@ -836,8 +836,9 @@ int debugTraceBack(lua_State *L) //todo test
 
     lua_getglobal(L, "debug");
     lua_getfield(L, -1, "traceback");
-    if (lua_pcall(L, 0, 0, errfunc))
+    if (lua_pcall(L, 0, 0, errfunc)!=0)
 	{
+		lua_pop(L, 1); //弹出错误信息，恢复干净的栈
 	}
     return 0;
 }
