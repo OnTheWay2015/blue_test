@@ -96,10 +96,10 @@ int test_visit_table(){
 
     // ===================== 方式1：通用遍历（支持所有类型键） =====================
     std::cout << "===== 通用遍历（所有键值对）=====\n";
-    // 初始键压入nil，触发第一次lua_next
+    // 初始键压入nil，触发第一次lua_next,会弹出栈顶
     lua_pushnil(L);
     // 循环遍历：lua_next返回1表示有下一个键值对，0表示遍历结束
-    while (lua_next(L, table_idx) != 0) {
+    while (lua_next(L, table_idx) != 0) { //lua_next 弹出栈顶的 key1（也就是上一轮剩下的 “键”）；
         // 此时栈结构：... table 键 值
         std::cout << "键: ";
         print_lua_value(L, -2);  // -2是键
