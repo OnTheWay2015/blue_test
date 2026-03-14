@@ -51,6 +51,12 @@
     <ClCompile Include="test_model_loading.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="text_base_img.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="text_base_img1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_model_loading.h">

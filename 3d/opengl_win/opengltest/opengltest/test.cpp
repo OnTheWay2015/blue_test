@@ -375,6 +375,14 @@ namespace TEST_BASE_EX{
 namespace TEST_BASE{
 	void test();
 }
+namespace TEST_BASE_IMG{
+	void test();
+}
+
+namespace TEST_BASE_IMG1 {void test();}
+
+
+
 
 /*
  VAO 的核心规则
@@ -396,13 +404,17 @@ namespace TEST_BASE{
 
 int main(void)
 {
-	MODEL_TEST::test();
+	//MODEL_TEST::test();
 	//STENCIL_TEST::test();
 	//basetest();
+	TEST_BASE_IMG::test();
+	//TEST_BASE_IMG1::test();
 	//glfwtest_more();
 	//test_corner();
 	//TEST_BASE_EX::test();
 	//TEST_BASE::test();
+
+
 	system( "pause" );
 	return 0;
 }

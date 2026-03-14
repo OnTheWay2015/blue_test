@@ -140,6 +140,8 @@
     <ClCompile Include="test_model_loading.cpp" />
     <ClCompile Include="test_more.cpp" />
     <ClCompile Include="test_stencil_test.cpp" />
+    <ClCompile Include="text_base_img.cpp" />
+    <ClCompile Include="text_base_img1.cpp" />
     <ClCompile Include="_faq.cpp" />
     <ClCompile Include="_faq_ASSIMP.cpp" />
     <ClCompile Include="_faq_shader.cpp" />
