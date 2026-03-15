@@ -360,26 +360,16 @@ extern
 int test_corner() ;
 
 
-namespace MODEL_TEST {
-	void test();
-}
-namespace STENCIL_TEST {
-	void test();
-}
 
-namespace TEST_BASE_EX{
-	void test();
-}
+namespace MODEL_TEST{void test();}
+namespace STENCIL_TEST{void test();}
+namespace TEST_BASE_EX{void test();}
 
-
-namespace TEST_BASE{
-	void test();
-}
-namespace TEST_BASE_IMG{
-	void test();
-}
+namespace TEST_BASE{void test();}
+namespace TEST_BASE_IMG{void test();}
 
 namespace TEST_BASE_IMG1 {void test();}
+namespace TEST_TRANS {void test();}
 
 
 
@@ -407,8 +397,9 @@ int main(void)
 	//MODEL_TEST::test();
 	//STENCIL_TEST::test();
 	//basetest();
-	TEST_BASE_IMG::test();
+	//TEST_BASE_IMG::test();
 	//TEST_BASE_IMG1::test();
+	TEST_TRANS::test();
 	//glfwtest_more();
 	//test_corner();
 	//TEST_BASE_EX::test();
