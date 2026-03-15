@@ -81,9 +81,13 @@ namespace TEST_BASE_IMG
 			dataFormat = GL_RGBA;
 		}
 
-
+        /*
+        internalFormat：告诉 GPU 纹理在显存中如何存储（相当于 “仓库的存储格式”）
+        dataFormat：告诉 GPU 你传入的 CPU 数据是什么格式（相当于 “待入库货物的包装格式”）
+        OpenGL 在调用 glTexImage2D 时，会自动把 dataFormat 格式的 CPU 数据转换成 internalFormat 格式存储到显存中。 
+        */
 		// 将纹理数据传入GPU
-		glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, heigh, 0, internalFormat, GL_UNSIGNED_BYTE, image);
+		glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, heigh, 0, dataFormat, GL_UNSIGNED_BYTE, image);
 		glGenerateMipmap(GL_TEXTURE_2D); // 生成多级渐远纹理
 
 		// 释放图片内存
