@@ -45,6 +45,9 @@
     <ClCompile Include="test_structlib.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="struct_lib.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="scripts\test001.lua">

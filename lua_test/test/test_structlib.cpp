@@ -12,9 +12,12 @@ extern "C" { // lua.dll　是c库，使用时要用 extern "C",  如果 lua库按 c++　编译的
 #include "../lua-5_1_4/lauxlib.h"
 #include "../lua-5_1_4/test_do.h"
 
+LUALIB_API int luaopen_struct (lua_State *L);
+
 }
 
 using namespace std;
+
 
 
 namespace TEST_STRUCT {
@@ -71,7 +74,8 @@ int test()
 	///< 加载相关库文件
 	luaL_openlibs(L);
     
-
+	//luaopen_struct(L);
+	
     ///< 加载lua文件
     std::string sf = dir_scripts + "/test_struct.lua";
 	if (luaL_loadfile(L, sf.c_str()))

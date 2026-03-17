@@ -1,5 +1,5 @@
 package.path = package.path .. ';../../../test/scripts/?.lua' 
-local struct = require("struct")
+local struct = require("struct")  --好像有点问提，可以用 struct_lib.c
 
 local GD = {}
  
@@ -104,8 +104,13 @@ function GD.packMsgObject(keysfmt,data)
 	local bytes="" 
 	for _,v in ipairs(keysfmt) do
 		local k = v[1]
-		bytes = bytes .. GD.packMsgKey(v,data[k])
+		--bytes = bytes .. GD.packMsgKey(v,data[k])
+		local bb = 	 GD.packMsgKey(v,data[k])
+		local len = #bb;
+		bytes = bytes ..bb
+		len = #bytes;
 	end 
+	local lll = #bytes
 	return bytes  
 end
 
@@ -120,9 +125,10 @@ function GD.unPackMsgKey(keysfmt,bytes,pos)
 	elseif tp == GD.CONVERT_KEYS.BYTE_FIX then
 			return GD.unPackMsgByteFix(keysfmt[3],bytes,pos) 
 	else
-		 
+		local len =#bytes -- 当 struct.unpack 返回 pos 为 nil 时，可能是长度不够 
 		local packfmt = "<" .. tp
-		return struct.unpack(packfmt,bytes,pos)
+		local data,p = struct.unpack(packfmt,bytes,pos)
+		return data,p
 	end 	 
 end
 
@@ -131,50 +137,54 @@ function GD.unPackMsgByteFix(keysfmt,bytes,pos)
 	if #bytes <=0 then
 		return ""
 	end
+	local nextPos = pos 
+	
 	local packfmt = "<" .. keysfmt
-	local len,pos = struct.unpack(packfmt,bytes,pos)
+	local len = -1
+	len ,nextPos = struct.unpack(packfmt,bytes,pos)
 	
 	packfmt = "<" .. len
-	
-	local bts,pos = struct.unpack(packfmt,bytes,pos)
-	return bts,pos
+	local bts = ""
+	bts, nextPos = struct.unpack(packfmt,bytes,nextPos)
+	return bts,nextPos
 end
 
 
 function GD.unPackMsgArray(lenfmt,keysfmt,bytes,pos)
 	local data = {}
-	 
+	local nextPos = pos 
 	if #bytes <=0 then
 		return data
 	end
 	local packfmt = "<" .. lenfmt
-	local len,pos = struct.unpack(packfmt,bytes,pos)
+	local len = -1	
+	len,nextPos = struct.unpack(packfmt,bytes,pos)
+	
 	local tmp
-
-
 	if type(keysfmt) == "table" then
 		for i=1,len do
-			tmp,pos = GD.unPackMsgObject(keysfmt,bytes,pos)
+			tmp,nextPos = GD.unPackMsgObject(keysfmt,bytes,nextPos)
 			table.insert(data,tmp)
 		end
 	else
 		for i=1,len do 
-			tmp,pos = GD.unPackMsgObject({"",keysfmt},bytes,pos)
+			tmp,nextPos = GD.unPackMsgKey({"",keysfmt},bytes,nextPos )
 			table.insert(data,tmp) 
 		end
 	end
-	return data,pos
+	return data,nextPos 
 end
 
 
 function GD.unPackMsgObject(keysfmt,bytes,pos)
 	local data = {}
+	local nextPos = pos 
 	for _,v in ipairs(keysfmt) do
 		local k = v[1]
-		data[k],pos = GD.unPackMsgKey(v,bytes,pos)
-		 
+		data[k],nextPos = GD.unPackMsgKey(v,bytes,pos)
+		pos =  nextPos 
 	end  
-	return data,pos 
+	return data,nextPos 
 end
 
 
@@ -200,7 +210,8 @@ function GD.unPackMsg(id,bytes)
 	--if formtab.numss() <=0 then
 	--	return {} 
 	--end
-	return GD.unPackMsgObject(formtab,bytes,1)
+	local pos =1
+	return GD.unPackMsgObject(formtab,bytes,pos)
 end
 
 
@@ -217,14 +228,14 @@ function testpack()
 	local data={
 		["lSize"]=99,
 		["obj"]={["a"]=11,["b"]=22},
-		--["ary1"]={
-		--	{["a"]=33,["b"]=44},
-		--	{["a"]=55,["b"]=66},
-		--	},
-		--["str1"]="abc1",
-		--["ary2"]={1,2,3,4,5},
+		["ary1"]={
+			{["a"]=33,["b"]=44},
+			{["a"]=55,["b"]=66},
+			},
+		["str1"]="abc1",
+		["ary2"]={1,2,3,4,5},
 
-		--["str2"]="efg2",
+		["str2"]="efg2",
 
 	} 
 	_testpack(GD.C2S_MessageId.TTT,data);

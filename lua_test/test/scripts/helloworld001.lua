@@ -1,3 +1,5 @@
+package.path = package.path .. ';../../../test/scripts/?.lua' 
+print(package.path)
 
 --
 --[[  

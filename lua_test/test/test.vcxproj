@@ -162,6 +162,7 @@
   <ItemGroup>
     <ClCompile Include="default.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="struct_lib.c" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="testfun.cpp" />
     <ClCompile Include="test_bind.cpp" />

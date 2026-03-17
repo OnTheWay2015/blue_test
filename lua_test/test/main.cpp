@@ -1237,6 +1237,9 @@ extern void test_matetable();
 
 
 namespace TEST_STRUCT { int test(); };
+
+
+
 int main(int argc, char* argv[])
 {
 	//main1(argc,argv);
@@ -1246,6 +1249,9 @@ int main(int argc, char* argv[])
 	//test_matetable();
 
 	TEST_STRUCT::test();
+	
+	
+	system("pause");
 	return 0;
 }
 
