@@ -42,6 +42,9 @@
     <ClCompile Include="testfun.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="test_structlib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="scripts\test001.lua">
@@ -69,6 +72,9 @@
       <Filter>scripts</Filter>
     </None>
     <None Include="scripts\testfun.lua">
+      <Filter>scripts</Filter>
+    </None>
+    <None Include="scripts\test_struct.lua">
       <Filter>scripts</Filter>
     </None>
   </ItemGroup>

@@ -1234,13 +1234,18 @@ int main_helloworld(int argc, char* argv[])
 
 extern void test_table();
 extern void test_matetable();
+
+
+namespace TEST_STRUCT { int test(); };
 int main(int argc, char* argv[])
 {
 	//main1(argc,argv);
-	main_helloworld(argc,argv);
+	//main_helloworld(argc,argv);
 	//test_table();//to test
 
 	//test_matetable();
+
+	TEST_STRUCT::test();
 	return 0;
 }
 

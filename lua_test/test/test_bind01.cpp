@@ -15,7 +15,7 @@ extern "C" { // lua.dll　是c库，使用时要用 extern "C",  如果 lua库按 c++　编译的
 using namespace std;
 
 
-static string dir_scripts = "../../test/scripts";
+static string dir_scripts = "../../../test/scripts";
 class Student
 {
 public:

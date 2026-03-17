@@ -38,7 +38,7 @@ template<class T> struct TypeWrapper {};
 
 */
 
-static string dir_scripts = "../../test/scripts";
+static string dir_scripts = "../../../test/scripts";
 extern int LuaPrintIdx(lua_State* L, int idx);
 
 void SetMetaClass(lua_State * L);
