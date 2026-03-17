@@ -64,7 +64,7 @@ struct DOS_SIMPLE_MESSAGE : DOS_SIMPLE_MESSAGE_HEAD
 #define PACK_HEADER(m,packet_id) \
     auto M= std::make_shared<DOS_SIMPLE_MESSAGE>();\
     M->MsgID = packet_id;\
-    M->MsgLen = m->ByteSize() + sizeof(DOS_SIMPLE_MESSAGE_HEAD);\
+    M->MsgLen = m->ByteSizeLong() + sizeof(DOS_SIMPLE_MESSAGE_HEAD);\
     M->MSG = m;\
 
  

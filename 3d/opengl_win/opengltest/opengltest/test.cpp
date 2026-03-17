@@ -394,12 +394,12 @@ namespace TEST_TRANS {void test();}
 
 int main(void)
 {
-	//MODEL_TEST::test();
+	MODEL_TEST::test();
 	//STENCIL_TEST::test();
 	//basetest();
 	//TEST_BASE_IMG::test();
 	//TEST_BASE_IMG1::test();
-	TEST_TRANS::test();
+	//TEST_TRANS::test();
 	//glfwtest_more();
 	//test_corner();
 	//TEST_BASE_EX::test();

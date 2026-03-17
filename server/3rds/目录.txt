@@ -1,1 +1,1 @@
-D:\__work\protobuf\cmake\build\protobuf.sln
+D:\__work\protobuf\cmake\build\protobuf.sln   版本 4.0.0

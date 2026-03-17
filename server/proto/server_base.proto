@@ -1,4 +1,4 @@
- 
+//#define GOOGLE_PROTOBUF_VERSION 3010001 
 syntax = "proto3"; 	// proto3 仅仅支持 repeated 字段修饰， 不支持 required，optional
 
 
@@ -104,8 +104,8 @@ message MSG_SVR_REG_RES {
 
 message MSG_PACKET {
 
-	int8  FromSvrID = 1;   //对应 MessageHandler::SendMsg 参数
-	int8  FromSvrType = 2; //对应 MessageHandler::SendMsg 参数
+	int32  FromSvrID = 1;   //对应 MessageHandler::SendMsg 参数
+	int32  FromSvrType = 2; //对应 MessageHandler::SendMsg 参数
 	 
 	
 	int64 MarkID = 3;  //sessionid(GATE) / playerid(GAME) ..
@@ -116,9 +116,9 @@ message MSG_PACKET {
 }
 
 /*
-  int8 	FromSvrID = 1; 
+  int32 	FromSvrID = 1; 
   int24 FromSessionID = 2; 
-  int8 	ToSvrID = 3; 
+  int32 	ToSvrID = 3; 
   int24 ToSessionID = 4; 
   int32 MsgID = 5;
 */

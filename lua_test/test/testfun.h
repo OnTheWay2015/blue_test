@@ -332,6 +332,10 @@ _ToluaRegfuncs(lua_State* L, const char* name, Func func) {
     void* ud = lua_newuserdata(L, sizeof(Func));
     *reinterpret_cast<Func*>(ud) = func;
 
+    //通知Lua GC：步进相应的真实内存大小
+    // LUA_GCSTEP会让GC的内存计数器增加指定值
+    lua_gc(L, LUA_GCSTEP, sizeof(Func));
+
     // 绑定包装函数
     lua_pushcclosure(L, &FunctionWrapper<Func>::call, 1);
     lua_rawset(L, -3);

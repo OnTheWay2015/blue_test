@@ -252,6 +252,8 @@ namespace TEST_TRANS
 
         // 渲染循环
         while (!glfwWindowShouldClose(window)) {
+            //draw
+            
             // 清屏
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
@@ -259,20 +261,13 @@ namespace TEST_TRANS
             // 使用着色器程序
             glUseProgram(g_shaderProgram);
 
-            // 绑定纹理（激活纹理单元0，并绑定纹理）
+            //绑定纹理（激活纹理单元0，并绑定纹理）
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, g_textureID);
             // 将纹理单元0赋值给采样器（也可以省略，默认绑定0单元）
             glUniform1i(glGetUniformLocation(g_shaderProgram, "ourTexture"), 0);
 
-            // 绘制带纹理的三角形
-            //glBindBuffer(GL_ARRAY_BUFFER, g_VBOs[0]);
-            //glBindVertexArray(g_VAOs[0]);
-            //glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
-
-            
-            //glBindVertexArray(g_EBOs[0]);
-            
+            // 绘制带纹理的四边形
             glBindVertexArray(g_VAOs[0]);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 

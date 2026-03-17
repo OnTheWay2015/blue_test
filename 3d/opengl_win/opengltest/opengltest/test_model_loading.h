@@ -750,6 +750,7 @@ public:
 
 
 
+    // 根据动画时间找到对应的前一个位置关键帧索引
     int GetPositionIndex(float animationTime)
     {
         for (int index = 0; index < m_NumPositions - 1; ++index)
@@ -783,6 +784,7 @@ public:
 
 private:
 
+    // 计算两个关键帧之间的插值比例因子
     float GetScaleFactor(float lastTimeStamp, float nextTimeStamp, float animationTime)
     {
         float scaleFactor = 0.0f;
@@ -792,19 +794,48 @@ private:
         return scaleFactor;
     }
 
+
+    //关键帧位置数据结构
+    //struct PositionKey
+    //{
+    //    float timeStamp;    // 关键帧对应的时间戳（tick数）
+    //    glm::vec3 position; // 该时间戳下骨骼的位置
+    //};
+
+    // 插值计算指定动画时间点的骨骼位置，并生成对应的平移矩阵
+    // @param animationTime: 当前要计算的动画时间点（单位：tick）
+    // @return: 对应位置的平移变换矩阵
     glm::mat4 InterpolatePosition(float animationTime)
     {
+        // 1. 特殊情况：如果只有1个位置关键帧，直接使用该位置生成平移矩阵
+        //    这种情况通常出现在骨骼在动画中没有位置变化的场景
         if (1 == m_NumPositions)
             return glm::translate(glm::mat4(1.0f), m_Positions[0].position);
 
+        // 2. 获取当前动画时间点所在的两个相邻关键帧索引
+        //    p0Index：当前时间点之前的关键帧索引
+        //    p1Index：当前时间点之后的关键帧索引
         int p0Index = GetPositionIndex(animationTime);
         int p1Index = p0Index + 1;
+
+        // 3. 计算插值比例因子（0~1之间）
+        //    该因子表示当前时间点在p0和p1两个关键帧之间的相对位置
+        //    例如：scaleFactor=0.5 表示正好在两个关键帧的中间位置
         float scaleFactor = GetScaleFactor(m_Positions[p0Index].timeStamp,
             m_Positions[p1Index].timeStamp, animationTime);
+
+        // 4. 对两个关键帧的位置进行线性插值（glm::mix本质是线性插值）
+        //    glm::mix(a, b, t) = a * (1-t) + b * t
+        //    最终得到当前动画时间点的骨骼位置
         glm::vec3 finalPosition = glm::mix(m_Positions[p0Index].position, m_Positions[p1Index].position
             , scaleFactor);
+
+        // 5. 将插值得到的位置转换为平移矩阵并返回
+        //    glm::translate：从单位矩阵创建一个平移矩阵，平移量为finalPosition
         return glm::translate(glm::mat4(1.0f), finalPosition);
     }
+
+
 
     glm::mat4 InterpolateRotation(float animationTime)
     {
@@ -839,10 +870,10 @@ private:
         return glm::scale(glm::mat4(1.0f), finalScale);
     }
 
-    std::vector<KeyPosition> m_Positions;
+    std::vector<KeyPosition> m_Positions; //存储所有位置关键帧的数组
     std::vector<KeyRotation> m_Rotations;
     std::vector<KeyScale> m_Scales;
-    int m_NumPositions;
+    int m_NumPositions; //骨骼位置关键帧的数量
     int m_NumRotations;
     int m_NumScalings;
 
@@ -924,9 +955,17 @@ public:
     }
 
 
+    // 记录动画每秒的 Tick 数，用于将 Tick 单位转换为秒级时间（实际播放时间 = Tick数 / mTicksPerSecond）
+    // 若该值为 0，通常会使用默认值（如 25.0f）来进行时间转换
     inline float GetTicksPerSecond() { return m_TicksPerSecond; }
+    
+
+    // 记录动画的总时长（单位：动画Ticks，非秒，需结合 TicksPerSecond 转换为实际时间）
+    // aiAnimation::mDuration 表示动画从开始到结束的总帧数（Ticks数）
     inline float GetDuration() { return m_Duration; }
+   
     inline const AssimpNodeData& GetRootNode() { return m_RootNode; }
+    
     inline const std::map<std::string, BoneInfo>& GetBoneIDMap()
     {
         return m_BoneInfoMap;
@@ -981,75 +1020,134 @@ private:
 };
 
 
+
+
+// 动画控制器类
+// 负责更新动画时间、计算骨骼的最终变换矩阵，并管理当前播放的动画
 class Animator
 {
 public:
+    // 构造函数：初始化动画控制器并绑定一个动画
+    // @param animation: 要播放的初始动画指针
     Animator(Animation* animation)
     {
+        // 初始化当前动画时间（以tick为单位）
         m_CurrentTime = 0.0;
+        // 绑定当前要播放的动画
         m_CurrentAnimation = animation;
 
+        // 预分配最终骨骼矩阵的存储空间（最多支持100个骨骼）
+        // 预留空间可以避免频繁的内存重新分配，提升性能
         m_FinalBoneMatrices.reserve(100);
 
+        // 初始化最终骨骼矩阵数组，每个矩阵初始化为单位矩阵
+        // 单位矩阵表示骨骼没有任何变换（平移、旋转、缩放）
         for (int i = 0; i < 100; i++)
             m_FinalBoneMatrices.push_back(glm::mat4(1.0f));
     }
 
+    // 更新动画状态，计算当前帧的骨骼变换
+    // @param dt: 从上一帧到当前帧的时间增量（秒）
     void UpdateAnimation(float dt)
     {
+        // 记录帧时间增量，供后续使用
         m_DeltaTime = dt;
+
+        // 如果当前有绑定的动画，则更新动画进度
         if (m_CurrentAnimation)
         {
+            // 1. 计算本次更新需要推进的tick数
+            //    GetTicksPerSecond()：动画每秒的tick数（动画帧率）
+            //    dt：时间增量，乘以帧率得到需要推进的tick数
             m_CurrentTime += m_CurrentAnimation->GetTicksPerSecond() * dt;
+
+            // 2. 对总时长取模，实现动画循环播放
+            //    GetDuration()：动画的总时长（总tick数）
+            //    fmod：取模运算，确保时间不会超过动画总时长
             m_CurrentTime = fmod(m_CurrentTime, m_CurrentAnimation->GetDuration());
+
+            // 3. 递归计算每个骨骼在当前时间点的最终变换矩阵
+            //    从动画的根节点开始，初始父变换为单位矩阵
             CalculateBoneTransform(&m_CurrentAnimation->GetRootNode(), glm::mat4(1.0f));
         }
     }
 
+    // 切换并播放指定的动画
+    // @param pAnimation: 要切换的新动画指针
     void PlayAnimation(Animation* pAnimation)
     {
+        // 绑定新的动画
         m_CurrentAnimation = pAnimation;
-        m_CurrentTime = 0.0f;//这里记录的其实是 tick 数, bone 通过 tick 计算对应的数值
+        // 重置动画时间为0，从动画开头开始播放
+        // 注意：这里的m_CurrentTime记录的是动画的tick数，骨骼会根据tick数计算对应的变换值
+        m_CurrentTime = 0.0f;
     }
 
+    // 递归计算骨骼的最终变换矩阵
+    // 核心功能：遍历骨骼节点树，结合动画关键帧数据，计算每个骨骼的最终全局变换
+    // @param node: 当前遍历的骨骼节点（Assimp加载的节点数据）
+    // @param parentTransform: 父节点的全局变换矩阵
     void CalculateBoneTransform(const AssimpNodeData* node, glm::mat4 parentTransform)
     {
+        // 获取当前节点的名称（对应骨骼名称）
         std::string nodeName = node->name;
+        // 获取节点的本地变换矩阵（从Assimp加载的初始变换）
         glm::mat4 nodeTransform = node->transformation;
 
-        Bone* Bone = m_CurrentAnimation->FindBone(nodeName);
+        // 根据节点名称查找对应的骨骼对象（包含动画关键帧数据）
+        Bone* bone = m_CurrentAnimation->FindBone(nodeName);
 
-        if (Bone)
+        // 如果当前节点对应一个骨骼（不是空节点）
+        if (bone)
         {
-            Bone->Update(m_CurrentTime);
-            nodeTransform = Bone->GetLocalTransform();
+            // 根据当前动画时间更新骨骼的本地变换矩阵（插值计算关键帧之间的变换）
+            bone->Update(m_CurrentTime);
+            // 用动画计算出的本地变换替换节点的初始变换
+            nodeTransform = bone->GetLocalTransform();
         }
 
+        // 计算当前节点的全局变换矩阵：父变换 * 本地变换
+        // 这里的乘法顺序很重要：父变换在前，本地变换在后
         glm::mat4 globalTransformation = parentTransform * nodeTransform;
 
+        // 获取骨骼ID映射表（骨骼名称 -> 骨骼信息（ID和偏移矩阵））
         auto boneInfoMap = m_CurrentAnimation->GetBoneIDMap();
+        // 如果当前节点是一个需要渲染的骨骼
         if (boneInfoMap.find(nodeName) != boneInfoMap.end())
         {
+            // 获取骨骼的索引（对应着色器中骨骼矩阵数组的下标）
             int index = boneInfoMap[nodeName].id;
+            // 获取骨骼的偏移矩阵（将骨骼从模型空间转换到骨骼空间）
             glm::mat4 offset = boneInfoMap[nodeName].offset;
+            // 计算最终的骨骼矩阵：全局变换 * 偏移矩阵
+            // 这个矩阵会传递给着色器，用于顶点蒙皮计算
             m_FinalBoneMatrices[index] = globalTransformation * offset;
         }
 
+        // 递归处理当前节点的所有子节点
         for (int i = 0; i < node->childrenCount; i++)
             CalculateBoneTransform(&node->children[i], globalTransformation);
     }
 
+    // 获取最终的骨骼变换矩阵数组（供着色器使用）
+    // @return: 包含所有骨骼最终变换矩阵的向量
     std::vector<glm::mat4> GetFinalBoneMatrices()
     {
         return m_FinalBoneMatrices;
     }
 
 private:
+    // 存储每个骨骼的最终变换矩阵（传递给着色器进行蒙皮）
     std::vector<glm::mat4> m_FinalBoneMatrices;
-    Animation* m_CurrentAnimation;
-    float m_CurrentTime;
-    float m_DeltaTime;
 
+    // 当前正在播放的动画指针
+    Animation* m_CurrentAnimation;
+
+    // 当前动画时间（以tick为单位，不是秒）
+    float m_CurrentTime;
+
+    // 帧时间增量（秒），记录上一帧到当前帧的时间差
+    float m_DeltaTime;
 };
 
 }

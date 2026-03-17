@@ -109,8 +109,15 @@ void drawInit()
 	};
 
 
+      /*
+      VAO 是 OpenGL 中顶点数组对象（VAO） 的标识符数组，
+      它的核心作用是保存 / 封装所有与顶点数据相关的配置状态（包括 VBO 绑定、顶点属性指针、EBO 绑定等），
+      让你可以通过绑定 VAO 一键恢复所有顶点数据的渲染配置，无需重复设置。  
+      所有与顶点数据相关的配置（VBO 绑定、顶点属性布局、EBO 绑定等）都会被 OpenGL 记录到当前绑定的 VAO 中
+      */
 	// 批量生成3个VAO（第一个参数=3）
 	glGenVertexArrays(3, g_VAOs);
+	
 	// 批量生成3个VBO（第一个参数=3）
 	glGenBuffers(3, g_VBOs);
 

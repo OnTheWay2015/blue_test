@@ -25,7 +25,7 @@ CSmartPtr<std::vector<unsigned char>> ProtobufParseMessage::SerializeToArray(CSm
 {
     auto msg = CONVERT_POINT(google::protobuf::Message, h);
     auto vec = std::make_shared<std::vector<unsigned char>>();
-    auto sz =  msg->ByteSize();
+    auto sz =  msg->ByteSizeLong();
     if (sz<=0)
     {
         PrintCoreDebugLog(_T("---- pb serialize error size 0"));

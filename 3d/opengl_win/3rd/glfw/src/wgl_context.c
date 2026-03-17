@@ -326,9 +326,10 @@ static void makeContextCurrentWGL(_GLFWwindow* window)
 static void swapBuffersWGL(_GLFWwindow* window)
 {
     if (!window->monitor)
-    {
+    {// window->monitor 判断是否是全屏模式（全屏时指向对应的显示器，窗口化时为 NULL）
+
         // HACK: Use DwmFlush when desktop composition is enabled on Windows 7
-        if (!IsWindows8OrGreater())
+        if (!IsWindows8OrGreater())// 系统版本判断：IsWindows8OrGreater() 是 Windows API，用于检测当前系统是否是 Win8 及以上版本
         {
             BOOL enabled = FALSE;
 
@@ -340,7 +341,9 @@ static void swapBuffersWGL(_GLFWwindow* window)
             }
         }
     }
-
+    
+    //调用 Windows GDI/OpenGL 接口 SwapBuffers，传入窗口的设备上下文（DC）
+    // 完成前后缓冲区交换（把后台渲染好的图像显示到屏幕上）
     SwapBuffers(window->context.wgl.dc);
 }
 

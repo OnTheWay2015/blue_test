@@ -691,7 +691,7 @@ static l_mem singlestep (lua_State *L) {
   }
 }
 
-
+//GC主驱动函数：协调标记（mark）和清扫（sweep）阶段
 void luaC_step (lua_State *L) {
   global_State *g = G(L);
   // 大致估算本次回收要回收多少数据
