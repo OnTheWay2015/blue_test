@@ -10,6 +10,7 @@ INT="i",
 LONG="I",
 WORD="H",
 SHORT="h",
+FLOAT="f",
 STR="s",
 BYTE="B",
 BYTE_FIX="c",
@@ -36,14 +37,15 @@ GD.MSG_Protocol={
 			[2]={"d",GD.CONVERT_KEYS.INT},
 
 		}},
-		[4]={"str1",GD.CONVERT_KEYS.STR},
-		[5]={"ary2",
+		[4]={"fval",GD.CONVERT_KEYS.FLOAT},
+		[5]={"str1",GD.CONVERT_KEYS.STR},
+		[6]={"ary2",
 			GD.CONVERT_KEYS.ARRAY,
 			GD.CONVERT_KEYS.INT,
 			GD.CONVERT_KEYS.INT
 		},		
-		[6]={"str2",GD.CONVERT_KEYS.STR},
-		--[7]={"bytes",GD.CONVERT_KEYS.BYTE_FIX,GD.CONVERT_KEYS.BYTE},
+		[7]={"str2",GD.CONVERT_KEYS.STR},
+		--[8]={"bytes",GD.CONVERT_KEYS.BYTE_FIX,GD.CONVERT_KEYS.BYTE},
 		
 	}, 
 }
@@ -67,6 +69,9 @@ end
 
 function GD.packMsgByteFix(keysfmt,data)
 	local bytes=""
+	if not data or #data <=0 then
+		return bytes
+	end	
 	local pos = -1
 	local len=#data
 	local packfmt = "<" .. keysfmt 
@@ -80,7 +85,7 @@ end
 
 function GD.packMsgArray(lenfmt,keysfmt,data)
 	local bytes=""
-	if #data <=0 then
+	if not data or #data <=0 then
 		return ""
 	end
 	local packfmt = "<" .. lenfmt 
@@ -134,8 +139,8 @@ end
 
 function GD.unPackMsgByteFix(keysfmt,bytes,pos)
 	 
-	if #bytes <=0 then
-		return ""
+	if #bytes <=0 or #bytes < pos then
+		return "",pos
 	end
 	local nextPos = pos 
 	
@@ -153,8 +158,8 @@ end
 function GD.unPackMsgArray(lenfmt,keysfmt,bytes,pos)
 	local data = {}
 	local nextPos = pos 
-	if #bytes <=0 then
-		return data
+	if #bytes <=0 or #bytes < pos then
+		return data,pos
 	end
 	local packfmt = "<" .. lenfmt
 	local len = -1	
@@ -232,9 +237,9 @@ function testpack()
 			{["a"]=33,["b"]=44},
 			{["a"]=55,["b"]=66},
 			},
+		["fval"]=1.5,
 		["str1"]="abc1",
 		["ary2"]={1,2,3,4,5},
-
 		["str2"]="efg2",
 
 	} 
