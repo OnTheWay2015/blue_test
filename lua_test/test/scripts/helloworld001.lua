@@ -1,5 +1,14 @@
+
+-- 添加 require 搜索目录 
 package.path = package.path .. ';../../../test/scripts/?.lua' 
 print(package.path)
+
+-- 查看已加载的文件 
+print(package.loaded)
+
+-- 清除已加载的文件 
+package.loaded["filename"] = nil
+
 
 --
 --[[  
