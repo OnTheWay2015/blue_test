@@ -168,6 +168,7 @@
     <ClCompile Include="test_bind.cpp" />
     <ClCompile Include="test_bind01.cpp" />
     <ClCompile Include="test_game.cpp" />
+    <ClCompile Include="test_requireEx.cpp" />
     <ClCompile Include="test_structlib.cpp" />
     <ClCompile Include="test_table.cpp" />
   </ItemGroup>

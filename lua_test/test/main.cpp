@@ -1237,6 +1237,7 @@ extern void test_matetable();
 
 
 namespace TEST_STRUCT { int test(); };
+namespace TEST_REQUIRE_EX{ int test(); };
 
 
 
@@ -1248,8 +1249,8 @@ int main(int argc, char* argv[])
 
 	//test_matetable();
 
-	TEST_STRUCT::test();
-	
+	//TEST_STRUCT::test();
+	TEST_REQUIRE_EX::test();
 	
 	system("pause");
 	return 0;

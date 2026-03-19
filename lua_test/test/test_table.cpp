@@ -1,4 +1,5 @@
 
+#define LUA_OK 0
 
 
 /*
@@ -107,7 +108,6 @@ void test_table() {
 //#include <iostream>
 //#include <string>
 
-#define LUA_OK 0
 
 // 辅助函数：检查Lua错误
 void check_lua_error(lua_State* L, int status) {
