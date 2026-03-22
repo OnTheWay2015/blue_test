@@ -370,6 +370,7 @@ namespace TEST_BASE_IMG{void test();}
 
 namespace TEST_BASE_IMG1 {void test();}
 namespace TEST_TRANS {void test();}
+namespace TEST_BASE_IMG_RENDER {void test();}
 
 
 
@@ -394,9 +395,10 @@ namespace TEST_TRANS {void test();}
 
 int main(void)
 {
-	MODEL_TEST::test();
+	//MODEL_TEST::test();
 	//STENCIL_TEST::test();
 	//basetest();
+	TEST_BASE_IMG_RENDER::test();
 	//TEST_BASE_IMG::test();
 	//TEST_BASE_IMG1::test();
 	//TEST_TRANS::test();

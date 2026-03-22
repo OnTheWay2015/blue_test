@@ -60,9 +60,15 @@
     <ClCompile Include="text_trans.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="text_base_img_render.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="test_model_loading.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

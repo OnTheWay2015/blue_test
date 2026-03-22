@@ -1,8 +1,5 @@
 /*
 _faq:
-    当加载纹理数据和 设置的 internalFormat 不一样时，可能是灰白，点点,错乱图样 
-    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, heigh, 0, internalFormat, GL_UNSIGNED_BYTE, image);
- 
 
 
 
@@ -10,6 +7,7 @@ _faq:
 
 
 
+#include "stdafx.h"
 #include "windows.h"
 #include <iostream>
 
@@ -19,8 +17,20 @@ _faq:
 #include "../../3rd/glew-2.2.0/include/GL/glew.h"
 #include "../../3rd/glfw/include/GLFW/glfw3.h"
 
-namespace TEST_BASE_IMG
+
+#include "../../3rd/glm/glm.hpp"
+#include "../../3rd/glm/gtc/matrix_transform.hpp" // 包含各种变换矩阵生成函数
+#include "../../3rd/glm/gtc/type_ptr.hpp"    
+
+
+
+namespace TEST_BASE_IMG_RENDER
 {
+    using namespace TEST_3D ;
+    
+    int g_window_w = 800;
+    int g_window_h = 600;
+
     GLuint g_shaderProgram;
     GLuint g_VAOs[1], g_VBOs[1], g_EBOs[1];
     GLuint g_textureID; // 存储纹理ID
@@ -46,7 +56,7 @@ namespace TEST_BASE_IMG
     }
 
     // 加载纹理的函数
-	GLuint loadTexture(const char* texturePath) {
+	GLuint loadTexture(const char* texturePath, int& width, int& heigh) {
 		GLuint textureID;
 		glGenTextures(1, &textureID);
 		glBindTexture(GL_TEXTURE_2D, textureID);
@@ -58,7 +68,7 @@ namespace TEST_BASE_IMG
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		// 加载纹理图片（使用SOIL库）
-		int width, heigh, nrChannels;
+		int nrChannels;
 		//unsigned char* image = SOIL_load_image(texturePath, &width, &height, 0, SOIL_LOAD_RGB);
 		unsigned char* image = stbi_load(texturePath, &width, &heigh, &nrChannels, 0);
 		if (image == nullptr) {
@@ -150,25 +160,23 @@ namespace TEST_BASE_IMG
 
         // 4. 定义带纹理坐标的顶点数据
         // 格式：x,y,z (位置) | u,v (纹理坐标)
-        float vertices[] = {
-            // 位置 opengl ndc 取值为 [-1,1],窗口中心为(0,0)  // 纹理坐标 取值[0,1]  纹理坐标以左上角为基点(0,0)
-            -0.5f, 0.5f, 0.0f,  0.0f, 0.0f, // 左上
-            -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, // 左下
-             0.5f, -0.5f, 0.0f,  1.0f, 1.0f, // 右下
-             0.5f, 0.5f, 0.0f,  1.0f, 0.0f, // 右上
-        };
-
         //float vertices[] = {
-        //    // 位置              // 纹理坐标
-        //    -0.5f, 0.5f, 0.0f,  0.0f, 1.0f, // 左上 (修正UV：0,1)
-        //    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, // 左下 (修正UV：0,0)
-        //     0.5f, 0.5f, 0.0f,  1.0f, 1.0f, // 右上 (修正UV：1,1)
-        //     0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // 右下 (修正UV：1,0)
+        //    // 位置              // 纹理坐标  纹理坐标以左上角为基点
+        //    -1.0f, 1.0f, 0.0f,  0.0f, 0.0f, // 左上
+        //    -1.0f, -1.0f, 0.0f,  0.0f, 1.0f, // 左下
+        //     1.0f, -1.0f, 0.0f,  1.0f, 1.0f, // 右下
+        //     1.0f, 1.0f, 0.0f,  1.0f, 0.0f, // 右上
         //};
 
+        VEC4_POS_UV vertices= {
+            // 位置 opengl ndc 取值为 [-1,1],窗口中心为(0,0)  // 纹理坐标 取值[0,1]  纹理坐标以左上角为基点(0,0)
+             - 1.0f, 1.0f, 0.0f,  0.0f, 0.0f, // 左上
+            -1.0f, -1.0f, 0.0f,  0.0f, 1.0f, // 左下
+             1.0f, -1.0f, 0.0f,  1.0f, 1.0f, // 右下
+             1.0f, 1.0f, 0.0f,  1.0f, 0.0f // 右上
+        };
 
-        //GLuint indices[] = { 0, 1, 2 }; // 三角形索引
-        //GLuint indices[] = { 0, 1, 2, 3,2,1 }; // 四边形索引
+        //vertices.vec4[0].v.pos.x = 100;
 
         // 正确的四边形索引（两个按顶点逆时针,画的三角形）
         GLuint indices[] = {
@@ -176,17 +184,62 @@ namespace TEST_BASE_IMG
             3, 0,2  // 第二个三角形：右上→左上→右下
         };
 
-        //float vertices[] = {
-        //    // positions          // texture coords
-        //     0.5f,  0.5f, 0.0f,   1.0f, 1.0f, // top right
-        //     0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // bottom right
-        //    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, // bottom left
-        //    -0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // top left 
-        //};
-        //unsigned int indices[] = {
-        //    0, 1, 3, // first triangle
-        //    1, 2, 3  // second triangle
-        //};
+        int width=0,heigh = 0;
+        //加载纹理
+        g_textureID = loadTexture("../../../run/img_test.png",width,heigh); 
+
+
+        glm::vec3 translateVec(0.0f, 0.0f, 0.0f);    // 平移向量
+        glm::vec3 scaleVec(width/2.0f, heigh/2.0f, 1.0f); // 缩放向量
+
+        float rotateAngle = glm::radians(0.0f);     // 旋转角度（绕 Z 轴）
+        glm::vec3 rotateAxis(0.0f, 0.0f, 1.0f);      // 旋转轴（Z 轴）
+
+        //组合变换矩阵（核心：先缩放 → 再旋转 → 最后平移，代码中反向相乘）
+        glm::mat4 modelMat = glm::mat4(1.0f);        // 初始化为单位矩阵
+        modelMat = glm::translate(modelMat, translateVec);  // 平移
+        modelMat = glm::rotate(modelMat, rotateAngle, rotateAxis);  // 旋转
+        modelMat = glm::scale(modelMat ,scaleVec);
+
+        //todo 正交投影
+        {
+            float left = -g_window_w/2.0f;     // 左裁剪面
+            float right = g_window_w/2.0f;     // 右裁剪面
+            float top = g_window_h/2.0f;       // 上裁剪面
+            float bottom =-g_window_h/2.0f;   // 下裁剪面
+            float nearPlane = -1.0f; // 近裁剪面（必须 >0，且 < far）
+            float farPlane =  1.0f;// 远裁剪面
+
+            // 创建正交投影矩阵
+            glm::mat4 orthoMat = glm::ortho(left, right, bottom, top, nearPlane, farPlane);
+            modelMat= orthoMat * modelMat; // 投影矩阵 * 视图矩阵 * 模型矩阵  /2D渲染无视图矩阵
+
+        }
+
+
+        for (int i=0;i<4;i++)
+		{
+			auto& d = vertices.vec4[i];
+            glm::vec3 originalPos(
+                d.v.pos.x,
+                d.v.pos.y,
+                d.v.pos.z);
+
+			//将三维点转换为齐次坐标（vec4，w=1）
+			glm::vec4 posHomogeneous(originalPos, 1.0f);
+
+			//矩阵与齐次坐标相乘（GLM重载了*运算符，顺序：矩阵 * 坐标）
+			glm::vec4 transformedHomogeneous = modelMat * posHomogeneous;
+
+			//将齐次坐标转回三维点（取出x,y,z即可，w通常仍为1）
+			glm::vec3 transformedPos = glm::vec3(transformedHomogeneous);
+            d.v.pos.x = transformedPos.x;
+            d.v.pos.y = transformedPos.y;
+            d.v.pos.z = transformedPos.z;
+		}
+
+        // 可选：将 glm::mat4 转换为 float 数组（用于传给 GPU 着色器）
+        //const float* matArray = glm::value_ptr(modelMat);
 
 
         // 5. 配置VAO/VBO/EBO
@@ -197,7 +250,14 @@ namespace TEST_BASE_IMG
         glBindVertexArray(g_VAOs[0]);
 
         glBindBuffer(GL_ARRAY_BUFFER, g_VBOs[0]);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        auto len1 = sizeof(VEC4_POS_UV);
+        auto len2 = sizeof(uni_POS_UV);
+        auto len2_1 = sizeof(uni_POS_UV::POS_UV);
+        auto len3 = sizeof(POS);
+        auto len4 = sizeof(UV);
+        auto len = sizeof(vertices);
+        glBufferData(GL_ARRAY_BUFFER, len, vertices.vec4[0].ves, GL_STATIC_DRAW);
+        //glBufferData(GL_ARRAY_BUFFER, len, vertices, GL_STATIC_DRAW);
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, g_EBOs[0]);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
@@ -209,9 +269,7 @@ namespace TEST_BASE_IMG
         // 配置纹理坐标属性（location 1）
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
-
-        // 6. 加载纹理（替换为你的纹理图片路径）
-        g_textureID = loadTexture("../../../run/img_test.png"); // 请修改为实际图片路径
+	
 
         // 解绑VAO/VBO
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -231,7 +289,7 @@ namespace TEST_BASE_IMG
         glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
         // 创建窗口
-        GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Texture Demo", nullptr, nullptr);
+        GLFWwindow* window = glfwCreateWindow(g_window_w, g_window_h, "OpenGL Texture Demo", nullptr, nullptr);
         if (window == NULL) {
             std::cout << "Failed to create GLFW window" << std::endl;
             glfwTerminate();
