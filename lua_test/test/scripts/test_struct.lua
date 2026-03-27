@@ -147,7 +147,10 @@ function GD.unPackMsgByteFix(keysfmt,bytes,pos)
 	local packfmt = "<" .. keysfmt
 	local len = -1
 	len ,nextPos = struct.unpack(packfmt,bytes,pos)
-	
+
+	if len <=0 then
+		return nil,nextPos
+	end
 	packfmt = "<" .. len
 	local bts = ""
 	bts, nextPos = struct.unpack(packfmt,bytes,nextPos)

@@ -135,10 +135,51 @@ end
 
 
 
+function test_gmath()
+    local str = "3*ABC+4*DDD+5*xxxxx"
+
+    -- 存储最终拆分结果的表
+    local result = { }
+
+    -- 第一步：按 "+" 拆分所有项（匹配所有非"+"的字符序列）
+	--  [^+]+ 这个 Lua 模式匹配表达式为什么不会匹配到 + 号，核心原因是 [^+] 这个字符集的定义本身就排除了 +，再结合 + 修饰符的作用，最终只会匹配连续的、不含 + 的字符序列。
+    for item in string.gmatch(str, "[^+]+") do
+        -- 第二步：对每个项按 "*" 拆分，提取数字和字符部分
+        -- 模式解释：(%d+) 匹配数字部分，(.+) 匹配*后的所有字符
+        local num, char_part = string.match(item, "(%d+)%*(.+)")  -- 第二个 % 是 Lua 正则（模式匹配）中的转义符，用来让后面的 * 表示 “普通的星号字符”，而非正则的特殊功能
+
+        -- 将拆分结果存入表（做非空判断，避免异常）
+        if num and char_part then
+            table.insert(result, {
+                number = tonumber(num),
+                -- 转成数字类型（可选）
+                text = char_part
+            } )
+        end
+    end
+
+    -- 打印拆分结果，验证效果
+    print("拆分后的详细结果：")
+    for i, v in ipairs(result) do
+        print(string.format("第%d项：数字=%d，字符=%s", i, v.number, v.text))
+    end
+
+    -- 也可以直接遍历原始拆分的项（不整理成表）
+    print("\n直接遍历拆分项：")
+    for item in string.gmatch(str, "[^+]+") do
+        print("原始项：" .. item)
+        local num, char_part = string.match(item, "(%d+)%*(.+)")
+        print("  → 拆分：数字=" .. num .. "，字符=" .. char_part)
+    end
+
+end
+
+
 -- 入口方法 
 function run_main()
-	normal_use()
-	TestString()
+	test_gmath()
+	--normal_use()
+	--TestString()
 end
  
  

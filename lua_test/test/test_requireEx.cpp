@@ -129,6 +129,11 @@ int test() {
     // 4. 测试：在 Lua 中 require 内存模块
     printf("\n=== 测试 require 内存模块 ===\n");
     const char *test_code = R"(
+            package.path = package.path .. ';../../../test/scripts/?.lua' 
+            local struct = require("struct")  -- 正常加载
+    	local bytes = struct.pack("<i",123)
+
+
         -- 加载 math.utils 模块
         local math_utils = require("math.utils")
         print("math_utils.add(10, 20) =", math_utils.add(10, 20))
