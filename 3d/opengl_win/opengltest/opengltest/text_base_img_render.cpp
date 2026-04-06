@@ -201,7 +201,7 @@ namespace TEST_BASE_IMG_RENDER
         modelMat = glm::rotate(modelMat, rotateAngle, rotateAxis);  // 旋转
         modelMat = glm::scale(modelMat ,scaleVec);
 
-        //todo 正交投影
+        //正交投影
         {
             float left = -g_window_w/2.0f;     // 左裁剪面
             float right = g_window_w/2.0f;     // 右裁剪面
@@ -230,6 +230,9 @@ namespace TEST_BASE_IMG_RENDER
 
 			//矩阵与齐次坐标相乘（GLM重载了*运算符，顺序：矩阵 * 坐标）
 			glm::vec4 transformedHomogeneous = modelMat * posHomogeneous;
+            
+
+        
 
 			//将齐次坐标转回三维点（取出x,y,z即可，w通常仍为1）
 			glm::vec3 transformedPos = glm::vec3(transformedHomogeneous);
