@@ -516,7 +516,9 @@ namespace TEST_BASE_IMG_RENDER_CORRECT_3D_TO_2D_FIXED
             glEnable(GL_DEPTH_TEST); // 启用深度测试
 
             shader->use();
-
+            
+            //todo 当前使用的是实际坐标点，还需要做转到到 ndc坐标
+            
             //float scale = 10.0f / windowHeight;
             //glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(scale));
 
