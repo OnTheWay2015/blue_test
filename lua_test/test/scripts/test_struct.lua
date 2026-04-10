@@ -1,5 +1,5 @@
 package.path = package.path .. ';../../../test/scripts/?.lua' 
-local struct = require("struct")  --好像有点问提，可以用 struct_lib.c
+local struct = require("struct")  --也可以用 struct_lib.c
 
 local GD = {}
  
@@ -14,13 +14,16 @@ FLOAT="f",
 STR="s",
 BYTE="B",
 BYTE_FIX="c",
+BOOL="b", -- todo
 }
 
 GD.C2S_MessageId={
 	TTT = 12345
 }
 
-
+--[[
+每个字段都要有
+--]]
 GD.MSG_Protocol={
 	[GD.C2S_MessageId.TTT]={
 		[1]={"lSize",GD.CONVERT_KEYS.INT},
@@ -32,17 +35,23 @@ GD.MSG_Protocol={
 		}},
 		[3]={"ary1",
 			GD.CONVERT_KEYS.ARRAY,
-			GD.CONVERT_KEYS.INT,{
-			[1]={"c",GD.CONVERT_KEYS.INT},
-			[2]={"d",GD.CONVERT_KEYS.INT},
-
-		}},
+			{
+				GD.CONVERT_KEYS.INT, 
+				GD.CONVERT_KEYS.OBJECT,
+				{
+					[1]={"c",GD.CONVERT_KEYS.INT},
+					[2]={"d",GD.CONVERT_KEYS.INT}, 
+				}
+			}
+		},
 		[4]={"fval",GD.CONVERT_KEYS.FLOAT},
 		[5]={"str1",GD.CONVERT_KEYS.STR},
 		[6]={"ary2",
 			GD.CONVERT_KEYS.ARRAY,
-			GD.CONVERT_KEYS.INT,
-			GD.CONVERT_KEYS.INT
+			{
+				GD.CONVERT_KEYS.INT,
+				GD.CONVERT_KEYS.INT
+			} 
 		},		
 		[7]={"str2",GD.CONVERT_KEYS.STR},
 		--[8]={"bytes",GD.CONVERT_KEYS.BYTE_FIX,GD.CONVERT_KEYS.BYTE},
@@ -50,14 +59,21 @@ GD.MSG_Protocol={
 	}, 
 }
 
-function GD.packMsgKey(keysfmt,data)
-	local tp = keysfmt[2]
+function GD.packMsgKey(tp,tpEx,data)
 	if tp == GD.CONVERT_KEYS.OBJECT then
-		return GD.packMsgObject(keysfmt[3],data)
+		return GD.packMsgObject(tpEx,data)
 	elseif tp == GD.CONVERT_KEYS.ARRAY then
-		return GD.packMsgArray(keysfmt[3],keysfmt[4],data) 
+		return GD.packMsgArray(tpEx,data) 
 	elseif tp == GD.CONVERT_KEYS.BYTE_FIX then
-			return GD.packMsgByteFix(keysfmt[3],data) 
+			return GD.packMsgByteFix(tpEx[1],data) 
+	elseif tp == GD.CONVERT_KEYS.BOOL then
+		local packfmt = "<" .. tp
+		if  not data then
+			return struct.pack(packfmt,0)
+		else	
+			return struct.pack(packfmt,1)
+		end
+
 	else
 		if data == nil then
 			return ""
@@ -67,14 +83,14 @@ function GD.packMsgKey(keysfmt,data)
 	end 
 end
 
-function GD.packMsgByteFix(keysfmt,data)
+function GD.packMsgByteFix(lentp,data)
 	local bytes=""
 	if not data or #data <=0 then
 		return bytes
 	end	
 	local pos = -1
 	local len=#data
-	local packfmt = "<" .. keysfmt 
+	local packfmt = "<" .. lentp
 	bytes = struct.pack(packfmt,len)
 	
 	local lenstr=""..len
@@ -83,34 +99,37 @@ function GD.packMsgByteFix(keysfmt,data)
 	return bytes..b 
 end
 
-function GD.packMsgArray(lenfmt,keysfmt,data)
+function GD.packMsgArray(tpEx,data)
+	local lenfmt = tpEx[1]
+	local tpCurr = tpEx[2]
+	local tpExCurr= tpEx[3]
+
 	local bytes=""
-	if not data or #data <=0 then
-		return ""
-	end
 	local packfmt = "<" .. lenfmt 
+	if not data or #data <=0 then
+		bytes = struct.pack(packfmt,0)
+		return  bytes 
+	end
+
 	bytes = struct.pack(packfmt,#data)
 
-	if type(keysfmt) == "table" then
-		for i=1,#data do
-			bytes = bytes .. GD.packMsgObject(keysfmt,data[i])
-		end
-	else
-		for i=1,#data do
-			bytes = bytes .. GD.packMsgKey({"",keysfmt} ,data[i]) 
-		end
+	for i=1,#data do
+		bytes = bytes .. GD.packMsgKey(tpCurr,tpExCurr,data[i]) 
 	end
 	return bytes
 	  
 end
 
 
-function GD.packMsgObject(keysfmt,data)
+function GD.packMsgObject(tpEx,data)
 	local bytes="" 
-	for _,v in ipairs(keysfmt) do
+	if not data then
+		return bytes
+	end
+	for _,v in ipairs(tpEx) do
 		local k = v[1]
-		--bytes = bytes .. GD.packMsgKey(v,data[k])
-		local bb = 	 GD.packMsgKey(v,data[k])
+		--bytes = bytes .. GD.packMsgKey(v[2],v[3],data[k])
+		local bb = 	 GD.packMsgKey(v[2],v[3],data[k])
 		local len = #bb;
 		bytes = bytes ..bb
 		len = #bytes;
@@ -121,14 +140,25 @@ end
 
 -----------------------------------------------------------------
 
-function GD.unPackMsgKey(keysfmt,bytes,pos)
-	local tp = keysfmt[2]
+function GD.unPackMsgKey(tp,tpEx,bytes,pos)
+	if #bytes <=0 or pos >=#bytes then
+		return nil,pos
+	end
+
 	if tp == GD.CONVERT_KEYS.OBJECT then
-		return GD.unPackMsgObject(keysfmt[3],bytes,pos)
+		return GD.unPackMsgObject(tpEx,bytes,pos)
 	elseif tp == GD.CONVERT_KEYS.ARRAY then
-		return GD.unPackMsgArray(keysfmt[3],keysfmt[4],bytes,pos) 
+		return GD.unPackMsgArray(tpEx,bytes,pos) 
 	elseif tp == GD.CONVERT_KEYS.BYTE_FIX then
-			return GD.unPackMsgByteFix(keysfmt[3],bytes,pos) 
+			return GD.unPackMsgByteFix(tpEx[1],bytes,pos) 
+	elseif tp == GD.CONVERT_KEYS.BYTE_FIX then
+		local packfmt = "<" .. tp
+		local val,p = struct.unpack(packfmt,bytes,pos)
+		if val > 0 then
+			return true,p
+		else
+			return false,p
+		end
 	else
 		local len =#bytes -- 当 struct.unpack 返回 pos 为 nil 时，可能是长度不够 
 		local packfmt = "<" .. tp
@@ -137,14 +167,14 @@ function GD.unPackMsgKey(keysfmt,bytes,pos)
 	end 	 
 end
 
-function GD.unPackMsgByteFix(keysfmt,bytes,pos)
+function GD.unPackMsgByteFix(lentp,bytes,pos)
 	 
 	if #bytes <=0 or #bytes < pos then
 		return "",pos
 	end
 	local nextPos = pos 
 	
-	local packfmt = "<" .. keysfmt
+	local packfmt = "<" ..lentp 
 	local len = -1
 	len ,nextPos = struct.unpack(packfmt,bytes,pos)
 
@@ -158,7 +188,11 @@ function GD.unPackMsgByteFix(keysfmt,bytes,pos)
 end
 
 
-function GD.unPackMsgArray(lenfmt,keysfmt,bytes,pos)
+function GD.unPackMsgArray(tpEx,bytes,pos)
+	local lenfmt = tpEx[1]
+	local tpCurr = tpEx[2]
+	local tpExCurr= tpEx[3]
+	
 	local data = {}
 	local nextPos = pos 
 	if #bytes <=0 or #bytes < pos then
@@ -169,16 +203,9 @@ function GD.unPackMsgArray(lenfmt,keysfmt,bytes,pos)
 	len,nextPos = struct.unpack(packfmt,bytes,pos)
 	
 	local tmp
-	if type(keysfmt) == "table" then
-		for i=1,len do
-			tmp,nextPos = GD.unPackMsgObject(keysfmt,bytes,nextPos)
-			table.insert(data,tmp)
-		end
-	else
-		for i=1,len do 
-			tmp,nextPos = GD.unPackMsgKey({"",keysfmt},bytes,nextPos )
-			table.insert(data,tmp) 
-		end
+	for i=1,len do 
+		tmp,nextPos = GD.unPackMsgKey(tpCurr,tpExCurr,bytes,nextPos )
+		table.insert(data,tmp) 
 	end
 	return data,nextPos 
 end
@@ -189,7 +216,7 @@ function GD.unPackMsgObject(keysfmt,bytes,pos)
 	local nextPos = pos 
 	for _,v in ipairs(keysfmt) do
 		local k = v[1]
-		data[k],nextPos = GD.unPackMsgKey(v,bytes,pos)
+		data[k],nextPos = GD.unPackMsgKey(v[2],v[3],bytes,pos)
 		pos =  nextPos 
 	end  
 	return data,nextPos 
