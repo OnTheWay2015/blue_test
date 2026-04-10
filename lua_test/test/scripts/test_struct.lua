@@ -22,7 +22,7 @@ GD.C2S_MessageId={
 }
 
 --[[
-每个字段都要有
+按序解析,所以要打包的数据,每个字段都要有,不能空
 --]]
 GD.MSG_Protocol={
 	[GD.C2S_MessageId.TTT]={
@@ -53,7 +53,8 @@ GD.MSG_Protocol={
 				GD.CONVERT_KEYS.INT
 			} 
 		},		
-		[7]={"str2",GD.CONVERT_KEYS.STR},
+		[7]={"bb",GD.CONVERT_KEYS.BOOL},
+		[8]={"str2",GD.CONVERT_KEYS.STR},
 		--[8]={"bytes",GD.CONVERT_KEYS.BYTE_FIX,GD.CONVERT_KEYS.BYTE},
 		
 	}, 
@@ -151,7 +152,7 @@ function GD.unPackMsgKey(tp,tpEx,bytes,pos)
 		return GD.unPackMsgArray(tpEx,bytes,pos) 
 	elseif tp == GD.CONVERT_KEYS.BYTE_FIX then
 			return GD.unPackMsgByteFix(tpEx[1],bytes,pos) 
-	elseif tp == GD.CONVERT_KEYS.BYTE_FIX then
+	elseif tp == GD.CONVERT_KEYS.BOOL then
 		local packfmt = "<" .. tp
 		local val,p = struct.unpack(packfmt,bytes,pos)
 		if val > 0 then
@@ -216,7 +217,7 @@ function GD.unPackMsgObject(keysfmt,bytes,pos)
 	local nextPos = pos 
 	for _,v in ipairs(keysfmt) do
 		local k = v[1]
-		data[k],nextPos = GD.unPackMsgKey(v[2],v[3],bytes,pos)
+		data[k],nextPos = GD.unPackMsgKey(v[2],v[3],bytes,nextPos)
 		pos =  nextPos 
 	end  
 	return data,nextPos 
@@ -264,12 +265,13 @@ function testpack()
 		["lSize"]=99,
 		["obj"]={["a"]=11,["b"]=22},
 		["ary1"]={
-			{["a"]=33,["b"]=44},
-			{["a"]=55,["b"]=66},
+			{["c"]=33,["d"]=44},
+			{["c"]=55,["d"]=66},
 			},
 		["fval"]=1.5,
 		["str1"]="abc1",
 		["ary2"]={1,2,3,4,5},
+		["bb"]=true,
 		["str2"]="efg2",
 
 	} 
