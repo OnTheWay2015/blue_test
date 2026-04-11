@@ -177,6 +177,8 @@ namespace TEST_BASE_IMG_RENDER_CORRECT_3D_TO_2D_FIXED
         float MouseSensitivity;
         float Zoom; // FOV (Field of View)
 
+		int m_windowWidth;
+		int m_windowHeight;
         // 构造函数：根据窗口大小和期望的图片大小计算相机参数
         Camera(int windowWidth, int windowHeight, int imgWidth, int imgHeight)
             : WorldUp(glm::vec3(0.0f, 1.0f, 0.0f)), MovementSpeed(2.5f), MouseSensitivity(0.1f)
@@ -184,7 +186,9 @@ namespace TEST_BASE_IMG_RENDER_CORRECT_3D_TO_2D_FIXED
             // 计算相机应距离 Z=0 平面多远，使得 Z=0 平面上的区域正好覆盖窗口大小
             // 使用 FOV 角度和窗口尺寸计算距离
             float aspectRatio = static_cast<float>(windowWidth) / static_cast<float>(windowHeight);
-            float fovRadians = glm::radians(Zoom = 30.0f); // 设定一个基础FOV
+            float fovRadians = glm::radians(Zoom = 60.0f); // 设定一个基础FOV
+			m_windowWidth = windowWidth;
+			m_windowHeight = windowHeight;
 
             // 计算垂直视野能覆盖的高度对应的距离
             // tan(fov/2) = (windowHeight/2) / distance -> distance = (windowHeight/2) / tan(fov/2)
@@ -214,7 +218,10 @@ namespace TEST_BASE_IMG_RENDER_CORRECT_3D_TO_2D_FIXED
             Position = glm::vec3(0.0f, 0.0f, calculatedDistance);
             
             */
-            float dis = (windowHeight/2) / fovRadians * 0.5f;
+            //float dis = (windowHeight/2) / fovRadians * 0.5f;
+            
+            float tt = tan(fovRadians* 0.5f);
+            float dis = (windowHeight/2) / (tt);
 
             float NearPlant = dis;
 
@@ -245,10 +252,14 @@ namespace TEST_BASE_IMG_RENDER_CORRECT_3D_TO_2D_FIXED
                 但 near 和 far 仍然必须填正数
 			*/
 
-
             // 使用透视投影, nearPlane 和 farPlane 必须都为正数，而且必须满足 0 < near < far
-            return glm::perspective(glm::radians(Zoom), aspectRatio,NearPlant,FarPlant ) ;
-            //return glm::perspective(glm::radians(Zoom), aspectRatio,1.0f, 2000.0f);
+            //return glm::perspective(glm::radians(Zoom), aspectRatio,NearPlant,FarPlant ) ;
+            glm::mat4 mat = glm::perspective(glm::radians(Zoom), aspectRatio,NearPlant,FarPlant ) ;
+             
+
+			//mat[0][0] = mat[0][0] * (2 / m_windowWidth);
+			//mat[1][1] = mat[1][1] * (2 / m_windowHeight);
+            return mat;
         }
 
     private:
@@ -525,10 +536,22 @@ namespace TEST_BASE_IMG_RENDER_CORRECT_3D_TO_2D_FIXED
             //float pixelScale = 2.0f / (float)windowHeight;
             //glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(pixelScale));
 
+    // --- 计算从物理像素坐标到 NDC 的 Model 矩阵 ---
+            float imgWidth = static_cast<float>(texture->width);
+            float imgHeight = static_cast<float>(texture->height);
+
+            glm::mat4 PixelToNDC = glm::mat4(1.0f); // Start with identity matrix
+            //PixelToNDC = glm::scale(PixelToNDC, glm::vec3(2.0f / imgWidth, 2.0f / imgHeight, 1.0f));
+            PixelToNDC = glm::scale(PixelToNDC, glm::vec3(2.0f /windowWidth, 2.0f /windowHeight , 1.0f));
+            // PixelToNDC 现在包含了从物理像素坐标到 NDC 的转换
+            // ----------------------------
+
             // --- 模型矩阵：对于 2D 显示，通常不需要额外变换 ---
             // 图片已经按照其像素尺寸放置在 Z=0 平面的原点周围
-            glm::mat4 model = glm::mat4(1.0f); 
+            //glm::mat4 model = glm::mat4(1.0f); 
+            glm::mat4 model = PixelToNDC;
             // (可选) 如果需要进一步的 2D 变换（如旋转、缩放），可以在这里应用
+            
 
             glm::mat4 view = camera->GetViewMatrix();
             float aspectRatio = static_cast<float>(windowWidth) / static_cast<float>(windowHeight);
