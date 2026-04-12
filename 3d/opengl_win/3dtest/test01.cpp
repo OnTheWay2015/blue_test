@@ -223,7 +223,7 @@ namespace TEST_BASE_IMG_RENDER_CORRECT_3D_TO_2D_FIXED
             float tt = tan(fovRadians* 0.5f);
             float dis = (windowHeight/2) / (tt);
 
-            float NearPlant = dis;
+            NearPlant = dis;
 
             Position = glm::vec3(0.0f, 0.0f, dis);
 
@@ -232,7 +232,7 @@ namespace TEST_BASE_IMG_RENDER_CORRECT_3D_TO_2D_FIXED
             Up = glm::vec3(0, 1, 0);
             Yaw = -90.0f; // 默认朝向-Z
             Pitch = 0.0f;  // 默认水平朝向
-            //updateCameraVectors();
+            updateCameraVectors();
         }
 
         // 获取视角矩阵
@@ -253,12 +253,7 @@ namespace TEST_BASE_IMG_RENDER_CORRECT_3D_TO_2D_FIXED
 			*/
 
             // 使用透视投影, nearPlane 和 farPlane 必须都为正数，而且必须满足 0 < near < far
-            //return glm::perspective(glm::radians(Zoom), aspectRatio,NearPlant,FarPlant ) ;
-            glm::mat4 mat = glm::perspective(glm::radians(Zoom), aspectRatio,NearPlant,FarPlant ) ;
-             
-
-			//mat[0][0] = mat[0][0] * (2 / m_windowWidth);
-			//mat[1][1] = mat[1][1] * (2 / m_windowHeight);
+            glm::mat4 mat = glm::perspective(Zoom, aspectRatio,NearPlant,FarPlant) ; //当前未开启 GLM_FORCE_RADIANS,传入参数使用的是角度
             return mat;
         }
 
@@ -528,39 +523,46 @@ namespace TEST_BASE_IMG_RENDER_CORRECT_3D_TO_2D_FIXED
 
             shader->use();
             
-            //todo 当前使用的是实际坐标点，还需要做转到到 ndc坐标
+            if (1)
+			{//ok
+				glm::mat4 model = glm::mat4(1.0f);
+				glm::mat4 view = camera->GetViewMatrix();
+				float aspectRatio = static_cast<float>(windowWidth) / static_cast<float>(windowHeight);
+				glm::mat4 projection = camera->GetProjectionMatrix(aspectRatio);
+
+				shader->setMat4("model", model); // Identity matrix
+				shader->setMat4("view", view);
+				shader->setMat4("projection", projection);
+			}
+            else
+			{ //ok
+				glm::mat4 model = glm::mat4(1.0f);
+
+				float Zoom = 60.0f;
+				float fovRadians = glm::radians(Zoom); // 设定一个基础FOV
+				float tt = tan(fovRadians * 0.5f);
+				float dis = (windowHeight / 2) / (tt);
+				float NearPlant = dis;
+				float FarPlant = 20000.0f;
+
+				glm::vec3 Position = glm::vec3(0.0f, 0.0f, dis);
+
+				// 相机默认朝向负 Z 方向
+				glm::vec3 Front = glm::vec3(0.0f, 0.0f, -1.0f);
+				glm::vec3 Up = glm::vec3(0, 1, 0);
+
+				glm::mat4 view = glm::lookAt(Position, glm::vec3(0.0f, 0.0f, 0.0f), Up);
+
+
+				float aspectRatio = static_cast<float>(windowWidth) / static_cast<float>(windowHeight);
+				glm::mat4 projection = glm::perspective(Zoom, aspectRatio, NearPlant, FarPlant);
+
+				shader->setMat4("model", model); // Identity matrix
+				shader->setMat4("view", view);
+				shader->setMat4("projection", projection);
+			}
+//--------------------------------------------------------------------------
             
-            //float scale = 10.0f / windowHeight;
-            //glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(scale));
-
-            //float pixelScale = 2.0f / (float)windowHeight;
-            //glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(pixelScale));
-
-    // --- 计算从物理像素坐标到 NDC 的 Model 矩阵 ---
-            float imgWidth = static_cast<float>(texture->width);
-            float imgHeight = static_cast<float>(texture->height);
-
-            glm::mat4 PixelToNDC = glm::mat4(1.0f); // Start with identity matrix
-            //PixelToNDC = glm::scale(PixelToNDC, glm::vec3(2.0f / imgWidth, 2.0f / imgHeight, 1.0f));
-            PixelToNDC = glm::scale(PixelToNDC, glm::vec3(2.0f /windowWidth, 2.0f /windowHeight , 1.0f));
-            // PixelToNDC 现在包含了从物理像素坐标到 NDC 的转换
-            // ----------------------------
-
-            // --- 模型矩阵：对于 2D 显示，通常不需要额外变换 ---
-            // 图片已经按照其像素尺寸放置在 Z=0 平面的原点周围
-            //glm::mat4 model = glm::mat4(1.0f); 
-            glm::mat4 model = PixelToNDC;
-            // (可选) 如果需要进一步的 2D 变换（如旋转、缩放），可以在这里应用
-            
-
-            glm::mat4 view = camera->GetViewMatrix();
-            float aspectRatio = static_cast<float>(windowWidth) / static_cast<float>(windowHeight);
-            glm::mat4 projection = camera->GetProjectionMatrix(aspectRatio);
-
-            shader->setMat4("model", model); // Identity matrix
-            shader->setMat4("view", view);
-            shader->setMat4("projection", projection);
-
             // 绑定纹理
             texture->bind(0);
             shader->setInt("ourTexture", 0);
