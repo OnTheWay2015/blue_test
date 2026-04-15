@@ -15,7 +15,7 @@ GD.CONVERT_KEYS = {
     STR = "s",
     BYTE = "B",
     BYTE_FIX = "c",
-    BOOL = "b",
+    BOOL = "BOOL",
 }
 
 GD.C2S_MessageId = {
@@ -51,7 +51,7 @@ GD.MSG_Protocol = {
 
 -- 内部辅助函数：检查字节串和位置
 local function isValidBytesAndPos(bytes, pos)
-    return bytes and #bytes > 0 and pos and pos <= #bytes
+    return bytes and #bytes > 0 and pos and pos < #bytes
 end
 
 -- 内部辅助函数：安全打包
@@ -303,6 +303,8 @@ function testpack()
 end
 
 function run_main()
+    print("---------------")
+    print(bit.band(33,32))
     testpack()
 end
 

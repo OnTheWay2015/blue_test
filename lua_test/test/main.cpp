@@ -1249,8 +1249,8 @@ int main(int argc, char* argv[])
 
 	//test_matetable();
 
-	//TEST_STRUCT::test();
-	TEST_REQUIRE_EX::test();
+	TEST_STRUCT::test();
+	//TEST_REQUIRE_EX::test();
 	
 	system("pause");
 	return 0;
