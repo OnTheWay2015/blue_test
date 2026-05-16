@@ -1,4 +1,4 @@
-
+﻿
 #define LUA_OK 0
 
 
@@ -25,211 +25,307 @@ extern "C" { // lua.dll　是c库，使用时要用 extern "C",  如果 lua库�
 
 using namespace std;
 
+namespace TEST_TABLE {
 
-// 自定义__index元方法：当访问table不存在的键时触发
-static int l_metatable_index(lua_State* L) {
-    // 栈入参：1=目标table，2=访问的key
-    const char* key = lua_tostring(L, 2);
-    if (key == NULL) {
-        lua_pushnil(L);
-        return 1;
-    }
+    static string dir_scripts = "../../../test/scripts";
+   
+    // 自定义__index元方法：当访问table不存在的键时触发
+    static int l_metatable_index(lua_State* L) {
+        // 栈入参：1=目标table，2=访问的key
+        const char* key = lua_tostring(L, 2);
+        if (key == NULL) {
+            lua_pushnil(L);
+            return 1;
+        }
 
-    // 模拟：访问不存在的key时返回默认值
-    std::cout << "R(触发__index元方法，访问的key：)" << key << std::endl;
-    if (strcmp(key, "default") == 0) {
-        lua_pushstring(L, "R(这是默认值)");
-    }
-    else {
-        lua_pushstring(L, "key不存在，返回默认提示");
-    }
-    return 1; // 返回1个值给Lua
-}
-
-// 为Lua栈中指定位置的table设置元表
-void set_table_metatable(lua_State* L, int table_idx) {
-    // 1. 创建空的元表（压入栈顶）
-    lua_newtable(L);
-    std::cout << "R(创建元表后栈深度：)" << lua_gettop(L) << std::endl; // 原栈深度+1
-
-    // 2. 为元表绑定__index元方法
-    lua_pushcfunction(L, l_metatable_index); // 压入C函数作为元方法
-    lua_setfield(L, -2, "__index"); // 元表.__index = l_metatable_index
-    std::cout << "R(绑定__index后栈深度：)" << lua_gettop(L) << std::endl; // 栈深度不变（弹函数，设字段）
-
-    // 3. 核心操作：为table_idx位置的table设置元表
-    // 此时栈顶是元表，调用lua_setmetatable后弹出元表，目标table保留
-    lua_setmetatable(L, table_idx);
-    std::cout << "R(设置元表后栈深度：)" << lua_gettop(L) << std::endl; // 栈深度-1（弹出元表）
-}
-
-
-void test_table() {
-    // 1. 创建Lua虚拟机
-    lua_State* L = luaL_newstate();
-    luaL_openlibs(L); // 打开Lua标准库
-
-    // 2. 创建目标table（压入栈顶，此时栈深度=1）
-    lua_newtable(L);
-    std::cout << "R(创建目标table后栈深度：)" << lua_gettop(L) << std::endl; // 输出：1
-
-    // 3. 为目标table设置元表（table在栈顶，索引为-1/1）
-    set_table_metatable(L, -1);
-
-    // 4. 测试元表是否生效：访问table的不存在key
-    std::cout << "\n===== 测试元表效果 =====" << std::endl;
-    // 压入要访问的key："test_key"
-    lua_pushstring(L, "test_key");
-    // 读取table["test_key"]（会触发__index元方法）
-    lua_gettable(L, -2);
-    // 输出返回值
-    const char* result = lua_tostring(L, -1);
-    std::cout << "访问table[\"test_key\"]的结果：" << result << std::endl;
-    lua_pop(L, 1); // 弹出返回值
-
-    // 5. 访问元表绑定的默认key
-    lua_pushstring(L, "default");
-    lua_gettable(L, -2);
-    result = lua_tostring(L, -1);
-    std::cout << "访问table[\"default\"]的结果：" << result << std::endl;
-    lua_pop(L, 1);
-
-    // 6. 清理Lua虚拟机
-    lua_close(L);
-}
-
-
-
-
-
-
-
-//#include <lua.hpp>
-//#include <iostream>
-//#include <string>
-
-
-// 辅助函数：检查Lua错误
-void check_lua_error(lua_State* L, int status) {
-    if (status != LUA_OK) {
-        std::cerr << "Lua error: " << lua_tostring(L, -1) << std::endl;
-        lua_pop(L, 1);
-        exit(1);
-    }
-}
-
-// Lua 5.1/5.2 模拟 lua_isinteger 函数,  5.3 才有这个方法
-static int lua_isinteger(lua_State* L, int idx) {
-    if (!lua_isnumber(L, idx)) return 0;
-    double num = lua_tonumber(L, idx);
-    lua_Integer i = static_cast<lua_Integer>(num);
-    // 判断数值是否等于其整数形式（无小数部分）
-    return (static_cast<double>(i) == num);
-}
-
-// 辅助函数：打印栈中指定位置的值（调试用）
-void print_lua_value(lua_State* L, int idx) {
-    switch (lua_type(L, idx)) {
-    case LUA_TNIL:
-        std::cout << "nil";
-        break;
-    case LUA_TNUMBER:
-        // 区分整数和浮点数
-        if (lua_isinteger(L, idx)) {
-            std::cout << lua_tointeger(L, idx);
+        // 模拟：访问不存在的key时返回默认值
+        std::cout << "R(触发__index元方法，访问的key：)" << key << std::endl;
+        if (strcmp(key, "default") == 0) {
+            lua_pushstring(L, "R(这是默认值)");
         }
         else {
-            std::cout << lua_tonumber(L, idx);
+            lua_pushstring(L, "key不存在，返回默认提示");
         }
-        break;
-    case LUA_TSTRING:
-        std::cout << "\"" << lua_tostring(L, idx) << "\"";
-        break;
-    case LUA_TBOOLEAN:
-        std::cout << (lua_toboolean(L, idx) ? "true" : "false");
-        break;
-    case LUA_TTABLE:
-        std::cout << "table: " << lua_topointer(L, idx);
-        break;
-    default:
-        std::cout << lua_typename(L, lua_type(L, idx));
-        break;
+        return 1; // 返回1个值给Lua
     }
-}
 
-int test_visit_table() {
-    // 1. 初始化Lua环境
-    lua_State* L = luaL_newstate();
-    if (!L) {
-        std::cerr << "Failed to create Lua state!" << std::endl;
-        return 1;
+    // 为Lua栈中指定位置的table设置元表
+    void set_table_metatable(lua_State* L, int table_idx) {
+        // 1. 创建空的元表（压入栈顶）
+        lua_newtable(L);
+        std::cout << "R(创建元表后栈深度：)" << lua_gettop(L) << std::endl; // 原栈深度+1
+
+        // 2. 为元表绑定__index元方法
+        lua_pushcfunction(L, l_metatable_index); // 压入C函数作为元方法
+        lua_setfield(L, -2, "__index"); // 元表.__index = l_metatable_index
+        std::cout << "R(绑定__index后栈深度：)" << lua_gettop(L) << std::endl; // 栈深度不变（弹函数，设字段）
+
+        // 3. 核心操作：为table_idx位置的table设置元表
+        // 此时栈顶是元表，调用lua_setmetatable后弹出元表，目标table保留
+        lua_setmetatable(L, table_idx);
+        std::cout << "R(设置元表后栈深度：)" << lua_gettop(L) << std::endl; // 栈深度-1（弹出元表）
     }
-    luaL_openlibs(L);
 
-    // 2. 加载并执行Lua脚本
-    int status = luaL_dofile(L, "test.lua");
-    check_lua_error(L, status);
 
-    // 3. 调用函数获取table
-    lua_getglobal(L, "get_mixed_table");
-    status = lua_pcall(L, 0, 1, 0);
-    check_lua_error(L, status);
 
-    // 4. 检查是否为table
-    if (!lua_istable(L, -1)) {
-        std::cerr << "Error: get_mixed_table() did not return a table!" << std::endl;
+
+
+
+
+
+
+    //#include <lua.hpp>
+    //#include <iostream>
+    //#include <string>
+
+
+    // 辅助函数：检查Lua错误
+    void check_lua_error(lua_State* L, int status) {
+        if (status != LUA_OK) {
+            std::cerr << "Lua error: " << lua_tostring(L, -1) << std::endl;
+            lua_pop(L, 1);
+            exit(1);
+        }
+    }
+
+    // Lua 5.1/5.2 模拟 lua_isinteger 函数,  5.3 才有这个方法
+    static int lua_isinteger(lua_State* L, int idx) {
+        if (!lua_isnumber(L, idx)) return 0;
+        double num = lua_tonumber(L, idx);
+        lua_Integer i = static_cast<lua_Integer>(num);
+        // 判断数值是否等于其整数形式（无小数部分）
+        return (static_cast<double>(i) == num);
+    }
+
+    // 辅助函数：打印栈中指定位置的值（调试用）
+    void print_lua_value(lua_State* L, int idx) {
+        switch (lua_type(L, idx)) {
+        case LUA_TNIL:
+            std::cout << "nil";
+            break;
+        case LUA_TNUMBER:
+            // 区分整数和浮点数
+            if (lua_isinteger(L, idx)) {
+                std::cout << lua_tointeger(L, idx);
+            }
+            else {
+                std::cout << lua_tonumber(L, idx);
+            }
+            break;
+        case LUA_TSTRING:
+            std::cout << "\"" << lua_tostring(L, idx) << "\"";
+            break;
+        case LUA_TBOOLEAN:
+            std::cout << (lua_toboolean(L, idx) ? "true" : "false");
+            break;
+        case LUA_TTABLE:
+            std::cout << "table: " << lua_topointer(L, idx);
+            break;
+        default:
+            std::cout << lua_typename(L, lua_type(L, idx));
+            break;
+        }
+    }
+
+    int test_visit_table() {
+        // 1. 初始化Lua环境
+        lua_State* L = luaL_newstate();
+        if (!L) {
+            std::cerr << "Failed to create Lua state!" << std::endl;
+            return 1;
+        }
+        luaL_openlibs(L);
+
+        // 2. 加载并执行Lua脚本
+        std::string sf = dir_scripts + "/test_table.lua";
+	    if (luaL_loadfile(L, sf.c_str()))
+	    {
+	    	cout << "test_table.lua loaded failed" << endl;
+	    	cout << lua_tostring(L, -1) << endl;
+            return -2;
+        }
+    //dofile   
+	if (lua_pcall(L, 0, 0, 0))
+	 {
+		 cout << lua_tostring(L, -1) << endl;
+		 lua_pop(L, 1);
+		 return -3;
+	 }
+
+
+
+        int status = 0;
+
+        // 3. 调用函数获取table
+        lua_getglobal(L, "get_mixed_table");
+        //status = lua_pcall(L, 0, 1, 0);
+        //check_lua_error(L, status);
+	if (lua_pcall(L, 0, 1, 0))
+	{
+		 cout << lua_tostring(L, -1) << endl;
+		 lua_pop(L, 1);
+		 return -4;
+	 }
+	 
+
+
+
+        // 4. 检查是否为table
+        if (!lua_istable(L, -1)) {
+            std::cerr << "Error: get_mixed_table() did not return a table!" << std::endl;
+            lua_close(L);
+            return 1;
+        }
+        int table_idx = lua_gettop(L);  // 记录table在栈中的位置（避免后续操作偏移）
+
+        // ===================== 方式1：通用遍历（支持所有类型键） =====================
+        std::cout << "===== 通用遍历（所有键值对）=====\n";
+        // 初始键压入nil，触发第一次lua_next,会弹出栈顶
+        lua_pushnil(L);
+        // 循环遍历：lua_next返回1表示有下一个键值对，0表示遍历结束
+        while (lua_next(L, table_idx) != 0) { //lua_next 弹出栈顶的 key1（也就是上一轮剩下的 “键”）；
+            // 此时栈结构：... table 键 值
+            std::cout << "key: ";
+            print_lua_value(L, -2);  // -2是键
+            std::cout << " |val: ";
+            print_lua_value(L, -1);  // -1是值
+            std::cout << std::endl;
+
+            // 弹出值，保留键供下一次lua_next使用
+            lua_pop(L, 1);
+        }
+
+        // ===================== 方式2：数组式遍历（仅数字索引） =====================
+        std::cout << "\n===== 数组式遍历（仅数字键）=====\n";
+        // 获取table长度（Lua 5.1+支持lua_rawlen，更高效）
+
+        //size_t table_len = lua_rawlen(L, table_idx);
+        size_t table_len = lua_objlen(L, table_idx);
+        for (size_t i = 1; i <= table_len; ++i) {
+            // 压入数字键，获取对应值
+            lua_pushinteger(L, i);
+            lua_gettable(L, table_idx);
+
+            std::cout << "index " << i << ": ";
+            print_lua_value(L, -1);
+            std::cout << std::endl;
+
+            // 弹出值，清理栈
+            lua_pop(L, 1);
+        }
+
+        // 5. 清理栈并释放资源
+        lua_pop(L, 1);  // 弹出table
         lua_close(L);
-        return 1;
+
+        return 0;
     }
-    int table_idx = lua_gettop(L);  // 记录table在栈中的位置（避免后续操作偏移）
 
-    // ===================== 方式1：通用遍历（支持所有类型键） =====================
-    std::cout << "===== 通用遍历（所有键值对）=====\n";
-    // 初始键压入nil，触发第一次lua_next,会弹出栈顶
-    lua_pushnil(L);
-    // 循环遍历：lua_next返回1表示有下一个键值对，0表示遍历结束
-    while (lua_next(L, table_idx) != 0) { //lua_next 弹出栈顶的 key1（也就是上一轮剩下的 “键”）；
-        // 此时栈结构：... table 键 值
-        std::cout << "键: ";
-        print_lua_value(L, -2);  // -2是键
-        std::cout << " | 值: ";
-        print_lua_value(L, -1);  // -1是值
-        std::cout << std::endl;
 
-        // 弹出值，保留键供下一次lua_next使用
+    void test_table() {
+        // 1. 创建Lua虚拟机
+        lua_State* L = luaL_newstate();
+        luaL_openlibs(L); // 打开Lua标准库
+
+        // 2. 创建目标table（压入栈顶，此时栈深度=1）
+        lua_newtable(L);
+        std::cout << "创建目标table后栈深度:" << lua_gettop(L) << std::endl; // 输出：1
+
+        // 3. 为目标table设置元表（table在栈顶，索引为-1/1）
+        set_table_metatable(L, -1);
+
+        // 4. 测试元表是否生效：访问table的不存在key
+        std::cout << "\n===== 测试元表效果 =====" << std::endl;
+        // 压入要访问的key："test_key"
+        lua_pushstring(L, "test_key");
+        // 读取table["test_key"]（会触发__index元方法）
+        lua_gettable(L, -2);
+
+        const char* result = nullptr;
+        // 输出返回值
+        if (lua_isstring(L, -1)) {         // 判断是不是字符串/数字
+            result = lua_tostring(L, -1);  // 安全获取
+        }
+        else {
+            result= "不存在";//兜底，避免空指针
+        }
+
+        lua_tostring(L, -1);
+        std::cout << "访问table[test_key]的结果:" << result << std::endl;
+        lua_pop(L, 1); // 弹出返回值
+
+        // 5. 访问元表绑定的默认key
+        lua_pushstring(L, "default");
+        lua_gettable(L, -2);
+       if (lua_isstring(L, -1)) {         // 判断是不是字符串/数字
+            result = lua_tostring(L, -1);  // 安全获取
+        }
+        else {
+            result = "不存在";   // 兜底，避免空指针
+        }
+        
+        std::cout << "访问table[default]的结果:" << result << std::endl;
         lua_pop(L, 1);
+
+        // 6. 清理Lua虚拟机
+        lua_close(L);
     }
 
-    // ===================== 方式2：数组式遍历（仅数字索引） =====================
-    std::cout << "\n===== 数组式遍历（仅数字键）=====\n";
-    // 获取table长度（Lua 5.1+支持lua_rawlen，更高效）
+    void test_table_for()
+    {
+        lua_State* L = luaL_newstate();
+        if (!L) {
+            std::cerr << "Failed to create Lua state!" << std::endl;
+            return ;
+        }
+
+        luaL_openlibs(L);
+
+
+        lua_newtable(L);
+
+        int table_idx = lua_gettop(L);
+        for (int i = 0; i < 5; i++)
+        {
+            lua_newtable(L);
+            lua_rawseti(L,-2,i+1); ///lua_rawseti （只需弹 value 出栈）
+        }
+
+        lua_pushnil(L);
+        // 循环遍历：lua_next返回1表示有下一个键值对，0表示遍历结束
+        while (lua_next(L, table_idx) != 0) { //lua_next 弹出栈顶的 key1（也就是上一轮剩下的 “键”）；
+            // 此时栈结构：... table 键 值
+            std::cout << "key: ";
+            print_lua_value(L, -2);  // -2是键
+            std::cout << " |val: ";
+            print_lua_value(L, -1);  // -1是值
+            std::cout << std::endl;
+            
+
+
+            //auto key = lua_tostring(L,-2);  //当 table 是数组时 , key 是数值类型,直接使用 lua_tostring 会报错,导致结果错误!!!
+            // 弹出值，保留键供下一次lua_next使用
+            lua_pop(L, 1);
+        }
+    }
+
     
-    //size_t table_len = lua_rawlen(L, table_idx);
-    size_t table_len = lua_objlen(L, table_idx);
-    for (size_t i = 1; i <= table_len; ++i) {
-        // 压入数字键，获取对应值
-        lua_pushinteger(L, i);
-        lua_gettable(L, table_idx);
+/*
+函数	弹栈数量
+lua_rawseti	1 个（只弹 value）
+lua_rawset	2 个（key + value）
+lua_settable	2 个（key + valu
 
-        std::cout << "索引 " << i << ": ";
-        print_lua_value(L, -1);
-        std::cout << std::endl;
-
-        // 弹出值，清理栈
-        lua_pop(L, 1);
+*/
+    int test()
+    {
+		//test_table();
+		//test_visit_table();
+		test_table_for();
+        return 0;
     }
 
-    // 5. 清理栈并释放资源
-    lua_pop(L, 1);  // 弹出table
-    lua_close(L);
-
-    return 0;
 }
-
-
-
-
-
 
 
 

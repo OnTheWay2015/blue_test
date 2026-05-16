@@ -123,6 +123,7 @@ void test003()
 	if (lua_pcall(pState, 0, 0, 0))
 	 {
 		 cout << lua_tostring(pState, -1) << endl;
+		 lua_pop(pState, 1);
 		 return;
 	 }
 	 
@@ -377,13 +378,13 @@ void test002()
 bool DumpTable(lua_State* L, int idx)
 {
     //try{
-        lua_pushnil(L);
 /*
 lua_next() 这个函数的工作过程是：
 1) 先从栈顶弹出一个 key, 所以在使用 lua_next 之前会先压入一个 nil. lua_pushnil(L);
 2) 从栈指定位置的 table 里取下一对 key-value，先将 key 入栈再将 value 入栈
 3) 如果第 2 步成功则返回非 0 值，否则返回 0，并且不向栈中压入任何值
 */
+        lua_pushnil(L);
         while(lua_next(L, idx) != 0){// 1), 弹一个 nil 出去后,压入一对 key_value
             int keyType = lua_type(L, -2); //key 在  -2， value 在 -1
             if(keyType == LUA_TNUMBER){
@@ -441,7 +442,7 @@ lua_next() 这个函数的工作过程是：
                     return false;
                 }
             }
-            lua_pop(L, 1);
+            lua_pop(L, 1); //弹出 value,剩下一个 key 在  lua_next 时弹出
         }
     //}
 	//catch(const char* s){
@@ -1232,25 +1233,28 @@ int main_helloworld(int argc, char* argv[])
 	return 0;
 }
 
-extern void test_table();
 extern void test_matetable();
 
 
 namespace TEST_STRUCT { int test(); };
+namespace TEST_TABLE { int test(); };
 namespace TEST_REQUIRE_EX{ int test(); };
 
 
 
 int main(int argc, char* argv[])
 {
+	system("chcp 65001"); // 让控制台支持 UTF-8 中文
+
 	//main1(argc,argv);
 	//main_helloworld(argc,argv);
-	//test_table();//to test
 
 	//test_matetable();
 
-	TEST_STRUCT::test();
+	//TEST_STRUCT::test();
 	//TEST_REQUIRE_EX::test();
+	
+	TEST_TABLE::test();
 	
 	system("pause");
 	return 0;
