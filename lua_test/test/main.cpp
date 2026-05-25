@@ -1246,7 +1246,7 @@ int main(int argc, char* argv[])
 {
 	system("chcp 65001"); // 让控制台支持 UTF-8 中文
 
-	//main1(argc,argv);
+	main1(argc,argv);
 	//main_helloworld(argc,argv);
 
 	//test_matetable();
@@ -1254,7 +1254,7 @@ int main(int argc, char* argv[])
 	//TEST_STRUCT::test();
 	//TEST_REQUIRE_EX::test();
 	
-	TEST_TABLE::test();
+	//TEST_TABLE::test();
 	
 	system("pause");
 	return 0;

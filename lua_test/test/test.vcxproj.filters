@@ -86,6 +86,9 @@
     <None Include="scripts\test_struct.lua">
       <Filter>scripts</Filter>
     </None>
+    <None Include="scripts\test_table.lua">
+      <Filter>scripts</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="testfun.h">
