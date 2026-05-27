@@ -11,6 +11,7 @@ class VM {
 private:
     std::unordered_map<std::string, double> variables; // 变量表
 
+	//计算值（数字、变量、二元运算）
     double evaluate(AstNode* node) {
         switch (node->type) {
             case AstNodeType::NUMBER:
@@ -38,7 +39,8 @@ private:
                 throw std::runtime_error("不支持的节点类型");
         }
     }
-
+	
+    //执行动作（代码块、赋值、表达式打印）
     void execute(AstNode* node) {
         switch (node->type) {
             case AstNodeType::BLOCK: {

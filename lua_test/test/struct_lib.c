@@ -392,7 +392,12 @@ static const struct luaL_Reg thislib[] = {
 };
 
 
-
+/*
+luaL_register(L, "struct", thislib);
+做了两件事：
+[1] 在 _G 里建了一张表：_G.struct
+[2] struct 注册进了 package.preload["struct"] → 让 require 能找到
+*/
 LUALIB_API int luaopen_struct (lua_State *L) {
   luaL_register(L, "struct", thislib);
   return 1;
