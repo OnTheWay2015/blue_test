@@ -20,3 +20,4 @@ s_out
 *.a
 *.exe
 *.user
+rust_test/**/target
