@@ -1,0 +1,99 @@
+<div class="article-intro" id="content">
+			
+			<h1>Rust 环境搭建</h1>
+<p>Rust 支持很多的集成开发环境（IDE）或开发专用的文本编辑器。 </p>
+<p>
+官方网站公布支持的工具如下（<a href="https://www.rust-lang.org/zh-CN/tools" rel="noopener noreferrer" target="_blank">https://www.rust-lang.org/zh-CN/tools</a>）： </p>
+<p><img decoding="async" style="width:80%" src="https://www.runoob.com/wp-content/uploads/2020/04/F39BCE6A-4324-4B82-AE80-BD6417183600.jpg"></p>
+<p>
+本教程将使用 Visual Studio Code 作为我们的开发环境（Eclipse 有专用于 Rust 开发的版本，对于初学者也是不错的选择）。 </p>
+<p>
+<strong>注意：</strong>IntelliJ IDEA 安装插件之后难以调试，所以推荐习惯使用 IDEA 的开发者使用 CLion，但 CLion 不是免费的。 </p>
+<h2>
+搭建 Visual Studio Code 开发环境 </h2>
+<p>
+首先，需要安装最新版的 Rust 编译工具和 Visual Studio Code。 </p>
+
+<p>Rust 编译工具：<a href="https://www.rust-lang.org/zh-CN/tools/install" rel="noopener noreferrer" target="_blank">https://www.rust-lang.org/zh-CN/tools/install</a> </p>
+
+<p>Visual Studio Code：<a href="https://code.visualstudio.com/Download" rel="noopener noreferrer" target="_blank">https://code.visualstudio.com/Download</a> </p>
+<p>
+Rust 的编译工具依赖 C 语言的编译工具，这意味着你的电脑上至少已经存在一个 C 语言的编译环境。如果你使用的是 Linux 系统，往往已经具备了 GCC 或 clang。如果你使用的是 macOS，需要安装 Xcode。如果你是用的是 Windows 操作系统，你需要安装 Visual Studio 2013 或以上的环境（需要 C/C++ 支持）以使用 MSVC 或安装 MinGW + GCC 编译环境（Cygwin 还没有测试）。 </p>
+<h3>
+安装 Rust 编译工具 </h3>
+<p>
+Rust 编译工具可以去官方网站下载： <a href="https://www.rust-lang.org/zh-CN/tools/install" rel="noopener" target="_blank">https://www.rust-lang.org/zh-CN/tools/install</a>。</p><p>
+macOS、Linux 或其它类 Unix 系统要下载 Rustup 并安装 Rust，请在终端中运行以下命令:</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pln">curl </span><span class="pun">--</span><span class="pln">proto </span><span class="str">'=https'</span><span class="pln"> </span><span class="pun">--</span><span class="pln">tlsv1</span><span class="pun">.</span><span class="lit">2</span><span class="pln"> </span><span class="pun">-</span><span class="pln">sSf https</span><span class="pun">:</span><span class="com">//sh.rustup.rs | sh</span><button class="copy-code-button" type="button" style="display: none;"><i class="fa fa-copy"></i></button></pre>
+
+<p>Windows 要下载 <a href="https://static.rust-lang.org/rustup/dist/i686-pc-windows-gnu/rustup-init.exe"><code class="hljs">rustup-init.exe</code></a> 可执行文件。</p>
+<p>下载好的 Rustup 在 Windows 上是一个可执行程序 rustup-init.exe。 </p>
+<p>
+现在执行 rustup-init 文件： </p>
+<p><img decoding="async" style="width:80%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env1.png"></p>
+<p>上图显示的是一个命令行安装向导。 </p>
+
+<p><strong>如果你已经安装 MSVC （推荐），那么安装过程会非常的简单，输入 1 并回车，直接进入第二步</strong>。</p> 
+
+<p>如果你安装的是 MinGW，那么你需要输入 2 （自定义安装），然后系统会询问你 Default host triple? ，请将上图中 <strong>default host triple</strong> 的 "msvc" 改为 "gnu" 再输入安装程序：</p> 
+
+<p><img decoding="async" style="width:80%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env2.png"></p>
+<p>其它属性都默认。 </p>
+<p>
+设置完所有选项，会回到安装向导界面（第一张图），这是我们输入 1 并回车即可。 </p>
+<p><img decoding="async" style="width:80%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env3.png"></p>
+<p>进行到这一步就完成了 Rust 的安装，可以通过以下命令测试： </p>
+<pre class="prettyprint prettyprinted" style=""><span class="pln">rustc </span><span class="pun">-</span><span class="pln">V        </span><span class="com"># 注意的大写的 V</span><button class="copy-code-button" type="button"><i class="fa fa-copy"></i></button></pre>
+<p><img decoding="async" style="width:80%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env4.png"></p>
+<p>
+如果以上两个命令能够输出你安装的版本号，就是安装成功了。 </p>
+<p>更多下载方式可以查阅：<a href="https://forge.rust-lang.org/infra/other-installation-methods.html" rel="noopener" target="_blank">https://forge.rust-lang.org/infra/other-installation-methods.html</a></p>
+ 
+<h3>
+搭建 Visual Studio Code 开发环境</h3>
+<p>
+下载完 Visual Studio Code 安装包之后启动安装向导安装（此步骤不在此赘述）。 </p>
+<p>
+安装完 Visual Studio Code （下文简称 VSCode）之后运行 VSCode。</p>
+
+
+<p><img decoding="async" style="width:80%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env5.png"></p>
+<p>
+在左边栏里找到 "Extensions"，并查找 "Chinese"，安装简体中文扩展，使界面变成中文。（如果你愿意用英文界面或计算机不支持中文字符，此步骤可以跳过）。 </p>
+
+<p><img decoding="async" style="width:50%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env6.png"></p>
+<p>用同样的方法再安装 rust-analyzer 和 Native Debug 两个扩展。 </p>
+
+<p><img decoding="async" style="width:50%" src="https://www.runoob.com/wp-content/uploads/2020/04/49033261-B1B8-4D70-8090-53DC45A8727E.jpeg"></p>
+
+<p><img decoding="async" style="width:50%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env8.png"></p>
+<p>重新启动 VSCode，Rust 的开发环境就搭建好了。 </p>
+
+<p>
+现在新建一个文件夹，如 runoob-greeting。</p>
+<p><img decoding="async" style="width:70%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env9.png"></p>
+<p>在 VSCode 中打开新建的文件夹： </p>
+
+<p><img decoding="async" style="width:50%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env10.png"></p>
+<p>打开文件夹之后选择菜单栏中的"终端"-"新建终端"，会打开一个新的终端： </p>
+
+<p><img decoding="async" style="width:80%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env11.png"></p>
+<p>在终端中输入命令：</p><pre class="prettyprint prettyprinted" style=""><span class="pln">cargo </span><span class="kwd">new</span><span class="pln"> greeting </span><button class="copy-code-button" type="button" style="display: none;"><i class="fa fa-copy"></i></button></pre>
+<p>
+当前文件下下会构建一个名叫 greeting 的 Rust 工程目录。</p>
+
+<p><img decoding="async" style="width:80%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env12.png"></p>
+<p>现在在终端里输入以下三个命令： </p>
+
+<pre class="prettyprint prettyprinted" style=""><span class="pln">cd </span><span class="pun">./</span><span class="pln">greeting 
+cargo build 
+cargo run </span><button class="copy-code-button" type="button" style="display: none;"><i class="fa fa-copy"></i></button></pre>
+<p>
+系统在创建工程时会生成一个 Hello, world 源程序 main.rs，这时会被编译并运行：</p> 
+
+<p><img decoding="async" style="width:80%" src="https://www.runoob.com/wp-content/uploads/2020/04/rust-env13.png"></p>
+<p>至此，你成功的构建了一个 Rust 命令行程序！ </p>
+
+<p>有关在 VSCode 中调试程序的问题，详见 <a href="/rust/cargo-tutorial.html">Cargo 教程</a>。</p> 			<!-- 其他扩展 -->
+						
+			</div>
